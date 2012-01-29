@@ -3,9 +3,6 @@ options {
 	language = Java;
 }
 
-@header {
-	using System;
-}
 tokens
 {
 	NIL = 'nil';
@@ -88,7 +85,7 @@ exprList:	expr (Comma expr)*;
 fieldList	:	idAssign (Comma idAssign)*;
 
 idAssign:	ID Equals expr |;
-lvalue	:	ID lvalueAux;;
+lvalue	:	ID lvalueAux;
 lvalueAux :	(Dot ID | LCorch expr RCorch )*;
 declarationList	:	declaration+;
 declaration	:	typeDeclaration | 
