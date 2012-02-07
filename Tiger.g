@@ -62,12 +62,28 @@ CHAR	:	~('\n'|'\t'|'\\'|'"'|' ');
 STRING_CONST	:	Quotes CHAR|SPACE|ESC Quotes;
 ID	:	LETTER (LETTER|DIGIT|Underscore)*;
 
-expr 	:	STRING_CONST | 
-		INT_CONST | 
-		NIL | 
-		lvalue | 
-		Minus expr | 
-		expr BINARY_OP expr | 
+expr_or	:	expr_or Or expr_and;
+expr_and:	expr_and And expr_logical;
+expr_logical
+	:	expr_logical Equals expr_arithm | 
+		expr_logical NotEquals expr_arithm | 
+		expr_logical GThan expr_arithm | 
+		expr_logical LThan expr_arithm | 
+		expr_logical GEThan expr_arithm | 
+		expr_logical LEThan expr_arithm;
+expr_arithm
+	:	expr_arithm Plus expr_factor |
+		expr_arithm Minus expr_factor;
+expr_factor
+	:	expr_factor Mult expr_minus |
+		expr_factor Div expr_minus;
+expr_minus
+	:	expr |
+		Minus expr;
+expr	:	STRING_CONST |
+		INT_CONST |
+		NIL |
+		lvalue |
 		lvalue Assign expr | 
 		ID LParent exprList RParent | 
 		LParent exprSeq RParent | 
@@ -79,14 +95,13 @@ expr 	:	STRING_CONST |
 		For ID Assign expr To expr Do expr | 
 		Break | 
 		Let declarationList In exprSeq End;
-exprSeq	: 	expr (DotComma expr)*;
-exprList:	expr (Comma expr)*;
-
+exprSeq	:	expr_or(DotComma expr_or)*;
+exprList:	expr_or(Comma expr_or)*;
 fieldList	:	idAssign (Comma idAssign)*;
 
-idAssign:	ID Equals expr |;
+idAssign:	ID Equals expr_or |;
 lvalue	:	ID lvalueAux;
-lvalueAux :	(Dot ID | LCorch expr RCorch )*;
+lvalueAux :	(Dot ID | LCorch expr_or RCorch )*;
 declarationList	:	declaration+;
 declaration	:	typeDeclaration | 
 			variableDeclaration | 
@@ -98,6 +113,8 @@ type	:	ID |
 typeFields	: 	typeField (Comma typeField)*;
 typeField	:	ID TwoDots ID;
 
-variableDeclaration	:	Var ID Assign expr |
-				Var ID TwoDots ID Assign expr;
+variableDeclaration	:	Var ID Assign expr_or |
+				Var ID TwoDots ID Assign expr_or;
 functionDeclaration	:	Function ID LParent typeFields RParent (TwoDots ID)? Equals expr;
+		
+		
