@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:45:30 C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g 2012-02-07 02:34:54
+// $ANTLR 3.3 Nov 30, 2010 12:45:30 C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g 2012-02-09 04:41:56
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -17,6 +17,7 @@ using ArrayList = System.Collections.Generic.List<object>;
 public partial class TigerLexer : Antlr.Runtime.Lexer
 {
 	public const int EOF=-1;
+	public const int T__54=54;
 	public const int NIL=4;
 	public const int Minus=5;
 	public const int Assign=6;
@@ -53,21 +54,20 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 	public const int Or=37;
 	public const int Type=38;
 	public const int ArrayOf=39;
-	public const int TwoDots=40;
-	public const int Var=41;
-	public const int Function=42;
-	public const int Quotes=43;
-	public const int Underscore=44;
-	public const int Of=45;
-	public const int DIGIT=46;
-	public const int INT_CONST=47;
+	public const int Var=40;
+	public const int Function=41;
+	public const int Quotes=42;
+	public const int Underscore=43;
+	public const int Of=44;
+	public const int DIGIT=45;
+	public const int INT_CONST=46;
+	public const int CHAR=47;
 	public const int SPACE=48;
 	public const int ESC=49;
-	public const int LETTER=50;
-	public const int CHAR=51;
-	public const int STRING_CONST=52;
-	public const int ID=53;
-	public const int COMMENTS=54;
+	public const int STRING_CONST=50;
+	public const int LETTER=51;
+	public const int ID=52;
+	public const int COMMENTS=53;
 
 	private IList<string> _errors = new List<string>();
 	public IList<string> Errors { get { return _errors; }}
@@ -1384,41 +1384,6 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 	}
 	// $ANTLR end "ArrayOf"
 
-	partial void Enter_TwoDots();
-	partial void Leave_TwoDots();
-
-	// $ANTLR start "TwoDots"
-	[GrammarRule("TwoDots")]
-	private void mTwoDots()
-	{
-		Enter_TwoDots();
-		EnterRule("TwoDots", 37);
-		TraceIn("TwoDots", 37);
-		try
-		{
-			int _type = TwoDots;
-			int _channel = DefaultTokenChannel;
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:52:9: ( ':' )
-			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:52:11: ':'
-			{
-			DebugLocation(52, 11);
-			Match(':'); 
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("TwoDots", 37);
-			LeaveRule("TwoDots", 37);
-			Leave_TwoDots();
-		}
-	}
-	// $ANTLR end "TwoDots"
-
 	partial void Enter_Var();
 	partial void Leave_Var();
 
@@ -1427,17 +1392,17 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 	private void mVar()
 	{
 		Enter_Var();
-		EnterRule("Var", 38);
-		TraceIn("Var", 38);
+		EnterRule("Var", 37);
+		TraceIn("Var", 37);
 		try
 		{
 			int _type = Var;
 			int _channel = DefaultTokenChannel;
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:53:5: ( 'var' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:52:5: ( 'var' )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:53:7: 'var'
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:52:7: 'var'
 			{
-			DebugLocation(53, 7);
+			DebugLocation(52, 7);
 			Match("var"); 
 
 
@@ -1448,8 +1413,8 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("Var", 38);
-			LeaveRule("Var", 38);
+			TraceOut("Var", 37);
+			LeaveRule("Var", 37);
 			Leave_Var();
 		}
 	}
@@ -1463,17 +1428,17 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 	private void mFunction()
 	{
 		Enter_Function();
-		EnterRule("Function", 39);
-		TraceIn("Function", 39);
+		EnterRule("Function", 38);
+		TraceIn("Function", 38);
 		try
 		{
 			int _type = Function;
 			int _channel = DefaultTokenChannel;
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:54:10: ( 'function' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:53:10: ( 'function' )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:54:12: 'function'
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:53:12: 'function'
 			{
-			DebugLocation(54, 12);
+			DebugLocation(53, 12);
 			Match("function"); 
 
 
@@ -1484,8 +1449,8 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("Function", 39);
-			LeaveRule("Function", 39);
+			TraceOut("Function", 38);
+			LeaveRule("Function", 38);
 			Leave_Function();
 		}
 	}
@@ -1499,17 +1464,17 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 	private void mQuotes()
 	{
 		Enter_Quotes();
-		EnterRule("Quotes", 40);
-		TraceIn("Quotes", 40);
+		EnterRule("Quotes", 39);
+		TraceIn("Quotes", 39);
 		try
 		{
 			int _type = Quotes;
 			int _channel = DefaultTokenChannel;
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:55:8: ( '\"' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:54:8: ( '\"' )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:55:10: '\"'
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:54:10: '\"'
 			{
-			DebugLocation(55, 10);
+			DebugLocation(54, 10);
 			Match('\"'); 
 
 			}
@@ -1519,8 +1484,8 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("Quotes", 40);
-			LeaveRule("Quotes", 40);
+			TraceOut("Quotes", 39);
+			LeaveRule("Quotes", 39);
 			Leave_Quotes();
 		}
 	}
@@ -1534,17 +1499,17 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 	private void mUnderscore()
 	{
 		Enter_Underscore();
-		EnterRule("Underscore", 41);
-		TraceIn("Underscore", 41);
+		EnterRule("Underscore", 40);
+		TraceIn("Underscore", 40);
 		try
 		{
 			int _type = Underscore;
 			int _channel = DefaultTokenChannel;
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:56:12: ( '_' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:55:12: ( '_' )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:56:14: '_'
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:55:14: '_'
 			{
-			DebugLocation(56, 14);
+			DebugLocation(55, 14);
 			Match('_'); 
 
 			}
@@ -1554,8 +1519,8 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("Underscore", 41);
-			LeaveRule("Underscore", 41);
+			TraceOut("Underscore", 40);
+			LeaveRule("Underscore", 40);
 			Leave_Underscore();
 		}
 	}
@@ -1569,17 +1534,17 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 	private void mOf()
 	{
 		Enter_Of();
-		EnterRule("Of", 42);
-		TraceIn("Of", 42);
+		EnterRule("Of", 41);
+		TraceIn("Of", 41);
 		try
 		{
 			int _type = Of;
 			int _channel = DefaultTokenChannel;
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:57:4: ( 'of' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:56:4: ( 'of' )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:57:6: 'of'
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:56:6: 'of'
 			{
-			DebugLocation(57, 6);
+			DebugLocation(56, 6);
 			Match("of"); 
 
 
@@ -1590,12 +1555,47 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("Of", 42);
-			LeaveRule("Of", 42);
+			TraceOut("Of", 41);
+			LeaveRule("Of", 41);
 			Leave_Of();
 		}
 	}
 	// $ANTLR end "Of"
+
+	partial void Enter_T__54();
+	partial void Leave_T__54();
+
+	// $ANTLR start "T__54"
+	[GrammarRule("T__54")]
+	private void mT__54()
+	{
+		Enter_T__54();
+		EnterRule("T__54", 42);
+		TraceIn("T__54", 42);
+		try
+		{
+			int _type = T__54;
+			int _channel = DefaultTokenChannel;
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:57:7: ( ':' )
+			DebugEnterAlt(1);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:57:9: ':'
+			{
+			DebugLocation(57, 9);
+			Match(':'); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__54", 42);
+			LeaveRule("T__54", 42);
+			Leave_T__54();
+		}
+	}
+	// $ANTLR end "T__54"
 
 	partial void Enter_INT_CONST();
 	partial void Leave_INT_CONST();
@@ -1611,12 +1611,12 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		{
 			int _type = INT_CONST;
 			int _channel = DefaultTokenChannel;
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:65:12: ( ( DIGIT )+ )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:73:12: ( ( DIGIT )+ )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:65:14: ( DIGIT )+
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:73:14: ( DIGIT )+
 			{
-			DebugLocation(65, 14);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:65:14: ( DIGIT )+
+			DebugLocation(73, 14);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:73:14: ( DIGIT )+
 			int cnt1=0;
 			try { DebugEnterSubRule(1);
 			while (true)
@@ -1636,9 +1636,9 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:65:15: DIGIT
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:73:15: DIGIT
 					{
-					DebugLocation(65, 15);
+					DebugLocation(73, 15);
 					mDIGIT(); 
 
 					}
@@ -1674,6 +1674,107 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 	}
 	// $ANTLR end "INT_CONST"
 
+	partial void Enter_STRING_CONST();
+	partial void Leave_STRING_CONST();
+
+	// $ANTLR start "STRING_CONST"
+	[GrammarRule("STRING_CONST")]
+	private void mSTRING_CONST()
+	{
+		Enter_STRING_CONST();
+		EnterRule("STRING_CONST", 44);
+		TraceIn("STRING_CONST", 44);
+		try
+		{
+			int _type = STRING_CONST;
+			int _channel = DefaultTokenChannel;
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:74:14: ( Quotes ( CHAR | SPACE | ESC )* Quotes )
+			DebugEnterAlt(1);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:74:16: Quotes ( CHAR | SPACE | ESC )* Quotes
+			{
+			DebugLocation(74, 16);
+			mQuotes(); 
+			DebugLocation(74, 23);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:74:23: ( CHAR | SPACE | ESC )*
+			try { DebugEnterSubRule(2);
+			while (true)
+			{
+				int alt2=4;
+				try { DebugEnterDecision(2, decisionCanBacktrack[2]);
+				int LA2_0 = input.LA(1);
+
+				if (((LA2_0>='\u0000' && LA2_0<='\b')||(LA2_0>='\u000B' && LA2_0<='\u001F')||LA2_0=='!'||(LA2_0>='#' && LA2_0<='[')||(LA2_0>=']' && LA2_0<='\uFFFF')))
+				{
+					alt2=1;
+				}
+				else if (((LA2_0>='\t' && LA2_0<='\n')||LA2_0==' '))
+				{
+					alt2=2;
+				}
+				else if ((LA2_0=='\\'))
+				{
+					alt2=3;
+				}
+
+
+				} finally { DebugExitDecision(2); }
+				switch ( alt2 )
+				{
+				case 1:
+					DebugEnterAlt(1);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:74:24: CHAR
+					{
+					DebugLocation(74, 24);
+					mCHAR(); 
+
+					}
+					break;
+				case 2:
+					DebugEnterAlt(2);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:74:29: SPACE
+					{
+					DebugLocation(74, 29);
+					mSPACE(); 
+
+					}
+					break;
+				case 3:
+					DebugEnterAlt(3);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:74:35: ESC
+					{
+					DebugLocation(74, 35);
+					mESC(); 
+
+					}
+					break;
+
+				default:
+					goto loop2;
+				}
+			}
+
+			loop2:
+				;
+
+			} finally { DebugExitSubRule(2); }
+
+			DebugLocation(74, 41);
+			mQuotes(); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("STRING_CONST", 44);
+			LeaveRule("STRING_CONST", 44);
+			Leave_STRING_CONST();
+		}
+	}
+	// $ANTLR end "STRING_CONST"
+
 	partial void Enter_DIGIT();
 	partial void Leave_DIGIT();
 
@@ -1682,15 +1783,15 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 	private void mDIGIT()
 	{
 		Enter_DIGIT();
-		EnterRule("DIGIT", 44);
-		TraceIn("DIGIT", 44);
+		EnterRule("DIGIT", 45);
+		TraceIn("DIGIT", 45);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:66:16: ( '0' .. '9' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:75:16: ( '0' .. '9' )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:66:18: '0' .. '9'
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:75:18: '0' .. '9'
 			{
-			DebugLocation(66, 18);
+			DebugLocation(75, 18);
 			MatchRange('0','9'); 
 
 			}
@@ -1698,8 +1799,8 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("DIGIT", 44);
-			LeaveRule("DIGIT", 44);
+			TraceOut("DIGIT", 45);
+			LeaveRule("DIGIT", 45);
 			Leave_DIGIT();
 		}
 	}
@@ -1713,16 +1814,18 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 	private void mSPACE()
 	{
 		Enter_SPACE();
-		EnterRule("SPACE", 45);
-		TraceIn("SPACE", 45);
+		EnterRule("SPACE", 46);
+		TraceIn("SPACE", 46);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:67:16: ( ( '\\n' | '\\t' | ' ' ) )
+			int _type = SPACE;
+			int _channel = DefaultTokenChannel;
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:76:7: ( ( '\\n' | '\\t' | ' ' | '\\r' ) )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:67:18: ( '\\n' | '\\t' | ' ' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:76:9: ( '\\n' | '\\t' | ' ' | '\\r' )
 			{
-			DebugLocation(67, 18);
-			if ((input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)==' ')
+			DebugLocation(76, 9);
+			if ((input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ')
 			{
 				input.Consume();
 
@@ -1734,14 +1837,18 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 				Recover(mse);
 				throw mse;}
 
+			DebugLocation(76, 30);
+			_channel = Hidden;
 
 			}
 
+			state.type = _type;
+			state.channel = _channel;
 		}
 		finally
 		{
-			TraceOut("SPACE", 45);
-			LeaveRule("SPACE", 45);
+			TraceOut("SPACE", 46);
+			LeaveRule("SPACE", 46);
 			Leave_SPACE();
 		}
 	}
@@ -1755,17 +1862,17 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 	private void mESC()
 	{
 		Enter_ESC();
-		EnterRule("ESC", 46);
-		TraceIn("ESC", 46);
+		EnterRule("ESC", 47);
+		TraceIn("ESC", 47);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:68:14: ( '\\\\' ( 'n' | 't' | '\\\\' | '\"' ) )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:77:14: ( '\\\\' ( 'n' | 't' | '\\\\' | '\"' ) )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:68:16: '\\\\' ( 'n' | 't' | '\\\\' | '\"' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:77:16: '\\\\' ( 'n' | 't' | '\\\\' | '\"' )
 			{
-			DebugLocation(68, 16);
+			DebugLocation(77, 16);
 			Match('\\'); 
-			DebugLocation(68, 20);
+			DebugLocation(77, 20);
 			if (input.LA(1)=='\"'||input.LA(1)=='\\'||input.LA(1)=='n'||input.LA(1)=='t')
 			{
 				input.Consume();
@@ -1784,8 +1891,8 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("ESC", 46);
-			LeaveRule("ESC", 46);
+			TraceOut("ESC", 47);
+			LeaveRule("ESC", 47);
 			Leave_ESC();
 		}
 	}
@@ -1799,15 +1906,15 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 	private void mLETTER()
 	{
 		Enter_LETTER();
-		EnterRule("LETTER", 47);
-		TraceIn("LETTER", 47);
+		EnterRule("LETTER", 48);
+		TraceIn("LETTER", 48);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:69:17: ( 'a' .. 'z' | 'A' .. 'Z' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:78:17: ( 'a' .. 'z' | 'A' .. 'Z' )
 			DebugEnterAlt(1);
 			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:
 			{
-			DebugLocation(69, 17);
+			DebugLocation(78, 17);
 			if ((input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z'))
 			{
 				input.Consume();
@@ -1826,8 +1933,8 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("LETTER", 47);
-			LeaveRule("LETTER", 47);
+			TraceOut("LETTER", 48);
+			LeaveRule("LETTER", 48);
 			Leave_LETTER();
 		}
 	}
@@ -1841,17 +1948,15 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 	private void mCHAR()
 	{
 		Enter_CHAR();
-		EnterRule("CHAR", 48);
-		TraceIn("CHAR", 48);
+		EnterRule("CHAR", 49);
+		TraceIn("CHAR", 49);
 		try
 		{
-			int _type = CHAR;
-			int _channel = DefaultTokenChannel;
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:70:6: (~ ( '\\n' | '\\t' | '\\\\' | '\"' | ' ' ) )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:79:15: (~ ( '\\n' | '\\t' | '\\\\' | '\"' | ' ' ) )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:70:8: ~ ( '\\n' | '\\t' | '\\\\' | '\"' | ' ' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:79:17: ~ ( '\\n' | '\\t' | '\\\\' | '\"' | ' ' )
 			{
-			DebugLocation(70, 8);
+			DebugLocation(79, 17);
 			if ((input.LA(1)>='\u0000' && input.LA(1)<='\b')||(input.LA(1)>='\u000B' && input.LA(1)<='\u001F')||input.LA(1)=='!'||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF'))
 			{
 				input.Consume();
@@ -1867,110 +1972,15 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 
 			}
 
-			state.type = _type;
-			state.channel = _channel;
 		}
 		finally
 		{
-			TraceOut("CHAR", 48);
-			LeaveRule("CHAR", 48);
+			TraceOut("CHAR", 49);
+			LeaveRule("CHAR", 49);
 			Leave_CHAR();
 		}
 	}
 	// $ANTLR end "CHAR"
-
-	partial void Enter_STRING_CONST();
-	partial void Leave_STRING_CONST();
-
-	// $ANTLR start "STRING_CONST"
-	[GrammarRule("STRING_CONST")]
-	private void mSTRING_CONST()
-	{
-		Enter_STRING_CONST();
-		EnterRule("STRING_CONST", 49);
-		TraceIn("STRING_CONST", 49);
-		try
-		{
-			int _type = STRING_CONST;
-			int _channel = DefaultTokenChannel;
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:71:14: ( Quotes CHAR | SPACE | ESC Quotes )
-			int alt2=3;
-			try { DebugEnterDecision(2, decisionCanBacktrack[2]);
-			switch (input.LA(1))
-			{
-			case '\"':
-				{
-				alt2=1;
-				}
-				break;
-			case '\t':
-			case '\n':
-			case ' ':
-				{
-				alt2=2;
-				}
-				break;
-			case '\\':
-				{
-				alt2=3;
-				}
-				break;
-			default:
-				{
-					NoViableAltException nvae = new NoViableAltException("", 2, 0, input);
-
-					DebugRecognitionException(nvae);
-					throw nvae;
-				}
-			}
-
-			} finally { DebugExitDecision(2); }
-			switch (alt2)
-			{
-			case 1:
-				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:71:16: Quotes CHAR
-				{
-				DebugLocation(71, 16);
-				mQuotes(); 
-				DebugLocation(71, 23);
-				mCHAR(); 
-
-				}
-				break;
-			case 2:
-				DebugEnterAlt(2);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:71:28: SPACE
-				{
-				DebugLocation(71, 28);
-				mSPACE(); 
-
-				}
-				break;
-			case 3:
-				DebugEnterAlt(3);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:71:34: ESC Quotes
-				{
-				DebugLocation(71, 34);
-				mESC(); 
-				DebugLocation(71, 38);
-				mQuotes(); 
-
-				}
-				break;
-
-			}
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("STRING_CONST", 49);
-			LeaveRule("STRING_CONST", 49);
-			Leave_STRING_CONST();
-		}
-	}
-	// $ANTLR end "STRING_CONST"
 
 	partial void Enter_ID();
 	partial void Leave_ID();
@@ -1986,14 +1996,14 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		{
 			int _type = ID;
 			int _channel = DefaultTokenChannel;
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:72:4: ( LETTER ( LETTER | DIGIT | Underscore )* )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:80:4: ( LETTER ( LETTER | DIGIT | Underscore )* )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:72:6: LETTER ( LETTER | DIGIT | Underscore )*
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:80:6: LETTER ( LETTER | DIGIT | Underscore )*
 			{
-			DebugLocation(72, 6);
+			DebugLocation(80, 6);
 			mLETTER(); 
-			DebugLocation(72, 13);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:72:13: ( LETTER | DIGIT | Underscore )*
+			DebugLocation(80, 12);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:80:12: ( LETTER | DIGIT | Underscore )*
 			try { DebugEnterSubRule(3);
 			while (true)
 			{
@@ -2014,7 +2024,7 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 					DebugEnterAlt(1);
 					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:
 					{
-					DebugLocation(72, 13);
+					DebugLocation(80, 12);
 					if ((input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z'))
 					{
 						input.Consume();
@@ -2070,15 +2080,15 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		{
 			int _type = COMMENTS;
 			int _channel = DefaultTokenChannel;
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:74:2: ( '/*' ( options {greedy=false; } : COMMENTS | . )* '*/' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:82:2: ( '/*' ( options {greedy=false; } : COMMENTS | . )* '*/' )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:74:4: '/*' ( options {greedy=false; } : COMMENTS | . )* '*/'
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:82:4: '/*' ( options {greedy=false; } : COMMENTS | . )* '*/'
 			{
-			DebugLocation(74, 4);
+			DebugLocation(82, 4);
 			Match("/*"); 
 
-			DebugLocation(74, 9);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:74:9: ( options {greedy=false; } : COMMENTS | . )*
+			DebugLocation(82, 9);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:82:9: ( options {greedy=false; } : COMMENTS | . )*
 			try { DebugEnterSubRule(4);
 			while (true)
 			{
@@ -2127,18 +2137,18 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:74:37: COMMENTS
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:82:37: COMMENTS
 					{
-					DebugLocation(74, 37);
+					DebugLocation(82, 37);
 					mCOMMENTS(); 
 
 					}
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:74:48: .
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:82:48: .
 					{
-					DebugLocation(74, 48);
+					DebugLocation(82, 48);
 					MatchAny(); 
 
 					}
@@ -2154,10 +2164,10 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 
 			} finally { DebugExitSubRule(4); }
 
-			DebugLocation(74, 53);
+			DebugLocation(82, 53);
 			Match("*/"); 
 
-			DebugLocation(75, 3);
+			DebugLocation(83, 3);
 			_channel = Hidden;
 
 			}
@@ -2176,7 +2186,7 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 
 	public override void mTokens()
 	{
-		// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:8: ( NIL | Minus | Assign | LParent | RParent | LCorch | RCorch | LKey | RKey | If | Then | Else | Break | While | Do | For | To | In | End | Let | Comma | DotComma | Dot | Plus | Mult | Div | Equals | NotEquals | GThan | LThan | GEThan | LEThan | And | Or | Type | ArrayOf | TwoDots | Var | Function | Quotes | Underscore | Of | INT_CONST | CHAR | STRING_CONST | ID | COMMENTS )
+		// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:8: ( NIL | Minus | Assign | LParent | RParent | LCorch | RCorch | LKey | RKey | If | Then | Else | Break | While | Do | For | To | In | End | Let | Comma | DotComma | Dot | Plus | Mult | Div | Equals | NotEquals | GThan | LThan | GEThan | LEThan | And | Or | Type | ArrayOf | Var | Function | Quotes | Underscore | Of | T__54 | INT_CONST | STRING_CONST | SPACE | ID | COMMENTS )
 		int alt5=47;
 		try { DebugEnterDecision(5, decisionCanBacktrack[5]);
 		try
@@ -2517,99 +2527,99 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 			break;
 		case 37:
 			DebugEnterAlt(37);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:209: TwoDots
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:209: Var
 			{
 			DebugLocation(1, 209);
-			mTwoDots(); 
+			mVar(); 
 
 			}
 			break;
 		case 38:
 			DebugEnterAlt(38);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:217: Var
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:213: Function
 			{
-			DebugLocation(1, 217);
-			mVar(); 
+			DebugLocation(1, 213);
+			mFunction(); 
 
 			}
 			break;
 		case 39:
 			DebugEnterAlt(39);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:221: Function
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:222: Quotes
 			{
-			DebugLocation(1, 221);
-			mFunction(); 
+			DebugLocation(1, 222);
+			mQuotes(); 
 
 			}
 			break;
 		case 40:
 			DebugEnterAlt(40);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:230: Quotes
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:229: Underscore
 			{
-			DebugLocation(1, 230);
-			mQuotes(); 
+			DebugLocation(1, 229);
+			mUnderscore(); 
 
 			}
 			break;
 		case 41:
 			DebugEnterAlt(41);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:237: Underscore
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:240: Of
 			{
-			DebugLocation(1, 237);
-			mUnderscore(); 
+			DebugLocation(1, 240);
+			mOf(); 
 
 			}
 			break;
 		case 42:
 			DebugEnterAlt(42);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:248: Of
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:243: T__54
 			{
-			DebugLocation(1, 248);
-			mOf(); 
+			DebugLocation(1, 243);
+			mT__54(); 
 
 			}
 			break;
 		case 43:
 			DebugEnterAlt(43);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:251: INT_CONST
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:249: INT_CONST
 			{
-			DebugLocation(1, 251);
+			DebugLocation(1, 249);
 			mINT_CONST(); 
 
 			}
 			break;
 		case 44:
 			DebugEnterAlt(44);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:261: CHAR
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:259: STRING_CONST
 			{
-			DebugLocation(1, 261);
-			mCHAR(); 
+			DebugLocation(1, 259);
+			mSTRING_CONST(); 
 
 			}
 			break;
 		case 45:
 			DebugEnterAlt(45);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:266: STRING_CONST
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:272: SPACE
 			{
-			DebugLocation(1, 266);
-			mSTRING_CONST(); 
+			DebugLocation(1, 272);
+			mSPACE(); 
 
 			}
 			break;
 		case 46:
 			DebugEnterAlt(46);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:279: ID
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:278: ID
 			{
-			DebugLocation(1, 279);
+			DebugLocation(1, 278);
 			mID(); 
 
 			}
 			break;
 		case 47:
 			DebugEnterAlt(47);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:282: COMMENTS
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:1:281: COMMENTS
 			{
-			DebugLocation(1, 282);
+			DebugLocation(1, 281);
 			mCOMMENTS(); 
 
 			}
@@ -2632,191 +2642,160 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 	private class DFA5 : DFA
 	{
 		private const string DFA5_eotS =
-			"\x1\xFFFF\x1\x25\x1\xFFFF\x1\x2A\x6\xFFFF\x8\x25\x5\xFFFF\x1\x44\x1"+
-			"\xFFFF\x1\x48\x1\x4A\x2\xFFFF\x2\x25\x1\x4F\x1\xFFFF\x1\x25\x1\xFFFF"+
-			"\x1\x25\x2\xFFFF\x1\x27\xA\xFFFF\x1\x54\x1\x55\x1\x27\x1\x57\x5\x27\x1"+
-			"\x5D\x3\x27\xF\xFFFF\x2\x27\x2\xFFFF\x1\x63\x1\xFFFF\x1\x64\x2\xFFFF"+
-			"\x1\x27\x1\xFFFF\x2\x27\x1\x68\x2\x27\x1\xFFFF\x1\x6B\x1\x27\x1\x6D\x1"+
-			"\x27\x1\x6F\x2\xFFFF\x1\x70\x1\x71\x1\x72\x1\xFFFF\x2\x27\x1\xFFFF\x1"+
-			"\x27\x1\xFFFF\x1\x27\x4\xFFFF\x1\x77\x1\x78\x2\x27\x2\xFFFF\x1\x27\x1"+
-			"\xFFFF\x1\x27\x1\x7D\x1\xFFFF";
+			"\x1\xFFFF\x1\x24\x1\xFFFF\x1\x27\x6\xFFFF\x8\x24\x5\xFFFF\x1\x36\x1"+
+			"\xFFFF\x1\x39\x1\x3B\x2\xFFFF\x2\x24\x1\x3E\x1\xFFFF\x1\x24\x3\xFFFF"+
+			"\x1\x24\x2\xFFFF\x1\x42\x1\x43\x1\x24\x1\x45\x5\x24\x1\x4B\x3\x24\x7"+
+			"\xFFFF\x2\x24\x2\xFFFF\x1\x51\x1\x52\x2\xFFFF\x1\x24\x1\xFFFF\x2\x24"+
+			"\x1\x56\x2\x24\x1\xFFFF\x1\x59\x1\x24\x1\x5B\x1\x24\x1\x5D\x2\xFFFF\x1"+
+			"\x5E\x1\x5F\x1\x60\x1\xFFFF\x2\x24\x1\xFFFF\x1\x24\x1\xFFFF\x1\x24\x4"+
+			"\xFFFF\x1\x65\x1\x66\x2\x24\x2\xFFFF\x1\x24\x1\xFFFF\x1\x24\x1\x6B\x1"+
+			"\xFFFF";
 		private const string DFA5_eofS =
-			"\x7E\xFFFF";
+			"\x6C\xFFFF";
 		private const string DFA5_minS =
-			"\x1\x0\x1\x30\x1\xFFFF\x1\x3D\x6\xFFFF\x8\x30\x5\xFFFF\x1\x2A\x1\xFFFF"+
-			"\x2\x3D\x2\xFFFF\x2\x30\x1\x0\x1\xFFFF\x1\x30\x1\xFFFF\x1\x30\x2\xFFFF"+
-			"\x1\x6C\xA\xFFFF\x2\x30\x1\x65\x1\x30\x1\x70\x1\x73\x1\x64\x1\x65\x1"+
-			"\x69\x1\x30\x1\x72\x1\x6E\x1\x74\xF\xFFFF\x2\x72\x2\xFFFF\x1\x30\x1\xFFFF"+
-			"\x1\x30\x2\xFFFF\x1\x6E\x1\xFFFF\x2\x65\x1\x30\x1\x61\x1\x6C\x1\xFFFF"+
-			"\x1\x30\x1\x63\x1\x30\x1\x61\x1\x30\x2\xFFFF\x3\x30\x1\xFFFF\x1\x6B\x1"+
-			"\x65\x1\xFFFF\x1\x74\x1\xFFFF\x1\x79\x4\xFFFF\x2\x30\x1\x69\x1\x20\x2"+
-			"\xFFFF\x1\x6F\x1\xFFFF\x1\x6E\x1\x30\x1\xFFFF";
+			"\x1\x9\x1\x69\x1\xFFFF\x1\x3D\x6\xFFFF\x1\x66\x1\x68\x1\x6C\x1\x72\x1"+
+			"\x68\x2\x6F\x1\x65\x5\xFFFF\x1\x2A\x1\xFFFF\x2\x3D\x2\xFFFF\x1\x72\x1"+
+			"\x61\x1\x0\x1\xFFFF\x1\x66\x3\xFFFF\x1\x6C\x2\xFFFF\x2\x30\x1\x65\x1"+
+			"\x30\x1\x70\x1\x73\x1\x64\x1\x65\x1\x69\x1\x30\x1\x72\x1\x6E\x1\x74\x7"+
+			"\xFFFF\x2\x72\x2\xFFFF\x2\x30\x2\xFFFF\x1\x6E\x1\xFFFF\x2\x65\x1\x30"+
+			"\x1\x61\x1\x6C\x1\xFFFF\x1\x30\x1\x63\x1\x30\x1\x61\x1\x30\x2\xFFFF\x3"+
+			"\x30\x1\xFFFF\x1\x6B\x1\x65\x1\xFFFF\x1\x74\x1\xFFFF\x1\x79\x4\xFFFF"+
+			"\x2\x30\x1\x69\x1\x20\x2\xFFFF\x1\x6F\x1\xFFFF\x1\x6E\x1\x30\x1\xFFFF";
 		private const string DFA5_maxS =
-			"\x1\xFFFF\x1\x7A\x1\xFFFF\x1\x3D\x6\xFFFF\x8\x7A\x5\xFFFF\x1\x2A\x1"+
-			"\xFFFF\x1\x3E\x1\x3D\x2\xFFFF\x2\x7A\x1\xFFFF\x1\xFFFF\x1\x7A\x1\xFFFF"+
-			"\x1\x7A\x2\xFFFF\x1\x6C\xA\xFFFF\x2\x7A\x1\x65\x1\x7A\x1\x70\x1\x73\x1"+
-			"\x64\x1\x65\x1\x69\x1\x7A\x1\x72\x1\x6E\x1\x74\xF\xFFFF\x2\x72\x2\xFFFF"+
-			"\x1\x7A\x1\xFFFF\x1\x7A\x2\xFFFF\x1\x6E\x1\xFFFF\x2\x65\x1\x7A\x1\x61"+
-			"\x1\x6C\x1\xFFFF\x1\x7A\x1\x63\x1\x7A\x1\x61\x1\x7A\x2\xFFFF\x3\x7A\x1"+
-			"\xFFFF\x1\x6B\x1\x65\x1\xFFFF\x1\x74\x1\xFFFF\x1\x79\x4\xFFFF\x2\x7A"+
-			"\x1\x69\x1\x20\x2\xFFFF\x1\x6F\x1\xFFFF\x1\x6E\x1\x7A\x1\xFFFF";
+			"\x1\x7D\x1\x69\x1\xFFFF\x1\x3D\x6\xFFFF\x1\x6E\x1\x79\x1\x6E\x1\x72"+
+			"\x1\x68\x1\x6F\x1\x75\x1\x65\x5\xFFFF\x1\x2A\x1\xFFFF\x1\x3E\x1\x3D\x2"+
+			"\xFFFF\x1\x72\x1\x61\x1\xFFFF\x1\xFFFF\x1\x66\x3\xFFFF\x1\x6C\x2\xFFFF"+
+			"\x2\x7A\x1\x65\x1\x7A\x1\x70\x1\x73\x1\x64\x1\x65\x1\x69\x1\x7A\x1\x72"+
+			"\x1\x6E\x1\x74\x7\xFFFF\x2\x72\x2\xFFFF\x2\x7A\x2\xFFFF\x1\x6E\x1\xFFFF"+
+			"\x2\x65\x1\x7A\x1\x61\x1\x6C\x1\xFFFF\x1\x7A\x1\x63\x1\x7A\x1\x61\x1"+
+			"\x7A\x2\xFFFF\x3\x7A\x1\xFFFF\x1\x6B\x1\x65\x1\xFFFF\x1\x74\x1\xFFFF"+
+			"\x1\x79\x4\xFFFF\x2\x7A\x1\x69\x1\x20\x2\xFFFF\x1\x6F\x1\xFFFF\x1\x6E"+
+			"\x1\x7A\x1\xFFFF";
 		private const string DFA5_acceptS =
 			"\x2\xFFFF\x1\x2\x1\xFFFF\x1\x4\x1\x5\x1\x6\x1\x7\x1\x8\x1\x9\x8\xFFFF"+
 			"\x1\x15\x1\x16\x1\x17\x1\x18\x1\x19\x1\xFFFF\x1\x1B\x2\xFFFF\x1\x21\x1"+
-			"\x22\x3\xFFFF\x1\x29\x1\xFFFF\x1\x2B\x1\xFFFF\x1\x2D\x1\x2C\x1\xFFFF"+
-			"\x1\x2E\x1\x2\x1\x3\x1\x25\x1\x4\x1\x5\x1\x6\x1\x7\x1\x8\x1\x9\xD\xFFFF"+
-			"\x1\x15\x1\x16\x1\x17\x1\x18\x1\x19\x1\x2F\x1\x1A\x1\x1B\x1\x1C\x1\x20"+
-			"\x1\x1E\x1\x1F\x1\x1D\x1\x21\x1\x22\x2\xFFFF\x1\x28\x1\x29\x1\xFFFF\x1"+
-			"\x2B\x1\xFFFF\x1\xA\x1\x12\x1\xFFFF\x1\x11\x5\xFFFF\x1\xF\x5\xFFFF\x1"+
-			"\x2A\x1\x1\x3\xFFFF\x1\x13\x2\xFFFF\x1\x10\x1\xFFFF\x1\x14\x1\xFFFF\x1"+
-			"\x26\x1\xB\x1\x23\x1\xC\x4\xFFFF\x1\xD\x1\xE\x1\xFFFF\x1\x24\x2\xFFFF"+
-			"\x1\x27";
+			"\x22\x3\xFFFF\x1\x28\x1\xFFFF\x1\x2B\x1\x2D\x1\x2E\x1\xFFFF\x1\x3\x1"+
+			"\x2A\xD\xFFFF\x1\x2F\x1\x1A\x1\x1C\x1\x20\x1\x1E\x1\x1F\x1\x1D\x2\xFFFF"+
+			"\x1\x27\x1\x2C\x2\xFFFF\x1\xA\x1\x12\x1\xFFFF\x1\x11\x5\xFFFF\x1\xF\x5"+
+			"\xFFFF\x1\x29\x1\x1\x3\xFFFF\x1\x13\x2\xFFFF\x1\x10\x1\xFFFF\x1\x14\x1"+
+			"\xFFFF\x1\x25\x1\xB\x1\x23\x1\xC\x4\xFFFF\x1\xD\x1\xE\x1\xFFFF\x1\x24"+
+			"\x2\xFFFF\x1\x26";
 		private const string DFA5_specialS =
-			"\x1\x1\x1E\xFFFF\x1\x0\x5E\xFFFF}>";
+			"\x1F\xFFFF\x1\x0\x4C\xFFFF}>";
 		private static readonly string[] DFA5_transitionS =
 			{
-				"\x9\x25\x2\x24\x15\x25\x1\x24\x1\x25\x1\x1F\x3\x25\x1\x1B\x1\x25\x1"+
-				"\x4\x1\x5\x1\x16\x1\x15\x1\x12\x1\x2\x1\x14\x1\x17\xA\x22\x1\x3\x1\x13"+
-				"\x1\x19\x1\x18\x1\x1A\x2\x25\x1A\x23\x1\x6\x1\x24\x1\x7\x1\x25\x1\x20"+
-				"\x1\x25\x1\x1D\x1\xD\x1\x23\x1\xF\x1\xC\x1\x10\x2\x23\x1\xA\x2\x23\x1"+
-				"\x11\x1\x23\x1\x1\x1\x21\x4\x23\x1\xB\x1\x23\x1\x1E\x1\xE\x3\x23\x1"+
-				"\x8\x1\x1C\x1\x9\xFF82\x25",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x8\x27\x1\x26\x11"+
-				"\x27",
+				"\x2\x23\x2\xFFFF\x1\x23\x12\xFFFF\x1\x23\x1\xFFFF\x1\x1F\x3\xFFFF\x1"+
+				"\x1B\x1\xFFFF\x1\x4\x1\x5\x1\x16\x1\x15\x1\x12\x1\x2\x1\x14\x1\x17\xA"+
+				"\x22\x1\x3\x1\x13\x1\x19\x1\x18\x1\x1A\x2\xFFFF\x1A\x24\x1\x6\x1\xFFFF"+
+				"\x1\x7\x1\xFFFF\x1\x20\x1\xFFFF\x1\x1D\x1\xD\x1\x24\x1\xF\x1\xC\x1\x10"+
+				"\x2\x24\x1\xA\x2\x24\x1\x11\x1\x24\x1\x1\x1\x21\x4\x24\x1\xB\x1\x24"+
+				"\x1\x1E\x1\xE\x3\x24\x1\x8\x1\x1C\x1\x9",
+				"\x1\x25",
 				"",
-				"\x1\x29",
-				"",
+				"\x1\x26",
 				"",
 				"",
 				"",
 				"",
 				"",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x5\x27\x1\x31\x7"+
-				"\x27\x1\x32\xC\x27",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x7\x27\x1\x33\x6"+
-				"\x27\x1\x34\x9\x27\x1\x35\x1\x27",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\xB\x27\x1\x36\x1"+
-				"\x27\x1\x37\xC\x27",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x11\x27\x1\x38\x8"+
-				"\x27",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x7\x27\x1\x39\x12"+
-				"\x27",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\xE\x27\x1\x3A\xB"+
-				"\x27",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\xE\x27\x1\x3B\x5"+
-				"\x27\x1\x3C\x5\x27",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x4\x27\x1\x3D\x15"+
-				"\x27",
+				"",
+				"\x1\x28\x7\xFFFF\x1\x29",
+				"\x1\x2A\x6\xFFFF\x1\x2B\x9\xFFFF\x1\x2C",
+				"\x1\x2D\x1\xFFFF\x1\x2E",
+				"\x1\x2F",
+				"\x1\x30",
+				"\x1\x31",
+				"\x1\x32\x5\xFFFF\x1\x33",
+				"\x1\x34",
 				"",
 				"",
 				"",
 				"",
 				"",
-				"\x1\x43",
+				"\x1\x35",
 				"",
-				"\x1\x47\x1\x46",
+				"\x1\x38\x1\x37",
+				"\x1\x3A",
+				"",
+				"",
+				"\x1\x3C",
+				"\x1\x3D",
+				"\x0\x3F",
+				"",
+				"\x1\x40",
+				"",
+				"",
+				"",
+				"\x1\x41",
+				"",
+				"",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
+				"\x1\x44",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
+				"\x1\x46",
+				"\x1\x47",
+				"\x1\x48",
 				"\x1\x49",
+				"\x1\x4A",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
+				"\x1\x4C",
+				"\x1\x4D",
+				"\x1\x4E",
 				"",
 				"",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x11\x27\x1\x4D\x8"+
-				"\x27",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1\x4E\x19\x27",
-				"\x9\x24\x2\xFFFF\x15\x24\x1\xFFFF\x1\x24\x1\xFFFF\x39\x24\x1\xFFFF"+
-				"\xFFA3\x24",
 				"",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x5\x27\x1\x51\x14"+
-				"\x27",
 				"",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
+				"",
+				"",
+				"",
+				"\x1\x4F",
+				"\x1\x50",
+				"",
+				"",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
 				"",
 				"",
 				"\x1\x53",
 				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
-				"\x1\x56",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
+				"\x1\x54",
+				"\x1\x55",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
+				"\x1\x57",
 				"\x1\x58",
-				"\x1\x59",
+				"",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
 				"\x1\x5A",
-				"\x1\x5B",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
 				"\x1\x5C",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
-				"\x1\x5E",
-				"\x1\x5F",
-				"\x1\x60",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
 				"",
 				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
 				"",
 				"\x1\x61",
 				"\x1\x62",
 				"",
+				"\x1\x63",
 				"",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
-				"",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
+				"\x1\x64",
 				"",
 				"",
-				"\x1\x65",
 				"",
-				"\x1\x66",
+				"",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
 				"\x1\x67",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
+				"\x1\x68",
+				"",
+				"",
 				"\x1\x69",
+				"",
 				"\x1\x6A",
-				"",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
-				"\x1\x6C",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
-				"\x1\x6E",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
-				"",
-				"",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
-				"",
-				"\x1\x73",
-				"\x1\x74",
-				"",
-				"\x1\x75",
-				"",
-				"\x1\x76",
-				"",
-				"",
-				"",
-				"",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
-				"\x1\x79",
-				"\x1\x7A",
-				"",
-				"",
-				"\x1\x7B",
-				"",
-				"\x1\x7C",
-				"\xA\x27\x7\xFFFF\x1A\x27\x4\xFFFF\x1\x27\x1\xFFFF\x1A\x27",
+				"\xA\x24\x7\xFFFF\x1A\x24\x4\xFFFF\x1\x24\x1\xFFFF\x1A\x24",
 				""
 			};
 
@@ -2852,7 +2831,7 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 			this.transition = DFA5_transition;
 		}
 
-		public override string Description { get { return "1:1: Tokens : ( NIL | Minus | Assign | LParent | RParent | LCorch | RCorch | LKey | RKey | If | Then | Else | Break | While | Do | For | To | In | End | Let | Comma | DotComma | Dot | Plus | Mult | Div | Equals | NotEquals | GThan | LThan | GEThan | LEThan | And | Or | Type | ArrayOf | TwoDots | Var | Function | Quotes | Underscore | Of | INT_CONST | CHAR | STRING_CONST | ID | COMMENTS );"; } }
+		public override string Description { get { return "1:1: Tokens : ( NIL | Minus | Assign | LParent | RParent | LCorch | RCorch | LKey | RKey | If | Then | Else | Break | While | Do | For | To | In | End | Let | Comma | DotComma | Dot | Plus | Mult | Div | Equals | NotEquals | GThan | LThan | GEThan | LEThan | And | Or | Type | ArrayOf | Var | Function | Quotes | Underscore | Of | T__54 | INT_CONST | STRING_CONST | SPACE | ID | COMMENTS );"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
@@ -2870,89 +2849,9 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 				int LA5_31 = input.LA(1);
 
 				s = -1;
-				if ( ((LA5_31>='\u0000' && LA5_31<='\b')||(LA5_31>='\u000B' && LA5_31<='\u001F')||LA5_31=='!'||(LA5_31>='#' && LA5_31<='[')||(LA5_31>=']' && LA5_31<='\uFFFF')) ) {s = 36;}
+				if ( ((LA5_31>='\u0000' && LA5_31<='\uFFFF')) ) {s = 63;}
 
-				else s = 79;
-
-				if ( s>=0 ) return s;
-				break;
-			case 1:
-				int LA5_0 = input.LA(1);
-
-				s = -1;
-				if ( (LA5_0=='n') ) {s = 1;}
-
-				else if ( (LA5_0=='-') ) {s = 2;}
-
-				else if ( (LA5_0==':') ) {s = 3;}
-
-				else if ( (LA5_0=='(') ) {s = 4;}
-
-				else if ( (LA5_0==')') ) {s = 5;}
-
-				else if ( (LA5_0=='[') ) {s = 6;}
-
-				else if ( (LA5_0==']') ) {s = 7;}
-
-				else if ( (LA5_0=='{') ) {s = 8;}
-
-				else if ( (LA5_0=='}') ) {s = 9;}
-
-				else if ( (LA5_0=='i') ) {s = 10;}
-
-				else if ( (LA5_0=='t') ) {s = 11;}
-
-				else if ( (LA5_0=='e') ) {s = 12;}
-
-				else if ( (LA5_0=='b') ) {s = 13;}
-
-				else if ( (LA5_0=='w') ) {s = 14;}
-
-				else if ( (LA5_0=='d') ) {s = 15;}
-
-				else if ( (LA5_0=='f') ) {s = 16;}
-
-				else if ( (LA5_0=='l') ) {s = 17;}
-
-				else if ( (LA5_0==',') ) {s = 18;}
-
-				else if ( (LA5_0==';') ) {s = 19;}
-
-				else if ( (LA5_0=='.') ) {s = 20;}
-
-				else if ( (LA5_0=='+') ) {s = 21;}
-
-				else if ( (LA5_0=='*') ) {s = 22;}
-
-				else if ( (LA5_0=='/') ) {s = 23;}
-
-				else if ( (LA5_0=='=') ) {s = 24;}
-
-				else if ( (LA5_0=='<') ) {s = 25;}
-
-				else if ( (LA5_0=='>') ) {s = 26;}
-
-				else if ( (LA5_0=='&') ) {s = 27;}
-
-				else if ( (LA5_0=='|') ) {s = 28;}
-
-				else if ( (LA5_0=='a') ) {s = 29;}
-
-				else if ( (LA5_0=='v') ) {s = 30;}
-
-				else if ( (LA5_0=='\"') ) {s = 31;}
-
-				else if ( (LA5_0=='_') ) {s = 32;}
-
-				else if ( (LA5_0=='o') ) {s = 33;}
-
-				else if ( ((LA5_0>='0' && LA5_0<='9')) ) {s = 34;}
-
-				else if ( ((LA5_0>='A' && LA5_0<='Z')||LA5_0=='c'||(LA5_0>='g' && LA5_0<='h')||(LA5_0>='j' && LA5_0<='k')||LA5_0=='m'||(LA5_0>='p' && LA5_0<='s')||LA5_0=='u'||(LA5_0>='x' && LA5_0<='z')) ) {s = 35;}
-
-				else if ( ((LA5_0>='\t' && LA5_0<='\n')||LA5_0==' '||LA5_0=='\\') ) {s = 36;}
-
-				else if ( ((LA5_0>='\u0000' && LA5_0<='\b')||(LA5_0>='\u000B' && LA5_0<='\u001F')||LA5_0=='!'||(LA5_0>='#' && LA5_0<='%')||LA5_0=='\''||(LA5_0>='?' && LA5_0<='@')||LA5_0=='^'||LA5_0=='`'||(LA5_0>='~' && LA5_0<='\uFFFF')) ) {s = 37;}
+				else s = 62;
 
 				if ( s>=0 ) return s;
 				break;

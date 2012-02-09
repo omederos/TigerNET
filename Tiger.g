@@ -45,7 +45,6 @@ tokens
 	Or = '|';
 	Type = 'type';
 	ArrayOf = 'array of';
-	TwoDots = ':';
 	Var = 'var';
 	Function ='function';
 	Quotes = '"';
@@ -62,19 +61,28 @@ public override void ReportError(RecognitionException e) {
 }	
 }
 
+@parser::members {
+private IList<string> _errors = new List<string>();
+public IList<string> Errors { get { return _errors; }}
+
+public override void ReportError(RecognitionException e) {
+	Errors.Add(e.ToString());
+}	
+}
+
 INT_CONST 	:	(DIGIT)+;
+STRING_CONST	:	Quotes (CHAR|SPACE|ESC)* Quotes;
 fragment DIGIT	:	'0'..'9';
-fragment SPACE	:	('\n'|'\t'|' ');
+SPACE	:	('\n'|'\t'|' '|'\r') {$channel = Hidden;};
 fragment ESC	:	'\\'('n'|'t'|'\\'|'"');	/* TODO: Control-C, ASCII, etc */
 fragment LETTER :	'a'..'z' | 'A'..'Z';
-CHAR	:	~('\n'|'\t'|'\\'|'"'|' ');	
-STRING_CONST	:	Quotes CHAR|SPACE|ESC Quotes;
-ID	:	LETTER (LETTER|DIGIT|Underscore)*;
+fragment CHAR	:	~('\n'|'\t'|'\\'|'"'|' ');	
+ID	:	LETTER(LETTER|DIGIT|Underscore)*;
 COMMENTS 
 	:	'/*' ( options {greedy=false;} : COMMENTS | . )* '*/' 
 		{$channel = Hidden;};
 
-public program:	 expr_or EOF;
+public prog:	 expr_or EOF;
 expr_or	:	expr_and (Or expr_and)*;
 expr_and:	expr_logical (And expr_logical)*;
 expr_logical
@@ -92,8 +100,13 @@ expr	:	STRING_CONST | /* string-constant */
 		/* id(expr-list) */ /* type-id{field-list} */
 		/* type-id[expr] of expr*/
 		/* lvalue */ /* lvalue := expr */
-		ID ((LParent exprList RParent | LKey fieldList RKey)? | (LCorch expr_or RCorch Of) => (LCorch expr_or RCorch Of expr_or) | (lvalue (Assign expr_or)?)) | 
-		LParent exprSeq RParent | /* (expr-seq) */ 
+		ID 
+		(
+			LParent (exprList)? RParent | 
+			((LKey RKey) => LKey RKey | LKey fieldList RKey ) |
+			((LCorch expr_or RCorch Of) => (LCorch expr_or RCorch Of expr_or) | lvalue (Assign expr_or)?)
+		) |
+		LParent (exprSeq)? RParent | /* (expr-seq) */ 
 		If expr_or Then expr_or (Else expr_or)? | /* if expr then expr */ /* if expr then expr else expr */
 		While expr_or Do expr_or | /* while expr do expr */
 		For ID Assign expr_or To expr_or Do expr_or | /* for id:=expr to expr do expr */
@@ -111,16 +124,15 @@ declaration	:	typeDeclaration | /* una declaracion de tipo, de variable, o de fu
 			functionDeclaration;
 typeDeclaration	:	Type ID Equals type; /* type type-id = type */
 type	:	ID | /* type-id */
-		LKey typeFields RKey | /* { type-fields_opt } */
+		LKey (typeFields)? RKey | /* { type-fields_opt } */
 		ArrayOf ID; /* array of type-id */
 typeFields	: 	typeField (Comma typeField)*; /* uno o varios tipos separados por comas (,) */
-typeField	:	ID TwoDots ID; /* id : type-id */
+typeField	:	ID ':' ID; /* id : type-id */
 
-variableDeclaration	:	Var ID Assign expr_or | /* var id := expr */
-				Var ID TwoDots ID Assign expr_or; /* var id : type-id := expr */
+variableDeclaration	:	Var ID (':' ID)? Assign expr_or; /* var id := expr */ /* var id : type-id := expr */
 
 				/* function id (type-fields_opt) = expr*/
 				/* function id (type-fields_opt) : type-id = expr*/
-functionDeclaration	:	Function ID LParent typeFields RParent (TwoDots ID)? Equals expr; 
+functionDeclaration	:	Function ID LParent (typeFields)? RParent (':' ID)? Equals expr_or; 
 		
 		
