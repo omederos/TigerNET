@@ -1,147 +1,336 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="TigerNET.AST.ExpressionNode" Collapsed="true">
-    <Position X="6" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAABAAAAAAAAIAABAAAAAAAEAAAAAAAAAAAAFAAA=</HashCode>
-      <FileName>ExpressionNode.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="TigerNET.AST.InstructionNode">
-    <Position X="6.75" Y="1.5" Width="1.5" />
+  <Class Name="TigerNET.AST.AccessNode" Collapsed="true">
+    <Position X="5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>InstructionNode.cs</FileName>
+      <FileName>AccessNode.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TigerNET.AST.ControlNode">
-    <Position X="5" Y="3" Width="1.5" />
+  <Class Name="TigerNET.AST.AliasDeclarationNode" Collapsed="true">
+    <Position X="9.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>AliasDeclarationNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.AndOperatorNode" Collapsed="true">
+    <Position X="43.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AndOperatorNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.ArithmeticalBinaryOperatorNode" Collapsed="true">
+    <Position X="35.25" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ControlNode.cs</FileName>
+      <FileName>ArithmeticalBinaryOperatorNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.ArrayAccessNode" Collapsed="true">
+    <Position X="5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAACAEAAAAAAAA=</HashCode>
+      <FileName>ArrayAccessNode.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TigerNET.AST.ArrayDeclarationNode" Collapsed="true">
-    <Position X="14" Y="3.5" Width="1.5" />
+    <Position X="11.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAABAAAAAAAAAAAAA=</HashCode>
       <FileName>ArrayDeclarationNode.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TigerNET.AST.AssignmentNode" Collapsed="true">
-    <Position X="25.75" Y="0.5" Width="1.5" />
+  <Class Name="TigerNET.AST.AssignmentBaseNode" Collapsed="true">
+    <Position X="28.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>AssignmentBaseNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.AssignmentNode" Collapsed="true">
+    <Position X="27.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AssignmentNode.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="TigerNET.AST.AtomicLiteralNode" Collapsed="true">
+    <Position X="21.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AtomicLiteralNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.BinaryOperatorNode" Collapsed="true">
+    <Position X="37.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAA=</HashCode>
+      <FileName>BinaryOperatorNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.BreakNode" Collapsed="true">
+    <Position X="50" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BreakNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.CallableDeclarationNode" Collapsed="true">
+    <Position X="16.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAQAAAAAAgAA=</HashCode>
+      <FileName>CallableDeclarationNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.CallableNode" Collapsed="true">
+    <Position X="52.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAQAAAEAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>CallableNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.ControlNode" Collapsed="true">
+    <Position X="56.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ControlNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="TigerNET.AST.DeclarationNode" Collapsed="true">
-    <Position X="16.25" Y="0.5" Width="1.5" />
+    <Position X="14" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DeclarationNode.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="TigerNET.AST.DivOperatorNode" Collapsed="true">
+    <Position X="32" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DivOperatorNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.ExpressionNode" Collapsed="true">
+    <Position X="30.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAIAABAAAAAAAEAAAAAAAAAAAAFAAA=</HashCode>
+      <FileName>ExpressionNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.FieldAssignmentNode" Collapsed="true">
+    <Position X="29.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FieldAssignmentNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="TigerNET.AST.ForToDoNode" Collapsed="true">
-    <Position X="4.75" Y="4.5" Width="1.5" />
+    <Position X="54.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAIAAABAAAAAAEAAAAAAAAAAAAAAAI=</HashCode>
       <FileName>ForToDoNode.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TigerNET.AST.IfThenElseNode" Collapsed="true">
-    <Position X="7" Y="4.5" Width="1.5" />
+    <Position X="56.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAACAAAAIAAAAAAAAAAEAAAAAIAIAAAAAAAA=</HashCode>
       <FileName>IfThenElseNode.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TigerNET.AST.LinkDeclarationNode" Collapsed="true">
-    <Position X="27.5" Y="0.5" Width="1.5" />
+  <Class Name="TigerNET.AST.InstructionNode" Collapsed="true">
+    <Position X="45.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>LinkDeclarationNode.cs</FileName>
+      <FileName>InstructionNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.IntegerLiteralNode" Collapsed="true">
+    <Position X="20.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IntegerLiteralNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.LetInEndNode" Collapsed="true">
+    <Position X="47.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAIAAAAAAAAAAEAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>LetInEndNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.LiteralNode" Collapsed="true">
+    <Position X="23" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LiteralNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.LogicalBinaryOperatorNode" Collapsed="true">
+    <Position X="42" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LogicalBinaryOperatorNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.MinusOperatorNode" Collapsed="true">
+    <Position X="38.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MinusOperatorNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.MinusUnaryOperatorNode" Collapsed="true">
+    <Position X="45.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MinusUnaryOperatorNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.NilLiteralNode" Collapsed="true">
+    <Position X="23" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NilLiteralNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.OperatorNode" Collapsed="true">
+    <Position X="38.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OperatorNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.OrOperatorNode" Collapsed="true">
+    <Position X="41" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OrOperatorNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.PlusOperatorNode" Collapsed="true">
+    <Position X="34.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PlusOperatorNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.ProdOperatorNode" Collapsed="true">
+    <Position X="36.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProdOperatorNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.RecordAccessNode" Collapsed="true">
+    <Position X="7.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAGAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>RecordAccessNode.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TigerNET.AST.RecordDeclarationNode" Collapsed="true">
-    <Position X="16.25" Y="3.5" Width="1.5" />
+    <Position X="14" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>RecordDeclarationNode.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="TigerNET.AST.StringLiteralNode" Collapsed="true">
+    <Position X="25.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>StringLiteralNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="TigerNET.AST.TypeDeclarationNode" Collapsed="true">
-    <Position X="15.25" Y="2" Width="1.5" />
+    <Position X="11.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>TypeDeclarationNode.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TigerNET.AST.TypeField" Collapsed="true">
-    <Position X="25.75" Y="1.5" Width="1.5" />
+    <Position X="61.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
       <FileName>TypeField.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="TigerNET.AST.UnaryOperatorNode" Collapsed="true">
+    <Position X="45.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UnaryOperatorNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TigerNET.AST.VariableAccessNode" Collapsed="true">
+    <Position X="2.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAQAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VariableAccessNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="TigerNET.AST.VariableDeclarationNode" Collapsed="true">
-    <Position X="18.5" Y="2" Width="1.5" />
+    <Position X="18.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAIAAABAAAAAAEAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>VariableDeclarationNode.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TigerNET.AST.WhileNode" Collapsed="true">
-    <Position X="2.5" Y="4.5" Width="1.5" />
+    <Position X="59" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAACAAAAIAAABAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>WhileNode.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TigerNET.AST.Types.ArrayType" Collapsed="true">
-    <Position X="2.75" Y="6" Width="1.5" />
+    <Position X="11.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\ArrayType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TigerNET.AST.Types.IntegerType" Collapsed="true">
-    <Position X="5" Y="6" Width="1.5" />
+    <Position X="0.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\IntegerType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TigerNET.AST.Types.NilType" Collapsed="true">
-    <Position X="9.5" Y="6" Width="1.5" />
+    <Position X="2.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\NilType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TigerNET.AST.Types.RecordType" Collapsed="true">
-    <Position X="11.75" Y="6" Width="1.5" />
+    <Position X="5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>Types\RecordType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TigerNET.AST.Types.StringType" Collapsed="true">
-    <Position X="0.75" Y="6" Width="1.5" />
+    <Position X="7.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\StringType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TigerNET.AST.Types.TigerType" Collapsed="true">
-    <Position X="6.25" Y="8" Width="1.5" />
+    <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAiA=</HashCode>
       <FileName>Types\TigerType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TigerNET.AST.Types.VoidType" Collapsed="true">
-    <Position X="7.25" Y="6" Width="1.5" />
+    <Position X="9.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\VoidType.cs</FileName>
