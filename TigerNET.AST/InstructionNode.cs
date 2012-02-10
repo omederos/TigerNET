@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TigerNET.AST
 {
-    public class Class1
+    public abstract class InstructionNode : ExpressionNode
     {
     }
 }
