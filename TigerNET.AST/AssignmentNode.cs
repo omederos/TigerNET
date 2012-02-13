@@ -10,8 +10,15 @@ namespace TigerNET.AST
     /// </summary>
     public class AssignmentNode : AssignmentBaseNode
     {
-        public AssignmentNode(AccessNode left, ExpressionNode body) : base(left, body) {}
-        
+        /// <summary>
+        /// Nodo al que le estamos asignando el valor. Puede ser una variable, posicion de array, campo de un record..
+        /// </summary>
+        public AccessNode Left { get; set; }
+
+        public AssignmentNode(AccessNode left, ExpressionNode body) : base(body) {
+            Left = left;
+        }
+
         public override void GenerateCode() {
             throw new NotImplementedException();
         }

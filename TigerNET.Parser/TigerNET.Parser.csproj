@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\..\..\..\..\..\..\HERE\School\!4to\Complementos de Compilacion\Proyecto de Compilación. C4. 2011-2012\Antlr 3.3 &amp; AntlrWorks 1.4.2\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,8 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="..\..\..\..\..\..\..\HERE\School\!4to\Complementos de Compilacion\Compilador\Grammar\output\TigerLexer.cs">
+      <Link>TigerLexer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\..\..\..\HERE\School\!4to\Complementos de Compilacion\Compilador\Grammar\output\TigerParser.cs">
+      <Link>TigerParser.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TigerNET.AST\TigerNET.AST.csproj">
+      <Project>{AA13FB85-8458-4F50-B26D-99F11233EADD}</Project>
+      <Name>TigerNET.AST</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

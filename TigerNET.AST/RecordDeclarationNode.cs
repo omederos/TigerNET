@@ -15,6 +15,7 @@ namespace TigerNET.AST
         public RecordDeclarationNode(string name, IList<TypeField> fields) : base(name) {
             Fields = fields;
         }
+        public RecordDeclarationNode(string name) : this(name, new List<TypeField>()) {}
 
         public override void GenerateCode() {
             throw new NotImplementedException();

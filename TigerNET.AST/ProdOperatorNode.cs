@@ -8,6 +8,7 @@ namespace TigerNET.AST
     public class ProdOperatorNode : ArithmeticalBinaryOperatorNode
     {
         public ProdOperatorNode(ExpressionNode left, ExpressionNode right) : base(left, right) {}
+        public ProdOperatorNode() : this(null, null) {}
         public override void GenerateCode() {
             throw new NotImplementedException();
         }

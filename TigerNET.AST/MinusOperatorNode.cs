@@ -8,6 +8,7 @@ namespace TigerNET.AST
     public class MinusOperatorNode : ArithmeticalBinaryOperatorNode
     {
         public MinusOperatorNode(ExpressionNode left, ExpressionNode right) : base(left, right) {}
+        public MinusOperatorNode() : this(null, null) {}
         public override void GenerateCode() {
             throw new NotImplementedException();
         }

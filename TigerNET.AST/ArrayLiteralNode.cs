@@ -16,8 +16,8 @@ namespace TigerNET.AST
         /// </summary>
         public ExpressionNode InitialValue { get; set; }
 
-        public ArrayLiteralNode(string name,  ExpressionNode index, ExpressionNode initialValue) : base(name) {
-            Count = index;
+        public ArrayLiteralNode(string name,  ExpressionNode count, ExpressionNode initialValue) : base(name) {
+            Count = count;
             InitialValue = initialValue;
         }
 

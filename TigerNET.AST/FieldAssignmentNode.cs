@@ -11,10 +11,10 @@ namespace TigerNET.AST
     /// </summary>
     public class FieldAssignmentNode : AssignmentBaseNode
     {
-        public FieldAssignmentNode(AccessNode field, ExpressionNode body) : base(field, body) {
-            //Nota: Cuando se le esta dando valor al campo de un record, realmente no es un 'AccessNode', sino un string que identifique el nombre
-            //del campo, pero esto lo comprobamos desde el Parser en ANTLR, es decir, garantizamos que lo que haya en 'field' sea un simple identificador
-            //Hice esto para poder usar la herencia y subir t odo para AssignmentBaseNode y de esta forma tratar a FieldAssignmentNode y 
+        protected string FieldName { get; set; }
+
+        public FieldAssignmentNode(string fieldName, ExpressionNode body) : base(body) {
+            FieldName = fieldName;
         }
 
         public override void GenerateCode() {

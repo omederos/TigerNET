@@ -15,9 +15,15 @@ namespace TigerNET.AST
         /// </summary>
         public string Type { get; set; }
 
-        public CallableDeclarationNode(string name, IList<TypeField> fields, string type = null) : base(name) {
+        /// <summary>
+        /// El cuerpo de la funcion
+        /// </summary>
+        public ExpressionNode Body { get; set; }
+
+        public CallableDeclarationNode(string name, IList<TypeField> fields, ExpressionNode body, string type = null) : base(name) {
             Fields = fields;
             Type = type;
+            Body = body;
         }
 
         public override void GenerateCode() {

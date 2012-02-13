@@ -20,6 +20,7 @@ namespace TigerNET.AST
             Declarations = declarations;
             Expressions = expressions;
         }
+        public LetInEndNode(IList<DeclarationNode> declarations) : this(declarations, new List<ExpressionNode>()) {}
 
         public override void GenerateCode() {
             throw new NotImplementedException();

@@ -6,7 +6,7 @@ using TigerNET.AST.Types;
 
 namespace TigerNET.AST
 {
-    class ArrayDeclarationNode : TypeDeclarationNode
+    public class ArrayDeclarationNode : TypeDeclarationNode
     {
         /// <summary>
         /// Indica de que tipo es el array (de los definidos en la aplicacion actual, no de Tiger)

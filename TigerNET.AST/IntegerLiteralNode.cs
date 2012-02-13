@@ -7,6 +7,12 @@ namespace TigerNET.AST
 {
     public class IntegerLiteralNode : AtomicLiteralNode
     {
+        public int Value { get; set; }
+
+        public IntegerLiteralNode(int value) {
+            Value = value;
+        }
+
         public override void GenerateCode() {
             throw new NotImplementedException();
         }
