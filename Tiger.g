@@ -52,6 +52,10 @@ tokens
 	Of = 'of';
 }
 
+@header {
+using TigerNET.AST;
+}
+
 @lexer::members {
 private IList<string> _errors = new List<string>();
 public IList<string> Errors { get { return _errors; }}
@@ -82,57 +86,202 @@ COMMENTS
 	:	'/*' ( options {greedy=false;} : COMMENTS | . )* '*/' 
 		{$channel = Hidden;};
 
-public prog:	 expr_or EOF;
-expr_or	:	expr_and (Or expr_and)*;
-expr_and:	expr_logical (And expr_logical)*;
-expr_logical
-	:	expr_arithm (
-			(((Equals) | NotEquals | GThan | LThan | GEThan | LEThan)) expr_arithm
-		)*;
-expr_arithm
-	:	expr_factor (((Plus) | Minus) expr_factor)*;
-expr_factor
-	:	expr (((Mult) | Div) expr)*;
-expr	:	STRING_CONST | /* string-constant */
-		INT_CONST | /* integer-constant */
-		NIL | /* nil */
-		Minus expr_or | /* -expr */
-		/* id(expr-list) */ /* type-id{field-list} */
-		/* type-id[expr] of expr*/
-		/* lvalue */ /* lvalue := expr */
-		ID 
+public prog returns [ExpressionNode node] :	e = expr_or EOF { $node = $expr_or.node; };
+expr_or	returns [ExpressionNode node] :	left = expr_and 
+{
+/* Left */
+$node = $left.node; 
+}
+(Or right = expr_or 
+{
+var orOperatorNode = new OrOperatorNode($node, $right.node);
+$node = orOperatorNode;
+})?;
+expr_and returns [ExpressionNode node]:	left = expr_logical  
+{
+$node = $left.node;
+}
+(And right = expr_and 
+{
+var andOperatorNode = new AndOperatorNode($node, $right.node);
+$node = andOperatorNode;
+}
+)?;
+expr_logical returns [ExpressionNode node]
+	@init {RelationalBinaryOperatorNode n = null;}
+	:	left = expr_arithm 
+{
+$node = $left.node; 
+}
+	(
+	
+	((Equals 
+	{
+	n = new EqualOperatorNode() { Left = $node };
+	}) | 
+	NotEquals 
+	{
+	n = new NotEqualOperatorNode() { Left = $node };
+	}| 
+	GThan {
+	n = new GreatherOperatorNode() { Left = $node };
+	}| 
+	LThan 
+	{
+	n = new LowerOperatorNode() { Left = $node };
+	}| 
+	GEThan 
+	{
+	n = new GreatherEqualOperatorNode() { Left = $node };
+	}| 
+	LEThan 
+	{
+	n = new LowerEqualOperatorNode() { Left = $node };	
+	}
+	) right = expr_logical 
+	{
+	n.Right = $right.node;
+	}
+	
+	)?;
+expr_arithm returns [ExpressionNode node]
+@init {ArithmeticalBinaryOperatorNode n = null;}
+	:	left = expr_factor {$node = $left.node;} 
+	(
+	(
+	(Plus) 
+	{
+	n = new PlusOperatorNode() { Left = $node };
+	} | 
+	Minus
+	{
+	n = new MinusOperatorNode() { Left = $node };
+	}
+	) right = expr_arithm {n.Right = $right.node;}
+	)?;
+expr_factor returns [ExpressionNode node]
+@init {ArithmeticalBinaryOperatorNode n = null;}
+	:	left = expr {$node = $left.node; }
+	(
+	(
+	(Mult) 
+	{
+	n = new ProdOperatorNode() { Left = $node };
+	}| 
+	Div 
+	{
+	n = new DivOperatorNode() { Left = $node };
+	}
+	) right = expr_factor {n.Right = $right.node;}
+	)?;
+expr	returns [ExpressionNode node]:	
+	(STRING_CONST {$node = new StringLiteralNode($STRING_CONST.Text); }| /* string-constant */
+	INT_CONST {$node = new IntegerLiteralNode(int.Parse($INT_CONST.Text)); }| /* integer-constant */
+	NIL {$node = new NilLiteralNode(); }| /* nil */
+	Minus e = expr_or {$node = new MinusUnaryOperatorNode($e.node); }| /* -expr */
+	/* id(expr-list) */ /* type-id{field-list} */
+	/* type-id[expr] of expr*/
+	/* lvalue */ /* lvalue := expr */
+	id = ID {$node = new VariableAccessNode($id.Text); }
+	(
+		LParent {$node = new CallableNode($id.Text, new List<ExpressionNode>()); }(list = exprList { $node = new CallableNode($id.Text, $list.items); } )? RParent 
+		{
+		} |
 		(
-			LParent (exprList)? RParent | 
-			((LKey RKey) => LKey RKey | LKey fieldList RKey ) |
-			((LCorch expr_or RCorch Of) => (LCorch expr_or RCorch Of expr_or) | lvalue (Assign expr_or)?)
-		) |
-		LParent (exprSeq)? RParent | /* (expr-seq) */ 
-		If expr_or Then expr_or (Else expr_or)? | /* if expr then expr */ /* if expr then expr else expr */
-		While expr_or Do expr_or | /* while expr do expr */
-		For ID Assign expr_or To expr_or Do expr_or | /* for id:=expr to expr do expr */
-		Break |  /* break */
-		Let declarationList In (exprSeq)? End; /* let declaration-list in expr-seq end */
-exprSeq	:	expr_or (DotComma expr_or)*; /* una o mas expresiones separadas por punto y coma (;) */
-exprList:	expr_or (Comma expr_or)*; /* una o mas expresiones separadas por comas (,) */
-fieldList	:	idAssign (Comma idAssign)*; /* una o varias asignaciones (ver idAssign) separadas por comas (,) */
+			(LKey RKey) => 
+				 LKey RKey {$node = new RecordLiteralNode($id.Text, new List<FieldAssignmentNode>()); }|
+				 LKey fields = fieldList 
+				 {
+				 $node = new RecordLiteralNode($id.Text, $fields.items);
+				 } 
+				 RKey
+		)|
+		((LCorch expr_or RCorch Of) => 
+		(
+		LCorch length = expr_or RCorch Of initialValue = expr_or 
+		{
+		$node = new ArrayLiteralNode($id.Text, $length.node, $initialValue.node); 
+		}
+		) | 
+		lv = lvalue[$node] {$node = $lv.node; }(Assign body = expr_or {$node = new AssignmentNode((AccessNode)$node, $body.node);})?
+		)
+	) |
+	LParent (exprSeq)? RParent | /* (expr-seq) */ 
+	If cond = expr_or Then then = expr_or (Else els = expr_or)? 
+	{
+	$node = new IfThenElseNode($cond.node, $then.node, $els.node);
+	} | /* if expr then expr */ /* if expr then expr else expr */
+	While cond = expr_or Do body = expr_or 
+	{
+	$node = new WhileNode($cond.node, $body.node);
+	}| /* while expr do expr */
+	For ID Assign start = expr_or To end = expr_or Do bodyFor = expr_or 
+	{
+	$node = new ForToDoNode($start.node, $end.node, $bodyFor.node);
+	}| /* for id:=expr to expr do expr */
+	Break { $node = new BreakNode(); }|  /* break */
+	Let declarations = declarationList {$node = new LetInEndNode($declarations.items); } In (items = exprSeq {((LetInEndNode)$node).Expressions = $items.items; })? End /* let declaration-list in expr-seq end */
+	) 
+	lvalue[$node] ; 
+exprSeq	returns [IList<ExpressionNode> items] 
+@init {$items = new List<ExpressionNode>();}
+:	e1 = expr_or {$items.Add($e1.node); }(DotComma e2 = expr_or {$items.Add($e2.node); })*; /* una o mas expresiones separadas por punto y coma (;) */
 
-idAssign:	ID Equals expr_or |; /* id = expr */
-lvalue	:	(Dot ID | LCorch expr_or RCorch )*; /* Asume que sera llamado con el ID ya macheado. */ /* .ID */ /* [expr] */
-declarationList	:	declaration+; /* un o mas declaraciones */
-declaration	:	typeDeclaration | /* una declaracion de tipo, de variable, o de funcion */
-			variableDeclaration | 
-			functionDeclaration;
-typeDeclaration	:	Type ID Equals type; /* type type-id = type */
-type	:	ID | /* type-id */
-		LKey (typeFields)? RKey | /* { type-fields_opt } */
-		ArrayOf ID; /* array of type-id */
-typeFields	: 	typeField (Comma typeField)*; /* uno o varios tipos separados por comas (,) */
-typeField	:	ID ':' ID; /* id : type-id */
+exprList returns [IList<ExpressionNode> items]	
+@init {items = new List<ExpressionNode>();}
+: e1 = expr_or {items.Add($e1.node);} (Comma e2 = expr_or {items.Add($e2.node);})*; /* una o mas expresiones separadas por comas (,) */
 
-variableDeclaration	:	Var ID (':' ID)? Assign expr_or; /* var id := expr */ /* var id : type-id := expr */
+fieldList returns [IList<FieldAssignmentNode> items]
+@init{$items = new List<FieldAssignmentNode>(); }	:
+	id = idAssign {$items.Add($id.node);} (Comma id = idAssign {$items.Add($id.node);})*; /* una o varias asignaciones (ver idAssign) separadas por comas (,) */
+
+idAssign returns [FieldAssignmentNode node]:	
+fieldName = ID Equals body = expr_or {$node = new FieldAssignmentNode($fieldName.Text, $body.node);}; /* id = expr */
+
+lvalue[ExpressionNode accessNode] returns [ExpressionNode node]	:	
+(
+Dot fieldName = ID {$node = new RecordAccessNode($accessNode, $fieldName.Text);}| 
+LCorch index = expr_or RCorch {$node = new ArrayAccessNode($accessNode, $index.node); }
+)*; /* Asume que sera llamado con el ID ya macheado. */ /* .ID */ /* [expr] */
+
+declarationList	returns [IList<DeclarationNode> items]
+@init{$items = new List<DeclarationNode>();}:
+	(dec = declaration {$items.Add($dec.node);} )+ ; /* un o mas declaraciones */
+declaration returns [DeclarationNode node]	:	
+/* una declaracion de tipo, de variable, o de funcion */
+t = typeDeclaration { $node = $t.node; } |
+v = variableDeclaration { $node = $v.node; }| 
+f = functionDeclaration {$node = $f.node; };
+
+typeDeclaration	returns [TypeDeclarationNode node] :	
+Type name = ID Equals type[$name.Text]; /* type type-id = type */
+
+type[string name] returns [TypeDeclarationNode node]	:	
+	id = ID {$node = new AliasDeclarationNode(name, $id.Text); }| /* type-id */
+	LKey {$node = new RecordDeclarationNode(name); }(fields = typeFields {((RecordDeclarationNode)$node).Fields = $fields.items;})? RKey | /* { type-fields_opt } */
+	ArrayOf typeName = ID {$node = new ArrayDeclarationNode(name, $typeName.Text);}; /* array of type-id */
+
+typeFields returns [IList<TypeField> items]
+@init{$items = new List<TypeField>();}	: 	
+t = typeField {$items.Add($t.value); } (Comma t = typeField {$items.Add($t.value);})*; /* uno o varios tipos separados por comas (,) */
+
+typeField returns [TypeField value]	:	id = ID ':' typeId = ID {$value = new TypeField($id.Text, $typeId.Text);};/* id : type-id */
+
+variableDeclaration returns [VariableDeclarationNode node]
+@init{string typeName = null;} :
+Var name = ID (':' tName = ID {typeName = $tName.Text;})? Assign body = expr_or 
+{$node = new VariableDeclarationNode($name.Text, $body.node, typeName);}; /* var id := expr */ /* var id : type-id := expr */
 
 				/* function id (type-fields_opt) = expr*/
 				/* function id (type-fields_opt) : type-id = expr*/
-functionDeclaration	:	Function ID LParent (typeFields)? RParent (':' ID)? Equals expr_or; 
+functionDeclaration returns [CallableDeclarationNode node]	
+@init {
+IList<TypeField> fields = new List<TypeField>();
+string typeName = null;
+}
+:	
+Function name = ID LParent (f = typeFields {fields = $f.items;})? RParent (':' tName = ID {typeName = $tName.Text;})? Equals body = expr_or
+{return new CallableDeclarationNode($name.Text, fields, $body.node, typeName);}
+; 
 		
 		

@@ -1,9 +1,12 @@
-// $ANTLR 3.3 Nov 30, 2010 12:45:30 C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g 2012-02-09 04:41:56
+// $ANTLR 3.3 Nov 30, 2010 12:45:30 C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g 2012-02-13 02:07:55
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
 // Unreachable code detected.
 #pragma warning disable 162
+
+
+using TigerNET.AST;
 
 
 using System.Collections.Generic;
@@ -81,9 +84,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			new bool[]
 			{
 				false, // invalid decision
-				false, false, false, false, false, false, false, false, false, true, 
+				false, false, false, false, false, false, false, false, false, false, 
 				false, true, false, false, false, false, false, false, false, false, 
-				false, false, false, false, false, false, false, false, false, false
+				false, false, false, false, false, false, false, false, false
 			};
 	#else
 		private static readonly bool[] decisionCanBacktrack = new bool[0];
@@ -122,28 +125,37 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_prog();
 
 	// $ANTLR start "prog"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:85:8: public prog : expr_or EOF ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:89:8: public prog returns [ExpressionNode node] : e= expr_or EOF ;
 	[GrammarRule("prog")]
-	public void prog()
+	public ExpressionNode prog()
 	{
 		Enter_prog();
 		EnterRule("prog", 1);
 		TraceIn("prog", 1);
+		ExpressionNode node = default(ExpressionNode);
+
+		ExpressionNode e = default(ExpressionNode);
+
 		try { DebugEnterRule(GrammarFileName, "prog");
-		DebugLocation(85, 25);
+		DebugLocation(89, 86);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:85:12: ( expr_or EOF )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:89:43: (e= expr_or EOF )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:85:15: expr_or EOF
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:89:45: e= expr_or EOF
 			{
-			DebugLocation(85, 15);
-			PushFollow(Follow._expr_or_in_prog551);
-			expr_or();
+			DebugLocation(89, 47);
+			PushFollow(Follow._expr_or_in_prog565);
+			e=expr_or();
 			PopFollow();
-			if (state.failed) return;
-			DebugLocation(85, 23);
-			Match(input,EOF,Follow._EOF_in_prog553); if (state.failed) return;
+			if (state.failed) return node;
+			DebugLocation(89, 57);
+			Match(input,EOF,Follow._EOF_in_prog567); if (state.failed) return node;
+			DebugLocation(89, 61);
+			if ( state.backtracking == 0 )
+			{
+				 node = e; 
+			}
 
 			}
 
@@ -159,9 +171,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("prog", 1);
 			Leave_prog();
 		}
-		DebugLocation(85, 25);
+		DebugLocation(89, 86);
 		} finally { DebugExitRule(GrammarFileName, "prog"); }
-		return;
+		return node;
 
 	}
 	// $ANTLR end "prog"
@@ -171,67 +183,77 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_expr_or();
 
 	// $ANTLR start "expr_or"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:86:1: expr_or : expr_and ( Or expr_and )* ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:1: expr_or returns [ExpressionNode node] : left= expr_and ( Or right= expr_or )? ;
 	[GrammarRule("expr_or")]
-	private void expr_or()
+	private ExpressionNode expr_or()
 	{
 		Enter_expr_or();
 		EnterRule("expr_or", 2);
 		TraceIn("expr_or", 2);
+		ExpressionNode node = default(ExpressionNode);
+
+		ExpressionNode left = default(ExpressionNode);
+		ExpressionNode right = default(ExpressionNode);
+
 		try { DebugEnterRule(GrammarFileName, "expr_or");
-		DebugLocation(86, 33);
+		DebugLocation(90, 3);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:86:9: ( expr_and ( Or expr_and )* )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:39: (left= expr_and ( Or right= expr_or )? )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:86:11: expr_and ( Or expr_and )*
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:41: left= expr_and ( Or right= expr_or )?
 			{
-			DebugLocation(86, 11);
-			PushFollow(Follow._expr_and_in_expr_or560);
-			expr_and();
+			DebugLocation(90, 46);
+			PushFollow(Follow._expr_and_in_expr_or584);
+			left=expr_and();
 			PopFollow();
-			if (state.failed) return;
-			DebugLocation(86, 20);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:86:20: ( Or expr_and )*
-			try { DebugEnterSubRule(1);
-			while (true)
+			if (state.failed) return node;
+			DebugLocation(91, 1);
+			if ( state.backtracking == 0 )
 			{
-				int alt1=2;
-				try { DebugEnterDecision(1, decisionCanBacktrack[1]);
-				int LA1_0 = input.LA(1);
 
-				if ((LA1_0==Or))
-				{
-					alt1=1;
-				}
+				/* Left */
+				node = left; 
 
-
-				} finally { DebugExitDecision(1); }
-				switch ( alt1 )
-				{
-				case 1:
-					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:86:21: Or expr_and
-					{
-					DebugLocation(86, 21);
-					Match(input,Or,Follow._Or_in_expr_or563); if (state.failed) return;
-					DebugLocation(86, 24);
-					PushFollow(Follow._expr_and_in_expr_or565);
-					expr_and();
-					PopFollow();
-					if (state.failed) return;
-
-					}
-					break;
-
-				default:
-					goto loop1;
-				}
 			}
+			DebugLocation(95, 1);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:95:1: ( Or right= expr_or )?
+			int alt1=2;
+			try { DebugEnterSubRule(1);
+			try { DebugEnterDecision(1, decisionCanBacktrack[1]);
+			int LA1_0 = input.LA(1);
 
-			loop1:
-				;
+			if ((LA1_0==Or))
+			{
+				alt1=1;
+			}
+			} finally { DebugExitDecision(1); }
+			switch (alt1)
+			{
+			case 1:
+				DebugEnterAlt(1);
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:95:2: Or right= expr_or
+				{
+				DebugLocation(95, 2);
+				Match(input,Or,Follow._Or_in_expr_or590); if (state.failed) return node;
+				DebugLocation(95, 11);
+				PushFollow(Follow._expr_or_in_expr_or596);
+				right=expr_or();
+				PopFollow();
+				if (state.failed) return node;
+				DebugLocation(96, 1);
+				if ( state.backtracking == 0 )
+				{
 
+					var orOperatorNode = new OrOperatorNode(node, right);
+					node = orOperatorNode;
+
+				}
+
+				}
+				break;
+
+			}
 			} finally { DebugExitSubRule(1); }
 
 
@@ -249,9 +271,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("expr_or", 2);
 			Leave_expr_or();
 		}
-		DebugLocation(86, 33);
+		DebugLocation(99, 3);
 		} finally { DebugExitRule(GrammarFileName, "expr_or"); }
-		return;
+		return node;
 
 	}
 	// $ANTLR end "expr_or"
@@ -261,67 +283,76 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_expr_and();
 
 	// $ANTLR start "expr_and"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:87:1: expr_and : expr_logical ( And expr_logical )* ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:100:1: expr_and returns [ExpressionNode node] : left= expr_logical ( And right= expr_and )? ;
 	[GrammarRule("expr_and")]
-	private void expr_and()
+	private ExpressionNode expr_and()
 	{
 		Enter_expr_and();
 		EnterRule("expr_and", 3);
 		TraceIn("expr_and", 3);
+		ExpressionNode node = default(ExpressionNode);
+
+		ExpressionNode left = default(ExpressionNode);
+		ExpressionNode right = default(ExpressionNode);
+
 		try { DebugEnterRule(GrammarFileName, "expr_and");
-		DebugLocation(87, 42);
+		DebugLocation(100, 2);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:87:9: ( expr_logical ( And expr_logical )* )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:100:39: (left= expr_logical ( And right= expr_and )? )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:87:11: expr_logical ( And expr_logical )*
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:100:41: left= expr_logical ( And right= expr_and )?
 			{
-			DebugLocation(87, 11);
-			PushFollow(Follow._expr_logical_in_expr_and573);
-			expr_logical();
+			DebugLocation(100, 46);
+			PushFollow(Follow._expr_logical_in_expr_and615);
+			left=expr_logical();
 			PopFollow();
-			if (state.failed) return;
-			DebugLocation(87, 24);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:87:24: ( And expr_logical )*
-			try { DebugEnterSubRule(2);
-			while (true)
+			if (state.failed) return node;
+			DebugLocation(101, 1);
+			if ( state.backtracking == 0 )
 			{
-				int alt2=2;
-				try { DebugEnterDecision(2, decisionCanBacktrack[2]);
-				int LA2_0 = input.LA(1);
 
-				if ((LA2_0==And))
-				{
-					alt2=1;
-				}
+				node = left;
 
-
-				} finally { DebugExitDecision(2); }
-				switch ( alt2 )
-				{
-				case 1:
-					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:87:25: And expr_logical
-					{
-					DebugLocation(87, 25);
-					Match(input,And,Follow._And_in_expr_and576); if (state.failed) return;
-					DebugLocation(87, 29);
-					PushFollow(Follow._expr_logical_in_expr_and578);
-					expr_logical();
-					PopFollow();
-					if (state.failed) return;
-
-					}
-					break;
-
-				default:
-					goto loop2;
-				}
 			}
+			DebugLocation(104, 1);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:104:1: ( And right= expr_and )?
+			int alt2=2;
+			try { DebugEnterSubRule(2);
+			try { DebugEnterDecision(2, decisionCanBacktrack[2]);
+			int LA2_0 = input.LA(1);
 
-			loop2:
-				;
+			if ((LA2_0==And))
+			{
+				alt2=1;
+			}
+			} finally { DebugExitDecision(2); }
+			switch (alt2)
+			{
+			case 1:
+				DebugEnterAlt(1);
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:104:2: And right= expr_and
+				{
+				DebugLocation(104, 2);
+				Match(input,And,Follow._And_in_expr_and622); if (state.failed) return node;
+				DebugLocation(104, 12);
+				PushFollow(Follow._expr_and_in_expr_and628);
+				right=expr_and();
+				PopFollow();
+				if (state.failed) return node;
+				DebugLocation(105, 1);
+				if ( state.backtracking == 0 )
+				{
 
+					var andOperatorNode = new AndOperatorNode(node, right);
+					node = andOperatorNode;
+
+				}
+
+				}
+				break;
+
+			}
 			} finally { DebugExitSubRule(2); }
 
 
@@ -339,9 +370,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("expr_and", 3);
 			Leave_expr_and();
 		}
-		DebugLocation(87, 42);
+		DebugLocation(109, 2);
 		} finally { DebugExitRule(GrammarFileName, "expr_and"); }
-		return;
+		return node;
 
 	}
 	// $ANTLR end "expr_and"
@@ -351,216 +382,260 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_expr_logical();
 
 	// $ANTLR start "expr_logical"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:88:1: expr_logical : expr_arithm ( ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) ) expr_arithm )* ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:110:1: expr_logical returns [ExpressionNode node] : left= expr_arithm ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical )? ;
 	[GrammarRule("expr_logical")]
-	private void expr_logical()
+	private ExpressionNode expr_logical()
 	{
 		Enter_expr_logical();
 		EnterRule("expr_logical", 4);
 		TraceIn("expr_logical", 4);
+		ExpressionNode node = default(ExpressionNode);
+
+		ExpressionNode left = default(ExpressionNode);
+		ExpressionNode right = default(ExpressionNode);
+
+		RelationalBinaryOperatorNode n = null;
 		try { DebugEnterRule(GrammarFileName, "expr_logical");
-		DebugLocation(88, 4);
+		DebugLocation(110, 3);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:89:2: ( expr_arithm ( ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) ) expr_arithm )* )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:112:2: (left= expr_arithm ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical )? )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:89:4: expr_arithm ( ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) ) expr_arithm )*
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:112:4: left= expr_arithm ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical )?
 			{
-			DebugLocation(89, 4);
-			PushFollow(Follow._expr_arithm_in_expr_logical588);
-			expr_arithm();
+			DebugLocation(112, 9);
+			PushFollow(Follow._expr_arithm_in_expr_logical656);
+			left=expr_arithm();
 			PopFollow();
-			if (state.failed) return;
-			DebugLocation(89, 16);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:89:16: ( ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) ) expr_arithm )*
-			try { DebugEnterSubRule(4);
-			while (true)
+			if (state.failed) return node;
+			DebugLocation(113, 1);
+			if ( state.backtracking == 0 )
 			{
-				int alt4=2;
-				try { DebugEnterDecision(4, decisionCanBacktrack[4]);
+
+				node = left; 
+
+			}
+			DebugLocation(116, 2);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:116:2: ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical )?
+			int alt4=2;
+			try { DebugEnterSubRule(4);
+			try { DebugEnterDecision(4, decisionCanBacktrack[4]);
+			switch (input.LA(1))
+			{
+			case Equals:
+				{
+				alt4=1;
+				}
+				break;
+			case NotEquals:
+				{
+				alt4=1;
+				}
+				break;
+			case GThan:
+				{
+				alt4=1;
+				}
+				break;
+			case LThan:
+				{
+				alt4=1;
+				}
+				break;
+			case GEThan:
+				{
+				alt4=1;
+				}
+				break;
+			case LEThan:
+				{
+				alt4=1;
+				}
+				break;
+			}
+
+			} finally { DebugExitDecision(4); }
+			switch (alt4)
+			{
+			case 1:
+				DebugEnterAlt(1);
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:118:2: ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical
+				{
+				DebugLocation(118, 2);
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:118:2: ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan )
+				int alt3=6;
+				try { DebugEnterSubRule(3);
+				try { DebugEnterDecision(3, decisionCanBacktrack[3]);
 				switch (input.LA(1))
 				{
 				case Equals:
 					{
-					alt4=1;
+					alt3=1;
 					}
 					break;
 				case NotEquals:
 					{
-					alt4=1;
+					alt3=2;
 					}
 					break;
 				case GThan:
 					{
-					alt4=1;
+					alt3=3;
 					}
 					break;
 				case LThan:
 					{
-					alt4=1;
+					alt3=4;
 					}
 					break;
 				case GEThan:
 					{
-					alt4=1;
+					alt3=5;
 					}
 					break;
 				case LEThan:
 					{
-					alt4=1;
+					alt3=6;
 					}
 					break;
+				default:
+					{
+						if (state.backtracking>0) {state.failed=true; return node;}
+						NoViableAltException nvae = new NoViableAltException("", 3, 0, input);
 
+						DebugRecognitionException(nvae);
+						throw nvae;
+					}
 				}
 
-				} finally { DebugExitDecision(4); }
-				switch ( alt4 )
+				} finally { DebugExitDecision(3); }
+				switch (alt3)
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:4: ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) ) expr_arithm
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:118:3: ( Equals )
 					{
-					DebugLocation(90, 4);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:4: ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) )
+					DebugLocation(118, 3);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:118:3: ( Equals )
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:5: ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan )
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:118:4: Equals
 					{
-					DebugLocation(90, 5);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:5: ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan )
-					int alt3=6;
-					try { DebugEnterSubRule(3);
-					try { DebugEnterDecision(3, decisionCanBacktrack[3]);
-					switch (input.LA(1))
+					DebugLocation(118, 4);
+					Match(input,Equals,Follow._Equals_in_expr_logical669); if (state.failed) return node;
+					DebugLocation(119, 2);
+					if ( state.backtracking == 0 )
 					{
-					case Equals:
-						{
-						alt3=1;
-						}
-						break;
-					case NotEquals:
-						{
-						alt3=2;
-						}
-						break;
-					case GThan:
-						{
-						alt3=3;
-						}
-						break;
-					case LThan:
-						{
-						alt3=4;
-						}
-						break;
-					case GEThan:
-						{
-						alt3=5;
-						}
-						break;
-					case LEThan:
-						{
-						alt3=6;
-						}
-						break;
-					default:
-						{
-							if (state.backtracking>0) {state.failed=true; return;}
-							NoViableAltException nvae = new NoViableAltException("", 3, 0, input);
 
-							DebugRecognitionException(nvae);
-							throw nvae;
-						}
+							n = new EqualOperatorNode() { Left = node };
+							
 					}
-
-					} finally { DebugExitDecision(3); }
-					switch (alt3)
-					{
-					case 1:
-						DebugEnterAlt(1);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:6: ( Equals )
-						{
-						DebugLocation(90, 6);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:6: ( Equals )
-						DebugEnterAlt(1);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:7: Equals
-						{
-						DebugLocation(90, 7);
-						Match(input,Equals,Follow._Equals_in_expr_logical598); if (state.failed) return;
-
-						}
-
-
-						}
-						break;
-					case 2:
-						DebugEnterAlt(2);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:17: NotEquals
-						{
-						DebugLocation(90, 17);
-						Match(input,NotEquals,Follow._NotEquals_in_expr_logical603); if (state.failed) return;
-
-						}
-						break;
-					case 3:
-						DebugEnterAlt(3);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:29: GThan
-						{
-						DebugLocation(90, 29);
-						Match(input,GThan,Follow._GThan_in_expr_logical607); if (state.failed) return;
-
-						}
-						break;
-					case 4:
-						DebugEnterAlt(4);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:37: LThan
-						{
-						DebugLocation(90, 37);
-						Match(input,LThan,Follow._LThan_in_expr_logical611); if (state.failed) return;
-
-						}
-						break;
-					case 5:
-						DebugEnterAlt(5);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:45: GEThan
-						{
-						DebugLocation(90, 45);
-						Match(input,GEThan,Follow._GEThan_in_expr_logical615); if (state.failed) return;
-
-						}
-						break;
-					case 6:
-						DebugEnterAlt(6);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:90:54: LEThan
-						{
-						DebugLocation(90, 54);
-						Match(input,LEThan,Follow._LEThan_in_expr_logical619); if (state.failed) return;
-
-						}
-						break;
-
-					}
-					} finally { DebugExitSubRule(3); }
-
 
 					}
 
-					DebugLocation(90, 63);
-					PushFollow(Follow._expr_arithm_in_expr_logical623);
-					expr_arithm();
-					PopFollow();
-					if (state.failed) return;
+
+					}
+					break;
+				case 2:
+					DebugEnterAlt(2);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:122:2: NotEquals
+					{
+					DebugLocation(122, 2);
+					Match(input,NotEquals,Follow._NotEquals_in_expr_logical680); if (state.failed) return node;
+					DebugLocation(123, 2);
+					if ( state.backtracking == 0 )
+					{
+
+							n = new NotEqualOperatorNode() { Left = node };
+							
+					}
+
+					}
+					break;
+				case 3:
+					DebugEnterAlt(3);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:126:2: GThan
+					{
+					DebugLocation(126, 2);
+					Match(input,GThan,Follow._GThan_in_expr_logical689); if (state.failed) return node;
+					DebugLocation(126, 8);
+					if ( state.backtracking == 0 )
+					{
+
+							n = new GreatherOperatorNode() { Left = node };
+							
+					}
+
+					}
+					break;
+				case 4:
+					DebugEnterAlt(4);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:129:2: LThan
+					{
+					DebugLocation(129, 2);
+					Match(input,LThan,Follow._LThan_in_expr_logical696); if (state.failed) return node;
+					DebugLocation(130, 2);
+					if ( state.backtracking == 0 )
+					{
+
+							n = new LowerOperatorNode() { Left = node };
+							
+					}
+
+					}
+					break;
+				case 5:
+					DebugEnterAlt(5);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:133:2: GEThan
+					{
+					DebugLocation(133, 2);
+					Match(input,GEThan,Follow._GEThan_in_expr_logical705); if (state.failed) return node;
+					DebugLocation(134, 2);
+					if ( state.backtracking == 0 )
+					{
+
+							n = new GreatherEqualOperatorNode() { Left = node };
+							
+					}
+
+					}
+					break;
+				case 6:
+					DebugEnterAlt(6);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:137:2: LEThan
+					{
+					DebugLocation(137, 2);
+					Match(input,LEThan,Follow._LEThan_in_expr_logical714); if (state.failed) return node;
+					DebugLocation(138, 2);
+					if ( state.backtracking == 0 )
+					{
+
+							n = new LowerEqualOperatorNode() { Left = node };	
+							
+					}
 
 					}
 					break;
 
-				default:
-					goto loop4;
 				}
+				} finally { DebugExitSubRule(3); }
+
+				DebugLocation(141, 10);
+				PushFollow(Follow._expr_logical_in_expr_logical727);
+				right=expr_logical();
+				PopFollow();
+				if (state.failed) return node;
+				DebugLocation(142, 2);
+				if ( state.backtracking == 0 )
+				{
+
+						n.Right = right;
+						
+				}
+
+				}
+				break;
+
 			}
-
-			loop4:
-				;
-
 			} finally { DebugExitSubRule(4); }
 
 
@@ -578,9 +653,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("expr_logical", 4);
 			Leave_expr_logical();
 		}
-		DebugLocation(91, 4);
+		DebugLocation(146, 3);
 		} finally { DebugExitRule(GrammarFileName, "expr_logical"); }
-		return;
+		return node;
 
 	}
 	// $ANTLR end "expr_logical"
@@ -590,125 +665,144 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_expr_arithm();
 
 	// $ANTLR start "expr_arithm"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:92:1: expr_arithm : expr_factor ( ( ( Plus ) | Minus ) expr_factor )* ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:147:1: expr_arithm returns [ExpressionNode node] : left= expr_factor ( ( ( Plus ) | Minus ) right= expr_arithm )? ;
 	[GrammarRule("expr_arithm")]
-	private void expr_arithm()
+	private ExpressionNode expr_arithm()
 	{
 		Enter_expr_arithm();
 		EnterRule("expr_arithm", 5);
 		TraceIn("expr_arithm", 5);
+		ExpressionNode node = default(ExpressionNode);
+
+		ExpressionNode left = default(ExpressionNode);
+		ExpressionNode right = default(ExpressionNode);
+
+		ArithmeticalBinaryOperatorNode n = null;
 		try { DebugEnterRule(GrammarFileName, "expr_arithm");
-		DebugLocation(92, 46);
+		DebugLocation(147, 3);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:93:2: ( expr_factor ( ( ( Plus ) | Minus ) expr_factor )* )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:149:2: (left= expr_factor ( ( ( Plus ) | Minus ) right= expr_arithm )? )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:93:4: expr_factor ( ( ( Plus ) | Minus ) expr_factor )*
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:149:4: left= expr_factor ( ( ( Plus ) | Minus ) right= expr_arithm )?
 			{
-			DebugLocation(93, 4);
-			PushFollow(Follow._expr_factor_in_expr_arithm636);
-			expr_factor();
+			DebugLocation(149, 9);
+			PushFollow(Follow._expr_factor_in_expr_arithm758);
+			left=expr_factor();
 			PopFollow();
-			if (state.failed) return;
-			DebugLocation(93, 16);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:93:16: ( ( ( Plus ) | Minus ) expr_factor )*
-			try { DebugEnterSubRule(6);
-			while (true)
+			if (state.failed) return node;
+			DebugLocation(149, 23);
+			if ( state.backtracking == 0 )
 			{
-				int alt6=2;
-				try { DebugEnterDecision(6, decisionCanBacktrack[6]);
-				int LA6_0 = input.LA(1);
+				node = left;
+			}
+			DebugLocation(150, 2);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:150:2: ( ( ( Plus ) | Minus ) right= expr_arithm )?
+			int alt6=2;
+			try { DebugEnterSubRule(6);
+			try { DebugEnterDecision(6, decisionCanBacktrack[6]);
+			int LA6_0 = input.LA(1);
 
-				if ((LA6_0==Plus))
+			if ((LA6_0==Plus))
+			{
+				alt6=1;
+			}
+			else if ((LA6_0==Minus))
+			{
+				alt6=1;
+			}
+			} finally { DebugExitDecision(6); }
+			switch (alt6)
+			{
+			case 1:
+				DebugEnterAlt(1);
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:151:2: ( ( Plus ) | Minus ) right= expr_arithm
 				{
-					alt6=1;
-				}
-				else if ((LA6_0==Minus))
+				DebugLocation(151, 2);
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:151:2: ( ( Plus ) | Minus )
+				int alt5=2;
+				try { DebugEnterSubRule(5);
+				try { DebugEnterDecision(5, decisionCanBacktrack[5]);
+				int LA5_0 = input.LA(1);
+
+				if ((LA5_0==Plus))
 				{
-					alt6=1;
+					alt5=1;
 				}
+				else if ((LA5_0==Minus))
+				{
+					alt5=2;
+				}
+				else
+				{
+					if (state.backtracking>0) {state.failed=true; return node;}
+					NoViableAltException nvae = new NoViableAltException("", 5, 0, input);
 
-
-				} finally { DebugExitDecision(6); }
-				switch ( alt6 )
+					DebugRecognitionException(nvae);
+					throw nvae;
+				}
+				} finally { DebugExitDecision(5); }
+				switch (alt5)
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:93:17: ( ( Plus ) | Minus ) expr_factor
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:152:2: ( Plus )
 					{
-					DebugLocation(93, 17);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:93:17: ( ( Plus ) | Minus )
-					int alt5=2;
-					try { DebugEnterSubRule(5);
-					try { DebugEnterDecision(5, decisionCanBacktrack[5]);
-					int LA5_0 = input.LA(1);
-
-					if ((LA5_0==Plus))
+					DebugLocation(152, 2);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:152:2: ( Plus )
+					DebugEnterAlt(1);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:152:3: Plus
 					{
-						alt5=1;
-					}
-					else if ((LA5_0==Minus))
-					{
-						alt5=2;
-					}
-					else
-					{
-						if (state.backtracking>0) {state.failed=true; return;}
-						NoViableAltException nvae = new NoViableAltException("", 5, 0, input);
-
-						DebugRecognitionException(nvae);
-						throw nvae;
-					}
-					} finally { DebugExitDecision(5); }
-					switch (alt5)
-					{
-					case 1:
-						DebugEnterAlt(1);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:93:18: ( Plus )
-						{
-						DebugLocation(93, 18);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:93:18: ( Plus )
-						DebugEnterAlt(1);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:93:19: Plus
-						{
-						DebugLocation(93, 19);
-						Match(input,Plus,Follow._Plus_in_expr_arithm641); if (state.failed) return;
-
-						}
-
-
-						}
-						break;
-					case 2:
-						DebugEnterAlt(2);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:93:27: Minus
-						{
-						DebugLocation(93, 27);
-						Match(input,Minus,Follow._Minus_in_expr_arithm646); if (state.failed) return;
-
-						}
-						break;
+					DebugLocation(152, 3);
+					Match(input,Plus,Follow._Plus_in_expr_arithm771); if (state.failed) return node;
 
 					}
-					} finally { DebugExitSubRule(5); }
 
-					DebugLocation(93, 34);
-					PushFollow(Follow._expr_factor_in_expr_arithm649);
-					expr_factor();
-					PopFollow();
-					if (state.failed) return;
+					DebugLocation(153, 2);
+					if ( state.backtracking == 0 )
+					{
+
+							n = new PlusOperatorNode() { Left = node };
+							
+					}
+
+					}
+					break;
+				case 2:
+					DebugEnterAlt(2);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:156:2: Minus
+					{
+					DebugLocation(156, 2);
+					Match(input,Minus,Follow._Minus_in_expr_arithm782); if (state.failed) return node;
+					DebugLocation(157, 2);
+					if ( state.backtracking == 0 )
+					{
+
+							n = new MinusOperatorNode() { Left = node };
+							
+					}
 
 					}
 					break;
 
-				default:
-					goto loop6;
 				}
+				} finally { DebugExitSubRule(5); }
+
+				DebugLocation(160, 10);
+				PushFollow(Follow._expr_arithm_in_expr_arithm794);
+				right=expr_arithm();
+				PopFollow();
+				if (state.failed) return node;
+				DebugLocation(160, 24);
+				if ( state.backtracking == 0 )
+				{
+					n.Right = right;
+				}
+
+				}
+				break;
+
 			}
-
-			loop6:
-				;
-
 			} finally { DebugExitSubRule(6); }
 
 
@@ -726,9 +820,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("expr_arithm", 5);
 			Leave_expr_arithm();
 		}
-		DebugLocation(93, 46);
+		DebugLocation(161, 3);
 		} finally { DebugExitRule(GrammarFileName, "expr_arithm"); }
-		return;
+		return node;
 
 	}
 	// $ANTLR end "expr_arithm"
@@ -738,125 +832,144 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_expr_factor();
 
 	// $ANTLR start "expr_factor"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:94:1: expr_factor : expr ( ( ( Mult ) | Div ) expr )* ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:162:1: expr_factor returns [ExpressionNode node] : left= expr ( ( ( Mult ) | Div ) right= expr_factor )? ;
 	[GrammarRule("expr_factor")]
-	private void expr_factor()
+	private ExpressionNode expr_factor()
 	{
 		Enter_expr_factor();
 		EnterRule("expr_factor", 6);
 		TraceIn("expr_factor", 6);
+		ExpressionNode node = default(ExpressionNode);
+
+		ExpressionNode left = default(ExpressionNode);
+		ExpressionNode right = default(ExpressionNode);
+
+		ArithmeticalBinaryOperatorNode n = null;
 		try { DebugEnterRule(GrammarFileName, "expr_factor");
-		DebugLocation(94, 30);
+		DebugLocation(162, 3);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:95:2: ( expr ( ( ( Mult ) | Div ) expr )* )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:164:2: (left= expr ( ( ( Mult ) | Div ) right= expr_factor )? )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:95:4: expr ( ( ( Mult ) | Div ) expr )*
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:164:4: left= expr ( ( ( Mult ) | Div ) right= expr_factor )?
 			{
-			DebugLocation(95, 4);
-			PushFollow(Follow._expr_in_expr_factor659);
-			expr();
+			DebugLocation(164, 9);
+			PushFollow(Follow._expr_in_expr_factor821);
+			left=expr();
 			PopFollow();
-			if (state.failed) return;
-			DebugLocation(95, 9);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:95:9: ( ( ( Mult ) | Div ) expr )*
-			try { DebugEnterSubRule(8);
-			while (true)
+			if (state.failed) return node;
+			DebugLocation(164, 16);
+			if ( state.backtracking == 0 )
 			{
-				int alt8=2;
-				try { DebugEnterDecision(8, decisionCanBacktrack[8]);
-				int LA8_0 = input.LA(1);
+				node = left; 
+			}
+			DebugLocation(165, 2);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:165:2: ( ( ( Mult ) | Div ) right= expr_factor )?
+			int alt8=2;
+			try { DebugEnterSubRule(8);
+			try { DebugEnterDecision(8, decisionCanBacktrack[8]);
+			int LA8_0 = input.LA(1);
 
-				if ((LA8_0==Mult))
+			if ((LA8_0==Mult))
+			{
+				alt8=1;
+			}
+			else if ((LA8_0==Div))
+			{
+				alt8=1;
+			}
+			} finally { DebugExitDecision(8); }
+			switch (alt8)
+			{
+			case 1:
+				DebugEnterAlt(1);
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:166:2: ( ( Mult ) | Div ) right= expr_factor
 				{
-					alt8=1;
-				}
-				else if ((LA8_0==Div))
+				DebugLocation(166, 2);
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:166:2: ( ( Mult ) | Div )
+				int alt7=2;
+				try { DebugEnterSubRule(7);
+				try { DebugEnterDecision(7, decisionCanBacktrack[7]);
+				int LA7_0 = input.LA(1);
+
+				if ((LA7_0==Mult))
 				{
-					alt8=1;
+					alt7=1;
 				}
+				else if ((LA7_0==Div))
+				{
+					alt7=2;
+				}
+				else
+				{
+					if (state.backtracking>0) {state.failed=true; return node;}
+					NoViableAltException nvae = new NoViableAltException("", 7, 0, input);
 
-
-				} finally { DebugExitDecision(8); }
-				switch ( alt8 )
+					DebugRecognitionException(nvae);
+					throw nvae;
+				}
+				} finally { DebugExitDecision(7); }
+				switch (alt7)
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:95:10: ( ( Mult ) | Div ) expr
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:167:2: ( Mult )
 					{
-					DebugLocation(95, 10);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:95:10: ( ( Mult ) | Div )
-					int alt7=2;
-					try { DebugEnterSubRule(7);
-					try { DebugEnterDecision(7, decisionCanBacktrack[7]);
-					int LA7_0 = input.LA(1);
-
-					if ((LA7_0==Mult))
+					DebugLocation(167, 2);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:167:2: ( Mult )
+					DebugEnterAlt(1);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:167:3: Mult
 					{
-						alt7=1;
-					}
-					else if ((LA7_0==Div))
-					{
-						alt7=2;
-					}
-					else
-					{
-						if (state.backtracking>0) {state.failed=true; return;}
-						NoViableAltException nvae = new NoViableAltException("", 7, 0, input);
-
-						DebugRecognitionException(nvae);
-						throw nvae;
-					}
-					} finally { DebugExitDecision(7); }
-					switch (alt7)
-					{
-					case 1:
-						DebugEnterAlt(1);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:95:11: ( Mult )
-						{
-						DebugLocation(95, 11);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:95:11: ( Mult )
-						DebugEnterAlt(1);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:95:12: Mult
-						{
-						DebugLocation(95, 12);
-						Match(input,Mult,Follow._Mult_in_expr_factor664); if (state.failed) return;
-
-						}
-
-
-						}
-						break;
-					case 2:
-						DebugEnterAlt(2);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:95:20: Div
-						{
-						DebugLocation(95, 20);
-						Match(input,Div,Follow._Div_in_expr_factor669); if (state.failed) return;
-
-						}
-						break;
+					DebugLocation(167, 3);
+					Match(input,Mult,Follow._Mult_in_expr_factor833); if (state.failed) return node;
 
 					}
-					} finally { DebugExitSubRule(7); }
 
-					DebugLocation(95, 25);
-					PushFollow(Follow._expr_in_expr_factor672);
-					expr();
-					PopFollow();
-					if (state.failed) return;
+					DebugLocation(168, 2);
+					if ( state.backtracking == 0 )
+					{
+
+							n = new ProdOperatorNode() { Left = node };
+							
+					}
+
+					}
+					break;
+				case 2:
+					DebugEnterAlt(2);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:171:2: Div
+					{
+					DebugLocation(171, 2);
+					Match(input,Div,Follow._Div_in_expr_factor843); if (state.failed) return node;
+					DebugLocation(172, 2);
+					if ( state.backtracking == 0 )
+					{
+
+							n = new DivOperatorNode() { Left = node };
+							
+					}
 
 					}
 					break;
 
-				default:
-					goto loop8;
 				}
+				} finally { DebugExitSubRule(7); }
+
+				DebugLocation(175, 10);
+				PushFollow(Follow._expr_factor_in_expr_factor856);
+				right=expr_factor();
+				PopFollow();
+				if (state.failed) return node;
+				DebugLocation(175, 24);
+				if ( state.backtracking == 0 )
+				{
+					n.Right = right;
+				}
+
+				}
+				break;
+
 			}
-
-			loop8:
-				;
-
 			} finally { DebugExitSubRule(8); }
 
 
@@ -874,9 +987,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("expr_factor", 6);
 			Leave_expr_factor();
 		}
-		DebugLocation(95, 30);
+		DebugLocation(176, 3);
 		} finally { DebugExitRule(GrammarFileName, "expr_factor"); }
-		return;
+		return node;
 
 	}
 	// $ANTLR end "expr_factor"
@@ -886,19 +999,46 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_expr();
 
 	// $ANTLR start "expr"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:96:1: expr : ( STRING_CONST | INT_CONST | NIL | Minus expr_or | ID ( LParent ( exprList )? RParent | ( ( LKey RKey )=> LKey RKey | LKey fieldList RKey ) | ( ( LCorch expr_or RCorch Of )=> ( LCorch expr_or RCorch Of expr_or ) | lvalue ( Assign expr_or )? ) ) | LParent ( exprSeq )? RParent | If expr_or Then expr_or ( Else expr_or )? | While expr_or Do expr_or | For ID Assign expr_or To expr_or Do expr_or | Break | Let declarationList In ( exprSeq )? End );
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:177:1: expr returns [ExpressionNode node] : ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID ( LParent (list= exprList )? RParent | ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey ) | ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? ) ) | LParent ( exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (items= exprSeq )? End ) lvalue[$node] ;
 	[GrammarRule("expr")]
-	private void expr()
+	private ExpressionNode expr()
 	{
 		Enter_expr();
 		EnterRule("expr", 7);
 		TraceIn("expr", 7);
+		ExpressionNode node = default(ExpressionNode);
+
+		IToken id=null;
+		IToken STRING_CONST1=null;
+		IToken INT_CONST2=null;
+		ExpressionNode e = default(ExpressionNode);
+		IList<ExpressionNode> list = default(IList<ExpressionNode>);
+		IList<FieldAssignmentNode> fields = default(IList<FieldAssignmentNode>);
+		ExpressionNode length = default(ExpressionNode);
+		ExpressionNode initialValue = default(ExpressionNode);
+		ExpressionNode lv = default(ExpressionNode);
+		ExpressionNode body = default(ExpressionNode);
+		ExpressionNode cond = default(ExpressionNode);
+		ExpressionNode then = default(ExpressionNode);
+		ExpressionNode els = default(ExpressionNode);
+		ExpressionNode start = default(ExpressionNode);
+		ExpressionNode end = default(ExpressionNode);
+		ExpressionNode bodyFor = default(ExpressionNode);
+		IList<DeclarationNode> declarations = default(IList<DeclarationNode>);
+		IList<ExpressionNode> items = default(IList<ExpressionNode>);
+
 		try { DebugEnterRule(GrammarFileName, "expr");
-		DebugLocation(96, 39);
+		DebugLocation(177, 15);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:96:6: ( STRING_CONST | INT_CONST | NIL | Minus expr_or | ID ( LParent ( exprList )? RParent | ( ( LKey RKey )=> LKey RKey | LKey fieldList RKey ) | ( ( LCorch expr_or RCorch Of )=> ( LCorch expr_or RCorch Of expr_or ) | lvalue ( Assign expr_or )? ) ) | LParent ( exprSeq )? RParent | If expr_or Then expr_or ( Else expr_or )? | While expr_or Do expr_or | For ID Assign expr_or To expr_or Do expr_or | Break | Let declarationList In ( exprSeq )? End )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:177:35: ( ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID ( LParent (list= exprList )? RParent | ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey ) | ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? ) ) | LParent ( exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (items= exprSeq )? End ) lvalue[$node] )
+			DebugEnterAlt(1);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:178:2: ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID ( LParent (list= exprList )? RParent | ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey ) | ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? ) ) | LParent ( exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (items= exprSeq )? End ) lvalue[$node]
+			{
+			DebugLocation(178, 2);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:178:2: ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID ( LParent (list= exprList )? RParent | ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey ) | ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? ) ) | LParent ( exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (items= exprSeq )? End )
 			int alt17=11;
+			try { DebugEnterSubRule(17);
 			try { DebugEnterDecision(17, decisionCanBacktrack[17]);
 			switch (input.LA(1))
 			{
@@ -959,7 +1099,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			default:
 				{
-					if (state.backtracking>0) {state.failed=true; return;}
+					if (state.backtracking>0) {state.failed=true; return node;}
 					NoViableAltException nvae = new NoViableAltException("", 17, 0, input);
 
 					DebugRecognitionException(nvae);
@@ -972,53 +1112,78 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:96:8: STRING_CONST
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:178:3: STRING_CONST
 				{
-				DebugLocation(96, 8);
-				Match(input,STRING_CONST,Follow._STRING_CONST_in_expr681); if (state.failed) return;
+				DebugLocation(178, 3);
+				STRING_CONST1=(IToken)Match(input,STRING_CONST,Follow._STRING_CONST_in_expr875); if (state.failed) return node;
+				DebugLocation(178, 16);
+				if ( state.backtracking == 0 )
+				{
+					node = new StringLiteralNode(STRING_CONST1.Text); 
+				}
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:97:3: INT_CONST
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:179:2: INT_CONST
 				{
-				DebugLocation(97, 3);
-				Match(input,INT_CONST,Follow._INT_CONST_in_expr689); if (state.failed) return;
+				DebugLocation(179, 2);
+				INT_CONST2=(IToken)Match(input,INT_CONST,Follow._INT_CONST_in_expr883); if (state.failed) return node;
+				DebugLocation(179, 12);
+				if ( state.backtracking == 0 )
+				{
+					node = new IntegerLiteralNode(int.Parse(INT_CONST2.Text)); 
+				}
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:98:3: NIL
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:180:2: NIL
 				{
-				DebugLocation(98, 3);
-				Match(input,NIL,Follow._NIL_in_expr697); if (state.failed) return;
+				DebugLocation(180, 2);
+				Match(input,NIL,Follow._NIL_in_expr891); if (state.failed) return node;
+				DebugLocation(180, 6);
+				if ( state.backtracking == 0 )
+				{
+					node = new NilLiteralNode(); 
+				}
 
 				}
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:99:3: Minus expr_or
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:181:2: Minus e= expr_or
 				{
-				DebugLocation(99, 3);
-				Match(input,Minus,Follow._Minus_in_expr705); if (state.failed) return;
-				DebugLocation(99, 9);
-				PushFollow(Follow._expr_or_in_expr707);
-				expr_or();
+				DebugLocation(181, 2);
+				Match(input,Minus,Follow._Minus_in_expr899); if (state.failed) return node;
+				DebugLocation(181, 10);
+				PushFollow(Follow._expr_or_in_expr905);
+				e=expr_or();
 				PopFollow();
-				if (state.failed) return;
+				if (state.failed) return node;
+				DebugLocation(181, 20);
+				if ( state.backtracking == 0 )
+				{
+					node = new MinusUnaryOperatorNode(e); 
+				}
 
 				}
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:103:3: ID ( LParent ( exprList )? RParent | ( ( LKey RKey )=> LKey RKey | LKey fieldList RKey ) | ( ( LCorch expr_or RCorch Of )=> ( LCorch expr_or RCorch Of expr_or ) | lvalue ( Assign expr_or )? ) )
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:185:2: id= ID ( LParent (list= exprList )? RParent | ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey ) | ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? ) )
 				{
-				DebugLocation(103, 3);
-				Match(input,ID,Follow._ID_in_expr731); if (state.failed) return;
-				DebugLocation(104, 3);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:104:3: ( LParent ( exprList )? RParent | ( ( LKey RKey )=> LKey RKey | LKey fieldList RKey ) | ( ( LCorch expr_or RCorch Of )=> ( LCorch expr_or RCorch Of expr_or ) | lvalue ( Assign expr_or )? ) )
+				DebugLocation(185, 5);
+				id=(IToken)Match(input,ID,Follow._ID_in_expr930); if (state.failed) return node;
+				DebugLocation(185, 10);
+				if ( state.backtracking == 0 )
+				{
+					node = new VariableAccessNode(id.Text); 
+				}
+				DebugLocation(186, 2);
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:186:2: ( LParent (list= exprList )? RParent | ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey ) | ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? ) )
 				int alt13=3;
 				try { DebugEnterSubRule(13);
 				try { DebugEnterDecision(13, decisionCanBacktrack[13]);
@@ -1070,7 +1235,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					break;
 				default:
 					{
-						if (state.backtracking>0) {state.failed=true; return;}
+						if (state.backtracking>0) {state.failed=true; return node;}
 						NoViableAltException nvae = new NoViableAltException("", 13, 0, input);
 
 						DebugRecognitionException(nvae);
@@ -1083,12 +1248,17 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:105:4: LParent ( exprList )? RParent
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:187:3: LParent (list= exprList )? RParent
 					{
-					DebugLocation(105, 4);
-					Match(input,LParent,Follow._LParent_in_expr741); if (state.failed) return;
-					DebugLocation(105, 12);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:105:12: ( exprList )?
+					DebugLocation(187, 3);
+					Match(input,LParent,Follow._LParent_in_expr939); if (state.failed) return node;
+					DebugLocation(187, 11);
+					if ( state.backtracking == 0 )
+					{
+						node = new CallableNode(id.Text, new List<ExpressionNode>()); 
+					}
+					DebugLocation(187, 77);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:187:77: (list= exprList )?
 					int alt9=2;
 					try { DebugEnterSubRule(9);
 					try { DebugEnterDecision(9, decisionCanBacktrack[9]);
@@ -1103,13 +1273,18 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:105:13: exprList
+						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:187:78: list= exprList
 						{
-						DebugLocation(105, 13);
-						PushFollow(Follow._exprList_in_expr744);
-						exprList();
+						DebugLocation(187, 83);
+						PushFollow(Follow._exprList_in_expr947);
+						list=exprList();
 						PopFollow();
-						if (state.failed) return;
+						if (state.failed) return node;
+						DebugLocation(187, 94);
+						if ( state.backtracking == 0 )
+						{
+							 node = new CallableNode(id.Text, list); 
+						}
 
 						}
 						break;
@@ -1117,17 +1292,23 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					}
 					} finally { DebugExitSubRule(9); }
 
-					DebugLocation(105, 24);
-					Match(input,RParent,Follow._RParent_in_expr748); if (state.failed) return;
+					DebugLocation(187, 150);
+					Match(input,RParent,Follow._RParent_in_expr954); if (state.failed) return node;
+					DebugLocation(188, 3);
+					if ( state.backtracking == 0 )
+					{
+
+								
+					}
 
 					}
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:106:4: ( ( LKey RKey )=> LKey RKey | LKey fieldList RKey )
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:190:3: ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey )
 					{
-					DebugLocation(106, 4);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:106:4: ( ( LKey RKey )=> LKey RKey | LKey fieldList RKey )
+					DebugLocation(190, 3);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:190:3: ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey )
 					int alt10=2;
 					try { DebugEnterSubRule(10);
 					try { DebugEnterDecision(10, decisionCanBacktrack[10]);
@@ -1137,34 +1318,17 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					{
 						int LA10_1 = input.LA(2);
 
-						if ((LA10_1==RKey))
+						if ((LA10_1==RKey) && (EvaluatePredicate(synpred1_Tiger_fragment)))
 						{
-							int LA10_2 = input.LA(3);
-
-							if ((EvaluatePredicate(synpred1_Tiger_fragment)))
-							{
-								alt10=1;
-							}
-							else if ((true))
-							{
-								alt10=2;
-							}
-							else
-							{
-								if (state.backtracking>0) {state.failed=true; return;}
-								NoViableAltException nvae = new NoViableAltException("", 10, 2, input);
-
-								DebugRecognitionException(nvae);
-								throw nvae;
-							}
+							alt10=1;
 						}
-						else if ((LA10_1==Comma||LA10_1==ID))
+						else if ((LA10_1==ID))
 						{
 							alt10=2;
 						}
 						else
 						{
-							if (state.backtracking>0) {state.failed=true; return;}
+							if (state.backtracking>0) {state.failed=true; return node;}
 							NoViableAltException nvae = new NoViableAltException("", 10, 1, input);
 
 							DebugRecognitionException(nvae);
@@ -1173,7 +1337,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					}
 					else
 					{
-						if (state.backtracking>0) {state.failed=true; return;}
+						if (state.backtracking>0) {state.failed=true; return node;}
 						NoViableAltException nvae = new NoViableAltException("", 10, 0, input);
 
 						DebugRecognitionException(nvae);
@@ -1184,28 +1348,40 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:106:5: ( LKey RKey )=> LKey RKey
+						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:191:4: ( LKey RKey )=> LKey RKey
 						{
-						DebugLocation(106, 20);
-						Match(input,LKey,Follow._LKey_in_expr765); if (state.failed) return;
-						DebugLocation(106, 25);
-						Match(input,RKey,Follow._RKey_in_expr767); if (state.failed) return;
+						DebugLocation(192, 6);
+						Match(input,LKey,Follow._LKey_in_expr984); if (state.failed) return node;
+						DebugLocation(192, 11);
+						Match(input,RKey,Follow._RKey_in_expr986); if (state.failed) return node;
+						DebugLocation(192, 16);
+						if ( state.backtracking == 0 )
+						{
+							node = new RecordLiteralNode(id.Text, new List<FieldAssignmentNode>()); 
+						}
 
 						}
 						break;
 					case 2:
 						DebugEnterAlt(2);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:106:32: LKey fieldList RKey
+						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:193:6: LKey fields= fieldList RKey
 						{
-						DebugLocation(106, 32);
-						Match(input,LKey,Follow._LKey_in_expr771); if (state.failed) return;
-						DebugLocation(106, 37);
-						PushFollow(Follow._fieldList_in_expr773);
-						fieldList();
+						DebugLocation(193, 6);
+						Match(input,LKey,Follow._LKey_in_expr996); if (state.failed) return node;
+						DebugLocation(193, 18);
+						PushFollow(Follow._fieldList_in_expr1002);
+						fields=fieldList();
 						PopFollow();
-						if (state.failed) return;
-						DebugLocation(106, 47);
-						Match(input,RKey,Follow._RKey_in_expr775); if (state.failed) return;
+						if (state.failed) return node;
+						DebugLocation(194, 6);
+						if ( state.backtracking == 0 )
+						{
+
+											 node = new RecordLiteralNode(id.Text, fields);
+											 
+						}
+						DebugLocation(197, 6);
+						Match(input,RKey,Follow._RKey_in_expr1018); if (state.failed) return node;
 
 						}
 						break;
@@ -1218,10 +1394,10 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					break;
 				case 3:
 					DebugEnterAlt(3);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:107:4: ( ( LCorch expr_or RCorch Of )=> ( LCorch expr_or RCorch Of expr_or ) | lvalue ( Assign expr_or )? )
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:199:3: ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? )
 					{
-					DebugLocation(107, 4);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:107:4: ( ( LCorch expr_or RCorch Of )=> ( LCorch expr_or RCorch Of expr_or ) | lvalue ( Assign expr_or )? )
+					DebugLocation(199, 3);
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:199:3: ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? )
 					int alt12=2;
 					try { DebugEnterSubRule(12);
 					try { DebugEnterDecision(12, decisionCanBacktrack[12]);
@@ -1239,29 +1415,36 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:107:5: ( LCorch expr_or RCorch Of )=> ( LCorch expr_or RCorch Of expr_or )
+						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:199:4: ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or )
 						{
-						DebugLocation(107, 35);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:107:35: ( LCorch expr_or RCorch Of expr_or )
+						DebugLocation(200, 3);
+						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:200:3: ( LCorch length= expr_or RCorch Of initialValue= expr_or )
 						DebugEnterAlt(1);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:107:36: LCorch expr_or RCorch Of expr_or
+						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:201:3: LCorch length= expr_or RCorch Of initialValue= expr_or
 						{
-						DebugLocation(107, 36);
-						Match(input,LCorch,Follow._LCorch_in_expr798); if (state.failed) return;
-						DebugLocation(107, 43);
-						PushFollow(Follow._expr_or_in_expr800);
-						expr_or();
+						DebugLocation(201, 3);
+						Match(input,LCorch,Follow._LCorch_in_expr1047); if (state.failed) return node;
+						DebugLocation(201, 17);
+						PushFollow(Follow._expr_or_in_expr1053);
+						length=expr_or();
 						PopFollow();
-						if (state.failed) return;
-						DebugLocation(107, 51);
-						Match(input,RCorch,Follow._RCorch_in_expr802); if (state.failed) return;
-						DebugLocation(107, 58);
-						Match(input,Of,Follow._Of_in_expr804); if (state.failed) return;
-						DebugLocation(107, 61);
-						PushFollow(Follow._expr_or_in_expr806);
-						expr_or();
+						if (state.failed) return node;
+						DebugLocation(201, 27);
+						Match(input,RCorch,Follow._RCorch_in_expr1055); if (state.failed) return node;
+						DebugLocation(201, 34);
+						Match(input,Of,Follow._Of_in_expr1057); if (state.failed) return node;
+						DebugLocation(201, 50);
+						PushFollow(Follow._expr_or_in_expr1063);
+						initialValue=expr_or();
 						PopFollow();
-						if (state.failed) return;
+						if (state.failed) return node;
+						DebugLocation(202, 3);
+						if ( state.backtracking == 0 )
+						{
+
+									node = new ArrayLiteralNode(id.Text, length, initialValue); 
+									
+						}
 
 						}
 
@@ -1270,15 +1453,20 @@ public partial class TigerParser : Antlr.Runtime.Parser
 						break;
 					case 2:
 						DebugEnterAlt(2);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:107:72: lvalue ( Assign expr_or )?
+						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:206:3: lv= lvalue[$node] ( Assign body= expr_or )?
 						{
-						DebugLocation(107, 72);
-						PushFollow(Follow._lvalue_in_expr811);
-						lvalue();
+						DebugLocation(206, 6);
+						PushFollow(Follow._lvalue_in_expr1083);
+						lv=lvalue(node);
 						PopFollow();
-						if (state.failed) return;
-						DebugLocation(107, 79);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:107:79: ( Assign expr_or )?
+						if (state.failed) return node;
+						DebugLocation(206, 22);
+						if ( state.backtracking == 0 )
+						{
+							node = lv; 
+						}
+						DebugLocation(206, 42);
+						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:206:42: ( Assign body= expr_or )?
 						int alt11=2;
 						try { DebugEnterSubRule(11);
 						try { DebugEnterDecision(11, decisionCanBacktrack[11]);
@@ -1293,15 +1481,20 @@ public partial class TigerParser : Antlr.Runtime.Parser
 						{
 						case 1:
 							DebugEnterAlt(1);
-							// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:107:80: Assign expr_or
+							// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:206:43: Assign body= expr_or
 							{
-							DebugLocation(107, 80);
-							Match(input,Assign,Follow._Assign_in_expr814); if (state.failed) return;
-							DebugLocation(107, 87);
-							PushFollow(Follow._expr_or_in_expr816);
-							expr_or();
+							DebugLocation(206, 43);
+							Match(input,Assign,Follow._Assign_in_expr1088); if (state.failed) return node;
+							DebugLocation(206, 55);
+							PushFollow(Follow._expr_or_in_expr1094);
+							body=expr_or();
 							PopFollow();
-							if (state.failed) return;
+							if (state.failed) return node;
+							DebugLocation(206, 65);
+							if ( state.backtracking == 0 )
+							{
+								node = new AssignmentNode((AccessNode)node, body);
+							}
 
 							}
 							break;
@@ -1328,12 +1521,12 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 6:
 				DebugEnterAlt(6);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:109:3: LParent ( exprSeq )? RParent
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:209:2: LParent ( exprSeq )? RParent
 				{
-				DebugLocation(109, 3);
-				Match(input,LParent,Follow._LParent_in_expr829); if (state.failed) return;
-				DebugLocation(109, 11);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:109:11: ( exprSeq )?
+				DebugLocation(209, 2);
+				Match(input,LParent,Follow._LParent_in_expr1110); if (state.failed) return node;
+				DebugLocation(209, 10);
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:209:10: ( exprSeq )?
 				int alt14=2;
 				try { DebugEnterSubRule(14);
 				try { DebugEnterDecision(14, decisionCanBacktrack[14]);
@@ -1348,13 +1541,13 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:109:12: exprSeq
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:209:11: exprSeq
 					{
-					DebugLocation(109, 12);
-					PushFollow(Follow._exprSeq_in_expr832);
+					DebugLocation(209, 11);
+					PushFollow(Follow._exprSeq_in_expr1113);
 					exprSeq();
 					PopFollow();
-					if (state.failed) return;
+					if (state.failed) return node;
 
 					}
 					break;
@@ -1362,31 +1555,31 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				}
 				} finally { DebugExitSubRule(14); }
 
-				DebugLocation(109, 22);
-				Match(input,RParent,Follow._RParent_in_expr836); if (state.failed) return;
+				DebugLocation(209, 21);
+				Match(input,RParent,Follow._RParent_in_expr1117); if (state.failed) return node;
 
 				}
 				break;
 			case 7:
 				DebugEnterAlt(7);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:110:3: If expr_or Then expr_or ( Else expr_or )?
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:210:2: If cond= expr_or Then then= expr_or ( Else els= expr_or )?
 				{
-				DebugLocation(110, 3);
-				Match(input,If,Follow._If_in_expr845); if (state.failed) return;
-				DebugLocation(110, 6);
-				PushFollow(Follow._expr_or_in_expr847);
-				expr_or();
+				DebugLocation(210, 2);
+				Match(input,If,Follow._If_in_expr1125); if (state.failed) return node;
+				DebugLocation(210, 10);
+				PushFollow(Follow._expr_or_in_expr1131);
+				cond=expr_or();
 				PopFollow();
-				if (state.failed) return;
-				DebugLocation(110, 14);
-				Match(input,Then,Follow._Then_in_expr849); if (state.failed) return;
-				DebugLocation(110, 19);
-				PushFollow(Follow._expr_or_in_expr851);
-				expr_or();
+				if (state.failed) return node;
+				DebugLocation(210, 20);
+				Match(input,Then,Follow._Then_in_expr1133); if (state.failed) return node;
+				DebugLocation(210, 30);
+				PushFollow(Follow._expr_or_in_expr1139);
+				then=expr_or();
 				PopFollow();
-				if (state.failed) return;
-				DebugLocation(110, 27);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:110:27: ( Else expr_or )?
+				if (state.failed) return node;
+				DebugLocation(210, 40);
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:210:40: ( Else els= expr_or )?
 				int alt15=2;
 				try { DebugEnterSubRule(15);
 				try { DebugEnterDecision(15, decisionCanBacktrack[15]);
@@ -1401,15 +1594,15 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:110:28: Else expr_or
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:210:41: Else els= expr_or
 					{
-					DebugLocation(110, 28);
-					Match(input,Else,Follow._Else_in_expr854); if (state.failed) return;
-					DebugLocation(110, 33);
-					PushFollow(Follow._expr_or_in_expr856);
-					expr_or();
+					DebugLocation(210, 41);
+					Match(input,Else,Follow._Else_in_expr1142); if (state.failed) return node;
+					DebugLocation(210, 50);
+					PushFollow(Follow._expr_or_in_expr1148);
+					els=expr_or();
 					PopFollow();
-					if (state.failed) return;
+					if (state.failed) return node;
 
 					}
 					break;
@@ -1417,86 +1610,117 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				}
 				} finally { DebugExitSubRule(15); }
 
+				DebugLocation(211, 2);
+				if ( state.backtracking == 0 )
+				{
+
+						node = new IfThenElseNode(cond, then, els);
+						
+				}
 
 				}
 				break;
 			case 8:
 				DebugEnterAlt(8);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:111:3: While expr_or Do expr_or
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:214:2: While cond= expr_or Do body= expr_or
 				{
-				DebugLocation(111, 3);
-				Match(input,While,Follow._While_in_expr868); if (state.failed) return;
-				DebugLocation(111, 9);
-				PushFollow(Follow._expr_or_in_expr870);
-				expr_or();
+				DebugLocation(214, 2);
+				Match(input,While,Follow._While_in_expr1163); if (state.failed) return node;
+				DebugLocation(214, 13);
+				PushFollow(Follow._expr_or_in_expr1169);
+				cond=expr_or();
 				PopFollow();
-				if (state.failed) return;
-				DebugLocation(111, 17);
-				Match(input,Do,Follow._Do_in_expr872); if (state.failed) return;
-				DebugLocation(111, 20);
-				PushFollow(Follow._expr_or_in_expr874);
-				expr_or();
+				if (state.failed) return node;
+				DebugLocation(214, 23);
+				Match(input,Do,Follow._Do_in_expr1171); if (state.failed) return node;
+				DebugLocation(214, 31);
+				PushFollow(Follow._expr_or_in_expr1177);
+				body=expr_or();
 				PopFollow();
-				if (state.failed) return;
+				if (state.failed) return node;
+				DebugLocation(215, 2);
+				if ( state.backtracking == 0 )
+				{
+
+						node = new WhileNode(cond, body);
+						
+				}
 
 				}
 				break;
 			case 9:
 				DebugEnterAlt(9);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:112:3: For ID Assign expr_or To expr_or Do expr_or
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:218:2: For ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or
 				{
-				DebugLocation(112, 3);
-				Match(input,For,Follow._For_in_expr882); if (state.failed) return;
-				DebugLocation(112, 7);
-				Match(input,ID,Follow._ID_in_expr884); if (state.failed) return;
-				DebugLocation(112, 10);
-				Match(input,Assign,Follow._Assign_in_expr886); if (state.failed) return;
-				DebugLocation(112, 17);
-				PushFollow(Follow._expr_or_in_expr888);
-				expr_or();
+				DebugLocation(218, 2);
+				Match(input,For,Follow._For_in_expr1187); if (state.failed) return node;
+				DebugLocation(218, 6);
+				Match(input,ID,Follow._ID_in_expr1189); if (state.failed) return node;
+				DebugLocation(218, 9);
+				Match(input,Assign,Follow._Assign_in_expr1191); if (state.failed) return node;
+				DebugLocation(218, 22);
+				PushFollow(Follow._expr_or_in_expr1197);
+				start=expr_or();
 				PopFollow();
-				if (state.failed) return;
-				DebugLocation(112, 25);
-				Match(input,To,Follow._To_in_expr890); if (state.failed) return;
-				DebugLocation(112, 28);
-				PushFollow(Follow._expr_or_in_expr892);
-				expr_or();
+				if (state.failed) return node;
+				DebugLocation(218, 32);
+				Match(input,To,Follow._To_in_expr1199); if (state.failed) return node;
+				DebugLocation(218, 39);
+				PushFollow(Follow._expr_or_in_expr1205);
+				end=expr_or();
 				PopFollow();
-				if (state.failed) return;
-				DebugLocation(112, 36);
-				Match(input,Do,Follow._Do_in_expr894); if (state.failed) return;
-				DebugLocation(112, 39);
-				PushFollow(Follow._expr_or_in_expr896);
-				expr_or();
+				if (state.failed) return node;
+				DebugLocation(218, 49);
+				Match(input,Do,Follow._Do_in_expr1207); if (state.failed) return node;
+				DebugLocation(218, 60);
+				PushFollow(Follow._expr_or_in_expr1213);
+				bodyFor=expr_or();
 				PopFollow();
-				if (state.failed) return;
+				if (state.failed) return node;
+				DebugLocation(219, 2);
+				if ( state.backtracking == 0 )
+				{
+
+						node = new ForToDoNode(start, end, bodyFor);
+						
+				}
 
 				}
 				break;
 			case 10:
 				DebugEnterAlt(10);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:113:3: Break
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:222:2: Break
 				{
-				DebugLocation(113, 3);
-				Match(input,Break,Follow._Break_in_expr904); if (state.failed) return;
+				DebugLocation(222, 2);
+				Match(input,Break,Follow._Break_in_expr1223); if (state.failed) return node;
+				DebugLocation(222, 8);
+				if ( state.backtracking == 0 )
+				{
+					 node = new BreakNode(); 
+				}
 
 				}
 				break;
 			case 11:
 				DebugEnterAlt(11);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:114:3: Let declarationList In ( exprSeq )? End
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:223:2: Let declarations= declarationList In (items= exprSeq )? End
 				{
-				DebugLocation(114, 3);
-				Match(input,Let,Follow._Let_in_expr913); if (state.failed) return;
-				DebugLocation(114, 7);
-				PushFollow(Follow._declarationList_in_expr915);
-				declarationList();
+				DebugLocation(223, 2);
+				Match(input,Let,Follow._Let_in_expr1232); if (state.failed) return node;
+				DebugLocation(223, 19);
+				PushFollow(Follow._declarationList_in_expr1238);
+				declarations=declarationList();
 				PopFollow();
-				if (state.failed) return;
-				DebugLocation(114, 23);
-				Match(input,In,Follow._In_in_expr917); if (state.failed) return;
-				DebugLocation(114, 26);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:114:26: ( exprSeq )?
+				if (state.failed) return node;
+				DebugLocation(223, 37);
+				if ( state.backtracking == 0 )
+				{
+					node = new LetInEndNode(declarations); 
+				}
+				DebugLocation(223, 87);
+				Match(input,In,Follow._In_in_expr1242); if (state.failed) return node;
+				DebugLocation(223, 90);
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:223:90: (items= exprSeq )?
 				int alt16=2;
 				try { DebugEnterSubRule(16);
 				try { DebugEnterDecision(16, decisionCanBacktrack[16]);
@@ -1511,13 +1735,18 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:114:27: exprSeq
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:223:91: items= exprSeq
 					{
-					DebugLocation(114, 27);
-					PushFollow(Follow._exprSeq_in_expr920);
-					exprSeq();
+					DebugLocation(223, 97);
+					PushFollow(Follow._exprSeq_in_expr1249);
+					items=exprSeq();
 					PopFollow();
-					if (state.failed) return;
+					if (state.failed) return node;
+					DebugLocation(223, 107);
+					if ( state.backtracking == 0 )
+					{
+						((LetInEndNode)node).Expressions = items; 
+					}
 
 					}
 					break;
@@ -1525,13 +1754,23 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				}
 				} finally { DebugExitSubRule(16); }
 
-				DebugLocation(114, 37);
-				Match(input,End,Follow._End_in_expr924); if (state.failed) return;
+				DebugLocation(223, 162);
+				Match(input,End,Follow._End_in_expr1255); if (state.failed) return node;
 
 				}
 				break;
 
 			}
+			} finally { DebugExitSubRule(17); }
+
+			DebugLocation(225, 2);
+			PushFollow(Follow._lvalue_in_expr1264);
+			lvalue(node);
+			PopFollow();
+			if (state.failed) return node;
+
+			}
+
 		}
 		catch (RecognitionException re)
 		{
@@ -1544,9 +1783,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("expr", 7);
 			Leave_expr();
 		}
-		DebugLocation(114, 39);
+		DebugLocation(225, 15);
 		} finally { DebugExitRule(GrammarFileName, "expr"); }
-		return;
+		return node;
 
 	}
 	// $ANTLR end "expr"
@@ -1556,28 +1795,39 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_exprSeq();
 
 	// $ANTLR start "exprSeq"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:115:1: exprSeq : expr_or ( DotComma expr_or )* ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:226:1: exprSeq returns [IList<ExpressionNode> items] : e1= expr_or ( DotComma e2= expr_or )* ;
 	[GrammarRule("exprSeq")]
-	private void exprSeq()
+	private IList<ExpressionNode> exprSeq()
 	{
 		Enter_exprSeq();
 		EnterRule("exprSeq", 8);
 		TraceIn("exprSeq", 8);
+		IList<ExpressionNode> items = default(IList<ExpressionNode>);
+
+		ExpressionNode e1 = default(ExpressionNode);
+		ExpressionNode e2 = default(ExpressionNode);
+
+		items = new List<ExpressionNode>();
 		try { DebugEnterRule(GrammarFileName, "exprSeq");
-		DebugLocation(115, 37);
+		DebugLocation(226, 88);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:115:9: ( expr_or ( DotComma expr_or )* )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:228:1: (e1= expr_or ( DotComma e2= expr_or )* )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:115:11: expr_or ( DotComma expr_or )*
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:228:3: e1= expr_or ( DotComma e2= expr_or )*
 			{
-			DebugLocation(115, 11);
-			PushFollow(Follow._expr_or_in_exprSeq933);
-			expr_or();
+			DebugLocation(228, 6);
+			PushFollow(Follow._expr_or_in_exprSeq1288);
+			e1=expr_or();
 			PopFollow();
-			if (state.failed) return;
-			DebugLocation(115, 19);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:115:19: ( DotComma expr_or )*
+			if (state.failed) return items;
+			DebugLocation(228, 16);
+			if ( state.backtracking == 0 )
+			{
+				items.Add(e1); 
+			}
+			DebugLocation(228, 40);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:228:40: ( DotComma e2= expr_or )*
 			try { DebugEnterSubRule(18);
 			while (true)
 			{
@@ -1596,15 +1846,20 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:115:20: DotComma expr_or
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:228:41: DotComma e2= expr_or
 					{
-					DebugLocation(115, 20);
-					Match(input,DotComma,Follow._DotComma_in_exprSeq936); if (state.failed) return;
-					DebugLocation(115, 29);
-					PushFollow(Follow._expr_or_in_exprSeq938);
-					expr_or();
+					DebugLocation(228, 41);
+					Match(input,DotComma,Follow._DotComma_in_exprSeq1292); if (state.failed) return items;
+					DebugLocation(228, 53);
+					PushFollow(Follow._expr_or_in_exprSeq1298);
+					e2=expr_or();
 					PopFollow();
-					if (state.failed) return;
+					if (state.failed) return items;
+					DebugLocation(228, 63);
+					if ( state.backtracking == 0 )
+					{
+						items.Add(e2); 
+					}
 
 					}
 					break;
@@ -1634,9 +1889,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("exprSeq", 8);
 			Leave_exprSeq();
 		}
-		DebugLocation(115, 37);
+		DebugLocation(228, 88);
 		} finally { DebugExitRule(GrammarFileName, "exprSeq"); }
-		return;
+		return items;
 
 	}
 	// $ANTLR end "exprSeq"
@@ -1646,28 +1901,39 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_exprList();
 
 	// $ANTLR start "exprList"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:116:1: exprList : expr_or ( Comma expr_or )* ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:230:1: exprList returns [IList<ExpressionNode> items] : e1= expr_or ( Comma e2= expr_or )* ;
 	[GrammarRule("exprList")]
-	private void exprList()
+	private IList<ExpressionNode> exprList()
 	{
 		Enter_exprList();
 		EnterRule("exprList", 9);
 		TraceIn("exprList", 9);
+		IList<ExpressionNode> items = default(IList<ExpressionNode>);
+
+		ExpressionNode e1 = default(ExpressionNode);
+		ExpressionNode e2 = default(ExpressionNode);
+
+		items = new List<ExpressionNode>();
 		try { DebugEnterRule(GrammarFileName, "exprList");
-		DebugLocation(116, 34);
+		DebugLocation(230, 82);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:116:9: ( expr_or ( Comma expr_or )* )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:232:1: (e1= expr_or ( Comma e2= expr_or )* )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:116:11: expr_or ( Comma expr_or )*
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:232:3: e1= expr_or ( Comma e2= expr_or )*
 			{
-			DebugLocation(116, 11);
-			PushFollow(Follow._expr_or_in_exprList948);
-			expr_or();
+			DebugLocation(232, 6);
+			PushFollow(Follow._expr_or_in_exprList1326);
+			e1=expr_or();
 			PopFollow();
-			if (state.failed) return;
-			DebugLocation(116, 19);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:116:19: ( Comma expr_or )*
+			if (state.failed) return items;
+			DebugLocation(232, 16);
+			if ( state.backtracking == 0 )
+			{
+				items.Add(e1);
+			}
+			DebugLocation(232, 39);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:232:39: ( Comma e2= expr_or )*
 			try { DebugEnterSubRule(19);
 			while (true)
 			{
@@ -1686,15 +1952,20 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:116:20: Comma expr_or
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:232:40: Comma e2= expr_or
 					{
-					DebugLocation(116, 20);
-					Match(input,Comma,Follow._Comma_in_exprList951); if (state.failed) return;
-					DebugLocation(116, 26);
-					PushFollow(Follow._expr_or_in_exprList953);
-					expr_or();
+					DebugLocation(232, 40);
+					Match(input,Comma,Follow._Comma_in_exprList1331); if (state.failed) return items;
+					DebugLocation(232, 49);
+					PushFollow(Follow._expr_or_in_exprList1337);
+					e2=expr_or();
 					PopFollow();
-					if (state.failed) return;
+					if (state.failed) return items;
+					DebugLocation(232, 59);
+					if ( state.backtracking == 0 )
+					{
+						items.Add(e2);
+					}
 
 					}
 					break;
@@ -1724,9 +1995,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("exprList", 9);
 			Leave_exprList();
 		}
-		DebugLocation(116, 34);
+		DebugLocation(232, 82);
 		} finally { DebugExitRule(GrammarFileName, "exprList"); }
-		return;
+		return items;
 
 	}
 	// $ANTLR end "exprList"
@@ -1736,28 +2007,38 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_fieldList();
 
 	// $ANTLR start "fieldList"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:117:1: fieldList : idAssign ( Comma idAssign )* ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:234:1: fieldList returns [IList<FieldAssignmentNode> items] : id= idAssign ( Comma id= idAssign )* ;
 	[GrammarRule("fieldList")]
-	private void fieldList()
+	private IList<FieldAssignmentNode> fieldList()
 	{
 		Enter_fieldList();
 		EnterRule("fieldList", 10);
 		TraceIn("fieldList", 10);
+		IList<FieldAssignmentNode> items = default(IList<FieldAssignmentNode>);
+
+		FieldAssignmentNode id = default(FieldAssignmentNode);
+
+		items = new List<FieldAssignmentNode>(); 
 		try { DebugEnterRule(GrammarFileName, "fieldList");
-		DebugLocation(117, 38);
+		DebugLocation(234, 85);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:117:11: ( idAssign ( Comma idAssign )* )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:235:51: (id= idAssign ( Comma id= idAssign )* )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:117:13: idAssign ( Comma idAssign )*
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:236:2: id= idAssign ( Comma id= idAssign )*
 			{
-			DebugLocation(117, 13);
-			PushFollow(Follow._idAssign_in_fieldList964);
-			idAssign();
+			DebugLocation(236, 5);
+			PushFollow(Follow._idAssign_in_fieldList1364);
+			id=idAssign();
 			PopFollow();
-			if (state.failed) return;
-			DebugLocation(117, 22);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:117:22: ( Comma idAssign )*
+			if (state.failed) return items;
+			DebugLocation(236, 16);
+			if ( state.backtracking == 0 )
+			{
+				items.Add(id);
+			}
+			DebugLocation(236, 40);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:236:40: ( Comma id= idAssign )*
 			try { DebugEnterSubRule(20);
 			while (true)
 			{
@@ -1776,15 +2057,20 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:117:23: Comma idAssign
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:236:41: Comma id= idAssign
 					{
-					DebugLocation(117, 23);
-					Match(input,Comma,Follow._Comma_in_fieldList967); if (state.failed) return;
-					DebugLocation(117, 29);
-					PushFollow(Follow._idAssign_in_fieldList969);
-					idAssign();
+					DebugLocation(236, 41);
+					Match(input,Comma,Follow._Comma_in_fieldList1369); if (state.failed) return items;
+					DebugLocation(236, 50);
+					PushFollow(Follow._idAssign_in_fieldList1375);
+					id=idAssign();
 					PopFollow();
-					if (state.failed) return;
+					if (state.failed) return items;
+					DebugLocation(236, 61);
+					if ( state.backtracking == 0 )
+					{
+						items.Add(id);
+					}
 
 					}
 					break;
@@ -1814,9 +2100,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("fieldList", 10);
 			Leave_fieldList();
 		}
-		DebugLocation(117, 38);
+		DebugLocation(236, 85);
 		} finally { DebugExitRule(GrammarFileName, "fieldList"); }
-		return;
+		return items;
 
 	}
 	// $ANTLR end "fieldList"
@@ -1826,65 +2112,43 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_idAssign();
 
 	// $ANTLR start "idAssign"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:119:1: idAssign : ( ID Equals expr_or | );
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:238:1: idAssign returns [FieldAssignmentNode node] : fieldName= ID Equals body= expr_or ;
 	[GrammarRule("idAssign")]
-	private void idAssign()
+	private FieldAssignmentNode idAssign()
 	{
 		Enter_idAssign();
 		EnterRule("idAssign", 11);
 		TraceIn("idAssign", 11);
+		FieldAssignmentNode node = default(FieldAssignmentNode);
+
+		IToken fieldName=null;
+		ExpressionNode body = default(ExpressionNode);
+
 		try { DebugEnterRule(GrammarFileName, "idAssign");
-		DebugLocation(119, 29);
+		DebugLocation(238, 100);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:119:9: ( ID Equals expr_or | )
-			int alt21=2;
-			try { DebugEnterDecision(21, decisionCanBacktrack[21]);
-			int LA21_0 = input.LA(1);
-
-			if ((LA21_0==ID))
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:238:44: (fieldName= ID Equals body= expr_or )
+			DebugEnterAlt(1);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:239:1: fieldName= ID Equals body= expr_or
 			{
-				alt21=1;
+			DebugLocation(239, 11);
+			fieldName=(IToken)Match(input,ID,Follow._ID_in_idAssign1397); if (state.failed) return node;
+			DebugLocation(239, 16);
+			Match(input,Equals,Follow._Equals_in_idAssign1399); if (state.failed) return node;
+			DebugLocation(239, 28);
+			PushFollow(Follow._expr_or_in_idAssign1405);
+			body=expr_or();
+			PopFollow();
+			if (state.failed) return node;
+			DebugLocation(239, 38);
+			if ( state.backtracking == 0 )
+			{
+				node = new FieldAssignmentNode(fieldName.Text, body);
 			}
-			else if ((LA21_0==RKey||LA21_0==Comma))
-			{
-				alt21=2;
-			}
-			else
-			{
-				if (state.backtracking>0) {state.failed=true; return;}
-				NoViableAltException nvae = new NoViableAltException("", 21, 0, input);
-
-				DebugRecognitionException(nvae);
-				throw nvae;
-			}
-			} finally { DebugExitDecision(21); }
-			switch (alt21)
-			{
-			case 1:
-				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:119:11: ID Equals expr_or
-				{
-				DebugLocation(119, 11);
-				Match(input,ID,Follow._ID_in_idAssign980); if (state.failed) return;
-				DebugLocation(119, 14);
-				Match(input,Equals,Follow._Equals_in_idAssign982); if (state.failed) return;
-				DebugLocation(119, 21);
-				PushFollow(Follow._expr_or_in_idAssign984);
-				expr_or();
-				PopFollow();
-				if (state.failed) return;
-
-				}
-				break;
-			case 2:
-				DebugEnterAlt(2);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:119:30: 
-				{
-				}
-				break;
 
 			}
+
 		}
 		catch (RecognitionException re)
 		{
@@ -1897,9 +2161,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("idAssign", 11);
 			Leave_idAssign();
 		}
-		DebugLocation(119, 29);
+		DebugLocation(239, 100);
 		} finally { DebugExitRule(GrammarFileName, "idAssign"); }
-		return;
+		return node;
 
 	}
 	// $ANTLR end "idAssign"
@@ -1909,80 +2173,95 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_lvalue();
 
 	// $ANTLR start "lvalue"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:120:1: lvalue : ( Dot ID | LCorch expr_or RCorch )* ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:241:1: lvalue[ExpressionNode accessNode] returns [ExpressionNode node] : ( Dot fieldName= ID | LCorch index= expr_or RCorch )* ;
 	[GrammarRule("lvalue")]
-	private void lvalue()
+	private ExpressionNode lvalue(ExpressionNode accessNode)
 	{
 		Enter_lvalue();
 		EnterRule("lvalue", 12);
 		TraceIn("lvalue", 12);
+		ExpressionNode node = default(ExpressionNode);
+
+		IToken fieldName=null;
+		ExpressionNode index = default(ExpressionNode);
+
 		try { DebugEnterRule(GrammarFileName, "lvalue");
-		DebugLocation(120, 43);
+		DebugLocation(241, 2);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:120:8: ( ( Dot ID | LCorch expr_or RCorch )* )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:241:65: ( ( Dot fieldName= ID | LCorch index= expr_or RCorch )* )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:120:10: ( Dot ID | LCorch expr_or RCorch )*
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:242:1: ( Dot fieldName= ID | LCorch index= expr_or RCorch )*
 			{
-			DebugLocation(120, 10);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:120:10: ( Dot ID | LCorch expr_or RCorch )*
-			try { DebugEnterSubRule(22);
+			DebugLocation(242, 1);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:242:1: ( Dot fieldName= ID | LCorch index= expr_or RCorch )*
+			try { DebugEnterSubRule(21);
 			while (true)
 			{
-				int alt22=3;
-				try { DebugEnterDecision(22, decisionCanBacktrack[22]);
-				int LA22_0 = input.LA(1);
+				int alt21=3;
+				try { DebugEnterDecision(21, decisionCanBacktrack[21]);
+				int LA21_0 = input.LA(1);
 
-				if ((LA22_0==Dot))
+				if ((LA21_0==Dot))
 				{
-					alt22=1;
+					alt21=1;
 				}
-				else if ((LA22_0==LCorch))
+				else if ((LA21_0==LCorch))
 				{
-					alt22=2;
+					alt21=2;
 				}
 
 
-				} finally { DebugExitDecision(22); }
-				switch ( alt22 )
+				} finally { DebugExitDecision(21); }
+				switch ( alt21 )
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:120:11: Dot ID
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:243:1: Dot fieldName= ID
 					{
-					DebugLocation(120, 11);
-					Match(input,Dot,Follow._Dot_in_lvalue996); if (state.failed) return;
-					DebugLocation(120, 15);
-					Match(input,ID,Follow._ID_in_lvalue998); if (state.failed) return;
+					DebugLocation(243, 1);
+					Match(input,Dot,Follow._Dot_in_lvalue1425); if (state.failed) return node;
+					DebugLocation(243, 15);
+					fieldName=(IToken)Match(input,ID,Follow._ID_in_lvalue1431); if (state.failed) return node;
+					DebugLocation(243, 20);
+					if ( state.backtracking == 0 )
+					{
+						node = new RecordAccessNode(accessNode, fieldName.Text);
+					}
 
 					}
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:120:20: LCorch expr_or RCorch
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:244:1: LCorch index= expr_or RCorch
 					{
-					DebugLocation(120, 20);
-					Match(input,LCorch,Follow._LCorch_in_lvalue1002); if (state.failed) return;
-					DebugLocation(120, 27);
-					PushFollow(Follow._expr_or_in_lvalue1004);
-					expr_or();
+					DebugLocation(244, 1);
+					Match(input,LCorch,Follow._LCorch_in_lvalue1437); if (state.failed) return node;
+					DebugLocation(244, 14);
+					PushFollow(Follow._expr_or_in_lvalue1443);
+					index=expr_or();
 					PopFollow();
-					if (state.failed) return;
-					DebugLocation(120, 35);
-					Match(input,RCorch,Follow._RCorch_in_lvalue1006); if (state.failed) return;
+					if (state.failed) return node;
+					DebugLocation(244, 24);
+					Match(input,RCorch,Follow._RCorch_in_lvalue1445); if (state.failed) return node;
+					DebugLocation(244, 31);
+					if ( state.backtracking == 0 )
+					{
+						node = new ArrayAccessNode(accessNode, index); 
+					}
 
 					}
 					break;
 
 				default:
-					goto loop22;
+					goto loop21;
 				}
 			}
 
-			loop22:
+			loop21:
 				;
 
-			} finally { DebugExitSubRule(22); }
+			} finally { DebugExitSubRule(21); }
 
 
 			}
@@ -1999,9 +2278,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("lvalue", 12);
 			Leave_lvalue();
 		}
-		DebugLocation(120, 43);
+		DebugLocation(245, 2);
 		} finally { DebugExitRule(GrammarFileName, "lvalue"); }
-		return;
+		return node;
 
 	}
 	// $ANTLR end "lvalue"
@@ -2011,68 +2290,78 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_declarationList();
 
 	// $ANTLR start "declarationList"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:121:1: declarationList : ( declaration )+ ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:247:1: declarationList returns [IList<DeclarationNode> items] : (dec= declaration )+ ;
 	[GrammarRule("declarationList")]
-	private void declarationList()
+	private IList<DeclarationNode> declarationList()
 	{
 		Enter_declarationList();
 		EnterRule("declarationList", 13);
 		TraceIn("declarationList", 13);
+		IList<DeclarationNode> items = default(IList<DeclarationNode>);
+
+		DeclarationNode dec = default(DeclarationNode);
+
+		items = new List<DeclarationNode>();
 		try { DebugEnterRule(GrammarFileName, "declarationList");
-		DebugLocation(121, 30);
+		DebugLocation(247, 48);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:121:17: ( ( declaration )+ )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:248:45: ( (dec= declaration )+ )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:121:19: ( declaration )+
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:249:2: (dec= declaration )+
 			{
-			DebugLocation(121, 19);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:121:19: ( declaration )+
-			int cnt23=0;
-			try { DebugEnterSubRule(23);
+			DebugLocation(249, 2);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:249:2: (dec= declaration )+
+			int cnt22=0;
+			try { DebugEnterSubRule(22);
 			while (true)
 			{
-				int alt23=2;
-				try { DebugEnterDecision(23, decisionCanBacktrack[23]);
-				int LA23_0 = input.LA(1);
+				int alt22=2;
+				try { DebugEnterDecision(22, decisionCanBacktrack[22]);
+				int LA22_0 = input.LA(1);
 
-				if ((LA23_0==Type||(LA23_0>=Var && LA23_0<=Function)))
+				if ((LA22_0==Type||(LA22_0>=Var && LA22_0<=Function)))
 				{
-					alt23=1;
+					alt22=1;
 				}
 
 
-				} finally { DebugExitDecision(23); }
-				switch (alt23)
+				} finally { DebugExitDecision(22); }
+				switch (alt22)
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:121:19: declaration
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:249:3: dec= declaration
 					{
-					DebugLocation(121, 19);
-					PushFollow(Follow._declaration_in_declarationList1022);
-					declaration();
+					DebugLocation(249, 7);
+					PushFollow(Follow._declaration_in_declarationList1477);
+					dec=declaration();
 					PopFollow();
-					if (state.failed) return;
+					if (state.failed) return items;
+					DebugLocation(249, 21);
+					if ( state.backtracking == 0 )
+					{
+						items.Add(dec);
+					}
 
 					}
 					break;
 
 				default:
-					if (cnt23 >= 1)
-						goto loop23;
+					if (cnt22 >= 1)
+						goto loop22;
 
-					if (state.backtracking>0) {state.failed=true; return;}
-					EarlyExitException eee23 = new EarlyExitException( 23, input );
-					DebugRecognitionException(eee23);
-					throw eee23;
+					if (state.backtracking>0) {state.failed=true; return items;}
+					EarlyExitException eee22 = new EarlyExitException( 22, input );
+					DebugRecognitionException(eee22);
+					throw eee22;
 				}
-				cnt23++;
+				cnt22++;
 			}
-			loop23:
+			loop22:
 				;
 
-			} finally { DebugExitSubRule(23); }
+			} finally { DebugExitSubRule(22); }
 
 
 			}
@@ -2089,9 +2378,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("declarationList", 13);
 			Leave_declarationList();
 		}
-		DebugLocation(121, 30);
+		DebugLocation(249, 48);
 		} finally { DebugExitRule(GrammarFileName, "declarationList"); }
-		return;
+		return items;
 
 	}
 	// $ANTLR end "declarationList"
@@ -2101,83 +2390,104 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_declaration();
 
 	// $ANTLR start "declaration"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:122:1: declaration : ( typeDeclaration | variableDeclaration | functionDeclaration );
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:250:1: declaration returns [DeclarationNode node] : (t= typeDeclaration | v= variableDeclaration | f= functionDeclaration );
 	[GrammarRule("declaration")]
-	private void declaration()
+	private DeclarationNode declaration()
 	{
 		Enter_declaration();
 		EnterRule("declaration", 14);
 		TraceIn("declaration", 14);
+		DeclarationNode node = default(DeclarationNode);
+
+		TypeDeclarationNode t = default(TypeDeclarationNode);
+		VariableDeclarationNode v = default(VariableDeclarationNode);
+		CallableDeclarationNode f = default(CallableDeclarationNode);
+
 		try { DebugEnterRule(GrammarFileName, "declaration");
-		DebugLocation(122, 22);
+		DebugLocation(250, 43);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:122:13: ( typeDeclaration | variableDeclaration | functionDeclaration )
-			int alt24=3;
-			try { DebugEnterDecision(24, decisionCanBacktrack[24]);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:250:44: (t= typeDeclaration | v= variableDeclaration | f= functionDeclaration )
+			int alt23=3;
+			try { DebugEnterDecision(23, decisionCanBacktrack[23]);
 			switch (input.LA(1))
 			{
 			case Type:
 				{
-				alt24=1;
+				alt23=1;
 				}
 				break;
 			case Var:
 				{
-				alt24=2;
+				alt23=2;
 				}
 				break;
 			case Function:
 				{
-				alt24=3;
+				alt23=3;
 				}
 				break;
 			default:
 				{
-					if (state.backtracking>0) {state.failed=true; return;}
-					NoViableAltException nvae = new NoViableAltException("", 24, 0, input);
+					if (state.backtracking>0) {state.failed=true; return node;}
+					NoViableAltException nvae = new NoViableAltException("", 23, 0, input);
 
 					DebugRecognitionException(nvae);
 					throw nvae;
 				}
 			}
 
-			} finally { DebugExitDecision(24); }
-			switch (alt24)
+			} finally { DebugExitDecision(23); }
+			switch (alt23)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:122:15: typeDeclaration
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:252:1: t= typeDeclaration
 				{
-				DebugLocation(122, 15);
-				PushFollow(Follow._typeDeclaration_in_declaration1032);
-				typeDeclaration();
+				DebugLocation(252, 3);
+				PushFollow(Follow._typeDeclaration_in_declaration1503);
+				t=typeDeclaration();
 				PopFollow();
-				if (state.failed) return;
+				if (state.failed) return node;
+				DebugLocation(252, 21);
+				if ( state.backtracking == 0 )
+				{
+					 node = t; 
+				}
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:123:4: variableDeclaration
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:253:1: v= variableDeclaration
 				{
-				DebugLocation(123, 4);
-				PushFollow(Follow._variableDeclaration_in_declaration1041);
-				variableDeclaration();
+				DebugLocation(253, 3);
+				PushFollow(Follow._variableDeclaration_in_declaration1513);
+				v=variableDeclaration();
 				PopFollow();
-				if (state.failed) return;
+				if (state.failed) return node;
+				DebugLocation(253, 25);
+				if ( state.backtracking == 0 )
+				{
+					 node = v; 
+				}
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:124:4: functionDeclaration
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:254:1: f= functionDeclaration
 				{
-				DebugLocation(124, 4);
-				PushFollow(Follow._functionDeclaration_in_declaration1049);
-				functionDeclaration();
+				DebugLocation(254, 3);
+				PushFollow(Follow._functionDeclaration_in_declaration1523);
+				f=functionDeclaration();
 				PopFollow();
-				if (state.failed) return;
+				if (state.failed) return node;
+				DebugLocation(254, 25);
+				if ( state.backtracking == 0 )
+				{
+					node = f; 
+				}
 
 				}
 				break;
@@ -2195,9 +2505,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("declaration", 14);
 			Leave_declaration();
 		}
-		DebugLocation(124, 22);
+		DebugLocation(254, 43);
 		} finally { DebugExitRule(GrammarFileName, "declaration"); }
-		return;
+		return node;
 
 	}
 	// $ANTLR end "declaration"
@@ -2207,32 +2517,36 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_typeDeclaration();
 
 	// $ANTLR start "typeDeclaration"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:125:1: typeDeclaration : Type ID Equals type ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:256:1: typeDeclaration returns [TypeDeclarationNode node] : Type name= ID Equals type[$name.Text] ;
 	[GrammarRule("typeDeclaration")]
-	private void typeDeclaration()
+	private TypeDeclarationNode typeDeclaration()
 	{
 		Enter_typeDeclaration();
 		EnterRule("typeDeclaration", 15);
 		TraceIn("typeDeclaration", 15);
+		TypeDeclarationNode node = default(TypeDeclarationNode);
+
+		IToken name=null;
+
 		try { DebugEnterRule(GrammarFileName, "typeDeclaration");
-		DebugLocation(125, 37);
+		DebugLocation(256, 38);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:125:17: ( Type ID Equals type )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:256:52: ( Type name= ID Equals type[$name.Text] )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:125:19: Type ID Equals type
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:257:1: Type name= ID Equals type[$name.Text]
 			{
-			DebugLocation(125, 19);
-			Match(input,Type,Follow._Type_in_typeDeclaration1056); if (state.failed) return;
-			DebugLocation(125, 24);
-			Match(input,ID,Follow._ID_in_typeDeclaration1058); if (state.failed) return;
-			DebugLocation(125, 27);
-			Match(input,Equals,Follow._Equals_in_typeDeclaration1060); if (state.failed) return;
-			DebugLocation(125, 34);
-			PushFollow(Follow._type_in_typeDeclaration1062);
-			type();
+			DebugLocation(257, 1);
+			Match(input,Type,Follow._Type_in_typeDeclaration1538); if (state.failed) return node;
+			DebugLocation(257, 11);
+			name=(IToken)Match(input,ID,Follow._ID_in_typeDeclaration1544); if (state.failed) return node;
+			DebugLocation(257, 16);
+			Match(input,Equals,Follow._Equals_in_typeDeclaration1546); if (state.failed) return node;
+			DebugLocation(257, 23);
+			PushFollow(Follow._type_in_typeDeclaration1548);
+			type(name.Text);
 			PopFollow();
-			if (state.failed) return;
+			if (state.failed) return node;
 
 			}
 
@@ -2248,9 +2562,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("typeDeclaration", 15);
 			Leave_typeDeclaration();
 		}
-		DebugLocation(125, 37);
+		DebugLocation(257, 38);
 		} finally { DebugExitRule(GrammarFileName, "typeDeclaration"); }
-		return;
+		return node;
 
 	}
 	// $ANTLR end "typeDeclaration"
@@ -2260,108 +2574,134 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_type();
 
 	// $ANTLR start "type"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:126:1: type : ( ID | LKey ( typeFields )? RKey | ArrayOf ID );
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:259:1: type[string name] returns [TypeDeclarationNode node] : (id= ID | LKey (fields= typeFields )? RKey | ArrayOf typeName= ID );
 	[GrammarRule("type")]
-	private void type()
+	private TypeDeclarationNode type(string name)
 	{
 		Enter_type();
 		EnterRule("type", 16);
 		TraceIn("type", 16);
+		TypeDeclarationNode node = default(TypeDeclarationNode);
+
+		IToken id=null;
+		IToken typeName=null;
+		IList<TypeField> fields = default(IList<TypeField>);
+
 		try { DebugEnterRule(GrammarFileName, "type");
-		DebugLocation(126, 12);
+		DebugLocation(259, 80);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:126:6: ( ID | LKey ( typeFields )? RKey | ArrayOf ID )
-			int alt26=3;
-			try { DebugEnterDecision(26, decisionCanBacktrack[26]);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:259:54: (id= ID | LKey (fields= typeFields )? RKey | ArrayOf typeName= ID )
+			int alt25=3;
+			try { DebugEnterDecision(25, decisionCanBacktrack[25]);
 			switch (input.LA(1))
 			{
 			case ID:
 				{
-				alt26=1;
+				alt25=1;
 				}
 				break;
 			case LKey:
 				{
-				alt26=2;
+				alt25=2;
 				}
 				break;
 			case ArrayOf:
 				{
-				alt26=3;
+				alt25=3;
 				}
 				break;
 			default:
 				{
-					if (state.backtracking>0) {state.failed=true; return;}
-					NoViableAltException nvae = new NoViableAltException("", 26, 0, input);
+					if (state.backtracking>0) {state.failed=true; return node;}
+					NoViableAltException nvae = new NoViableAltException("", 25, 0, input);
 
 					DebugRecognitionException(nvae);
 					throw nvae;
 				}
 			}
 
-			} finally { DebugExitDecision(26); }
-			switch (alt26)
+			} finally { DebugExitDecision(25); }
+			switch (alt25)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:126:8: ID
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:260:2: id= ID
 				{
-				DebugLocation(126, 8);
-				Match(input,ID,Follow._ID_in_type1071); if (state.failed) return;
+				DebugLocation(260, 5);
+				id=(IToken)Match(input,ID,Follow._ID_in_type1570); if (state.failed) return node;
+				DebugLocation(260, 10);
+				if ( state.backtracking == 0 )
+				{
+					node = new AliasDeclarationNode(name, id.Text); 
+				}
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:127:3: LKey ( typeFields )? RKey
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:261:2: LKey (fields= typeFields )? RKey
 				{
-				DebugLocation(127, 3);
-				Match(input,LKey,Follow._LKey_in_type1079); if (state.failed) return;
-				DebugLocation(127, 8);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:127:8: ( typeFields )?
-				int alt25=2;
-				try { DebugEnterSubRule(25);
-				try { DebugEnterDecision(25, decisionCanBacktrack[25]);
-				int LA25_0 = input.LA(1);
-
-				if ((LA25_0==ID))
+				DebugLocation(261, 2);
+				Match(input,LKey,Follow._LKey_in_type1578); if (state.failed) return node;
+				DebugLocation(261, 7);
+				if ( state.backtracking == 0 )
 				{
-					alt25=1;
+					node = new RecordDeclarationNode(name); 
 				}
-				} finally { DebugExitDecision(25); }
-				switch (alt25)
+				DebugLocation(261, 50);
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:261:50: (fields= typeFields )?
+				int alt24=2;
+				try { DebugEnterSubRule(24);
+				try { DebugEnterDecision(24, decisionCanBacktrack[24]);
+				int LA24_0 = input.LA(1);
+
+				if ((LA24_0==ID))
+				{
+					alt24=1;
+				}
+				} finally { DebugExitDecision(24); }
+				switch (alt24)
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:127:9: typeFields
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:261:51: fields= typeFields
 					{
-					DebugLocation(127, 9);
-					PushFollow(Follow._typeFields_in_type1082);
-					typeFields();
+					DebugLocation(261, 58);
+					PushFollow(Follow._typeFields_in_type1586);
+					fields=typeFields();
 					PopFollow();
-					if (state.failed) return;
+					if (state.failed) return node;
+					DebugLocation(261, 71);
+					if ( state.backtracking == 0 )
+					{
+						((RecordDeclarationNode)node).Fields = fields;
+					}
 
 					}
 					break;
 
 				}
-				} finally { DebugExitSubRule(25); }
+				} finally { DebugExitSubRule(24); }
 
-				DebugLocation(127, 22);
-				Match(input,RKey,Follow._RKey_in_type1086); if (state.failed) return;
+				DebugLocation(261, 130);
+				Match(input,RKey,Follow._RKey_in_type1592); if (state.failed) return node;
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:128:3: ArrayOf ID
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:262:2: ArrayOf typeName= ID
 				{
-				DebugLocation(128, 3);
-				Match(input,ArrayOf,Follow._ArrayOf_in_type1094); if (state.failed) return;
-				DebugLocation(128, 11);
-				Match(input,ID,Follow._ID_in_type1096); if (state.failed) return;
+				DebugLocation(262, 2);
+				Match(input,ArrayOf,Follow._ArrayOf_in_type1599); if (state.failed) return node;
+				DebugLocation(262, 19);
+				typeName=(IToken)Match(input,ID,Follow._ID_in_type1605); if (state.failed) return node;
+				DebugLocation(262, 24);
+				if ( state.backtracking == 0 )
+				{
+					node = new ArrayDeclarationNode(name, typeName.Text);
+				}
 
 				}
 				break;
@@ -2379,9 +2719,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("type", 16);
 			Leave_type();
 		}
-		DebugLocation(128, 12);
+		DebugLocation(262, 80);
 		} finally { DebugExitRule(GrammarFileName, "type"); }
-		return;
+		return node;
 
 	}
 	// $ANTLR end "type"
@@ -2391,68 +2731,83 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_typeFields();
 
 	// $ANTLR start "typeFields"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:129:1: typeFields : typeField ( Comma typeField )* ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:264:1: typeFields returns [IList<TypeField> items] : t= typeField ( Comma t= typeField )* ;
 	[GrammarRule("typeFields")]
-	private void typeFields()
+	private IList<TypeField> typeFields()
 	{
 		Enter_typeFields();
 		EnterRule("typeFields", 17);
 		TraceIn("typeFields", 17);
+		IList<TypeField> items = default(IList<TypeField>);
+
+		TypeField t = default(TypeField);
+
+		items = new List<TypeField>();
 		try { DebugEnterRule(GrammarFileName, "typeFields");
-		DebugLocation(129, 42);
+		DebugLocation(264, 85);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:129:12: ( typeField ( Comma typeField )* )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:265:40: (t= typeField ( Comma t= typeField )* )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:129:15: typeField ( Comma typeField )*
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:266:1: t= typeField ( Comma t= typeField )*
 			{
-			DebugLocation(129, 15);
-			PushFollow(Follow._typeField_in_typeFields1106);
-			typeField();
+			DebugLocation(266, 3);
+			PushFollow(Follow._typeField_in_typeFields1631);
+			t=typeField();
 			PopFollow();
-			if (state.failed) return;
-			DebugLocation(129, 25);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:129:25: ( Comma typeField )*
-			try { DebugEnterSubRule(27);
+			if (state.failed) return items;
+			DebugLocation(266, 15);
+			if ( state.backtracking == 0 )
+			{
+				items.Add(t); 
+			}
+			DebugLocation(266, 40);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:266:40: ( Comma t= typeField )*
+			try { DebugEnterSubRule(26);
 			while (true)
 			{
-				int alt27=2;
-				try { DebugEnterDecision(27, decisionCanBacktrack[27]);
-				int LA27_0 = input.LA(1);
+				int alt26=2;
+				try { DebugEnterDecision(26, decisionCanBacktrack[26]);
+				int LA26_0 = input.LA(1);
 
-				if ((LA27_0==Comma))
+				if ((LA26_0==Comma))
 				{
-					alt27=1;
+					alt26=1;
 				}
 
 
-				} finally { DebugExitDecision(27); }
-				switch ( alt27 )
+				} finally { DebugExitDecision(26); }
+				switch ( alt26 )
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:129:26: Comma typeField
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:266:41: Comma t= typeField
 					{
-					DebugLocation(129, 26);
-					Match(input,Comma,Follow._Comma_in_typeFields1109); if (state.failed) return;
-					DebugLocation(129, 32);
-					PushFollow(Follow._typeField_in_typeFields1111);
-					typeField();
+					DebugLocation(266, 41);
+					Match(input,Comma,Follow._Comma_in_typeFields1636); if (state.failed) return items;
+					DebugLocation(266, 49);
+					PushFollow(Follow._typeField_in_typeFields1642);
+					t=typeField();
 					PopFollow();
-					if (state.failed) return;
+					if (state.failed) return items;
+					DebugLocation(266, 61);
+					if ( state.backtracking == 0 )
+					{
+						items.Add(t);
+					}
 
 					}
 					break;
 
 				default:
-					goto loop27;
+					goto loop26;
 				}
 			}
 
-			loop27:
+			loop26:
 				;
 
-			} finally { DebugExitSubRule(27); }
+			} finally { DebugExitSubRule(26); }
 
 
 			}
@@ -2469,9 +2824,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("typeFields", 17);
 			Leave_typeFields();
 		}
-		DebugLocation(129, 42);
+		DebugLocation(266, 85);
 		} finally { DebugExitRule(GrammarFileName, "typeFields"); }
-		return;
+		return items;
 
 	}
 	// $ANTLR end "typeFields"
@@ -2481,27 +2836,37 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_typeField();
 
 	// $ANTLR start "typeField"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:130:1: typeField : ID ':' ID ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:268:1: typeField returns [TypeField value] : id= ID ':' typeId= ID ;
 	[GrammarRule("typeField")]
-	private void typeField()
+	private TypeField typeField()
 	{
 		Enter_typeField();
 		EnterRule("typeField", 18);
 		TraceIn("typeField", 18);
+		TypeField value = default(TypeField);
+
+		IToken id=null;
+		IToken typeId=null;
+
 		try { DebugEnterRule(GrammarFileName, "typeField");
-		DebugLocation(130, 21);
+		DebugLocation(268, 111);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:130:11: ( ID ':' ID )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:268:37: (id= ID ':' typeId= ID )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:130:13: ID ':' ID
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:268:39: id= ID ':' typeId= ID
 			{
-			DebugLocation(130, 13);
-			Match(input,ID,Follow._ID_in_typeField1122); if (state.failed) return;
-			DebugLocation(130, 16);
-			Match(input,54,Follow._54_in_typeField1124); if (state.failed) return;
-			DebugLocation(130, 20);
-			Match(input,ID,Follow._ID_in_typeField1126); if (state.failed) return;
+			DebugLocation(268, 42);
+			id=(IToken)Match(input,ID,Follow._ID_in_typeField1664); if (state.failed) return value;
+			DebugLocation(268, 47);
+			Match(input,54,Follow._54_in_typeField1666); if (state.failed) return value;
+			DebugLocation(268, 58);
+			typeId=(IToken)Match(input,ID,Follow._ID_in_typeField1672); if (state.failed) return value;
+			DebugLocation(268, 63);
+			if ( state.backtracking == 0 )
+			{
+				value = new TypeField(id.Text, typeId.Text);
+			}
 
 			}
 
@@ -2517,9 +2882,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("typeField", 18);
 			Leave_typeField();
 		}
-		DebugLocation(130, 21);
+		DebugLocation(268, 111);
 		} finally { DebugExitRule(GrammarFileName, "typeField"); }
-		return;
+		return value;
 
 	}
 	// $ANTLR end "typeField"
@@ -2529,61 +2894,78 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_variableDeclaration();
 
 	// $ANTLR start "variableDeclaration"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:132:1: variableDeclaration : Var ID ( ':' ID )? Assign expr_or ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:270:1: variableDeclaration returns [VariableDeclarationNode node] : Var name= ID ( ':' tName= ID )? Assign body= expr_or ;
 	[GrammarRule("variableDeclaration")]
-	private void variableDeclaration()
+	private VariableDeclarationNode variableDeclaration()
 	{
 		Enter_variableDeclaration();
 		EnterRule("variableDeclaration", 19);
 		TraceIn("variableDeclaration", 19);
+		VariableDeclarationNode node = default(VariableDeclarationNode);
+
+		IToken name=null;
+		IToken tName=null;
+		ExpressionNode body = default(ExpressionNode);
+
+		string typeName = null;
 		try { DebugEnterRule(GrammarFileName, "variableDeclaration");
-		DebugLocation(132, 53);
+		DebugLocation(270, 72);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:132:21: ( Var ID ( ':' ID )? Assign expr_or )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:271:32: ( Var name= ID ( ':' tName= ID )? Assign body= expr_or )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:132:23: Var ID ( ':' ID )? Assign expr_or
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:272:1: Var name= ID ( ':' tName= ID )? Assign body= expr_or
 			{
-			DebugLocation(132, 23);
-			Match(input,Var,Follow._Var_in_variableDeclaration1136); if (state.failed) return;
-			DebugLocation(132, 27);
-			Match(input,ID,Follow._ID_in_variableDeclaration1138); if (state.failed) return;
-			DebugLocation(132, 30);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:132:30: ( ':' ID )?
-			int alt28=2;
-			try { DebugEnterSubRule(28);
-			try { DebugEnterDecision(28, decisionCanBacktrack[28]);
-			int LA28_0 = input.LA(1);
+			DebugLocation(272, 1);
+			Match(input,Var,Follow._Var_in_variableDeclaration1691); if (state.failed) return node;
+			DebugLocation(272, 10);
+			name=(IToken)Match(input,ID,Follow._ID_in_variableDeclaration1697); if (state.failed) return node;
+			DebugLocation(272, 15);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:272:15: ( ':' tName= ID )?
+			int alt27=2;
+			try { DebugEnterSubRule(27);
+			try { DebugEnterDecision(27, decisionCanBacktrack[27]);
+			int LA27_0 = input.LA(1);
 
-			if ((LA28_0==54))
+			if ((LA27_0==54))
 			{
-				alt28=1;
+				alt27=1;
 			}
-			} finally { DebugExitDecision(28); }
-			switch (alt28)
+			} finally { DebugExitDecision(27); }
+			switch (alt27)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:132:31: ':' ID
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:272:16: ':' tName= ID
 				{
-				DebugLocation(132, 31);
-				Match(input,54,Follow._54_in_variableDeclaration1141); if (state.failed) return;
-				DebugLocation(132, 35);
-				Match(input,ID,Follow._ID_in_variableDeclaration1143); if (state.failed) return;
+				DebugLocation(272, 16);
+				Match(input,54,Follow._54_in_variableDeclaration1700); if (state.failed) return node;
+				DebugLocation(272, 26);
+				tName=(IToken)Match(input,ID,Follow._ID_in_variableDeclaration1706); if (state.failed) return node;
+				DebugLocation(272, 31);
+				if ( state.backtracking == 0 )
+				{
+					typeName = tName.Text;
+				}
 
 				}
 				break;
 
 			}
-			} finally { DebugExitSubRule(28); }
+			} finally { DebugExitSubRule(27); }
 
-			DebugLocation(132, 40);
-			Match(input,Assign,Follow._Assign_in_variableDeclaration1147); if (state.failed) return;
-			DebugLocation(132, 47);
-			PushFollow(Follow._expr_or_in_variableDeclaration1149);
-			expr_or();
+			DebugLocation(272, 59);
+			Match(input,Assign,Follow._Assign_in_variableDeclaration1712); if (state.failed) return node;
+			DebugLocation(272, 71);
+			PushFollow(Follow._expr_or_in_variableDeclaration1718);
+			body=expr_or();
 			PopFollow();
-			if (state.failed) return;
+			if (state.failed) return node;
+			DebugLocation(273, 1);
+			if ( state.backtracking == 0 )
+			{
+				node = new VariableDeclarationNode(name.Text, body, typeName);
+			}
 
 			}
 
@@ -2599,9 +2981,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("variableDeclaration", 19);
 			Leave_variableDeclaration();
 		}
-		DebugLocation(132, 53);
+		DebugLocation(273, 72);
 		} finally { DebugExitRule(GrammarFileName, "variableDeclaration"); }
-		return;
+		return node;
 
 	}
 	// $ANTLR end "variableDeclaration"
@@ -2611,35 +2993,83 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_functionDeclaration();
 
 	// $ANTLR start "functionDeclaration"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:136:1: functionDeclaration : Function ID LParent ( typeFields )? RParent ( ':' ID )? Equals expr_or ;
+	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:277:1: functionDeclaration returns [CallableDeclarationNode node] : Function name= ID LParent (f= typeFields )? RParent ( ':' tName= ID )? Equals body= expr_or ;
 	[GrammarRule("functionDeclaration")]
-	private void functionDeclaration()
+	private CallableDeclarationNode functionDeclaration()
 	{
 		Enter_functionDeclaration();
 		EnterRule("functionDeclaration", 20);
 		TraceIn("functionDeclaration", 20);
+		CallableDeclarationNode node = default(CallableDeclarationNode);
+
+		IToken name=null;
+		IToken tName=null;
+		IList<TypeField> f = default(IList<TypeField>);
+		ExpressionNode body = default(ExpressionNode);
+
+
+		IList<TypeField> fields = new List<TypeField>();
+		string typeName = null;
+
 		try { DebugEnterRule(GrammarFileName, "functionDeclaration");
-		DebugLocation(136, 88);
+		DebugLocation(277, 0);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:136:21: ( Function ID LParent ( typeFields )? RParent ( ':' ID )? Equals expr_or )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:282:1: ( Function name= ID LParent (f= typeFields )? RParent ( ':' tName= ID )? Equals body= expr_or )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:136:23: Function ID LParent ( typeFields )? RParent ( ':' ID )? Equals expr_or
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:283:1: Function name= ID LParent (f= typeFields )? RParent ( ':' tName= ID )? Equals body= expr_or
 			{
-			DebugLocation(136, 23);
-			Match(input,Function,Follow._Function_in_functionDeclaration1173); if (state.failed) return;
-			DebugLocation(136, 32);
-			Match(input,ID,Follow._ID_in_functionDeclaration1175); if (state.failed) return;
-			DebugLocation(136, 35);
-			Match(input,LParent,Follow._LParent_in_functionDeclaration1177); if (state.failed) return;
-			DebugLocation(136, 43);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:136:43: ( typeFields )?
+			DebugLocation(283, 1);
+			Match(input,Function,Follow._Function_in_functionDeclaration1756); if (state.failed) return node;
+			DebugLocation(283, 15);
+			name=(IToken)Match(input,ID,Follow._ID_in_functionDeclaration1762); if (state.failed) return node;
+			DebugLocation(283, 20);
+			Match(input,LParent,Follow._LParent_in_functionDeclaration1764); if (state.failed) return node;
+			DebugLocation(283, 28);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:283:28: (f= typeFields )?
+			int alt28=2;
+			try { DebugEnterSubRule(28);
+			try { DebugEnterDecision(28, decisionCanBacktrack[28]);
+			int LA28_0 = input.LA(1);
+
+			if ((LA28_0==ID))
+			{
+				alt28=1;
+			}
+			} finally { DebugExitDecision(28); }
+			switch (alt28)
+			{
+			case 1:
+				DebugEnterAlt(1);
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:283:29: f= typeFields
+				{
+				DebugLocation(283, 31);
+				PushFollow(Follow._typeFields_in_functionDeclaration1771);
+				f=typeFields();
+				PopFollow();
+				if (state.failed) return node;
+				DebugLocation(283, 44);
+				if ( state.backtracking == 0 )
+				{
+					fields = f;
+				}
+
+				}
+				break;
+
+			}
+			} finally { DebugExitSubRule(28); }
+
+			DebugLocation(283, 67);
+			Match(input,RParent,Follow._RParent_in_functionDeclaration1777); if (state.failed) return node;
+			DebugLocation(283, 75);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:283:75: ( ':' tName= ID )?
 			int alt29=2;
 			try { DebugEnterSubRule(29);
 			try { DebugEnterDecision(29, decisionCanBacktrack[29]);
 			int LA29_0 = input.LA(1);
 
-			if ((LA29_0==ID))
+			if ((LA29_0==54))
 			{
 				alt29=1;
 			}
@@ -2648,13 +3078,17 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:136:44: typeFields
+				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:283:76: ':' tName= ID
 				{
-				DebugLocation(136, 44);
-				PushFollow(Follow._typeFields_in_functionDeclaration1180);
-				typeFields();
-				PopFollow();
-				if (state.failed) return;
+				DebugLocation(283, 76);
+				Match(input,54,Follow._54_in_functionDeclaration1780); if (state.failed) return node;
+				DebugLocation(283, 86);
+				tName=(IToken)Match(input,ID,Follow._ID_in_functionDeclaration1786); if (state.failed) return node;
+				DebugLocation(283, 91);
+				if ( state.backtracking == 0 )
+				{
+					typeName = tName.Text;
+				}
 
 				}
 				break;
@@ -2662,44 +3096,18 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			}
 			} finally { DebugExitSubRule(29); }
 
-			DebugLocation(136, 57);
-			Match(input,RParent,Follow._RParent_in_functionDeclaration1184); if (state.failed) return;
-			DebugLocation(136, 65);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:136:65: ( ':' ID )?
-			int alt30=2;
-			try { DebugEnterSubRule(30);
-			try { DebugEnterDecision(30, decisionCanBacktrack[30]);
-			int LA30_0 = input.LA(1);
-
-			if ((LA30_0==54))
-			{
-				alt30=1;
-			}
-			} finally { DebugExitDecision(30); }
-			switch (alt30)
-			{
-			case 1:
-				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:136:66: ':' ID
-				{
-				DebugLocation(136, 66);
-				Match(input,54,Follow._54_in_functionDeclaration1187); if (state.failed) return;
-				DebugLocation(136, 70);
-				Match(input,ID,Follow._ID_in_functionDeclaration1189); if (state.failed) return;
-
-				}
-				break;
-
-			}
-			} finally { DebugExitSubRule(30); }
-
-			DebugLocation(136, 75);
-			Match(input,Equals,Follow._Equals_in_functionDeclaration1193); if (state.failed) return;
-			DebugLocation(136, 82);
-			PushFollow(Follow._expr_or_in_functionDeclaration1195);
-			expr_or();
+			DebugLocation(283, 119);
+			Match(input,Equals,Follow._Equals_in_functionDeclaration1792); if (state.failed) return node;
+			DebugLocation(283, 131);
+			PushFollow(Follow._expr_or_in_functionDeclaration1798);
+			body=expr_or();
 			PopFollow();
-			if (state.failed) return;
+			if (state.failed) return node;
+			DebugLocation(284, 1);
+			if ( state.backtracking == 0 )
+			{
+				return new CallableDeclarationNode(name.Text, fields, body, typeName);
+			}
 
 			}
 
@@ -2715,9 +3123,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("functionDeclaration", 20);
 			Leave_functionDeclaration();
 		}
-		DebugLocation(136, 88);
+		DebugLocation(285, 0);
 		} finally { DebugExitRule(GrammarFileName, "functionDeclaration"); }
-		return;
+		return node;
 
 	}
 	// $ANTLR end "functionDeclaration"
@@ -2733,14 +3141,14 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		TraceIn("synpred1_Tiger_fragment", 21);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:106:5: ( LKey RKey )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:191:4: ( LKey RKey )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:106:6: LKey RKey
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:191:5: LKey RKey
 			{
-			DebugLocation(106, 6);
-			Match(input,LKey,Follow._LKey_in_synpred1_Tiger758); if (state.failed) return;
-			DebugLocation(106, 11);
-			Match(input,RKey,Follow._RKey_in_synpred1_Tiger760); if (state.failed) return;
+			DebugLocation(191, 5);
+			Match(input,LKey,Follow._LKey_in_synpred1_Tiger971); if (state.failed) return;
+			DebugLocation(191, 10);
+			Match(input,RKey,Follow._RKey_in_synpred1_Tiger973); if (state.failed) return;
 
 			}
 
@@ -2765,21 +3173,21 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		TraceIn("synpred2_Tiger_fragment", 22);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:107:5: ( LCorch expr_or RCorch Of )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:199:4: ( LCorch expr_or RCorch Of )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:107:6: LCorch expr_or RCorch Of
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:199:5: LCorch expr_or RCorch Of
 			{
-			DebugLocation(107, 6);
-			Match(input,LCorch,Follow._LCorch_in_synpred2_Tiger786); if (state.failed) return;
-			DebugLocation(107, 13);
-			PushFollow(Follow._expr_or_in_synpred2_Tiger788);
+			DebugLocation(199, 5);
+			Match(input,LCorch,Follow._LCorch_in_synpred2_Tiger1029); if (state.failed) return;
+			DebugLocation(199, 12);
+			PushFollow(Follow._expr_or_in_synpred2_Tiger1031);
 			expr_or();
 			PopFollow();
 			if (state.failed) return;
-			DebugLocation(107, 21);
-			Match(input,RCorch,Follow._RCorch_in_synpred2_Tiger790); if (state.failed) return;
-			DebugLocation(107, 28);
-			Match(input,Of,Follow._Of_in_synpred2_Tiger792); if (state.failed) return;
+			DebugLocation(199, 20);
+			Match(input,RCorch,Follow._RCorch_in_synpred2_Tiger1033); if (state.failed) return;
+			DebugLocation(199, 27);
+			Match(input,Of,Follow._Of_in_synpred2_Tiger1035); if (state.failed) return;
 
 			}
 
@@ -2911,7 +3319,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			this.transition = DFA12_transition;
 		}
 
-		public override string Description { get { return "107:4: ( ( LCorch expr_or RCorch Of )=> ( LCorch expr_or RCorch Of expr_or ) | lvalue ( Assign expr_or )? )"; } }
+		public override string Description { get { return "199:3: ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? )"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
@@ -2952,137 +3360,138 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	#region Follow sets
 	private static class Follow
 	{
-		public static readonly BitSet _expr_or_in_prog551 = new BitSet(new ulong[]{0x0UL});
-		public static readonly BitSet _EOF_in_prog553 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _expr_and_in_expr_or560 = new BitSet(new ulong[]{0x2000000002UL});
-		public static readonly BitSet _Or_in_expr_or563 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_and_in_expr_or565 = new BitSet(new ulong[]{0x2000000002UL});
-		public static readonly BitSet _expr_logical_in_expr_and573 = new BitSet(new ulong[]{0x1000000002UL});
-		public static readonly BitSet _And_in_expr_and576 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_logical_in_expr_and578 = new BitSet(new ulong[]{0x1000000002UL});
-		public static readonly BitSet _expr_arithm_in_expr_logical588 = new BitSet(new ulong[]{0xFC0000002UL});
-		public static readonly BitSet _Equals_in_expr_logical598 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _NotEquals_in_expr_logical603 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _GThan_in_expr_logical607 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _LThan_in_expr_logical611 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _GEThan_in_expr_logical615 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _LEThan_in_expr_logical619 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_arithm_in_expr_logical623 = new BitSet(new ulong[]{0xFC0000002UL});
-		public static readonly BitSet _expr_factor_in_expr_arithm636 = new BitSet(new ulong[]{0x8000022UL});
-		public static readonly BitSet _Plus_in_expr_arithm641 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _Minus_in_expr_arithm646 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_factor_in_expr_arithm649 = new BitSet(new ulong[]{0x8000022UL});
-		public static readonly BitSet _expr_in_expr_factor659 = new BitSet(new ulong[]{0x30000002UL});
-		public static readonly BitSet _Mult_in_expr_factor664 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _Div_in_expr_factor669 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_in_expr_factor672 = new BitSet(new ulong[]{0x30000002UL});
-		public static readonly BitSet _STRING_CONST_in_expr681 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _INT_CONST_in_expr689 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _NIL_in_expr697 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _Minus_in_expr705 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_expr707 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _ID_in_expr731 = new BitSet(new ulong[]{0x4000AC0UL});
-		public static readonly BitSet _LParent_in_expr741 = new BitSet(new ulong[]{0x144000008B21B0UL});
-		public static readonly BitSet _exprList_in_expr744 = new BitSet(new ulong[]{0x100UL});
-		public static readonly BitSet _RParent_in_expr748 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _LKey_in_expr765 = new BitSet(new ulong[]{0x1000UL});
-		public static readonly BitSet _RKey_in_expr767 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _LKey_in_expr771 = new BitSet(new ulong[]{0x10000001000000UL});
-		public static readonly BitSet _fieldList_in_expr773 = new BitSet(new ulong[]{0x1000UL});
-		public static readonly BitSet _RKey_in_expr775 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _LCorch_in_expr798 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_expr800 = new BitSet(new ulong[]{0x400UL});
-		public static readonly BitSet _RCorch_in_expr802 = new BitSet(new ulong[]{0x100000000000UL});
-		public static readonly BitSet _Of_in_expr804 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_expr806 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _lvalue_in_expr811 = new BitSet(new ulong[]{0x42UL});
-		public static readonly BitSet _Assign_in_expr814 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_expr816 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _LParent_in_expr829 = new BitSet(new ulong[]{0x144000008B21B0UL});
-		public static readonly BitSet _exprSeq_in_expr832 = new BitSet(new ulong[]{0x100UL});
-		public static readonly BitSet _RParent_in_expr836 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _If_in_expr845 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_expr847 = new BitSet(new ulong[]{0x4000UL});
-		public static readonly BitSet _Then_in_expr849 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_expr851 = new BitSet(new ulong[]{0x8002UL});
-		public static readonly BitSet _Else_in_expr854 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_expr856 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _While_in_expr868 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_expr870 = new BitSet(new ulong[]{0x40000UL});
-		public static readonly BitSet _Do_in_expr872 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_expr874 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _For_in_expr882 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _ID_in_expr884 = new BitSet(new ulong[]{0x40UL});
-		public static readonly BitSet _Assign_in_expr886 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_expr888 = new BitSet(new ulong[]{0x100000UL});
-		public static readonly BitSet _To_in_expr890 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_expr892 = new BitSet(new ulong[]{0x40000UL});
-		public static readonly BitSet _Do_in_expr894 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_expr896 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _Break_in_expr904 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _Let_in_expr913 = new BitSet(new ulong[]{0x34000000000UL});
-		public static readonly BitSet _declarationList_in_expr915 = new BitSet(new ulong[]{0x200000UL});
-		public static readonly BitSet _In_in_expr917 = new BitSet(new ulong[]{0x14400000CB20B0UL});
-		public static readonly BitSet _exprSeq_in_expr920 = new BitSet(new ulong[]{0x400000UL});
-		public static readonly BitSet _End_in_expr924 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _expr_or_in_exprSeq933 = new BitSet(new ulong[]{0x2000002UL});
-		public static readonly BitSet _DotComma_in_exprSeq936 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_exprSeq938 = new BitSet(new ulong[]{0x2000002UL});
-		public static readonly BitSet _expr_or_in_exprList948 = new BitSet(new ulong[]{0x1000002UL});
-		public static readonly BitSet _Comma_in_exprList951 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_exprList953 = new BitSet(new ulong[]{0x1000002UL});
-		public static readonly BitSet _idAssign_in_fieldList964 = new BitSet(new ulong[]{0x1000002UL});
-		public static readonly BitSet _Comma_in_fieldList967 = new BitSet(new ulong[]{0x10000001000000UL});
-		public static readonly BitSet _idAssign_in_fieldList969 = new BitSet(new ulong[]{0x1000002UL});
-		public static readonly BitSet _ID_in_idAssign980 = new BitSet(new ulong[]{0x40000000UL});
-		public static readonly BitSet _Equals_in_idAssign982 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_idAssign984 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _Dot_in_lvalue996 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _ID_in_lvalue998 = new BitSet(new ulong[]{0x4000202UL});
-		public static readonly BitSet _LCorch_in_lvalue1002 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_lvalue1004 = new BitSet(new ulong[]{0x400UL});
-		public static readonly BitSet _RCorch_in_lvalue1006 = new BitSet(new ulong[]{0x4000202UL});
-		public static readonly BitSet _declaration_in_declarationList1022 = new BitSet(new ulong[]{0x34000000002UL});
-		public static readonly BitSet _typeDeclaration_in_declaration1032 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _variableDeclaration_in_declaration1041 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _functionDeclaration_in_declaration1049 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _Type_in_typeDeclaration1056 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _ID_in_typeDeclaration1058 = new BitSet(new ulong[]{0x40000000UL});
-		public static readonly BitSet _Equals_in_typeDeclaration1060 = new BitSet(new ulong[]{0x10008000000800UL});
-		public static readonly BitSet _type_in_typeDeclaration1062 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _ID_in_type1071 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _LKey_in_type1079 = new BitSet(new ulong[]{0x10000000001000UL});
-		public static readonly BitSet _typeFields_in_type1082 = new BitSet(new ulong[]{0x1000UL});
-		public static readonly BitSet _RKey_in_type1086 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _ArrayOf_in_type1094 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _ID_in_type1096 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _typeField_in_typeFields1106 = new BitSet(new ulong[]{0x1000002UL});
-		public static readonly BitSet _Comma_in_typeFields1109 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _typeField_in_typeFields1111 = new BitSet(new ulong[]{0x1000002UL});
-		public static readonly BitSet _ID_in_typeField1122 = new BitSet(new ulong[]{0x40000000000000UL});
-		public static readonly BitSet _54_in_typeField1124 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _ID_in_typeField1126 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _Var_in_variableDeclaration1136 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _ID_in_variableDeclaration1138 = new BitSet(new ulong[]{0x40000000000040UL});
-		public static readonly BitSet _54_in_variableDeclaration1141 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _ID_in_variableDeclaration1143 = new BitSet(new ulong[]{0x40UL});
-		public static readonly BitSet _Assign_in_variableDeclaration1147 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_variableDeclaration1149 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _Function_in_functionDeclaration1173 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _ID_in_functionDeclaration1175 = new BitSet(new ulong[]{0x80UL});
-		public static readonly BitSet _LParent_in_functionDeclaration1177 = new BitSet(new ulong[]{0x10000000000100UL});
-		public static readonly BitSet _typeFields_in_functionDeclaration1180 = new BitSet(new ulong[]{0x100UL});
-		public static readonly BitSet _RParent_in_functionDeclaration1184 = new BitSet(new ulong[]{0x40000040000000UL});
-		public static readonly BitSet _54_in_functionDeclaration1187 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _ID_in_functionDeclaration1189 = new BitSet(new ulong[]{0x40000000UL});
-		public static readonly BitSet _Equals_in_functionDeclaration1193 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_functionDeclaration1195 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _LKey_in_synpred1_Tiger758 = new BitSet(new ulong[]{0x1000UL});
-		public static readonly BitSet _RKey_in_synpred1_Tiger760 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _LCorch_in_synpred2_Tiger786 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_synpred2_Tiger788 = new BitSet(new ulong[]{0x400UL});
-		public static readonly BitSet _RCorch_in_synpred2_Tiger790 = new BitSet(new ulong[]{0x100000000000UL});
-		public static readonly BitSet _Of_in_synpred2_Tiger792 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _expr_or_in_prog565 = new BitSet(new ulong[]{0x0UL});
+		public static readonly BitSet _EOF_in_prog567 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _expr_and_in_expr_or584 = new BitSet(new ulong[]{0x2000000002UL});
+		public static readonly BitSet _Or_in_expr_or590 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_expr_or596 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _expr_logical_in_expr_and615 = new BitSet(new ulong[]{0x1000000002UL});
+		public static readonly BitSet _And_in_expr_and622 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_and_in_expr_and628 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _expr_arithm_in_expr_logical656 = new BitSet(new ulong[]{0xFC0000002UL});
+		public static readonly BitSet _Equals_in_expr_logical669 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _NotEquals_in_expr_logical680 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _GThan_in_expr_logical689 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _LThan_in_expr_logical696 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _GEThan_in_expr_logical705 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _LEThan_in_expr_logical714 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_logical_in_expr_logical727 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _expr_factor_in_expr_arithm758 = new BitSet(new ulong[]{0x8000022UL});
+		public static readonly BitSet _Plus_in_expr_arithm771 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _Minus_in_expr_arithm782 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_arithm_in_expr_arithm794 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _expr_in_expr_factor821 = new BitSet(new ulong[]{0x30000002UL});
+		public static readonly BitSet _Mult_in_expr_factor833 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _Div_in_expr_factor843 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_factor_in_expr_factor856 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _STRING_CONST_in_expr875 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _INT_CONST_in_expr883 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _NIL_in_expr891 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _Minus_in_expr899 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_expr905 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _ID_in_expr930 = new BitSet(new ulong[]{0x4000AC0UL});
+		public static readonly BitSet _LParent_in_expr939 = new BitSet(new ulong[]{0x144000008B21B0UL});
+		public static readonly BitSet _exprList_in_expr947 = new BitSet(new ulong[]{0x100UL});
+		public static readonly BitSet _RParent_in_expr954 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _LKey_in_expr984 = new BitSet(new ulong[]{0x1000UL});
+		public static readonly BitSet _RKey_in_expr986 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _LKey_in_expr996 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _fieldList_in_expr1002 = new BitSet(new ulong[]{0x1000UL});
+		public static readonly BitSet _RKey_in_expr1018 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _LCorch_in_expr1047 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_expr1053 = new BitSet(new ulong[]{0x400UL});
+		public static readonly BitSet _RCorch_in_expr1055 = new BitSet(new ulong[]{0x100000000000UL});
+		public static readonly BitSet _Of_in_expr1057 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_expr1063 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _lvalue_in_expr1083 = new BitSet(new ulong[]{0x4000240UL});
+		public static readonly BitSet _Assign_in_expr1088 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_expr1094 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _LParent_in_expr1110 = new BitSet(new ulong[]{0x144000008B21B0UL});
+		public static readonly BitSet _exprSeq_in_expr1113 = new BitSet(new ulong[]{0x100UL});
+		public static readonly BitSet _RParent_in_expr1117 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _If_in_expr1125 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_expr1131 = new BitSet(new ulong[]{0x4000UL});
+		public static readonly BitSet _Then_in_expr1133 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_expr1139 = new BitSet(new ulong[]{0x4008200UL});
+		public static readonly BitSet _Else_in_expr1142 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_expr1148 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _While_in_expr1163 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_expr1169 = new BitSet(new ulong[]{0x40000UL});
+		public static readonly BitSet _Do_in_expr1171 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_expr1177 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _For_in_expr1187 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _ID_in_expr1189 = new BitSet(new ulong[]{0x40UL});
+		public static readonly BitSet _Assign_in_expr1191 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_expr1197 = new BitSet(new ulong[]{0x100000UL});
+		public static readonly BitSet _To_in_expr1199 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_expr1205 = new BitSet(new ulong[]{0x40000UL});
+		public static readonly BitSet _Do_in_expr1207 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_expr1213 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _Break_in_expr1223 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _Let_in_expr1232 = new BitSet(new ulong[]{0x34000000000UL});
+		public static readonly BitSet _declarationList_in_expr1238 = new BitSet(new ulong[]{0x200000UL});
+		public static readonly BitSet _In_in_expr1242 = new BitSet(new ulong[]{0x14400000CB20B0UL});
+		public static readonly BitSet _exprSeq_in_expr1249 = new BitSet(new ulong[]{0x400000UL});
+		public static readonly BitSet _End_in_expr1255 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _lvalue_in_expr1264 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _expr_or_in_exprSeq1288 = new BitSet(new ulong[]{0x2000002UL});
+		public static readonly BitSet _DotComma_in_exprSeq1292 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_exprSeq1298 = new BitSet(new ulong[]{0x2000002UL});
+		public static readonly BitSet _expr_or_in_exprList1326 = new BitSet(new ulong[]{0x1000002UL});
+		public static readonly BitSet _Comma_in_exprList1331 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_exprList1337 = new BitSet(new ulong[]{0x1000002UL});
+		public static readonly BitSet _idAssign_in_fieldList1364 = new BitSet(new ulong[]{0x1000002UL});
+		public static readonly BitSet _Comma_in_fieldList1369 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _idAssign_in_fieldList1375 = new BitSet(new ulong[]{0x1000002UL});
+		public static readonly BitSet _ID_in_idAssign1397 = new BitSet(new ulong[]{0x40000000UL});
+		public static readonly BitSet _Equals_in_idAssign1399 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_idAssign1405 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _Dot_in_lvalue1425 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _ID_in_lvalue1431 = new BitSet(new ulong[]{0x4000202UL});
+		public static readonly BitSet _LCorch_in_lvalue1437 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_lvalue1443 = new BitSet(new ulong[]{0x400UL});
+		public static readonly BitSet _RCorch_in_lvalue1445 = new BitSet(new ulong[]{0x4000202UL});
+		public static readonly BitSet _declaration_in_declarationList1477 = new BitSet(new ulong[]{0x34000000002UL});
+		public static readonly BitSet _typeDeclaration_in_declaration1503 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _variableDeclaration_in_declaration1513 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _functionDeclaration_in_declaration1523 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _Type_in_typeDeclaration1538 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _ID_in_typeDeclaration1544 = new BitSet(new ulong[]{0x40000000UL});
+		public static readonly BitSet _Equals_in_typeDeclaration1546 = new BitSet(new ulong[]{0x10008000000800UL});
+		public static readonly BitSet _type_in_typeDeclaration1548 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _ID_in_type1570 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _LKey_in_type1578 = new BitSet(new ulong[]{0x10000000001000UL});
+		public static readonly BitSet _typeFields_in_type1586 = new BitSet(new ulong[]{0x1000UL});
+		public static readonly BitSet _RKey_in_type1592 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _ArrayOf_in_type1599 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _ID_in_type1605 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _typeField_in_typeFields1631 = new BitSet(new ulong[]{0x1000002UL});
+		public static readonly BitSet _Comma_in_typeFields1636 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _typeField_in_typeFields1642 = new BitSet(new ulong[]{0x1000002UL});
+		public static readonly BitSet _ID_in_typeField1664 = new BitSet(new ulong[]{0x40000000000000UL});
+		public static readonly BitSet _54_in_typeField1666 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _ID_in_typeField1672 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _Var_in_variableDeclaration1691 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _ID_in_variableDeclaration1697 = new BitSet(new ulong[]{0x40000000000040UL});
+		public static readonly BitSet _54_in_variableDeclaration1700 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _ID_in_variableDeclaration1706 = new BitSet(new ulong[]{0x40UL});
+		public static readonly BitSet _Assign_in_variableDeclaration1712 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_variableDeclaration1718 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _Function_in_functionDeclaration1756 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _ID_in_functionDeclaration1762 = new BitSet(new ulong[]{0x80UL});
+		public static readonly BitSet _LParent_in_functionDeclaration1764 = new BitSet(new ulong[]{0x10000000000100UL});
+		public static readonly BitSet _typeFields_in_functionDeclaration1771 = new BitSet(new ulong[]{0x100UL});
+		public static readonly BitSet _RParent_in_functionDeclaration1777 = new BitSet(new ulong[]{0x40000040000000UL});
+		public static readonly BitSet _54_in_functionDeclaration1780 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _ID_in_functionDeclaration1786 = new BitSet(new ulong[]{0x40000000UL});
+		public static readonly BitSet _Equals_in_functionDeclaration1792 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_functionDeclaration1798 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _LKey_in_synpred1_Tiger971 = new BitSet(new ulong[]{0x1000UL});
+		public static readonly BitSet _RKey_in_synpred1_Tiger973 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _LCorch_in_synpred2_Tiger1029 = new BitSet(new ulong[]{0x144000008B20B0UL});
+		public static readonly BitSet _expr_or_in_synpred2_Tiger1031 = new BitSet(new ulong[]{0x400UL});
+		public static readonly BitSet _RCorch_in_synpred2_Tiger1033 = new BitSet(new ulong[]{0x100000000000UL});
+		public static readonly BitSet _Of_in_synpred2_Tiger1035 = new BitSet(new ulong[]{0x2UL});
 
 	}
 	#endregion Follow sets
