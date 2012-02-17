@@ -11,7 +11,7 @@ namespace TigerNET.AST
     /// </summary>
     public class FieldAssignmentNode : AssignmentBaseNode
     {
-        protected string FieldName { get; set; }
+        public string FieldName { get; set; }
 
         public FieldAssignmentNode(string fieldName, ExpressionNode body) : base(body) {
             FieldName = fieldName;
