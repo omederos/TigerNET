@@ -2,9 +2,9 @@ using System;
 
 namespace TigerNET.AST {
     public class IfThenElseNode : ControlNode{
-        protected ExpressionNode ElseBody { get; set; }
-        protected ExpressionNode ThenBody { get; set; }
-        protected ExpressionNode Condition { get; set; }
+        public ExpressionNode ElseBody { get; set; }
+        public ExpressionNode ThenBody { get; set; }
+        public ExpressionNode Condition { get; set; }
 
         public IfThenElseNode(ExpressionNode condition, ExpressionNode thenBody, ExpressionNode elseBody) {
             Condition = condition;

@@ -14,13 +14,13 @@ namespace TigerNET.AST
         /// <summary>
         /// Expresiones a ejecutar dentro del IN - END
         /// </summary>
-        public IList<ExpressionNode> Expressions { get; set; }
+        public ExpressionSequenceNode Expressions { get; set; }
 
-        public LetInEndNode(IList<DeclarationNode> declarations, IList<ExpressionNode> expressions) {
+        public LetInEndNode(IList<DeclarationNode> declarations, ExpressionSequenceNode expressions) {
             Declarations = declarations;
             Expressions = expressions;
         }
-        public LetInEndNode(IList<DeclarationNode> declarations) : this(declarations, new List<ExpressionNode>()) {}
+        public LetInEndNode(IList<DeclarationNode> declarations) : this(declarations, new ExpressionSequenceNode()) {}
 
         public override void GenerateCode() {
             throw new NotImplementedException();

@@ -57,6 +57,7 @@
     <Compile Include="DivOperatorNode.cs" />
     <Compile Include="EqualOperatorNode.cs" />
     <Compile Include="ExpressionNode.cs" />
+    <Compile Include="ExpressionSequenceNode.cs" />
     <Compile Include="FieldAssignmentNode.cs" />
     <Compile Include="ForToDoNode.cs" />
     <Compile Include="GreatherEqualOperatorNode.cs" />
