@@ -75,7 +75,12 @@ public override void ReportError(RecognitionException e) {
 }
 
 INT_CONST 	:	(DIGIT)+;
-STRING_CONST	:	Quotes (CHAR|SPACE|ESC)* Quotes;
+STRING_CONST : Quotes {Text = "";}
+(
+CHAR {Text += $CHAR.Text; }|
+SPACE {Text += $SPACE.Text; }|
+ESC {Text += $ESC.Text; }
+)* Quotes;
 fragment DIGIT	:	'0'..'9';
 SPACE	:	('\n'|'\t'|' '|'\r') {$channel = Hidden;};
 fragment ESC	:	'\\'('n'|'t'|'\\'|'"');	/* TODO: Control-C, ASCII, etc */
@@ -141,6 +146,7 @@ $node = $left.node;
 	) right = expr_logical 
 	{
 	n.Right = $right.node;
+	$node = n;
 	}
 	
 	)?;
@@ -157,7 +163,7 @@ expr_arithm returns [ExpressionNode node]
 	{
 	n = new MinusOperatorNode() { Left = $node };
 	}
-	) right = expr_arithm {n.Right = $right.node;}
+	) right = expr_arithm {n.Right = $right.node; $node = n;}
 	)?;
 expr_factor returns [ExpressionNode node]
 @init {ArithmeticalBinaryOperatorNode n = null;}
@@ -172,41 +178,19 @@ expr_factor returns [ExpressionNode node]
 	{
 	n = new DivOperatorNode() { Left = $node };
 	}
-	) right = expr_factor {n.Right = $right.node;}
+	) right = expr_factor {n.Right = $right.node; $node = n;}
 	)?;
 expr	returns [ExpressionNode node]:	
-	(STRING_CONST {$node = new StringLiteralNode($STRING_CONST.Text); }| /* string-constant */
+	(
+	STRING_CONST {$node = new StringLiteralNode($STRING_CONST.Text); }| /* string-constant */
 	INT_CONST {$node = new IntegerLiteralNode(int.Parse($INT_CONST.Text)); }| /* integer-constant */
 	NIL {$node = new NilLiteralNode(); }| /* nil */
 	Minus e = expr_or {$node = new MinusUnaryOperatorNode($e.node); }| /* -expr */
 	/* id(expr-list) */ /* type-id{field-list} */
 	/* type-id[expr] of expr*/
 	/* lvalue */ /* lvalue := expr */
-	id = ID {$node = new VariableAccessNode($id.Text); }
-	(
-		LParent {$node = new CallableNode($id.Text, new List<ExpressionNode>()); }(list = exprList { $node = new CallableNode($id.Text, $list.items); } )? RParent 
-		{
-		} |
-		(
-			(LKey RKey) => 
-				 LKey RKey {$node = new RecordLiteralNode($id.Text, new List<FieldAssignmentNode>()); }|
-				 LKey fields = fieldList 
-				 {
-				 $node = new RecordLiteralNode($id.Text, $fields.items);
-				 } 
-				 RKey
-		)|
-		((LCorch expr_or RCorch Of) => 
-		(
-		LCorch length = expr_or RCorch Of initialValue = expr_or 
-		{
-		$node = new ArrayLiteralNode($id.Text, $length.node, $initialValue.node); 
-		}
-		) | 
-		lv = lvalue[$node] {$node = $lv.node; }(Assign body = expr_or {$node = new AssignmentNode((AccessNode)$node, $body.node);})?
-		)
-	) |
-	LParent (exprSeq)? RParent | /* (expr-seq) */ 
+	id = ID aux = idAux[$id.Text] {$node = $aux.node;}  |
+	LParent {$node = new ExpressionSequenceNode();} (seq = exprSeq {$node = $seq.node;})? RParent | /* (expr-seq) */ 
 	If cond = expr_or Then then = expr_or (Else els = expr_or)? 
 	{
 	$node = new IfThenElseNode($cond.node, $then.node, $els.node);
@@ -215,17 +199,39 @@ expr	returns [ExpressionNode node]:
 	{
 	$node = new WhileNode($cond.node, $body.node);
 	}| /* while expr do expr */
-	For ID Assign start = expr_or To end = expr_or Do bodyFor = expr_or 
+	For varName = ID Assign start = expr_or To end = expr_or Do bodyFor = expr_or 
 	{
-	$node = new ForToDoNode($start.node, $end.node, $bodyFor.node);
+	$node = new ForToDoNode($varName.Text, $start.node, $end.node, $bodyFor.node);
 	}| /* for id:=expr to expr do expr */
 	Break { $node = new BreakNode(); }|  /* break */
-	Let declarations = declarationList {$node = new LetInEndNode($declarations.items); } In (items = exprSeq {((LetInEndNode)$node).Expressions = $items.items; })? End /* let declaration-list in expr-seq end */
-	) 
-	lvalue[$node] ; 
-exprSeq	returns [IList<ExpressionNode> items] 
-@init {$items = new List<ExpressionNode>();}
-:	e1 = expr_or {$items.Add($e1.node); }(DotComma e2 = expr_or {$items.Add($e2.node); })*; /* una o mas expresiones separadas por punto y coma (;) */
+	Let declarations = declarationList {$node = new LetInEndNode($declarations.items); } In (seq = exprSeq {((LetInEndNode)$node).Expressions = $seq.node; })? End /* let declaration-list in expr-seq end */
+	) lv = lvalue[$node] {$node = $lv.node; };
+	
+idAux [string id] returns [ExpressionNode node] 
+@init{$node = new VariableAccessNode(id); }
+:
+	LParent {$node = new CallableNode(id, new List<ExpressionNode>()); }(list = exprList { $node = new CallableNode(id, $list.items); } )? RParent |
+	(
+		(LKey RKey) => 
+			 LKey RKey {$node = new RecordLiteralNode(id, new List<FieldAssignmentNode>()); }|
+			 LKey fields = fieldList 
+			 {
+			 $node = new RecordLiteralNode(id, $fields.items);
+			 } 
+			 RKey
+	)|
+	((LCorch expr_or RCorch Of) => 
+	(
+	LCorch length = expr_or RCorch Of initialValue = expr_or 
+	{
+	$node = new ArrayLiteralNode(id, $length.node, $initialValue.node); 
+	}
+	) | 
+	lv = lvalue[$node] {$node = $lv.node; }(Assign body = expr_or {$node = new AssignmentNode((AccessNode)$node, $body.node);})?
+	);
+exprSeq	returns [ExpressionSequenceNode node] 
+@init {$node = new ExpressionSequenceNode();}
+:	e1 = expr_or {((ExpressionSequenceNode)$node).Sequence.Add($e1.node); }(DotComma e2 = expr_or {((ExpressionSequenceNode)$node).Sequence.Add($e2.node); })*; /* una o mas expresiones separadas por punto y coma (;) */
 
 exprList returns [IList<ExpressionNode> items]	
 @init {items = new List<ExpressionNode>();}
@@ -239,6 +245,7 @@ idAssign returns [FieldAssignmentNode node]:
 fieldName = ID Equals body = expr_or {$node = new FieldAssignmentNode($fieldName.Text, $body.node);}; /* id = expr */
 
 lvalue[ExpressionNode accessNode] returns [ExpressionNode node]	:	
+{node = accessNode;}
 (
 Dot fieldName = ID {$node = new RecordAccessNode($accessNode, $fieldName.Text);}| 
 LCorch index = expr_or RCorch {$node = new ArrayAccessNode($accessNode, $index.node); }
@@ -254,7 +261,7 @@ v = variableDeclaration { $node = $v.node; }|
 f = functionDeclaration {$node = $f.node; };
 
 typeDeclaration	returns [TypeDeclarationNode node] :	
-Type name = ID Equals type[$name.Text]; /* type type-id = type */
+Type name = ID Equals t = type[$name.Text] {$node = $t.node;} ; /* type type-id = type */
 
 type[string name] returns [TypeDeclarationNode node]	:	
 	id = ID {$node = new AliasDeclarationNode(name, $id.Text); }| /* type-id */
@@ -283,5 +290,3 @@ string typeName = null;
 Function name = ID LParent (f = typeFields {fields = $f.items;})? RParent (':' tName = ID {typeName = $tName.Text;})? Equals body = expr_or
 {return new CallableDeclarationNode($name.Text, fields, $body.node, typeName);}
 ; 
-		
-		

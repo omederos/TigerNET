@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:45:30 C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g 2012-02-13 02:07:58
+// $ANTLR 3.3 Nov 30, 2010 12:45:30 C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g 2012-02-17 22:02:07
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -1688,6 +1688,10 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		{
 			int _type = STRING_CONST;
 			int _channel = DefaultTokenChannel;
+			CommonToken CHAR1=null;
+			CommonToken SPACE2=null;
+			CommonToken ESC3=null;
+
 			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:78:14: ( Quotes ( CHAR | SPACE | ESC )* Quotes )
 			DebugEnterAlt(1);
 			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:78:16: Quotes ( CHAR | SPACE | ESC )* Quotes
@@ -1695,7 +1699,9 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 			DebugLocation(78, 16);
 			mQuotes(); 
 			DebugLocation(78, 23);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:78:23: ( CHAR | SPACE | ESC )*
+			Text = "";
+			DebugLocation(79, 1);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:79:1: ( CHAR | SPACE | ESC )*
 			try { DebugEnterSubRule(2);
 			while (true)
 			{
@@ -1722,28 +1728,52 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:78:24: CHAR
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:80:1: CHAR
 					{
-					DebugLocation(78, 24);
+					DebugLocation(80, 1);
+					int CHAR1Start386 = CharIndex;
+					int CHAR1StartLine386 = Line;
+					int CHAR1StartCharPos386 = CharPositionInLine;
 					mCHAR(); 
+					CHAR1 = new CommonToken(input, TokenTypes.Invalid, TokenChannels.Default, CHAR1Start386, CharIndex-1);
+					CHAR1.Line = CHAR1StartLine386;
+					CHAR1.CharPositionInLine = CHAR1StartCharPos386;
+					DebugLocation(80, 6);
+					Text += CHAR1.Text; 
 
 					}
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:78:29: SPACE
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:81:1: SPACE
 					{
-					DebugLocation(78, 29);
+					DebugLocation(81, 1);
+					int SPACE2Start391 = CharIndex;
+					int SPACE2StartLine391 = Line;
+					int SPACE2StartCharPos391 = CharPositionInLine;
 					mSPACE(); 
+					SPACE2 = new CommonToken(input, TokenTypes.Invalid, TokenChannels.Default, SPACE2Start391, CharIndex-1);
+					SPACE2.Line = SPACE2StartLine391;
+					SPACE2.CharPositionInLine = SPACE2StartCharPos391;
+					DebugLocation(81, 7);
+					Text += SPACE2.Text; 
 
 					}
 					break;
 				case 3:
 					DebugEnterAlt(3);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:78:35: ESC
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:82:1: ESC
 					{
-					DebugLocation(78, 35);
+					DebugLocation(82, 1);
+					int ESC3Start396 = CharIndex;
+					int ESC3StartLine396 = Line;
+					int ESC3StartCharPos396 = CharPositionInLine;
 					mESC(); 
+					ESC3 = new CommonToken(input, TokenTypes.Invalid, TokenChannels.Default, ESC3Start396, CharIndex-1);
+					ESC3.Line = ESC3StartLine396;
+					ESC3.CharPositionInLine = ESC3StartCharPos396;
+					DebugLocation(82, 5);
+					Text += ESC3.Text; 
 
 					}
 					break;
@@ -1758,7 +1788,7 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 
 			} finally { DebugExitSubRule(2); }
 
-			DebugLocation(78, 41);
+			DebugLocation(83, 4);
 			mQuotes(); 
 
 			}
@@ -1787,11 +1817,11 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		TraceIn("DIGIT", 45);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:79:16: ( '0' .. '9' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:84:16: ( '0' .. '9' )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:79:18: '0' .. '9'
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:84:18: '0' .. '9'
 			{
-			DebugLocation(79, 18);
+			DebugLocation(84, 18);
 			MatchRange('0','9'); 
 
 			}
@@ -1820,11 +1850,11 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		{
 			int _type = SPACE;
 			int _channel = DefaultTokenChannel;
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:80:7: ( ( '\\n' | '\\t' | ' ' | '\\r' ) )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:85:7: ( ( '\\n' | '\\t' | ' ' | '\\r' ) )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:80:9: ( '\\n' | '\\t' | ' ' | '\\r' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:85:9: ( '\\n' | '\\t' | ' ' | '\\r' )
 			{
-			DebugLocation(80, 9);
+			DebugLocation(85, 9);
 			if ((input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ')
 			{
 				input.Consume();
@@ -1837,7 +1867,7 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 				Recover(mse);
 				throw mse;}
 
-			DebugLocation(80, 30);
+			DebugLocation(85, 30);
 			_channel = Hidden;
 
 			}
@@ -1866,13 +1896,13 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		TraceIn("ESC", 47);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:81:14: ( '\\\\' ( 'n' | 't' | '\\\\' | '\"' ) )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:86:14: ( '\\\\' ( 'n' | 't' | '\\\\' | '\"' ) )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:81:16: '\\\\' ( 'n' | 't' | '\\\\' | '\"' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:86:16: '\\\\' ( 'n' | 't' | '\\\\' | '\"' )
 			{
-			DebugLocation(81, 16);
+			DebugLocation(86, 16);
 			Match('\\'); 
-			DebugLocation(81, 20);
+			DebugLocation(86, 20);
 			if (input.LA(1)=='\"'||input.LA(1)=='\\'||input.LA(1)=='n'||input.LA(1)=='t')
 			{
 				input.Consume();
@@ -1910,11 +1940,11 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		TraceIn("LETTER", 48);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:82:17: ( 'a' .. 'z' | 'A' .. 'Z' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:87:17: ( 'a' .. 'z' | 'A' .. 'Z' )
 			DebugEnterAlt(1);
 			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:
 			{
-			DebugLocation(82, 17);
+			DebugLocation(87, 17);
 			if ((input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z'))
 			{
 				input.Consume();
@@ -1952,11 +1982,11 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		TraceIn("CHAR", 49);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:83:15: (~ ( '\\n' | '\\t' | '\\\\' | '\"' | ' ' ) )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:88:15: (~ ( '\\n' | '\\t' | '\\\\' | '\"' | ' ' ) )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:83:17: ~ ( '\\n' | '\\t' | '\\\\' | '\"' | ' ' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:88:17: ~ ( '\\n' | '\\t' | '\\\\' | '\"' | ' ' )
 			{
-			DebugLocation(83, 17);
+			DebugLocation(88, 17);
 			if ((input.LA(1)>='\u0000' && input.LA(1)<='\b')||(input.LA(1)>='\u000B' && input.LA(1)<='\u001F')||input.LA(1)=='!'||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF'))
 			{
 				input.Consume();
@@ -1996,14 +2026,14 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		{
 			int _type = ID;
 			int _channel = DefaultTokenChannel;
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:84:4: ( LETTER ( LETTER | DIGIT | Underscore )* )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:89:4: ( LETTER ( LETTER | DIGIT | Underscore )* )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:84:6: LETTER ( LETTER | DIGIT | Underscore )*
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:89:6: LETTER ( LETTER | DIGIT | Underscore )*
 			{
-			DebugLocation(84, 6);
+			DebugLocation(89, 6);
 			mLETTER(); 
-			DebugLocation(84, 12);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:84:12: ( LETTER | DIGIT | Underscore )*
+			DebugLocation(89, 12);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:89:12: ( LETTER | DIGIT | Underscore )*
 			try { DebugEnterSubRule(3);
 			while (true)
 			{
@@ -2024,7 +2054,7 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 					DebugEnterAlt(1);
 					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:
 					{
-					DebugLocation(84, 12);
+					DebugLocation(89, 12);
 					if ((input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z'))
 					{
 						input.Consume();
@@ -2080,15 +2110,15 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 		{
 			int _type = COMMENTS;
 			int _channel = DefaultTokenChannel;
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:86:2: ( '/*' ( options {greedy=false; } : COMMENTS | . )* '*/' )
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:91:2: ( '/*' ( options {greedy=false; } : COMMENTS | . )* '*/' )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:86:4: '/*' ( options {greedy=false; } : COMMENTS | . )* '*/'
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:91:4: '/*' ( options {greedy=false; } : COMMENTS | . )* '*/'
 			{
-			DebugLocation(86, 4);
+			DebugLocation(91, 4);
 			Match("/*"); 
 
-			DebugLocation(86, 9);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:86:9: ( options {greedy=false; } : COMMENTS | . )*
+			DebugLocation(91, 9);
+			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:91:9: ( options {greedy=false; } : COMMENTS | . )*
 			try { DebugEnterSubRule(4);
 			while (true)
 			{
@@ -2137,18 +2167,18 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:86:37: COMMENTS
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:91:37: COMMENTS
 					{
-					DebugLocation(86, 37);
+					DebugLocation(91, 37);
 					mCOMMENTS(); 
 
 					}
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:86:48: .
+					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:91:48: .
 					{
-					DebugLocation(86, 48);
+					DebugLocation(91, 48);
 					MatchAny(); 
 
 					}
@@ -2164,10 +2194,10 @@ public partial class TigerLexer : Antlr.Runtime.Lexer
 
 			} finally { DebugExitSubRule(4); }
 
-			DebugLocation(86, 53);
+			DebugLocation(91, 53);
 			Match("*/"); 
 
-			DebugLocation(87, 3);
+			DebugLocation(92, 3);
 			_channel = Hidden;
 
 			}
