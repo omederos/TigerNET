@@ -1,6 +1,11 @@
 namespace TigerNET.AST.Types {
     public class StringType : TigerType {
-        public StringType() : base("string") {}
+        private static StringType _instance;
+        private StringType() : base("string") {}
+
+        public static StringType Create() {
+            return _instance ?? (_instance = new StringType());
+        }
 
         public override bool Equals(object obj)
         {
