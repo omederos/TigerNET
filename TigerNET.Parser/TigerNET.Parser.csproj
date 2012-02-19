@@ -43,10 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\..\..\HERE\School\!4to\Complementos de Compilacion\Compilador\Grammar\output\TigerLexer.cs">
+    <Compile Include="..\Grammar\output\TigerLexer.cs">
       <Link>TigerLexer.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\..\..\HERE\School\!4to\Complementos de Compilacion\Compilador\Grammar\output\TigerParser.cs">
+    <Compile Include="..\Grammar\output\TigerParser.cs">
       <Link>TigerParser.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
