@@ -65,6 +65,7 @@
     <Compile Include="Parser\TypeDeclarations.cs" />
     <Compile Include="Parser\VariableDeclaration.cs" />
     <Compile Include="Parser\While.cs" />
+    <Compile Include="Semantic\TypesEquality.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Parser\IfThenElse.cs" />
     <Compile Include="Parser\IntegerLiteral.cs" />
@@ -81,6 +82,7 @@
       <Name>TigerNET.Parser</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
