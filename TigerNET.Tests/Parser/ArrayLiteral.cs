@@ -1,47 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using TigerNET.AST;
 
-namespace TigerNET.Tests.Parser
-{
-    class ArrayLiteral
-    {
-        public ExpressionNode GetInitialExpression(ExpressionNode expr) {
-            return Utils.GetProperty<ExpressionNode>(expr, "InitialValue");
-        }
-        
-        public ExpressionNode GetCountExpression(ExpressionNode expr)
-        {
-            return Utils.GetProperty<ExpressionNode>(expr, "Count");
-        }
-
+namespace TigerNET.Tests.Parser {
+    internal class ArrayLiteral {
         [Test]
-        public void Zero_IntType()
-        {
-            var ast = Utils.BuildAST("array[0] of 1");
+        public void Zero_IntType() {
+            ExpressionNode ast = Utils.BuildAST("array[0] of 1");
             Assert.IsInstanceOf<ArrayLiteralNode>(ast);
-            var initial = GetInitialExpression(ast);
+            ExpressionNode initial = Utils.GetInitialExpression(ast);
             Assert.IsInstanceOf<IntegerLiteralNode>(initial);
-            var count = GetCountExpression(ast);
+            ExpressionNode count = Utils.GetCountExpression(ast);
             Assert.IsInstanceOf<IntegerLiteralNode>(count);
         }
 
         [Test]
-        public void Zero_ArrayType()
-        {
-            var ast = Utils.BuildAST("array[0] of array[0] of 1");
+        public void Zero_ArrayType() {
+            ExpressionNode ast = Utils.BuildAST("array[0] of array[0] of 1");
             Assert.IsInstanceOf<ArrayLiteralNode>(ast);
-            var initial = GetInitialExpression(ast);
+            ExpressionNode initial = Utils.GetInitialExpression(ast);
             Assert.IsInstanceOf<ArrayLiteralNode>(initial);
-            var count = GetCountExpression(ast);
+            ExpressionNode count = Utils.GetCountExpression(ast);
             Assert.IsInstanceOf<IntegerLiteralNode>(count);
 
-            var array2 = initial;
-            var initial2 = GetInitialExpression(array2);
-            var count2 = GetCountExpression(array2);
+            ExpressionNode array2 = initial;
+            ExpressionNode initial2 = Utils.GetInitialExpression(array2);
+            ExpressionNode count2 = Utils.GetCountExpression(array2);
 
             Assert.IsInstanceOf<IntegerLiteralNode>(initial2);
             Assert.IsInstanceOf<IntegerLiteralNode>(count2);

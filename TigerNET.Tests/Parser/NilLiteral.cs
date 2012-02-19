@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using TigerNET.AST;
 
-namespace TigerNET.Tests.Parser
-{
-    class NilLiteral
-    {
+namespace TigerNET.Tests.Parser {
+    internal class NilLiteral {
         [Test]
-        public void Nil()
-        {
-            var ast = Utils.BuildAST("nil");
+        public void Nil() {
+            ExpressionNode ast = Utils.BuildAST("nil");
             Assert.IsInstanceOf<NilLiteralNode>(ast);
         }
     }

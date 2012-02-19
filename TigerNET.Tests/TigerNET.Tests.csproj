@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parser\Access.cs" />
     <Compile Include="Parser\ArithmeticalBinaryOperators.cs" />
     <Compile Include="Parser\ArrayLiteral.cs" />
     <Compile Include="Parser\Break.cs" />
@@ -56,12 +57,14 @@
     <Compile Include="Parser\ExpressionSequence.cs" />
     <Compile Include="Parser\ForToDo.cs" />
     <Compile Include="Parser\CallableDeclaration.cs" />
+    <Compile Include="Parser\LetInEnd.cs" />
     <Compile Include="Parser\MinusUnaryOperator.cs" />
     <Compile Include="Parser\NilLiteral.cs" />
     <Compile Include="Parser\RecordLiteral.cs" />
     <Compile Include="Parser\StringLiteral.cs" />
     <Compile Include="Parser\TypeDeclarations.cs" />
     <Compile Include="Parser\VariableDeclaration.cs" />
+    <Compile Include="Parser\While.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Parser\IfThenElse.cs" />
     <Compile Include="Parser\IntegerLiteral.cs" />
