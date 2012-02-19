@@ -247,8 +247,8 @@ fieldName = ID Equals body = expr_or {$node = new FieldAssignmentNode($fieldName
 lvalue[ExpressionNode accessNode] returns [ExpressionNode node]	:	
 {node = accessNode;}
 (
-Dot fieldName = ID {$node = new RecordAccessNode($accessNode, $fieldName.Text);}| 
-LCorch index = expr_or RCorch {$node = new ArrayAccessNode($accessNode, $index.node); }
+Dot fieldName = ID {$node = new RecordAccessNode($node, $fieldName.Text);}| 
+LCorch index = expr_or RCorch {$node = new ArrayAccessNode($node, $index.node); }
 )*; /* Asume que sera llamado con el ID ya macheado. */ /* .ID */ /* [expr] */
 
 declarationList	returns [IList<DeclarationNode> items]
