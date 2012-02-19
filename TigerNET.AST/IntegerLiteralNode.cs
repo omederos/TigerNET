@@ -19,7 +19,7 @@ namespace TigerNET.AST
         }
 
         public override void CheckSemantic() {
-            throw new NotImplementedException();
+            ReturnType = IntegerType.Create();
         }
     }
 }

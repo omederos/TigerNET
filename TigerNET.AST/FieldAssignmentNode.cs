@@ -7,7 +7,11 @@ namespace TigerNET.AST
 {
     /// <summary>
     /// Clase que representa la asignacion de un campo de un record cuando se inicializa. Ejemplo:
+    /// En
     /// var p := persona {nombre="Oscar", asignatura="Compilacion"}
+    /// los FieldAssignmentNodes serian:
+    /// nombre="Oscar (FieldName: nombre) (Body: "Oscar")
+    /// asignatura="Compilacion" (FieldName: asignatura) (Body: "Compilacion")
     /// </summary>
     public class FieldAssignmentNode : AssignmentBaseNode
     {

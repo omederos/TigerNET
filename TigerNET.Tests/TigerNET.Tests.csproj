@@ -52,6 +52,7 @@
     <Compile Include="Parser\Access.cs" />
     <Compile Include="Parser\ArithmeticalBinaryOperators.cs" />
     <Compile Include="Parser\ArrayLiteral.cs" />
+    <Compile Include="Parser\Assignment.cs" />
     <Compile Include="Parser\Break.cs" />
     <Compile Include="Parser\Callable.cs" />
     <Compile Include="Parser\ExpressionSequence.cs" />

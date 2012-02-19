@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
+using TigerNET.AST.Types;
 
 namespace TigerNET.AST
 {
@@ -19,6 +20,7 @@ namespace TigerNET.AST
         }
 
         public override void CheckSemantic() {
+            ReturnType = StringType.Create();
         }
     }
 }

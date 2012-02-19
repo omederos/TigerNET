@@ -111,5 +111,9 @@ namespace TigerNET.Tests {
         public static string GetValue(ExpressionNode expr) {
             return GetProperty<object>(expr, "Value").ToString();
         }
+
+        public static AccessNode GetLeftAccessNode(ExpressionNode expr) {
+            return GetProperty<AccessNode>(expr, "Left");
+        }
     }
 }
