@@ -7,5 +7,17 @@ namespace TigerNET.AST.Types {
         }
 
         public TigerType ElementsType { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(ArrayType)) {
+                return false;
+            }
+            var arrayType = (ArrayType) obj;
+            if (arrayType.Name != Name) {
+                return false;
+            }
+            return arrayType.ElementsType == ElementsType;
+        }
     }
 }
