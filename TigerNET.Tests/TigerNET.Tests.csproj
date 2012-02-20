@@ -66,6 +66,7 @@
     <Compile Include="Parser\TypeDeclarations.cs" />
     <Compile Include="Parser\VariableDeclaration.cs" />
     <Compile Include="Parser\While.cs" />
+    <Compile Include="Semantic\CallableDeclaration.cs" />
     <Compile Include="Semantic\Scope.cs" />
     <Compile Include="Semantic\TypesEquality.cs" />
     <Compile Include="Semantic\VariableDeclaration.cs" />

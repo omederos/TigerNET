@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Callable.cs" />
     <Compile Include="Errors\AlreadyDefinedError.cs" />
+    <Compile Include="Errors\DuplicateParameterError.cs" />
     <Compile Include="Errors\Error.cs" />
     <Compile Include="Errors\NilAssignmentError.cs" />
     <Compile Include="Errors\NonValueAssignmentError.cs" />

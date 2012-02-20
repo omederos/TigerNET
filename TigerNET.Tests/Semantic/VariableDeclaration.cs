@@ -17,6 +17,8 @@ namespace TigerNET.Tests.Semantic
         public void Init()
         {
             Scope = new Scope();
+            Scope.Add(IntegerType.Create());
+            Scope.Add(StringType.Create());
             Errors = new List<Error>();
         }
     }
@@ -38,8 +40,6 @@ namespace TigerNET.Tests.Semantic
         [Test]
         public void String_AlreadyExisting()
         {
-            Scope.Add("x", IntegerType.Create());
-            
             var ast = Utils.BuildAST(@"let var x := ""abc"" in end");
             var dec = Utils.GetFirstDeclaration(ast);
             dec.CheckSemantic(Scope, Errors);
@@ -66,8 +66,6 @@ namespace TigerNET.Tests.Semantic
         [Test]
         public void Explicit_SameTypes()
         {
-            Scope.Add(StringType.Create());
-            Scope.Add(IntegerType.Create());
             var ast = Utils.BuildAST(@"let var x : string := ""abc"" in end");
             var dec = Utils.GetFirstDeclaration(ast);
             dec.CheckSemantic(Scope, Errors);
@@ -81,8 +79,6 @@ namespace TigerNET.Tests.Semantic
         [Test]
         public void Explicit_DifferentTypes()
         {
-            Scope.Add(StringType.Create());
-            Scope.Add(IntegerType.Create());
             var ast = Utils.BuildAST(@"let var x : string := 1 in end");
             var dec = Utils.GetFirstDeclaration(ast);
             dec.CheckSemantic(Scope, Errors);
