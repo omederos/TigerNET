@@ -13,12 +13,6 @@ namespace TigerNET.AST
         protected TypeDeclarationNode(string name) : base(name) {}
 
         /// <summary>
-        /// Tipo asociado al tipo que estan declarando.
-        /// Ejemplo, si me declaran un record, el tipo asociado es RecordType
-        /// </summary>
-        public TigerType Type { get; set; }
-
-        /// <summary>
         /// Chequea si ya existe un tipo con ese nombre en este scope
         /// </summary>
         /// <param name="scope"></param>
