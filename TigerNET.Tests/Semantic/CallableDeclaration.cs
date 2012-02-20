@@ -12,7 +12,7 @@ namespace TigerNET.Tests.Semantic
     public class CallableDeclaration : SemanticTest {
         [Test]
         public void Procedure_NoParameters_Int() {
-            var ast = Utils.BuildAST("let function f() = 1");
+            var ast = Utils.BuildAST("let function f() = 1 in end");
             var dec = Utils.GetFirstDeclaration(ast);
             dec.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
@@ -22,10 +22,11 @@ namespace TigerNET.Tests.Semantic
             Assert.That(Scope.DefinedCallables["f"].Name == "f");
             Assert.That(Scope.DefinedCallables["f"].Type == null);
         }
+        
         [Test]
         public void Procedure_OneStringParameter_Int()
         {
-            var ast = Utils.BuildAST("let function f(a:string) = 1");
+            var ast = Utils.BuildAST("let function f(a:string) = 1 in end");
             var dec = Utils.GetFirstDeclaration(ast);
             dec.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
@@ -41,7 +42,7 @@ namespace TigerNET.Tests.Semantic
         [Test]
         public void Procedure_DuplicateParameters_Int()
         {
-            var ast = Utils.BuildAST("let function f(a:string, a:int) = 1");
+            var ast = Utils.BuildAST("let function f(a:string, a:int) = 1 in end");
             var dec = Utils.GetFirstDeclaration(ast);
             dec.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 1);
@@ -53,7 +54,7 @@ namespace TigerNET.Tests.Semantic
         [Test]
         public void Procedure_UndefinedParameterType_Int()
         {
-            var ast = Utils.BuildAST("let function f(a:someType) = 1");
+            var ast = Utils.BuildAST("let function f(a:someType) = 1 in end");
             var dec = Utils.GetFirstDeclaration(ast);
             dec.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 1);
@@ -65,11 +66,11 @@ namespace TigerNET.Tests.Semantic
         [Test]
         public void Function_NoParameters_Int()
         {
-            var ast = Utils.BuildAST("let function f() : int = 1");
+            var ast = Utils.BuildAST("let function f() : int = 1 in end");
             var dec = Utils.GetFirstDeclaration(ast);
             dec.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(dec.ReturnType == IntegerType.Create());
+            Assert.That(dec.ReturnType == null);
             Assert.That(Scope.ExistsDeclaration("f"));
             Assert.That(Scope.DefinedCallables["f"].Fields.Count == 0);
             Assert.That(Scope.DefinedCallables["f"].Name == "f");
@@ -79,7 +80,7 @@ namespace TigerNET.Tests.Semantic
         [Test]
         public void Function_DifferentTypes_String_Int()
         {
-            var ast = Utils.BuildAST("let function f() : string = 1");
+            var ast = Utils.BuildAST("let function f() : string = 1 in end");
             var dec = Utils.GetFirstDeclaration(ast);
             dec.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 1);
@@ -91,7 +92,7 @@ namespace TigerNET.Tests.Semantic
         [Test]
         public void Function_UndefinedReturnType_Int()
         {
-            var ast = Utils.BuildAST("let function f() : someType = 1");
+            var ast = Utils.BuildAST("let function f() : someType = 1 in end");
             var dec = Utils.GetFirstDeclaration(ast);
             dec.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 1);

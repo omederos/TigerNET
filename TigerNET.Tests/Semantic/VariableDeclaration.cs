@@ -40,6 +40,7 @@ namespace TigerNET.Tests.Semantic
         [Test]
         public void String_AlreadyExisting()
         {
+            Scope.Add("x", StringType.Create());
             var ast = Utils.BuildAST(@"let var x := ""abc"" in end");
             var dec = Utils.GetFirstDeclaration(ast);
             dec.CheckSemantic(Scope, Errors);
@@ -49,7 +50,7 @@ namespace TigerNET.Tests.Semantic
             
             Assert.That(Scope.DefinedVariables.Count == 1);
             Assert.That(Scope.ExistsDeclaration("x"));
-            Assert.IsInstanceOf<IntegerType>(Scope.DefinedVariables["x"]);
+            Assert.IsInstanceOf<StringType>(Scope.DefinedVariables["x"]);
         }
 
         [Test]

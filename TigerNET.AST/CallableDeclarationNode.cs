@@ -102,9 +102,6 @@ namespace TigerNET.AST
             //Si no hubo ningun problema...
             if (errorsCount == errors.Count) {
                 scope.AddCallable(new Callable(Name, Fields, Type));
-                if (Type != null) {
-                    ReturnType = Body.ReturnType;
-                }
             }
         }
     }
