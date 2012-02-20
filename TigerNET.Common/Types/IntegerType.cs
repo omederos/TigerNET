@@ -1,11 +1,11 @@
-namespace TigerNET.AST.Types {
+namespace TigerNET.Common.Types {
     public class IntegerType : TigerType {
         private static IntegerType _instance;
         
         private IntegerType() : base("int") {}
 
         public override bool Equals(object obj) {
-            return obj.GetType() == typeof (IntegerType);
+            return obj is IntegerType;
         }
 
         public static IntegerType Create() {

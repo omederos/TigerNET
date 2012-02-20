@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TigerNET.AST.Types {
+namespace TigerNET.Common.Types {
 
     public class Fields : Dictionary<string, TigerType> {
         public override bool Equals(object obj)

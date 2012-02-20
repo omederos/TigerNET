@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TigerNET.AST.Types;
+using TigerNET.Common;
+using TigerNET.Common.Errors;
+using TigerNET.Common.Types;
 
 namespace TigerNET.AST {
     public abstract class ExpressionNode {
@@ -25,16 +27,19 @@ namespace TigerNET.AST {
         /// </summary>
         /// <returns>True si retorna algun tipo. False en otro caso</returns>
         public bool ReturnsValue() {
-            return !(ReturnType is VoidType);
+            return ReturnType != null;
         }
 
         /// <summary>
         /// Genera el codigo asociado a este nodo
         /// </summary>
         public abstract void GenerateCode();
+
         /// <summary>
         /// Chequea la semantica de este nodo
         /// </summary>
-        public abstract void CheckSemantic();
+        /// <param name="scope"> </param>
+        /// <param name="errors"> </param>
+        public abstract void CheckSemantic(Scope scope, IList<Error> errors);
     }
 }

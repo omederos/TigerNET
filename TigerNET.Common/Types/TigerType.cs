@@ -1,15 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-
-namespace TigerNET.AST.Types
+﻿namespace TigerNET.Common.Types
 {
     public abstract class TigerType {
         protected TigerType(string name) {
             Name = name;
         }
 
-        protected string Name { get; set; }
+        public string Name { get; set; }
 
         public static bool operator ==(TigerType type, object x) {
             //Si ambos son null, entonces son iguales

@@ -1,4 +1,4 @@
-namespace TigerNET.AST.Types {
+namespace TigerNET.Common.Types {
     public class ArrayType : TigerType {
 
         public ArrayType(string name, TigerType elementsType) : base(name) {

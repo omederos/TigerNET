@@ -1,4 +1,4 @@
-namespace TigerNET.AST.Types {
+namespace TigerNET.Common.Types {
     public class StringType : TigerType {
         private static StringType _instance;
         private StringType() : base("string") {}
@@ -9,7 +9,7 @@ namespace TigerNET.AST.Types {
 
         public override bool Equals(object obj)
         {
-            return obj.GetType() == typeof(StringType);
+            return obj is StringType;
         }
 
         public override int GetHashCode()

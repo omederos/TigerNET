@@ -67,6 +67,7 @@
     <Compile Include="Parser\VariableDeclaration.cs" />
     <Compile Include="Parser\While.cs" />
     <Compile Include="Semantic\TypesEquality.cs" />
+    <Compile Include="Semantic\VariableDeclaration.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Parser\IfThenElse.cs" />
     <Compile Include="Parser\IntegerLiteral.cs" />
@@ -77,6 +78,10 @@
     <ProjectReference Include="..\TigerNET.AST\TigerNET.AST.csproj">
       <Project>{AA13FB85-8458-4F50-B26D-99F11233EADD}</Project>
       <Name>TigerNET.AST</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TigerNET.Common\TigerNET.Common.csproj">
+      <Project>{B783BABF-1096-42D3-9E26-05486E27EAF9}</Project>
+      <Name>TigerNET.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\TigerNET.Parser\TigerNET.Parser.csproj">
       <Project>{955657CF-0443-45B1-8B04-DC95335A0727}</Project>

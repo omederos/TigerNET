@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using TigerNET.AST.Types;
+using TigerNET.Common.Types;
 
 namespace TigerNET.Tests.Semantic
 {
