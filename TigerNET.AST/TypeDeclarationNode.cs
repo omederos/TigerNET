@@ -17,9 +17,11 @@ namespace TigerNET.AST
         /// </summary>
         /// <param name="scope"></param>
         /// <param name="errors"></param>
-        protected void CheckIfTypeAlreadyExists(Scope scope, IList<Error> errors) {
-            if (scope.ExistsType(Name)) {
-                errors.Add(new AlreadyDefinedError(Line, Column, Name));
+        /// <param name="typeName"></param>
+        protected void CheckIfTypeAlreadyExists(Scope scope, IList<Error> errors, string typeName = null) {
+            var typeToCheck = typeName ?? Name;
+            if (scope.ExistsType(typeToCheck)) {
+                errors.Add(new AlreadyDefinedError(Line, Column, typeToCheck));
             }
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace TigerNET.Common.Types
+﻿using System;
+
+namespace TigerNET.Common.Types
 {
     public abstract class TigerType {
         protected TigerType(string name) {

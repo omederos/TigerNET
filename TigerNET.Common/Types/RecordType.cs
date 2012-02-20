@@ -45,5 +45,6 @@ namespace TigerNET.Common.Types {
         }
 
         public Fields Fields { get; set; }
+        
     }
 }

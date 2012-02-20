@@ -5,5 +5,6 @@ namespace TigerNET.Common.Types {
         public static NilType Create() {
             return _instance ?? (_instance = new NilType());
         }
+
     }
 }
