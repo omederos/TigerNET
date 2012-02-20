@@ -93,8 +93,7 @@ namespace TigerNET.Common
         public bool ExistsDeclaration(string name) {
             return Exists(name,
                           (x, scope) =>
-                          scope.DefinedVariables.ContainsKey(x) || scope.DefinedCallables.ContainsKey(x) ||
-                          scope.DefinedTypes.ContainsKey(x));
+                          scope.DefinedVariables.ContainsKey(x) || scope.DefinedCallables.ContainsKey(x));
         }
     }
 }

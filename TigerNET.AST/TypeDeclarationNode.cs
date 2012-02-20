@@ -19,12 +19,12 @@ namespace TigerNET.AST
         public TigerType Type { get; set; }
 
         /// <summary>
-        /// Chequea si ya existe una definicion con ese nombre en este scope (y padres)
+        /// Chequea si ya existe un tipo con ese nombre en este scope
         /// </summary>
         /// <param name="scope"></param>
         /// <param name="errors"></param>
-        protected void CheckIfMemberAlreadyExists(Scope scope, IList<Error> errors) {
-            if (scope.ExistsDeclaration(Name)) {
+        protected void CheckIfTypeAlreadyExists(Scope scope, IList<Error> errors) {
+            if (scope.ExistsType(Name)) {
                 errors.Add(new AlreadyDefinedError(Line, Column, Name));
             }
         }

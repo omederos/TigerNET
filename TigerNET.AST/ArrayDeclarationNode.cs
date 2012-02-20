@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TigerNET.Common;
 using TigerNET.Common.Errors;
+using TigerNET.Common.Types;
 
 namespace TigerNET.AST
 {
@@ -25,7 +26,23 @@ namespace TigerNET.AST
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
-            throw new NotImplementedException();
+            int errorsCount = errors.Count;
+            
+            //Chequeamos si ya existe un tipo en el scope con el mismo nombre que el que define este tipo
+            CheckIfTypeAlreadyExists(scope, errors);
+
+            //Chequear que el tipo que almacenara el array exista en el scope
+            if (!scope.ExistsType(TypeName)) {
+                errors.Add(new UndefinedTypeError(Line, Column, TypeName));
+            }
+
+            //Si ocurrio algun error
+            if (errorsCount != errors.Count) {
+                return;
+            }
+
+            //Anadimos el nuevo tipo definido al scope
+            scope.Add(new ArrayType(Name, scope.DefinedTypes[TypeName]));
         }
     }
 }

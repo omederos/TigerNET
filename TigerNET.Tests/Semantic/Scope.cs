@@ -45,7 +45,7 @@ namespace TigerNET.Tests.Semantic
             s.Add(StringType.Create());
             _scope = new Scope(s);
 
-            Assert.That(_scope.ExistsDeclaration("string"));
+            Assert.That(_scope.ExistsType("string"));
             
         }
     }

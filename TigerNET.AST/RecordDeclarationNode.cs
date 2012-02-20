@@ -32,7 +32,7 @@ namespace TigerNET.AST
             int errorsCount = errors.Count;
 
             //Chequeamos que un tipo con ese nombre no haya sido definido anteriormente
-            CheckIfMemberAlreadyExists(scope, errors);
+            CheckIfTypeAlreadyExists(scope, errors);
 
             IDictionary<string, TigerType> fields = new Dictionary<string, TigerType>();
             

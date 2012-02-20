@@ -20,7 +20,6 @@ namespace TigerNET.Tests.Semantic
             Assert.That(Errors.Count == 0);
             Assert.That(dec.ReturnType == null);
             Assert.That(Scope.ExistsType("person"));
-            Assert.That(Scope.ExistsDeclaration("person"));
             Assert.That(Scope.DefinedTypes.ContainsKey("person"));
             Assert.That(Scope.DefinedTypes["person"] is RecordType);
         }
@@ -34,7 +33,6 @@ namespace TigerNET.Tests.Semantic
             Assert.That(Errors.Count == 0);
             Assert.That(dec.ReturnType == null);
             Assert.That(Scope.ExistsType("person"));
-            Assert.That(Scope.ExistsDeclaration("person"));
             Assert.That(Scope.DefinedTypes.ContainsKey("person"));
             Assert.That(Scope.DefinedTypes["person"] is RecordType);
 
@@ -52,7 +50,6 @@ namespace TigerNET.Tests.Semantic
             Assert.That(Errors.Count == 0);
             Assert.That(dec.ReturnType == null);
             Assert.That(Scope.ExistsType("person"));
-            Assert.That(Scope.ExistsDeclaration("person"));
             Assert.That(Scope.DefinedTypes.ContainsKey("person"));
             Assert.That(Scope.DefinedTypes["person"] is RecordType);
 
