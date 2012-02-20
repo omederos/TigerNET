@@ -7,17 +7,19 @@ using TigerNET.Common.Types;
 namespace TigerNET.Common
 {
     public class Scope {
-
-        public Scope() {
+        public Scope(Scope parent) {
             DefinedTypes = new Dictionary<string, TigerType>();
             DefinedVariables = new Dictionary<string, TigerType>();
             DefinedCallables = new Dictionary<string, Callable>();
+            Parent = parent;
         }
+
+        public Scope() : this(null) {}
 
         /// <summary>
         /// Scope padre
         /// </summary>
-        public Scope Parent;
+        public Scope Parent { get; private set; }
 
         public IDictionary<string, TigerType> DefinedTypes { get; set; }
         public IDictionary<string, TigerType> DefinedVariables { get; set; }
@@ -62,9 +64,25 @@ namespace TigerNET.Common
         /// Comprueba si existe un tipo
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="lookInAncestors">Especifica si se debe buscar en el scope padre (recursivamente) o no</param>
         /// <returns></returns>
-        public bool ExistsType(string name) {
-            return DefinedTypes.ContainsKey(name);
+        public bool ExistsType(string name, bool lookInAncestors = true) {
+            return Exists(name, (x, scope) => scope.DefinedTypes.ContainsKey(x));
+        }
+
+        private bool Exists(string name, Func<string, Scope, bool> findFunc, bool lookInAncestors = true) {
+            if (!lookInAncestors) {
+                return findFunc(name, this);
+            }
+            var s = this;
+            do {
+                if (findFunc(name, s)) {
+                    return true;
+                }
+                s = s.Parent;
+            } while (s != null);
+
+            return false;
         }
 
         /// <summary>
@@ -73,15 +91,10 @@ namespace TigerNET.Common
         /// <param name="name"></param>
         /// <returns></returns>
         public bool ExistsDeclaration(string name) {
-            //Comprobamos en las variables
-            if (DefinedVariables.ContainsKey(name)) {
-                return true;
-            }
-            if (DefinedCallables.ContainsKey(name)) {
-                return true;
-            }
-            //TODO: Hay que comprobar esto?
-            return DefinedTypes.ContainsKey(name);
+            return Exists(name,
+                          (x, scope) =>
+                          scope.DefinedVariables.ContainsKey(x) || scope.DefinedCallables.ContainsKey(x) ||
+                          scope.DefinedTypes.ContainsKey(x));
         }
     }
 }
