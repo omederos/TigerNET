@@ -1,9 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using TigerNET.AST;
 
 namespace TigerNET.Common.Types {
 
     public class Fields : Dictionary<string, TigerType> {
+        public Fields(IDictionary<string, TigerType> fields) : base(fields) {}
+        public Fields() {}
+        
         public override bool Equals(object obj)
         {
             if (!(obj is IDictionary<string, TigerType>)) {
@@ -40,6 +44,6 @@ namespace TigerNET.Common.Types {
             return Fields.Equals(recordType.Fields);
         }
 
-        protected Fields Fields { get; set; }
+        public Fields Fields { get; set; }
     }
 }

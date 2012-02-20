@@ -7,7 +7,7 @@ namespace TigerNET.Common.Errors {
         }
 
         public override string ToString() {
-            return string.Format("A member with the name '' already exist{0}s", "ARG0");
+            return string.Format("A member with the name '{0}' already exists", Name);
         }
     }
 }
