@@ -47,5 +47,9 @@ namespace TigerNET.AST
             scope.Add(type, Name);
 
         }
+
+        public override void UpdateDefinition(Scope scope) {
+            throw new NotImplementedException();
+        }
     }
 }

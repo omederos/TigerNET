@@ -31,8 +31,9 @@ namespace TigerNET.AST
 
             int errorsCount = errors.Count;
 
+
             //Chequeamos que un tipo con ese nombre no haya sido definido anteriormente
-            CheckIfTypeAlreadyExists(scope, errors);
+//            CheckIfTypeAlreadyExists(scope, errors);
 
             IDictionary<string, TigerType> fields = new Dictionary<string, TigerType>();
             
@@ -59,8 +60,27 @@ namespace TigerNET.AST
                 return;
             }
 
-            //Si no ocurrio ningun error, definimos este tipo nuevo
-            scope.Add(new RecordType(Name, new Fields(fields)));
+            //Si no ocurrio ningun error, actualizamos la definicion de este tipo
+            scope.Add(new RecordType(Name, new Fields(fields)), updateIfExists: true);
+        }
+
+        /// <summary>
+        /// Actualiza la definicion del record actual
+        /// Util en los casos que contenga campos que apunten a el mismo, u a otros records que aun no habian sido
+        /// 100% definidos cuando se llamo al CheckSemantic
+        /// </summary>
+        /// <param name="scope"></param>
+        public override void UpdateDefinition(Scope scope) {
+            //Esta linea no debe dar ningun error, pues este metodo debe ser llamado antes de llamar al CheckSemantic
+            var record = (RecordType)scope.DefinedTypes[Name];
+            //Por cada campo del record...
+            for (int i = 0; i < record.Fields.Count; i++) {
+                string fieldName = Fields[i].Id;
+                //Tipo (en el programa) del campo
+                string typeId = Fields[i].TypeId;
+                //Hacemos que el tipo real del campo apunte al tipo definido en el Scope
+                record.Fields[fieldName] = scope.DefinedTypes[typeId];
+            }
         }
     }
 }

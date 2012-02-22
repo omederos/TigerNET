@@ -24,5 +24,7 @@ namespace TigerNET.AST
                 errors.Add(new AlreadyDefinedError(Line, Column, typeToCheck));
             }
         }
+
+        public abstract void UpdateDefinition(Scope scope);
     }
 }

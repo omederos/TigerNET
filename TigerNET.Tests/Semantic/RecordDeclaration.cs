@@ -81,15 +81,15 @@ namespace TigerNET.Tests.Semantic
             Assert.That(dec.ReturnType == null);
         }
 
-        [Test]
-        public void AlreadyExistingType()
-        {
-            var ast = Utils.BuildAST("let type string = {Name : string, Age : int} in end");
-            var dec = Utils.GetFirstDeclaration(ast);
-            dec.CheckSemantic(Scope, Errors);
-            Assert.That(Errors.Count == 1);
-            Assert.That(Errors[0] is AlreadyDefinedError);
-            Assert.That(dec.ReturnType == null);
-        }
+//        [Test]
+//        public void AlreadyExistingType()
+//        {
+//            var ast = Utils.BuildAST("let type string = {Name : string, Age : int} in end");
+//            var dec = Utils.GetFirstDeclaration(ast);
+//            dec.CheckSemantic(Scope, Errors);
+//            Assert.That(Errors.Count == 1);
+//            Assert.That(Errors[0] is AlreadyDefinedError);
+//            Assert.That(dec.ReturnType == null);
+//        }
     }
 }

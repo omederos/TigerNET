@@ -122,7 +122,7 @@ namespace TigerNET.Tests.Semantic
         [Test]
         public void Explicit_Array_AssignNil()
         {
-            //Definimos un record en el scope
+            //Definimos un array recen el scope
             Scope.Add(new ArrayType("arr", StringType.Create()));
             var ast = Utils.BuildAST(@"let var x : arr := nil in end");
             var dec = Utils.GetFirstDeclaration(ast);
@@ -137,7 +137,6 @@ namespace TigerNET.Tests.Semantic
         [Test]
         public void Explicit_String_AssignNil()
         {
-            //Definimos un record en el scope
             var ast = Utils.BuildAST(@"let var x : string := nil in end");
             var dec = Utils.GetFirstDeclaration(ast);
             dec.CheckSemantic(Scope, Errors);

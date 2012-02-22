@@ -69,6 +69,8 @@
     <Compile Include="Semantic\AliasDeclaration.cs" />
     <Compile Include="Semantic\ArrayDeclaration.cs" />
     <Compile Include="Semantic\CallableDeclaration.cs" />
+    <Compile Include="Semantic\GroupDeclarations.cs" />
+    <Compile Include="Semantic\LetInEnd.cs" />
     <Compile Include="Semantic\RecordDeclaration.cs" />
     <Compile Include="Semantic\Scope.cs" />
     <Compile Include="Semantic\TypesEquality.cs" />

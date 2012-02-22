@@ -29,7 +29,7 @@ namespace TigerNET.AST
             int errorsCount = errors.Count;
             
             //Chequeamos si ya existe un tipo en el scope con el mismo nombre que el que define este tipo
-            CheckIfTypeAlreadyExists(scope, errors);
+//            CheckIfTypeAlreadyExists(scope, errors);
 
             //Chequear que el tipo que almacenara el array exista en el scope
             if (!scope.ExistsType(TypeName)) {
@@ -42,7 +42,13 @@ namespace TigerNET.AST
             }
 
             //Anadimos el nuevo tipo definido al scope
-            scope.Add(new ArrayType(Name, scope.DefinedTypes[TypeName]));
+            scope.Add(new ArrayType(Name, scope.DefinedTypes[TypeName]), updateIfExists: true);
+        }
+
+        public override void UpdateDefinition(Scope scope) {
+            //Cogemos el tipo de este 
+            var array = (ArrayType) scope.DefinedTypes[Name];
+            array.ElementsType = scope.DefinedTypes[TypeName];
         }
     }
 }

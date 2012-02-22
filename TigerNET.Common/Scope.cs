@@ -30,12 +30,20 @@ namespace TigerNET.Common
         /// </summary>
         /// <param name="type">Tipo que se anadira al scope</param>
         /// <param name="name">Parametro opcional que especifica con que nombre se anadira al scope. Si es null, se utiliza type.Name</param>
-        public void Add(TigerType type, string name = null) {
+        /// <param name="updateIfExists">Especifica si se debe actualizar el tipo en caso de que este exista en el scope</param>
+        public void Add(TigerType type, string name = null, bool updateIfExists = false) {
             var nameToAdd = name ?? type.Name;
-            if (DefinedTypes.ContainsKey(nameToAdd)) {
-                throw new Exception("Ya existe un tipo con ese nombre");
+            if (DefinedTypes.ContainsKey(nameToAdd))
+            {
+                if (updateIfExists)
+                {
+                    DefinedTypes[nameToAdd] = type;
+                }
+                else { throw new Exception("Ya existe un tipo con ese nombre"); }
             }
-            DefinedTypes.Add(nameToAdd, type);
+            else {
+                DefinedTypes.Add(nameToAdd, type);
+            }
         }
 
         /// <summary>
