@@ -103,5 +103,49 @@ namespace TigerNET.Tests.Semantic
             Assert.That(Errors.Count == 1);
             Assert.That(Errors[0] is NotMatchingTypesError);
         }
+
+        [Test]
+        public void Explicit_Record_AssignNil()
+        {
+            //Definimos un record en el scope
+            Scope.Add(new RecordType("rec", new Fields()));
+            var ast = Utils.BuildAST(@"let var x : rec := nil in end");
+            var dec = Utils.GetFirstDeclaration(ast);
+            dec.CheckSemantic(Scope, Errors);
+
+            Assert.That(Errors.Count == 0);
+            Assert.That(Scope.DefinedVariables.Count == 1);
+            Assert.That(Scope.ExistsDeclaration("x"));
+            Assert.IsInstanceOf<RecordType>(Scope.DefinedVariables["x"]);
+        }
+
+        [Test]
+        public void Explicit_Array_AssignNil()
+        {
+            //Definimos un record en el scope
+            Scope.Add(new ArrayType("arr", StringType.Create()));
+            var ast = Utils.BuildAST(@"let var x : arr := nil in end");
+            var dec = Utils.GetFirstDeclaration(ast);
+            dec.CheckSemantic(Scope, Errors);
+
+            Assert.That(Errors.Count == 0);
+            Assert.That(Scope.DefinedVariables.Count == 1);
+            Assert.That(Scope.ExistsDeclaration("x"));
+            Assert.IsInstanceOf<ArrayType>(Scope.DefinedVariables["x"]);
+        }
+
+        [Test]
+        public void Explicit_String_AssignNil()
+        {
+            //Definimos un record en el scope
+            var ast = Utils.BuildAST(@"let var x : string := nil in end");
+            var dec = Utils.GetFirstDeclaration(ast);
+            dec.CheckSemantic(Scope, Errors);
+
+            Assert.That(Errors.Count == 0);
+            Assert.That(Scope.DefinedVariables.Count == 1);
+            Assert.That(Scope.ExistsDeclaration("x"));
+            Assert.IsInstanceOf<StringType>(Scope.DefinedVariables["x"]);
+        }
     }
 }

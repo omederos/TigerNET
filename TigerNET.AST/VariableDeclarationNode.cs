@@ -40,6 +40,8 @@ namespace TigerNET.AST {
             errorsCount = errors.Count;
 
             //Si me especificaron el tipo
+            TigerType resultType = null;
+            
             if (Type != null) {
                 //Si el tipo no existe
                 if (!scope.ExistsType(Type)) {
@@ -47,11 +49,15 @@ namespace TigerNET.AST {
                 }
                 
                 //Guardamos el tipo que debe almacenar esta variable (segun su definicion)
-                TigerType resultType = scope.DefinedTypes[Type];
-               
+                resultType = scope.DefinedTypes[Type];
+
                 //Si el tipo de retorno de la expresion es diferente al del especificado explicitamente
                 if (Body.ReturnType != resultType) {
-                    errors.Add(new NotMatchingTypesError(Line, Column, resultType, Body.ReturnType));
+                    //Debemos chequear el caso se este asignando Nil a un tipo que lo permita
+                    if (!(Body.ReturnType is NilType) || !NilType.CanBeAssignedTo(resultType)) {
+                        errors.Add(new NotMatchingTypesError(Line, Column, resultType, Body.ReturnType));
+                    }
+                    
                 }
             }
             //Si no me especificaron el tipo
@@ -69,7 +75,7 @@ namespace TigerNET.AST {
             //Si no hubo ningun error...
             if (errorsCount == errors.Count) {
                 //Finalmente anadimos la variable declarada al scope
-                scope.Add(Name, Body.ReturnType);
+                scope.Add(Name, Body.ReturnType is NilType ? resultType : Body.ReturnType);
             }
 
             

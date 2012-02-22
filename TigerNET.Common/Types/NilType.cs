@@ -6,5 +6,8 @@ namespace TigerNET.Common.Types {
             return _instance ?? (_instance = new NilType());
         }
 
+        public static bool CanBeAssignedTo(TigerType type) {
+            return type is RecordType || type is ArrayType || type is StringType;
+        }
     }
 }
