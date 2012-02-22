@@ -13,14 +13,14 @@ namespace TigerNET.AST
         protected TypeDeclarationNode(string name) : base(name) {}
 
         /// <summary>
-        /// Chequea si ya existe un tipo con ese nombre en este scope
+        /// Chequea si ya existe un tipo con ese nombre (solamente) en este scope 
         /// </summary>
         /// <param name="scope"></param>
         /// <param name="errors"></param>
         /// <param name="typeName"></param>
         protected void CheckIfTypeAlreadyExists(Scope scope, IList<Error> errors, string typeName = null) {
             var typeToCheck = typeName ?? Name;
-            if (scope.ExistsType(typeToCheck)) {
+            if (scope.ExistsType(typeToCheck, false)) {
                 errors.Add(new AlreadyDefinedError(Line, Column, typeToCheck));
             }
         }

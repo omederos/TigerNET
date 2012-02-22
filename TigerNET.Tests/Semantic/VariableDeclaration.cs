@@ -54,6 +54,22 @@ namespace TigerNET.Tests.Semantic
         }
 
         [Test]
+        public void String_AlreadyExistingInOuterScope()
+        {
+            Scope.Add("x", StringType.Create());
+            var ast = Utils.BuildAST(@"let var x := ""abc"" in end");
+            var dec = Utils.GetFirstDeclaration(ast);
+            dec.CheckSemantic(Scope, Errors);
+
+            Assert.That(Errors.Count == 1);
+            Assert.That(Errors[0] is AlreadyDefinedError);
+
+            Assert.That(Scope.DefinedVariables.Count == 1);
+            Assert.That(Scope.ExistsDeclaration("x"));
+            Assert.IsInstanceOf<StringType>(Scope.DefinedVariables["x"]);
+        }
+
+        [Test]
         public void Integer()
         {
             var ast = Utils.BuildAST(@"let var x := nil in end");

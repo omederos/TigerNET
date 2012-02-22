@@ -16,6 +16,5 @@ namespace TigerNET.Common.Types {
         {
             return base.GetHashCode();
         }
-
     }
 }

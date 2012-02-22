@@ -19,7 +19,7 @@ namespace TigerNET.Common
         /// <summary>
         /// Scope padre
         /// </summary>
-        public Scope Parent { get; private set; }
+        public Scope Parent { get; set; }
 
         public IDictionary<string, TigerType> DefinedTypes { get; set; }
         public IDictionary<string, TigerType> DefinedVariables { get; set; }
@@ -69,7 +69,7 @@ namespace TigerNET.Common
         /// <param name="lookInAncestors">Especifica si se debe buscar en el scope padre (recursivamente) o no</param>
         /// <returns></returns>
         public bool ExistsType(string name, bool lookInAncestors = true) {
-            return Exists(name, (x, scope) => scope.DefinedTypes.ContainsKey(x));
+            return Exists(name, (x, scope) => scope.DefinedTypes.ContainsKey(x), lookInAncestors);
         }
 
         private bool Exists(string name, Func<string, Scope, bool> findFunc, bool lookInAncestors = true) {
@@ -92,10 +92,10 @@ namespace TigerNET.Common
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public bool ExistsDeclaration(string name) {
+        public bool ExistsDeclaration(string name, bool lookInAncestors = true) {
             return Exists(name,
                           (x, scope) =>
-                          scope.DefinedVariables.ContainsKey(x) || scope.DefinedCallables.ContainsKey(x));
+                          scope.DefinedVariables.ContainsKey(x) || scope.DefinedCallables.ContainsKey(x), lookInAncestors);
         }
     }
 }

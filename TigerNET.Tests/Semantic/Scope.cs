@@ -35,8 +35,8 @@ namespace TigerNET.Tests.Semantic
             AddStringVariable("x", s);
             _scope = new Scope(s);
             
-            AddStringVariable("x");
             Assert.That(_scope.ExistsDeclaration("x"));
+            Assert.That(!_scope.ExistsDeclaration("x", false));
         }
 
         [Test]
@@ -46,6 +46,7 @@ namespace TigerNET.Tests.Semantic
             _scope = new Scope(s);
 
             Assert.That(_scope.ExistsType("string"));
+            Assert.That(!_scope.ExistsType("string", false));
             
         }
     }
