@@ -49,7 +49,7 @@ namespace TigerNET.AST {
                 }
                 
                 //Guardamos el tipo que debe almacenar esta variable (segun su definicion)
-                resultType = scope.DefinedTypes[Type];
+                resultType = scope.GetType(Type);
 
                 //Si el tipo de retorno de la expresion es diferente al del especificado explicitamente
                 if (Body.ReturnType != resultType) {

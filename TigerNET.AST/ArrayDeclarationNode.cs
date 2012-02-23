@@ -42,13 +42,13 @@ namespace TigerNET.AST
             }
 
             //Anadimos el nuevo tipo definido al scope
-            scope.Add(new ArrayType(Name, scope.DefinedTypes[TypeName]), updateIfExists: true);
+            scope.Add(new ArrayType(Name, scope.GetType(TypeName)), updateIfExists: true);
         }
 
         public override void UpdateDefinition(Scope scope) {
             //Cogemos el tipo de este 
-            var array = (ArrayType) scope.DefinedTypes[Name];
-            array.ElementsType = scope.DefinedTypes[TypeName];
+            var array = (ArrayType) scope.GetType(Name, false);
+            array.ElementsType = scope.GetType(TypeName);
         }
     }
 }

@@ -86,7 +86,7 @@ namespace TigerNET.AST
             errorsCount = errors.Count;
             //Si me especificaron el tipo
             if (Type != null) {
-                var type = scope.DefinedTypes[Type];
+                var type = scope.GetType(Type);
                 
                 //Si la expresion no retorna ningun valor
                 if (!Body.ReturnsValue()) {

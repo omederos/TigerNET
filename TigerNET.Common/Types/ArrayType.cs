@@ -10,6 +10,9 @@ namespace TigerNET.Common.Types {
 
         public override bool Equals(object obj)
         {
+            if (ReferenceEquals(obj, this)) {
+                return true;
+            }
             if (obj.GetType() != typeof(ArrayType)) {
                 return false;
             }

@@ -26,6 +26,30 @@ namespace TigerNET.Common
         public IDictionary<string, Callable> DefinedCallables { get; set; }
 
         /// <summary>
+        /// Devuelve el tipo dado el identificador
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="lookInAncestors">Indica si se debe buscar en los scopes padres</param>
+        /// <returns></returns>
+        public TigerType GetType(string name, bool lookInAncestors = true) {
+            if (!ExistsType(name, lookInAncestors)) {
+                throw new Exception(string.Format("El tipo {0} no existe", name));
+            }
+            var s = this;
+            while (s != null) {
+                if (s.DefinedTypes.ContainsKey(name)) {
+                    return s.DefinedTypes[name];
+                }
+                if (!lookInAncestors) {
+                    break;
+                }
+                s = s.Parent;
+            }
+
+            throw new Exception(string.Format("El tipo {0} no existe", name));
+        }
+
+        /// <summary>
         /// Adiciona un tipo al scope
         /// </summary>
         /// <param name="type">Tipo que se anadira al scope</param>

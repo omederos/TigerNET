@@ -72,14 +72,14 @@ namespace TigerNET.AST
         /// <param name="scope"></param>
         public override void UpdateDefinition(Scope scope) {
             //Esta linea no debe dar ningun error, pues este metodo debe ser llamado antes de llamar al CheckSemantic
-            var record = (RecordType)scope.DefinedTypes[Name];
+            var record = (RecordType)scope.GetType(Name, false);
             //Por cada campo del record...
             for (int i = 0; i < record.Fields.Count; i++) {
                 string fieldName = Fields[i].Id;
                 //Tipo (en el programa) del campo
                 string typeId = Fields[i].TypeId;
                 //Hacemos que el tipo real del campo apunte al tipo definido en el Scope
-                record.Fields[fieldName] = scope.DefinedTypes[typeId];
+                record.Fields[fieldName] = scope.GetType(typeId);
             }
         }
     }

@@ -10,6 +10,10 @@ namespace TigerNET.Common.Types {
         
         public override bool Equals(object obj)
         {
+            //Si son la misma referencia
+            if (ReferenceEquals(this, obj)) {
+                return true;
+            }
             if (!(obj is IDictionary<string, TigerType>)) {
                 return false;
             }
@@ -20,6 +24,7 @@ namespace TigerNET.Common.Types {
 
             var f1 = this.ToList();
             var f2 = fields.ToList();
+
 
             return !f1.Where((t, i) => t.Key != f2[i].Key || t.Value != f2[i].Value).Any();
         }
