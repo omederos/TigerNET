@@ -51,7 +51,7 @@ namespace TigerNET.AST
                     errorInField = true;
                 }
                 if (!errorInField) {
-                    fields.Add(field.Id, scope.DefinedTypes[field.TypeId]);
+                    fields.Add(field.Id, scope.GetType(field.TypeId));
                 }
             }
 

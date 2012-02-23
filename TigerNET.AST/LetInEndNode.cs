@@ -74,10 +74,10 @@ namespace TigerNET.AST
             int errorsCount = 0;
 
             //Anadimos los encabezados de las declaraciones de los tipos
-            //Y a la vez, comprobamos que no exista un tipo con ese nombre...
+            //Y a la vez, comprobamos que no exista un tipo con ese nombre (en este scope solamente)
             foreach (var dec in groupOfDeclarations)
             {
-                if (scope.ExistsType(dec.Name)) {
+                if (scope.ExistsType(dec.Name, false)) {
                     errors.Add(new AlreadyDefinedError(dec.Line, dec.Column, dec.Name));
                     break;
                 }

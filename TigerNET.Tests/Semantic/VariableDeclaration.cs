@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using TigerNET.AST;
 using TigerNET.Common;
 using TigerNET.Common.Errors;
 using TigerNET.Common.Types;
@@ -27,54 +28,37 @@ namespace TigerNET.Tests.Semantic
     {
         [Test]
         public void String() {
-            var ast = Utils.BuildAST(@"let var x := ""abc"" in end");
-            var dec = Utils.GetFirstDeclaration(ast);
-            dec.CheckSemantic(Scope, Errors);
+            var ast = (LetInEndNode)Utils.BuildAST(@"let var x := ""abc"" in end");
+            
+            ast.CheckSemantic(Scope, Errors);
 
             Assert.That(Errors.Count == 0);
-            Assert.That(Scope.DefinedVariables.Count == 1);
-            Assert.That(Scope.ExistsDeclaration("x"));
-            Assert.IsInstanceOf<StringType>(Scope.DefinedVariables["x"]);
+            Assert.That(ast.CurrentScope.DefinedVariables.Count == 1);
+            Assert.That(ast.CurrentScope.ExistsDeclaration("x"));
+            Assert.IsInstanceOf<StringType>(ast.CurrentScope.DefinedVariables["x"]);
         }
 
         [Test]
-        public void String_AlreadyExisting()
+        public void String_AlreadyExisting_OK()
         {
             Scope.Add("x", StringType.Create());
-            var ast = Utils.BuildAST(@"let var x := ""abc"" in end");
-            var dec = Utils.GetFirstDeclaration(ast);
-            dec.CheckSemantic(Scope, Errors);
-
-            Assert.That(Errors.Count == 1);
-            Assert.That(Errors[0] is AlreadyDefinedError);
+            var ast = (LetInEndNode)Utils.BuildAST(@"let var x := ""abc"" in end");
             
-            Assert.That(Scope.DefinedVariables.Count == 1);
-            Assert.That(Scope.ExistsDeclaration("x"));
-            Assert.IsInstanceOf<StringType>(Scope.DefinedVariables["x"]);
-        }
+            ast.CheckSemantic(Scope, Errors);
 
-        [Test]
-        public void String_AlreadyExistingInOuterScope()
-        {
-            Scope.Add("x", StringType.Create());
-            var ast = Utils.BuildAST(@"let var x := ""abc"" in end");
-            var dec = Utils.GetFirstDeclaration(ast);
-            dec.CheckSemantic(Scope, Errors);
-
-            Assert.That(Errors.Count == 1);
-            Assert.That(Errors[0] is AlreadyDefinedError);
-
-            Assert.That(Scope.DefinedVariables.Count == 1);
-            Assert.That(Scope.ExistsDeclaration("x"));
-            Assert.IsInstanceOf<StringType>(Scope.DefinedVariables["x"]);
+            Assert.That(Errors.Count == 0);
+            
+            Assert.That(ast.CurrentScope.DefinedVariables.Count == 1);
+            Assert.That(ast.CurrentScope.ExistsDeclaration("x"));
+            Assert.IsInstanceOf<StringType>(ast.CurrentScope.DefinedVariables["x"]);
         }
 
         [Test]
         public void Integer()
         {
-            var ast = Utils.BuildAST(@"let var x := nil in end");
-            var dec = Utils.GetFirstDeclaration(ast);
-            dec.CheckSemantic(Scope, Errors);
+            var ast = (LetInEndNode)Utils.BuildAST(@"let var x := nil in end");
+            
+            ast.CheckSemantic(Scope, Errors);
 
             Assert.That(Errors.Count == 1);
             Assert.That(Errors[0] is NilAssignmentError);
@@ -83,22 +67,22 @@ namespace TigerNET.Tests.Semantic
         [Test]
         public void Explicit_SameTypes()
         {
-            var ast = Utils.BuildAST(@"let var x : string := ""abc"" in end");
-            var dec = Utils.GetFirstDeclaration(ast);
-            dec.CheckSemantic(Scope, Errors);
+            var ast = (LetInEndNode)Utils.BuildAST(@"let var x : string := ""abc"" in end");
+            
+            ast.CheckSemantic(Scope, Errors);
 
             Assert.That(Errors.Count == 0);
-            Assert.That(Scope.DefinedVariables.Count == 1);
-            Assert.That(Scope.ExistsDeclaration("x"));
-            Assert.IsInstanceOf<StringType>(Scope.DefinedVariables["x"]);
+            Assert.That(ast.CurrentScope.DefinedVariables.Count == 1);
+            Assert.That(ast.CurrentScope.ExistsDeclaration("x"));
+            Assert.IsInstanceOf<StringType>(ast.CurrentScope.DefinedVariables["x"]);
         }
 
         [Test]
         public void Explicit_DifferentTypes()
         {
-            var ast = Utils.BuildAST(@"let var x : string := 1 in end");
-            var dec = Utils.GetFirstDeclaration(ast);
-            dec.CheckSemantic(Scope, Errors);
+            var ast = (LetInEndNode)Utils.BuildAST(@"let var x : string := 1 in end");
+            
+            ast.CheckSemantic(Scope, Errors);
 
             Assert.That(Errors.Count == 1);
             Assert.That(Errors[0] is NotMatchingTypesError);
@@ -109,14 +93,14 @@ namespace TigerNET.Tests.Semantic
         {
             //Definimos un record en el scope
             Scope.Add(new RecordType("rec", new Fields()));
-            var ast = Utils.BuildAST(@"let var x : rec := nil in end");
-            var dec = Utils.GetFirstDeclaration(ast);
-            dec.CheckSemantic(Scope, Errors);
+            var ast = (LetInEndNode)Utils.BuildAST(@"let var x : rec := nil in end");
+            
+            ast.CheckSemantic(Scope, Errors);
 
             Assert.That(Errors.Count == 0);
-            Assert.That(Scope.DefinedVariables.Count == 1);
-            Assert.That(Scope.ExistsDeclaration("x"));
-            Assert.IsInstanceOf<RecordType>(Scope.DefinedVariables["x"]);
+            Assert.That(ast.CurrentScope.DefinedVariables.Count == 1);
+            Assert.That(ast.CurrentScope.ExistsDeclaration("x"));
+            Assert.IsInstanceOf<RecordType>(ast.CurrentScope.DefinedVariables["x"]);
         }
 
         [Test]
@@ -124,27 +108,27 @@ namespace TigerNET.Tests.Semantic
         {
             //Definimos un array recen el scope
             Scope.Add(new ArrayType("arr", StringType.Create()));
-            var ast = Utils.BuildAST(@"let var x : arr := nil in end");
-            var dec = Utils.GetFirstDeclaration(ast);
-            dec.CheckSemantic(Scope, Errors);
+            var ast = (LetInEndNode)Utils.BuildAST(@"let var x : arr := nil in end");
+            
+            ast.CheckSemantic(Scope, Errors);
 
             Assert.That(Errors.Count == 0);
-            Assert.That(Scope.DefinedVariables.Count == 1);
-            Assert.That(Scope.ExistsDeclaration("x"));
-            Assert.IsInstanceOf<ArrayType>(Scope.DefinedVariables["x"]);
+            Assert.That(ast.CurrentScope.DefinedVariables.Count == 1);
+            Assert.That(ast.CurrentScope.ExistsDeclaration("x"));
+            Assert.IsInstanceOf<ArrayType>(ast.CurrentScope.DefinedVariables["x"]);
         }
 
         [Test]
         public void Explicit_String_AssignNil()
         {
-            var ast = Utils.BuildAST(@"let var x : string := nil in end");
-            var dec = Utils.GetFirstDeclaration(ast);
-            dec.CheckSemantic(Scope, Errors);
+            var ast = (LetInEndNode)Utils.BuildAST(@"let var x : string := nil in end");
+            
+            ast.CheckSemantic(Scope, Errors);
 
             Assert.That(Errors.Count == 0);
-            Assert.That(Scope.DefinedVariables.Count == 1);
-            Assert.That(Scope.ExistsDeclaration("x"));
-            Assert.IsInstanceOf<StringType>(Scope.DefinedVariables["x"]);
+            Assert.That(ast.CurrentScope.DefinedVariables.Count == 1);
+            Assert.That(ast.CurrentScope.ExistsDeclaration("x"));
+            Assert.IsInstanceOf<StringType>(ast.CurrentScope.DefinedVariables["x"]);
         }
     }
 }
