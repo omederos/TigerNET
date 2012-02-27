@@ -33,11 +33,16 @@ namespace TigerNET.AST
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
-
+            //Comprobamos que no exista una variable/funcion en este mismo scope definida
+            if (scope.ExistsDeclaration(Name, false)) {
+                errors.Add(new AlreadyDefinedError(Line, Column, Name));
+                return;
+            }
+            
             int errorsCount = errors.Count;
             IList<string> parameters = new List<string>();
             //Creamos el scope de la nueva funcion
-            var scopeFunction = new Scope(scope);
+            _scopeFunction = new Scope(scope);
 
             //Chequeamos los parametros...
             foreach (var field in Fields) {
@@ -59,7 +64,7 @@ namespace TigerNET.AST
 
                 //Anadimos este parametro al scope de la funcion
                 if (!errorInField) {
-                    scopeFunction.Add(field.Id, scope.DefinedTypes[field.TypeId]);
+                    _scopeFunction.Add(field.Id, scope.GetType(field.TypeId));
                 }
             }
 
@@ -75,33 +80,50 @@ namespace TigerNET.AST
 
             //Si estamos aqui es porque no hubo ningun error anteriormente
 
-            //Chequeamos el cuerpo de la funcion/procedimiento (con las nuevas variables anadidas al scope)
-            Body.CheckSemantic(scopeFunction, errors);
-
-            //Si hubo algun error, paramos
-            if (errorsCount != errors.Count) {
-                return;
-            }
-
-            errorsCount = errors.Count;
-            //Si me especificaron el tipo
-            if (Type != null) {
-                var type = scope.GetType(Type);
-                
-                //Si la expresion no retorna ningun valor
-                if (!Body.ReturnsValue()) {
-                    errors.Add(new NonValueAssignmentError(Line, Column, Name));
-                }
-                //Comprobamos que el tipo del cuerpo de la funcion sea igual al especificado
-                else if (type != Body.ReturnType) {
-                    errors.Add(new NotMatchingTypesError(Line, Column, type, Body.ReturnType));
-                }
-                //TODO: Es posible retornar Nil aqui?
-            }
+            //OJO: No chequeamos la semantica del cuerpo de la funcion. Lo haremos en una segunda pasada
 
             //Si no hubo ningun problema...
             if (errorsCount == errors.Count) {
                 scope.AddCallable(new Callable(Name, Fields, Type));
+            }
+        }
+
+        /// <summary>
+        /// Scope que se creara de la funcion/procedimiento
+        /// </summary>
+        private Scope _scopeFunction;
+
+        /// <summary>
+        /// Chequea semanticamente el cuerpo de la funcion
+        /// Ademas, comprueba que el tipo de retorno especificado coincide con el del cuerpo de la funcion
+        /// </summary>
+        /// <param name="scope"></param>
+        /// <param name="errors"></param>
+        public void CheckBodySemantic(Scope scope, IList<Error> errors) {
+            int errorsCount = errors.Count;
+            Body.CheckSemantic(_scopeFunction, errors);
+
+            //Si ocurrio algun error...
+            if (errorsCount != errors.Count) {
+                return;
+            }
+
+            //Comprobamos que el tipo de retorno especificado coincida con el del cuerpo de la funcion
+            if (Type != null)
+            {
+                var type = scope.GetType(Type);
+
+                //Si la expresion no retorna ningun valor
+                if (!Body.ReturnsValue())
+                {
+                    errors.Add(new NonValueAssignmentError(Line, Column, Name));
+                }
+                //Comprobamos que el tipo del cuerpo de la funcion sea igual al especificado
+                else if (type != Body.ReturnType)
+                {
+                    errors.Add(new NotMatchingTypesError(Line, Column, type, Body.ReturnType));
+                }
+                //TODO: Es posible retornar Nil aqui?
             }
         }
     }

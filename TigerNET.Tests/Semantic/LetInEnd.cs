@@ -117,9 +117,9 @@ namespace TigerNET.Tests.Semantic
         public void Recursive_Array_Alias()
         {
             var ast = (LetInEndNode)Utils.BuildAST(@"let
-	                                                    type a = b
-	                                                    type b = c
-	                                                    type c = array of a
+                                                        type a = b
+                                                        type b = c
+                                                        type c = array of a
                                                     in
                                                     end");
             ast.CheckSemantic(Scope, Errors);
@@ -136,5 +136,19 @@ namespace TigerNET.Tests.Semantic
             Assert.That(arr.ElementsType is ArrayType);
             Assert.That(arr.ElementsType == ast.CurrentScope.DefinedTypes["a"]);
         }
+        [Test]
+        public void TwoFunctions_SameName()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"let
+                                                        function f() : int = 0
+                                                        function f() : int = 1
+                                                    in
+                                                    end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 1);
+            Assert.That(Errors[0] is AlreadyDefinedError);
+        }
+
+        //TODO: Chequear recurisivdad en funciones!
     }
 }

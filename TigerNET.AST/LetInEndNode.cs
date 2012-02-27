@@ -52,6 +52,7 @@ namespace TigerNET.AST
         /// Procesa un conjunto de declaraciones de un mismo tipo
         /// </summary>
         /// <param name="group"></param>
+        /// <param name="scope"> </param>
         private void Process(IList<DeclarationNode> group, Scope scope, IList<Error> errors) {
             var first = group[0];
             //TODO: Refactorizar: Usar clases en vez de if - else if - else if...
@@ -250,7 +251,30 @@ namespace TigerNET.AST
         }
 
         private void ProcessCallableDeclarations(IList<DeclarationNode> group, Scope scope, IList<Error> errors) {
-            throw new NotImplementedException();
+            //Por cada procedimiento o funcion en el bloque...
+            int errorsCount = errors.Count;
+            foreach (CallableDeclarationNode c in group) {
+                
+                //Chequeamos la semantica de la funcion. 
+                //OJO: No chequea la semantica del cuerpo de la funcion
+                c.CheckSemantic(scope, errors);
+                //Si ocurrio algun error chequeando la semantica de la funcion (en la 1ra pasada)
+                if (errorsCount != errors.Count) {
+                    return;
+                }
+            }
+
+            //Hacemos una segunda pasada para chequear los cuerpos de las funciones (una vez ya definidas formalmente todas las funciones del bloque)
+            //Y ver que el tipo de retorno de la funcion sea igual al especificado
+            foreach (CallableDeclarationNode c in group) {
+                errorsCount = errors.Count;
+                c.CheckBodySemantic(scope, errors);
+                
+                //Si hubo algun error, eliminamos esa funcion del scope. TODO: Necesario?
+                if (errorsCount != errors.Count) {
+                    scope.DefinedCallables.Remove(c.Name);
+                }
+            }
         }
 
         private void ProcessVariableDeclarations(IList<DeclarationNode> group, Scope scope, IList<Error> errors) {
