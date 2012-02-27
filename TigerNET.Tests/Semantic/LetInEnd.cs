@@ -150,7 +150,86 @@ namespace TigerNET.Tests.Semantic
             Assert.That(Errors[0] is AlreadyDefinedError);
         }
 
-        //TODO: Chequear recurisivdad en funciones!
+        [Test]
+        public void OneFunction_Recursive()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"let
+                                                        function f() : int = f()
+                                                    in
+                                                    end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 0);
+        }
+
+        [Test]
+        public void TwoFunctions_MutuallyRecursive()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"let
+                                                        function f1() : int = f2()
+                                                        function f2() : int = f1()
+                                                    in
+                                                    end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 0);
+        }
+
+        [Test]
+        public void TwoFunctions_MutuallyRecursive_WithExprSeq()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"let
+                                                        function f1() : int = f2()
+                                                        function f2() : int = f1()
+                                                    in
+                                                        f1()
+                                                    end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 0);
+            Assert.That(ast.ReturnType is IntegerType);
+        }
+
+        [Test]
+        public void TwoFunctions_MutuallyRecursive_WithExprSeq1()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"let
+                                                        function f1() : int = f2()
+                                                        function f2() : int = f1()
+                                                    in
+                                                        f1() ;
+                                                        f2()
+                                                    end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 0);
+            Assert.That(ast.ReturnType is IntegerType);
+        }
+        
+        [Test]
+        public void CallUndefinedFunction_InDefinition()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"let
+                                                        function f1() : int = f2()
+                                                        function f2() : int = f3()
+                                                    in
+                                                        f1() ;
+                                                        f2()
+                                                    end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 1);
+            Assert.That(Errors[0] is UndefinedFunctionError);
+        }
+
+        [Test]
+        public void UseUndefinedFunction_InExprSeq()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"let
+                                                        function f1() : int = f2()
+                                                        function f2() : int = f1()
+                                                    in
+                                                        f3()
+                                                    end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 1);
+            Assert.That(Errors[0] is UndefinedFunctionError);
+        }
 
         //TODO: Anadir pruebas para el Expression Sequence
         #region Expresion Sequence Tests

@@ -50,6 +50,45 @@ namespace TigerNET.Common
         }
 
         /// <summary>
+        /// Devuelve la funcion/procedimiento dado su nombre
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="lookInAncestors">Indica si se debe buscar en los scopes padres</param>
+        /// <returns></returns>
+        public Callable GetCallable(string name, bool lookInAncestors = true)
+        {
+            if (!ExistsCallable(name, lookInAncestors))
+            {
+                throw new Exception(string.Format("La funcion/procedimiento {0} no existe", name));
+            }
+            var s = this;
+            while (s != null)
+            {
+                if (s.DefinedCallables.ContainsKey(name))
+                {
+                    return s.DefinedCallables[name];
+                }
+                if (!lookInAncestors)
+                {
+                    break;
+                }
+                s = s.Parent;
+            }
+
+            throw new Exception(string.Format("La funcion/procedimiento {0} no existe", name));
+        }
+
+        /// <summary>
+        /// Comprueba si existe una funcion o procedimiento
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="lookInAncestors">Especifica si se debe buscar en el scope padre (recursivamente) o no</param>
+        /// <returns></returns>
+        public bool ExistsCallable(string name, bool lookInAncestors = true) {
+            return Exists(name, (n, scope) => scope.DefinedCallables.ContainsKey(name), lookInAncestors);
+        }
+
+        /// <summary>
         /// Adiciona un tipo al scope
         /// </summary>
         /// <param name="type">Tipo que se anadira al scope</param>

@@ -40,12 +40,15 @@ namespace TigerNET.AST
             }
         }
 
-        public static void CheckIfReturnsValue(ExpressionNode expression, IList<Error> errors, string nonValueMessage = null) {
+        public static bool CheckIfReturnsValue(ExpressionNode expression, IList<Error> errors, string nonValueMessage = null) {
             //Comprobamos que la expresion retorne algun valor
             if (!expression.ReturnsValue())
             {
                 errors.Add(new NonValueReturnError(expression.Line, expression.Column, nonValueMessage));
+                return false;
             }
+
+            return true;
         }
     }
 }

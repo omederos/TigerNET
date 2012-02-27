@@ -46,11 +46,13 @@
     <Compile Include="Errors\DuplicateFieldError.cs" />
     <Compile Include="Errors\DuplicateParameterError.cs" />
     <Compile Include="Errors\Error.cs" />
+    <Compile Include="Errors\MessageError.cs" />
     <Compile Include="Errors\NilAssignmentError.cs" />
     <Compile Include="Errors\NonValueAssignmentError.cs" />
     <Compile Include="Errors\NonValueReturnError.cs" />
     <Compile Include="Errors\NotMatchingTypesError.cs" />
     <Compile Include="Errors\OperatorError.cs" />
+    <Compile Include="Errors\UndefinedFunctionError.cs" />
     <Compile Include="Errors\UndefinedTypeError.cs" />
     <Compile Include="Errors\UnexpectedTypeError.cs" />
     <Compile Include="Scope.cs" />
