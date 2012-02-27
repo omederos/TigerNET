@@ -87,5 +87,7 @@ namespace TigerNET.Tests.Semantic
             Assert.That(Errors[0] is UndefinedTypeError);
             Assert.That(!ast.CurrentScope.ExistsDeclaration("f"));
         }
+
+        //TODO: Cuando implemente VariableAccessNode, comprobar que se acceden a los parametros de la funcion sin problema
     }
 }

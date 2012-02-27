@@ -166,7 +166,7 @@ namespace TigerNET.AST
         private void ProcessCallableDeclarations(IList<DeclarationNode> group, Scope scope, IList<Error> errors) {
             //Por cada procedimiento o funcion en el bloque...
             int errorsCount = errors.Count;
-            foreach (CallableDeclarationNode c in @group) {
+            foreach (CallableDeclarationNode c in group) {
                 
                 //Chequeamos la semantica de la funcion. 
                 //OJO: No chequea la semantica del cuerpo de la funcion
@@ -179,7 +179,7 @@ namespace TigerNET.AST
 
             //Hacemos una segunda pasada para chequear los cuerpos de las funciones (una vez ya definidas formalmente todas las funciones del bloque)
             //Y ver que el tipo de retorno de la funcion sea igual al especificado
-            foreach (CallableDeclarationNode c in @group) {
+            foreach (CallableDeclarationNode c in group) {
                 errorsCount = errors.Count;
                 c.CheckBodySemantic(scope, errors);
                 
