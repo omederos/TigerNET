@@ -16,7 +16,9 @@ namespace TigerNET.AST {
         }
 
         public override void GenerateCode() {
-            throw new NotImplementedException();
+
+            
+            ReturnType = null;
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {

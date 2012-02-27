@@ -7,7 +7,7 @@ namespace TigerNET.AST
 {
     public class OrOperatorNode : LogicalBinaryOperatorNode
     {
-        public OrOperatorNode(ExpressionNode left, ExpressionNode right) : base(left, right) {}
+        public OrOperatorNode(ExpressionNode left, ExpressionNode right) : base(left, right, "|") {}
         public override void GenerateCode() {
             throw new NotImplementedException();
         }

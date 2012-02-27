@@ -24,6 +24,7 @@ namespace TigerNET.Tests.Semantic
                 ast.CheckSemantic(Scope, Errors);
                 Assert.That(Errors.Count == 0);
                 Assert.That(ast.ReturnType is IntegerType);
+                Errors.Clear();
             }
         }
         
@@ -34,6 +35,7 @@ namespace TigerNET.Tests.Semantic
                 ast.CheckSemantic(Scope, Errors);
                 Assert.That(Errors.Count == 1);
                 Assert.That(Errors[0] is NonValueReturnError);
+                Errors.Clear();
             }
         }
 
@@ -45,7 +47,20 @@ namespace TigerNET.Tests.Semantic
             {
                 ast.CheckSemantic(Scope, Errors);
                 Assert.That(Errors.Count == 1);
-                Assert.That(Errors[0] is UnexpectedTypeError);
+                Assert.That(Errors[0] is OperatorError);
+                Errors.Clear();
+            }
+        }
+        [Test]
+        public void String_String()
+        {
+            var asts = GetASTs(@"""Oscar""{0}""Oscar""");
+            foreach (var ast in asts)
+            {
+                ast.CheckSemantic(Scope, Errors);
+                Assert.That(Errors.Count == 1);
+                Assert.That(Errors[0] is OperatorError);
+                Errors.Clear();
             }
         }
     }

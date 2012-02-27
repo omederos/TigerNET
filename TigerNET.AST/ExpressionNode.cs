@@ -20,7 +20,7 @@ namespace TigerNET.AST {
         /// <summary>
         /// Indica el tipo de retorno del nodo
         /// </summary>
-        public TigerType ReturnType { get; protected set; }
+        public TigerType ReturnType { get; set; }
 
         /// <summary>
         /// Comprueba si el nodo actual retorna algun tipo
