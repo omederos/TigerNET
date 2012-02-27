@@ -4,7 +4,7 @@ namespace TigerNET.Common.Errors {
 
         }
         public override string ToString() {
-            return "Existe un ciclo en las declaraciones de varios alias";
+            return "A cycle exists in the definition of aliases";
         }
     }
 }

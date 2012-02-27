@@ -22,10 +22,8 @@ namespace TigerNET.AST
                 return;
             }
 
-            //Comprobamos que la expresion retorne un entero...
-            if (!(Body.ReturnType is IntegerType)) {
-                errors.Add(new UnexpectedTypeError(Line, Column, IntegerType.Create(), Body.ReturnType));
-            }
+            //Comprobamos que la expresion retorne algun valor, y que sea entero
+            ErrorsHelper.CheckIfReturnTypeIsInt(Body, errors);
 
             //El tipo de retorno de esta expresion es entero
             ReturnType = IntegerType.Create();

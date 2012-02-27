@@ -11,7 +11,7 @@ namespace TigerNET.Common.Errors {
         }
 
         public override string ToString() {
-            return string.Format("Se esperaba el tipo {0} en vez de {1}", ExpectedType, Type);
+            return string.Format("Expected type '{0}' but found '{1}'", ExpectedType, Type);
         }
     }
 }
