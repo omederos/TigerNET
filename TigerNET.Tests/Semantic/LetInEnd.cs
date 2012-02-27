@@ -136,6 +136,7 @@ namespace TigerNET.Tests.Semantic
             Assert.That(arr.ElementsType is ArrayType);
             Assert.That(arr.ElementsType == ast.CurrentScope.DefinedTypes["a"]);
         }
+        
         [Test]
         public void TwoFunctions_SameName()
         {
@@ -150,5 +151,50 @@ namespace TigerNET.Tests.Semantic
         }
 
         //TODO: Chequear recurisivdad en funciones!
+
+        //TODO: Anadir pruebas para el Expression Sequence
+        #region Expresion Sequence Tests
+        [Test]
+        public void No_Expressions()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"let
+                                                        var x := 2
+                                                        var y := 3
+                                                    in
+                                                    end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 0);
+            Assert.That(ast.ReturnType == null);
+        }
+
+        [Test]
+        public void Integer()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"let
+                                                        var x := 2
+                                                        var y := 3
+                                                    in
+                                                        2
+                                                    end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 0);
+            Assert.That(ast.ReturnType is IntegerType);
+        }
+
+        [Test]
+        public void Integer_String()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"let
+                                                        var x := 2
+                                                        var y := 3
+                                                    in
+                                                        2;
+                                                        ""Pepe""
+                                                    end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 0);
+            Assert.That(ast.ReturnType is StringType);
+        }
+        #endregion
     }
 }

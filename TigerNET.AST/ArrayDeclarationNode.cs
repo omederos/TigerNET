@@ -18,7 +18,6 @@ namespace TigerNET.AST
 
         public ArrayDeclarationNode(string name, string typeName) : base(name) {
             TypeName = typeName;
-            //TODO: En el chequeo semantico, darle valor a Type en dependencia del tipo de 'typeName'
         }
 
         public override void GenerateCode() {

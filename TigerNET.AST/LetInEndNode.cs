@@ -42,10 +42,21 @@ namespace TigerNET.AST
             var scopeLetIn = new Scope(scope);
             CurrentScope = scopeLetIn;
 
+            int errorsCount = errors.Count;
             //Procesamos cada grupo de declaraciones
             foreach (var group in groups) {
                 Process(group, scopeLetIn, errors);
             }
+            
+            //Si ocurrio algun error en el conjunto de definiciones...
+            if (errorsCount != errors.Count) {
+                return;
+            }
+
+            //Chequeamos semanticamente la secuencia de expresiones
+            Expressions.CheckSemantic(scopeLetIn, errors);
+            
+            ReturnType = Expressions.ReturnType;
         }
 
         /// <summary>
@@ -152,6 +163,40 @@ namespace TigerNET.AST
             }
         }
 
+        private void ProcessCallableDeclarations(IList<DeclarationNode> group, Scope scope, IList<Error> errors) {
+            //Por cada procedimiento o funcion en el bloque...
+            int errorsCount = errors.Count;
+            foreach (CallableDeclarationNode c in @group) {
+                
+                //Chequeamos la semantica de la funcion. 
+                //OJO: No chequea la semantica del cuerpo de la funcion
+                c.CheckSemantic(scope, errors);
+                //Si ocurrio algun error chequeando la semantica de la funcion (en la 1ra pasada)
+                if (errorsCount != errors.Count) {
+                    return;
+                }
+            }
+
+            //Hacemos una segunda pasada para chequear los cuerpos de las funciones (una vez ya definidas formalmente todas las funciones del bloque)
+            //Y ver que el tipo de retorno de la funcion sea igual al especificado
+            foreach (CallableDeclarationNode c in @group) {
+                errorsCount = errors.Count;
+                c.CheckBodySemantic(scope, errors);
+                
+                //Si hubo algun error, eliminamos esa funcion del scope. TODO: Necesario?
+                if (errorsCount != errors.Count) {
+                    scope.DefinedCallables.Remove(c.Name);
+                }
+            }
+        }
+
+        private void ProcessVariableDeclarations(IList<DeclarationNode> group, Scope scope, IList<Error> errors) {
+            //Las variables no necesitan un trato especial
+            foreach (var dec in @group) {
+                dec.CheckSemantic(scope, errors);
+            }
+        }
+
         /// <summary>
         /// Encargado de recibir un conjunto de declaraciones de tipo alias (pertenecientes a un mismo bloque)
         /// y chequear que no haya ciclos, etc.
@@ -248,40 +293,6 @@ namespace TigerNET.AST
 
         private bool IsFullyDefined(string type, Scope scope) {
             return scope.ExistsType(type) && scope.GetType(type) != null;
-        }
-
-        private void ProcessCallableDeclarations(IList<DeclarationNode> group, Scope scope, IList<Error> errors) {
-            //Por cada procedimiento o funcion en el bloque...
-            int errorsCount = errors.Count;
-            foreach (CallableDeclarationNode c in group) {
-                
-                //Chequeamos la semantica de la funcion. 
-                //OJO: No chequea la semantica del cuerpo de la funcion
-                c.CheckSemantic(scope, errors);
-                //Si ocurrio algun error chequeando la semantica de la funcion (en la 1ra pasada)
-                if (errorsCount != errors.Count) {
-                    return;
-                }
-            }
-
-            //Hacemos una segunda pasada para chequear los cuerpos de las funciones (una vez ya definidas formalmente todas las funciones del bloque)
-            //Y ver que el tipo de retorno de la funcion sea igual al especificado
-            foreach (CallableDeclarationNode c in group) {
-                errorsCount = errors.Count;
-                c.CheckBodySemantic(scope, errors);
-                
-                //Si hubo algun error, eliminamos esa funcion del scope. TODO: Necesario?
-                if (errorsCount != errors.Count) {
-                    scope.DefinedCallables.Remove(c.Name);
-                }
-            }
-        }
-
-        private void ProcessVariableDeclarations(IList<DeclarationNode> group, Scope scope, IList<Error> errors) {
-            //Las variables no necesitan un trato especial
-            foreach (var dec in group) {
-                dec.CheckSemantic(scope, errors);
-            }
         }
     }
 }

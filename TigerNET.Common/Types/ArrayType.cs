@@ -3,7 +3,7 @@ namespace TigerNET.Common.Types {
 
         public ArrayType(string name, TigerType elementsType) : base(name) {
             ElementsType = elementsType;
-            //TODO: Lanzar excepcion aqui si me crean un array de un tipo invalido (eg. void)?
+            //TODO: Lanzar excepcion aqui si me crean un array de un tipo invalido (eg. Null)?
         }
 
         public TigerType ElementsType { get; set; }

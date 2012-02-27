@@ -23,7 +23,18 @@ namespace TigerNET.AST
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
-            throw new NotImplementedException();
+            //Si no hay expresiones, no se hace nada. El tipo de retorno sigue siendo Null
+            if (Sequence.Count == 0) {
+                return;
+            }
+
+            //Chequeamos semanticamente cada expresion
+            foreach (var expr in Sequence) {
+                expr.CheckSemantic(scope, errors);
+            }
+
+            //El tipo de retorno sera el de la ultima expresion
+            ReturnType = Sequence[Sequence.Count - 1].ReturnType;
         }
     }
 }
