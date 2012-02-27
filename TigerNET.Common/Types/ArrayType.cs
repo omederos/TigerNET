@@ -13,6 +13,12 @@ namespace TigerNET.Common.Types {
             if (ReferenceEquals(obj, this)) {
                 return true;
             }
+
+            if (obj == null)
+            {
+                return false;
+            }
+
             if (obj.GetType() != typeof(ArrayType)) {
                 return false;
             }

@@ -32,7 +32,7 @@ namespace TigerNET.AST
             var callable = scope.GetCallable(Name);
 
             if (callable.Fields.Count != Parameters.Count) {
-                errors.Add(new MessageError(Line, Column, "The arguments of the call do not match with the parameters of the defined function"));
+                errors.Add(new MessageError(Line, Column, "The arguments of the call do not match the parameters of the defined function"));
                 //Para poder continuar el chequeo semantico y detectar mas errores en el programa...
                 AssignReturnType(scope, callable);
                 return;
@@ -45,8 +45,8 @@ namespace TigerNET.AST
                 //Chequeamos la semantica del argumento
                 parameter.CheckSemantic(scope, errors);
 
-                bool returnsValue = ErrorsHelper.CheckIfReturnsValue(parameter, errors, string.Format("The argument '{0}' must return a value", i));
-                if (returnsValue) {
+                ErrorsHelper.CheckIfReturnsValue(parameter, errors, string.Format("The argument '{0}' must return a value", i));
+                if (parameter.ReturnsValue()) {
                     //Comprobamos que el tipo de retorno coincida con la definicion de la funcion
                     var definedType = scope.GetType(field.TypeId);
                     var returnType = parameter.ReturnType;

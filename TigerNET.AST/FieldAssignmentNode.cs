@@ -28,7 +28,15 @@ namespace TigerNET.AST
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
-            throw new NotImplementedException();
+            //Chequeamos la semantica del cuerpo de la asignacion
+            //Otro nodo se encargara de comprobar que el nombre del campo sea correcto, el tipo, etc
+            Body.CheckSemantic(scope, errors);
+
+            ErrorsHelper.CheckIfReturnsValue(Body, errors,
+                                                 string.Format(
+                                                     "The expression to be assigned to the field '{0}' must return a value",
+                                                     FieldName));
+            ReturnType = Body.ReturnType;
         }
     }
 }

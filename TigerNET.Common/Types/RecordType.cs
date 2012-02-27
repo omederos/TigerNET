@@ -38,6 +38,14 @@ namespace TigerNET.Common.Types {
 
         public override bool Equals(object obj)
         {
+            if (ReferenceEquals(obj, this)) {
+                return true;
+            }
+
+            if (obj == null) {
+                return false;
+            }
+
             if (obj.GetType() != typeof(RecordType)) {
                 return false;
             }
