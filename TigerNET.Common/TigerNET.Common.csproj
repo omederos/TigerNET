@@ -50,6 +50,7 @@
     <Compile Include="Errors\NonValueAssignmentError.cs" />
     <Compile Include="Errors\NotMatchingTypesError.cs" />
     <Compile Include="Errors\UndefinedTypeError.cs" />
+    <Compile Include="Errors\UnexpectedTypeError.cs" />
     <Compile Include="Scope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeField.cs" />
