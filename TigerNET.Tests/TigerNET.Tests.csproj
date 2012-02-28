@@ -71,6 +71,7 @@
     <Compile Include="Semantic\ArrayAccess.cs" />
     <Compile Include="Semantic\ArrayDeclaration.cs" />
     <Compile Include="Semantic\ArrayLiteral.cs" />
+    <Compile Include="Semantic\Assignment.cs" />
     <Compile Include="Semantic\Callable.cs" />
     <Compile Include="Semantic\CallableDeclaration.cs" />
     <Compile Include="Semantic\GroupDeclarations.cs" />
