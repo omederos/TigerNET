@@ -22,7 +22,7 @@ namespace TigerNET.AST {
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
             //Si ya se definio ese nombre anteriormente (en este scope solamente)
-            if (scope.ExistsDeclaration(Name, false)) {
+            if (scope.ExistsVariableOrCallable(Name, false)) {
                 errors.Add(new AlreadyDefinedError(Line, Column, Name));
                 return;
             }

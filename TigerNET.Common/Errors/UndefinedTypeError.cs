@@ -13,7 +13,7 @@ namespace TigerNET.Common.Errors
         }
 
         public override string ToString() {
-            return string.Format("The type {0} does not exist", TypeName);
+            return string.Format("The type '{0}' does not exist", TypeName);
         }
     }
 }

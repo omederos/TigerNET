@@ -26,7 +26,7 @@ namespace TigerNET.Tests.Semantic
         [Test]
         public void CheckLocalExistence_OneVariable() {
             AddStringVariable("x");
-            Assert.That(_scope.ExistsDeclaration("x"));
+            Assert.That(_scope.ExistsVariableOrCallable("x"));
         }
 
         [Test]
@@ -35,8 +35,8 @@ namespace TigerNET.Tests.Semantic
             AddStringVariable("x", s);
             _scope = new Scope(s);
             
-            Assert.That(_scope.ExistsDeclaration("x"));
-            Assert.That(!_scope.ExistsDeclaration("x", false));
+            Assert.That(_scope.ExistsVariableOrCallable("x"));
+            Assert.That(!_scope.ExistsVariableOrCallable("x", false));
         }
 
         [Test]

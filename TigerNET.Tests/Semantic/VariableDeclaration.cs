@@ -34,7 +34,7 @@ namespace TigerNET.Tests.Semantic
 
             Assert.That(Errors.Count == 0);
             Assert.That(ast.CurrentScope.DefinedVariables.Count == 1);
-            Assert.That(ast.CurrentScope.ExistsDeclaration("x"));
+            Assert.That(ast.CurrentScope.ExistsVariableOrCallable("x"));
             Assert.IsInstanceOf<StringType>(ast.CurrentScope.DefinedVariables["x"]);
         }
 
@@ -49,7 +49,7 @@ namespace TigerNET.Tests.Semantic
             Assert.That(Errors.Count == 0);
             
             Assert.That(ast.CurrentScope.DefinedVariables.Count == 1);
-            Assert.That(ast.CurrentScope.ExistsDeclaration("x"));
+            Assert.That(ast.CurrentScope.ExistsVariableOrCallable("x"));
             Assert.IsInstanceOf<StringType>(ast.CurrentScope.DefinedVariables["x"]);
         }
 
@@ -73,7 +73,7 @@ namespace TigerNET.Tests.Semantic
 
             Assert.That(Errors.Count == 0);
             Assert.That(ast.CurrentScope.DefinedVariables.Count == 1);
-            Assert.That(ast.CurrentScope.ExistsDeclaration("x"));
+            Assert.That(ast.CurrentScope.ExistsVariableOrCallable("x"));
             Assert.IsInstanceOf<StringType>(ast.CurrentScope.DefinedVariables["x"]);
         }
 
@@ -99,7 +99,7 @@ namespace TigerNET.Tests.Semantic
 
             Assert.That(Errors.Count == 0);
             Assert.That(ast.CurrentScope.DefinedVariables.Count == 1);
-            Assert.That(ast.CurrentScope.ExistsDeclaration("x"));
+            Assert.That(ast.CurrentScope.ExistsVariableOrCallable("x"));
             Assert.IsInstanceOf<RecordType>(ast.CurrentScope.DefinedVariables["x"]);
         }
 
@@ -114,7 +114,7 @@ namespace TigerNET.Tests.Semantic
 
             Assert.That(Errors.Count == 0);
             Assert.That(ast.CurrentScope.DefinedVariables.Count == 1);
-            Assert.That(ast.CurrentScope.ExistsDeclaration("x"));
+            Assert.That(ast.CurrentScope.ExistsVariableOrCallable("x"));
             Assert.IsInstanceOf<ArrayType>(ast.CurrentScope.DefinedVariables["x"]);
         }
 
@@ -127,7 +127,7 @@ namespace TigerNET.Tests.Semantic
 
             Assert.That(Errors.Count == 0);
             Assert.That(ast.CurrentScope.DefinedVariables.Count == 1);
-            Assert.That(ast.CurrentScope.ExistsDeclaration("x"));
+            Assert.That(ast.CurrentScope.ExistsVariableOrCallable("x"));
             Assert.IsInstanceOf<StringType>(ast.CurrentScope.DefinedVariables["x"]);
         }
     }

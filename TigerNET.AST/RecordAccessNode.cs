@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TigerNET.Common;
 using TigerNET.Common.Errors;
+using TigerNET.Common.Types;
 
 namespace TigerNET.AST
 {
@@ -30,7 +31,37 @@ namespace TigerNET.AST
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
-            throw new NotImplementedException();
+            //Comprobamos que lo de la izquierda sea un record
+            //Luego que exista el campo al que estamos accediendo
+            int errorsCount = errors.Count;
+            //Chequeamos semanticamente la expresion a la que estamos accediendo
+            Left.CheckSemantic(scope, errors);
+            if (errorsCount != errors.Count) {
+                return;
+            }
+
+            //Si no retorna valor la expresion
+            ErrorsHelper.CheckIfReturnsValue(Left, errors, "The expression being accessed must return a value");
+            if (errorsCount != errors.Count) {
+                return;
+            }
+
+            //Si no es un record
+            if (!(Left.ReturnType is RecordType)) {
+                errors.Add(new UnexpectedTypeError(Line, Column, Left.ReturnType, "record"));
+                return;
+            }
+
+            //Si es un record, comprobamos que exista ese campo...
+            var record = (RecordType) Left.ReturnType;
+            if (!record.Fields.ContainsKey(FieldName))
+            {
+                errors.Add(new FieldNotFoundError(Line, Column, record.Name, FieldName));
+            }
+            else {
+                //El tipo de retorno sera el mismo que el del campo del record
+                ReturnType = record.Fields[FieldName];
+            }
         }
     }
 }

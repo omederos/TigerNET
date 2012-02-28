@@ -162,11 +162,44 @@ namespace TigerNET.Common
         /// Comprueba si el nombre especificado ha sido definido
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="lookInAncestors"></param>
         /// <returns></returns>
-        public bool ExistsDeclaration(string name, bool lookInAncestors = true) {
+        public bool ExistsVariableOrCallable(string name, bool lookInAncestors = true) {
             return Exists(name,
                           (x, scope) =>
                           scope.DefinedVariables.ContainsKey(x) || scope.DefinedCallables.ContainsKey(x), lookInAncestors);
+        }
+
+        /// <summary>
+        /// Comprueba si existe una variable definida con el nombre especificado
+        /// </summary>
+        /// <param name="variableName"></param>
+        /// <param name="lookInAncestors"></param>
+        /// <returns></returns>
+        public bool ExistsVariable(string variableName, bool lookInAncestors = true) {
+            return Exists(variableName, (x, scope) => scope.DefinedVariables.ContainsKey(x), lookInAncestors);
+        }
+
+        public TigerType GetVariable(string name, bool lookInAncestors = true) {
+            if (!ExistsVariable(name, lookInAncestors))
+            {
+                throw new Exception(string.Format("La variable {0} no existe", name));
+            }
+            var s = this;
+            while (s != null)
+            {
+                if (s.DefinedVariables.ContainsKey(name))
+                {
+                    return s.DefinedVariables[name];
+                }
+                if (!lookInAncestors)
+                {
+                    break;
+                }
+                s = s.Parent;
+            }
+
+            throw new Exception(string.Format("La variable {0} no existe", name));
         }
     }
 }

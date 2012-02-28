@@ -23,7 +23,28 @@ namespace TigerNET.AST
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
-            throw new NotImplementedException();
+            //Comprobamos que exista la variable con ese nombre en el scope
+            if (!scope.ExistsVariable(Name))
+            {
+                errors.Add(new UndefinedVariableError(Line, Column, Name));
+            }
+            else {
+                var variable = scope.GetVariable(Name);
+                //Asignamos el tipo de retorno
+                ReturnType = variable;
+            }
+        }
+    }
+
+    public class UndefinedVariableError : Error {
+        public string Name { get; set; }
+
+        public UndefinedVariableError(int line, int column, string name) : base(line, column) {
+            Name = name;
+        }
+
+        public override string ToString() {
+            return string.Format("The variable '{0}' does not exist", Name);
         }
     }
 }
