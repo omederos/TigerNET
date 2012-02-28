@@ -127,7 +127,6 @@ end");
             Assert.That(Errors.Count == 0);
             Assert.That(ast.ReturnType == null);
         }
-        
         [Test]
         public void Assign_Procedure_NoValue()
         {
@@ -141,6 +140,28 @@ end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 1);
             Assert.That(ast.ReturnType == null);
+        }
+        [Test]
+        public void Redefine_Type_Nested_LetIn_IncorrectAssignment()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"
+let 
+    type a = array of int /* Definimos un primer array 'a' */
+    type b = a
+    var varB : b := nil
+in 
+    let 
+        type a = array of int /* Redefinimos a */
+    in
+        /* Estamos asignando a una variable de tipo 'b' (que es del tipo 'a' que sobreescribimos) un valor del tipo 'a' nuevo
+           y esto esta mal porque el tipo 'a' redefinido y el original son tipos distintos!
+        */
+        varB := a[10] of 10 
+    end
+end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 1);
+            Assert.That(Errors[0] is UnexpectedTypeError);
         }
     }
 }

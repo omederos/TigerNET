@@ -1,8 +1,10 @@
+using System;
+
 namespace TigerNET.Common.Types {
     public class IntegerType : TigerType {
         private static IntegerType _instance;
         
-        private IntegerType() : base("int") {}
+        private IntegerType() : base("int", Guid.NewGuid()) {}
 
         public override bool Equals(object obj) {
             return obj is IntegerType;
@@ -17,5 +19,8 @@ namespace TigerNET.Common.Types {
             return base.GetHashCode();
         }
 
+        public override string ToString() {
+            return "int";
+        }
     }
 }

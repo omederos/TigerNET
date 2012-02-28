@@ -3,11 +3,17 @@
 namespace TigerNET.Common.Types
 {
     public abstract class TigerType {
-        protected TigerType(string name) {
+        protected TigerType(string name, Guid guid) {
             Name = name;
+            Id = guid;
         }
 
         public string Name { get; set; }
+        
+        /// <summary>
+        /// Hash que identifica al tipo (para ser usado en Arrays/Records principalmente)
+        /// </summary>
+        public Guid Id { get; set; }
 
         public static bool operator ==(TigerType type, object x) {
             //Si ambos son null, entonces son iguales
@@ -15,12 +21,19 @@ namespace TigerNET.Common.Types
             if (((object)type) == null) {
                 return x == null;
             }
-            //Dejamos que cada tipo decida cuando es igual a otro tipo
-            return type.Equals(x);
+
+            var xx = x as TigerType;
+            if (xx == null) {
+                return false;
+            }
+
+            //Comparamos por los Id de ambos tipos
+            return xx.Id == type.Id;
         }
 
         public static bool operator !=(TigerType type, object x) {
             return !(type == x);
         }
+
     }
 }

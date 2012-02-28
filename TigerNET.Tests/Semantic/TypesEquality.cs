@@ -4,11 +4,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using TigerNET.AST;
 using TigerNET.Common.Types;
 
 namespace TigerNET.Tests.Semantic
 {
-    public class TypesEquality
+    public class TypesEquality : SemanticTest
     {
         [Test]
         public void TwoNullTypes() {
@@ -35,7 +36,7 @@ namespace TigerNET.Tests.Semantic
         }
 
         [Test]
-        public void RecordType_Equals()
+        public void RecordType_DifferentReference()
         {
             var fields1 = new Fields {{"name", StringType.Create()}, {"lastname", StringType.Create()}};
             var fields2 = new Fields {{"name", StringType.Create()}, {"lastname", StringType.Create()}};
@@ -43,7 +44,7 @@ namespace TigerNET.Tests.Semantic
             var t1 = new RecordType("somerecord", fields1);
             var t2 = new RecordType("somerecord", fields2);
 
-            Assert.That(t1 == t2);
+            Assert.That(t1 != t2);
         }
 
         [Test]
@@ -83,7 +84,7 @@ namespace TigerNET.Tests.Semantic
         }
 
         [Test]
-        public void ArrayType_Equals()
+        public void ArrayType_DifferentReference()
         {
             var fields1 = new Fields { { "name", StringType.Create() }, { "lastname", StringType.Create() } };
             var fields2 = new Fields { { "name", StringType.Create() }, { "lastname", StringType.Create() } };
@@ -94,7 +95,7 @@ namespace TigerNET.Tests.Semantic
             var a1 = new ArrayType("somearray", t1);
             var a2 = new ArrayType("somearray", t2);
 
-            Assert.That(a1 == a2);
+            Assert.That(a1 != a2);
         }
 
         [Test]
@@ -113,6 +114,16 @@ namespace TigerNET.Tests.Semantic
             var a2 = new ArrayType("somearray", StringType.Create());
 
             Assert.That(a1 != a2);
+        }
+        
+        [Test]
+        public void Array_Alias_Equals() {
+            var ast = (LetInEndNode) Utils.BuildAST("let type a = array of int type b = a in end");
+            ast.CheckSemantic(Scope, Errors);
+            var typeA = ast.CurrentScope.GetType("a");
+            var typeB = ast.CurrentScope.GetType("b");
+
+            Assert.That(typeA == typeB);
         }
     }
 }
