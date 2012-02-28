@@ -84,5 +84,48 @@ end");
             Assert.That(Errors.Count == 0);
             Assert.That(ast.ReturnType == null);
         }
+        [Test]
+        public void Assign_To_Array_Position()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"
+let 
+    type r1 = array of int
+    var x := r1[0] of 0
+in 
+    x[0] := 10
+end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 0);
+            Assert.That(ast.ReturnType == null);
+        }
+        [Test]
+        public void Assign_To_Array_Position_Nil()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"
+let 
+    type r1 = array of string
+    var x := r1[0] of ""Empty""
+in 
+    x[0] := nil
+end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 0);
+            Assert.That(ast.ReturnType == null);
+        }
+        [Test]
+        public void Assign_To_Record_Field()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"
+let 
+    type r1 = {x : string }
+    var x := r1{x = ""Empty""}
+in 
+    x.x := nil
+    x.x := nil
+end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 0);
+            Assert.That(ast.ReturnType == null);
+        }
     }
 }
