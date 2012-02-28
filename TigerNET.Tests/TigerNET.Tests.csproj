@@ -75,6 +75,7 @@
     <Compile Include="Semantic\Callable.cs" />
     <Compile Include="Semantic\CallableDeclaration.cs" />
     <Compile Include="Semantic\GroupDeclarations.cs" />
+    <Compile Include="Semantic\IfThenElse.cs" />
     <Compile Include="Semantic\LetInEnd.cs" />
     <Compile Include="Semantic\MinusUnary.cs" />
     <Compile Include="Semantic\RecordAccess.cs" />

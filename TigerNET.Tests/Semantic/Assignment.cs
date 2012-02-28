@@ -127,5 +127,20 @@ end");
             Assert.That(Errors.Count == 0);
             Assert.That(ast.ReturnType == null);
         }
+        
+        [Test]
+        public void Assign_Procedure_NoValue()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"
+let 
+    function f() = 1 /* No retorna valor */
+    var x := 1
+in
+    x := f()
+end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 1);
+            Assert.That(ast.ReturnType == null);
+        }
     }
 }
