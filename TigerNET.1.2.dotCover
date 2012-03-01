@@ -1,0 +1,11 @@
+<Configuration>
+  <SnapshotDialog>
+    <InitialDirectory>C:\Users\Oscar\Documents\Visual Studio 2010\Projects\TigerNET</InitialDirectory>
+  </SnapshotDialog>
+  <CoverageFilters>
+    <IncludeFilters>
+      <Filter ModuleMask="*" ClassMask="*" FunctionMask="*" />
+    </IncludeFilters>
+    <ExcludeFilters />
+  </CoverageFilters>
+</Configuration>

@@ -21,7 +21,21 @@ namespace TigerNET.AST {
 
         public override void CheckSemantic(Scope scope, IList<Error> errors)
         {
-            throw new NotImplementedException();
+            //La condicion debe retornar entero
+            //El cuerpo no puede retornar valor
+            //No retorna nada
+
+            int errorsCount = errors.Count;
+            Condition.CheckSemantic(scope, errors);
+            Body.CheckSemantic(scope, errors);
+
+            //La condicion debe retornar un entero
+            ErrorsHelper.CheckIfReturnTypeIsInt(Condition, errors, "The condition must return a value", "The condition must return an integer");
+
+            //El cuerpo no puede retornar valor
+            if (Body.ReturnsValue()) {
+                errors.Add(new MessageError(Line, Column, "Expression body of 'while' must not return a value"));
+            }
         }
     }
 }
