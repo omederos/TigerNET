@@ -16,7 +16,9 @@ namespace TigerNET.Tests.Parser
             Assert.IsInstanceOf<AssignmentNode>(ast);
 
             var leftAccessNode = Utils.GetLeftAccessNode(ast);
+            Assert.That(leftAccessNode.Parent == ast);
             var body = Utils.GetBody(ast);
+            Assert.That(body.Parent == ast);
 
             Assert.IsInstanceOf<VariableAccessNode>(leftAccessNode);
             Assert.IsInstanceOf<IntegerLiteralNode>(body);
@@ -33,6 +35,8 @@ namespace TigerNET.Tests.Parser
 
             Assert.IsInstanceOf<ArrayAccessNode>(leftAccessNode);
             Assert.IsInstanceOf<IntegerLiteralNode>(body);
+            Assert.That(leftAccessNode.Parent == ast);
+            Assert.That(body.Parent == ast);
         }
 
         [Test]
@@ -46,6 +50,8 @@ namespace TigerNET.Tests.Parser
 
             Assert.IsInstanceOf<RecordAccessNode>(leftAccessNode);
             Assert.IsInstanceOf<IntegerLiteralNode>(body);
+            Assert.That(leftAccessNode.Parent == ast);
+            Assert.That(body.Parent == ast);
         }
 
         [Test]
@@ -60,9 +66,14 @@ namespace TigerNET.Tests.Parser
             Assert.IsInstanceOf<RecordAccessNode>(leftAccessNode);
             var left = Utils.GetLeft(leftAccessNode);
             Assert.IsInstanceOf<ArrayAccessNode>(left);
-            var left2 = Utils.GetLeft(leftAccessNode);
+            var left2 = Utils.GetLeft(left);
             Assert.IsInstanceOf<ArrayAccessNode>(left2);
             Assert.IsInstanceOf<IntegerLiteralNode>(body);
+
+            Assert.That(leftAccessNode.Parent == ast);
+            Assert.That(body.Parent == ast);
+            Assert.That(left2.Parent == left);
+
         }
     }
 }

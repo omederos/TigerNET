@@ -5,18 +5,27 @@ using System.Text;
 using TigerNET.Common;
 using TigerNET.Common.Errors;
 
-namespace TigerNET.AST
-{
-    public class LetInEndNode : InstructionNode
-    {
+namespace TigerNET.AST {
+    public class LetInEndNode : InstructionNode {
         /// <summary>
         /// Declaraciones dentro del LET - IN
         /// </summary>
         public IList<DeclarationNode> Declarations { get; set; }
+
+        private ExpressionSequenceNode _expressions;
+
         /// <summary>
         /// Expresiones a ejecutar dentro del IN - END
         /// </summary>
-        public ExpressionSequenceNode Expressions { get; set; }
+        public ExpressionSequenceNode Expressions {
+            get { return _expressions; }
+            set {
+                _expressions = value;
+                if (_expressions != null) {
+                    _expressions.Parent = this;
+                }
+            }
+        }
 
         /// <summary>
         /// Util en las pruebas unitarias solamente!
@@ -27,7 +36,14 @@ namespace TigerNET.AST
         public LetInEndNode(IList<DeclarationNode> declarations, ExpressionSequenceNode expressions) {
             Declarations = declarations;
             Expressions = expressions;
+
+            Expressions.Parent = this;
+
+            foreach (var dec in Declarations) {
+                dec.Parent = this;
+            }
         }
+
         public LetInEndNode(IList<DeclarationNode> declarations) : this(declarations, new ExpressionSequenceNode()) {}
 
         public override void GenerateCode() {
@@ -47,7 +63,7 @@ namespace TigerNET.AST
             foreach (var group in groups) {
                 Process(group, scopeLetIn, errors);
             }
-            
+
             //Si ocurrio algun error en el conjunto de definiciones...
             if (errorsCount != errors.Count) {
                 return;
@@ -55,7 +71,7 @@ namespace TigerNET.AST
 
             //Chequeamos semanticamente la secuencia de expresiones
             Expressions.CheckSemantic(scopeLetIn, errors);
-            
+
             ReturnType = Expressions.ReturnType;
         }
 
@@ -71,24 +87,23 @@ namespace TigerNET.AST
             if (first is VariableDeclarationNode) {
                 ProcessVariableDeclarations(group, scope, errors);
             }
-            //Si es un grupo de declaraciones de funciones/procedimientos
-            else if (first is CallableDeclarationNode)
-            {
+                //Si es un grupo de declaraciones de funciones/procedimientos
+            else if (first is CallableDeclarationNode) {
                 ProcessCallableDeclarations(group, scope, errors);
             }
-            //Si es un grupo de declaraciones de tipos (records, arrays, etc)
+                //Si es un grupo de declaraciones de tipos (records, arrays, etc)
             else {
                 ProcessTypeDeclarations(group, scope, errors);
             }
         }
 
-        private void ProcessTypeDeclarations(IList<DeclarationNode> groupOfDeclarations, Scope scope, IList<Error> errors) {
+        private void ProcessTypeDeclarations(IList<DeclarationNode> groupOfDeclarations, Scope scope,
+                                             IList<Error> errors) {
             int errorsCount = 0;
 
             //Anadimos los encabezados de las declaraciones de los tipos
             //Y a la vez, comprobamos que no exista un tipo con ese nombre (en este scope solamente)
-            foreach (var dec in groupOfDeclarations)
-            {
+            foreach (var dec in groupOfDeclarations) {
                 if (scope.ExistsType(dec.Name, false)) {
                     errors.Add(new AlreadyDefinedError(dec.Line, dec.Column, dec.Name));
                     break;
@@ -97,13 +112,12 @@ namespace TigerNET.AST
             }
 
             //Si ocurrio algun error, paramos
-            if (errorsCount != errors.Count)
-            {
+            if (errorsCount != errors.Count) {
                 return;
             }
 
             //Separamos los alias y las declaraciones de array/records..
-            
+
             //Listado de declaraciones que no son alias
             var notAliasDeclarations = groupOfDeclarations.Where(x => !(x is AliasDeclarationNode)).ToList();
             //Listadoo de declaraciones que son alias
@@ -132,8 +146,7 @@ namespace TigerNET.AST
 
             //Chequeamos semanticamente cada tipo (que no sea alias)
             //Todos los tipos posibles a los que pueden hacer referencia han sido anadidos al scope
-            foreach (var declaration in notAliasDeclarations)
-            {
+            foreach (var declaration in notAliasDeclarations) {
                 declaration.CheckSemantic(scope, errors);
             }
 
@@ -144,10 +157,8 @@ namespace TigerNET.AST
 
             //Por cada grupo de alias, vamos de atras hacia delante resolviendo los tipos
             //Pues el ultimo en cada grupo es el que apuntaba hacia un tipo valido (y no hacia otro alias)
-            foreach (var aliasGroup in aliasesGroups)
-            {
-                for (int i = aliasGroup.Count - 1; i >= 0; i--)
-                {
+            foreach (var aliasGroup in aliasesGroups) {
+                for (int i = aliasGroup.Count - 1; i >= 0; i--) {
                     var alias = aliasGroup[i];
                     //Actualizamos la definicion del tipo en el scope
                     alias.UpdateDefinition(scope);
@@ -155,9 +166,8 @@ namespace TigerNET.AST
             }
 
             //Actualizamos las declaraciones de los no-alias
-            foreach (var declaration in notAliasDeclarations)
-            {
-                var t = (TypeDeclarationNode)declaration;
+            foreach (var declaration in notAliasDeclarations) {
+                var t = (TypeDeclarationNode) declaration;
                 //Actualizamos la definicion del tipo en el scope
                 t.UpdateDefinition(scope);
             }
@@ -167,7 +177,6 @@ namespace TigerNET.AST
             //Por cada procedimiento o funcion en el bloque...
             int errorsCount = errors.Count;
             foreach (CallableDeclarationNode c in group) {
-                
                 //Chequeamos la semantica de la funcion. 
                 //OJO: No chequea la semantica del cuerpo de la funcion
                 c.CheckSemantic(scope, errors);
@@ -182,7 +191,7 @@ namespace TigerNET.AST
             foreach (CallableDeclarationNode c in group) {
                 errorsCount = errors.Count;
                 c.CheckBodySemantic(scope, errors);
-                
+
                 //Si hubo algun error, eliminamos esa funcion del scope. TODO: Necesario?
                 if (errorsCount != errors.Count) {
                     scope.DefinedCallables.Remove(c.Name);
@@ -205,30 +214,31 @@ namespace TigerNET.AST
         /// <param name="scope"></param>
         /// <param name="errors"></param>
         /// <returns>Varios conjunticos de alias donde en cada conjunto estan los relacionados. Ademas, estan en el orden que se fueron resolviendo</returns>
-        private IList<List<AliasDeclarationNode>> ProcessAliasesGroup(IList<AliasDeclarationNode> aliasDeclarations, Scope scope, IList<Error> errors) {
+        private IList<List<AliasDeclarationNode>> ProcessAliasesGroup(IList<AliasDeclarationNode> aliasDeclarations,
+                                                                      Scope scope, IList<Error> errors) {
             //Donde guardaremos los conjunticos
             var result = new List<List<AliasDeclarationNode>>();
-            
+
             //Si no hay ningun Alias declaration
             if (aliasDeclarations.Count == 0) {
                 return result;
             }
-            
+
             //Creamos el primer conjunto
             result.Add(new List<AliasDeclarationNode>());
-            
+
             //Convertimos los alias a un diccionario (para facilitar el manejo) de la forma:
             //{ Name : AliasDeclarationNode }
             var dictAliases = aliasDeclarations.ToDictionary(x => x.Name, x => x);
 
             //Cogemos el primer alias
             AliasDeclarationNode alias = aliasDeclarations[0];
-            
+
             //Mientras queden alias por analizar
             while (dictAliases.Count > 0) {
                 //Tipo al que apunta
                 var type = alias.AliasType;
-                
+
                 //Si no existe el tipo, paramos
                 if (!scope.ExistsType(type)) {
                     errors.Add(new UndefinedTypeError(Line, Column, type));
@@ -237,19 +247,17 @@ namespace TigerNET.AST
 
                 //Si el tipo ya ha sido definido correctamente o si no ha sido definido completamente pero no apunta a ningun alias (ej. apunta a un record que esta por definirse)
                 if (IsFullyDefined(type, scope) || DoesNotPointToAlias(type, aliasDeclarations)) {
-                    
                     //Cogemos el tipo al que apunta
                     var t = scope.GetType(type);
                     //Anadimos este alias diciendo que apunta a aquel tipo
                     scope.Add(t, alias.Name, updateIfExists: true);
                     //Anadimos el alias al grupo actual
-                    result[result.Count-1].Add(alias);
+                    result[result.Count - 1].Add(alias);
                     //Lo eliminamos de los procesados (ya acabamos con el)
                     dictAliases.Remove(alias.Name);
                     //Ya actualizamos el que apunta a un tipo que no es alias
                     //Ahora vamos de atras hacia delante por la cadena y actualizamos el tipo de todos
-                    for (int i = result[result.Count - 1].Count - 1; i >= 0; i--)
-                    {
+                    for (int i = result[result.Count - 1].Count - 1; i >= 0; i--) {
                         //Cogemos el i-esimo alias
                         var a = result[result.Count - 1][i];
                         //Cogemos el tipo al que apunta
@@ -259,7 +267,7 @@ namespace TigerNET.AST
                         //Ya no procesaremos mas este alias
                         dictAliases.Remove(a.Name);
                     }
-                    
+
                     //Creamos un nuevo grupo
                     result.Add(new List<AliasDeclarationNode>());
                     if (dictAliases.Count != 0) {
@@ -267,7 +275,7 @@ namespace TigerNET.AST
                         alias = dictAliases[dictAliases.First().Key];
                     }
                 }
-                //Si el tipo apunta no ha sido 100% definido y esta apuntando a un tipo que es una alias...
+                    //Si el tipo apunta no ha sido 100% definido y esta apuntando a un tipo que es una alias...
                 else {
                     //Lo anadimos al grupo actual
                     result[result.Count - 1].Add(alias);
@@ -275,8 +283,7 @@ namespace TigerNET.AST
                     alias = dictAliases[alias.AliasType];
                     //Si ese tipo al que apunta ya ha sido anadido en este grupo => Hay un ciclo
                     //Notar que si estuviera en otro grupo, no hubiera problema, porque significa que ya fue resuelto correctamente sin siclos
-                    if (result[result.Count - 1].Contains(alias))
-                    {
+                    if (result[result.Count - 1].Contains(alias)) {
                         //Existe un ciclo y terminamo
                         errors.Add(new CyclicAliasesError(alias.Line, alias.Column));
                         break;

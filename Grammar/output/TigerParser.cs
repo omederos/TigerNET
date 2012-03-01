@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:45:30 C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g 2012-02-19 15:04:01
+// $ANTLR 3.3 Nov 30, 2010 12:45:30 C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g 2012-03-01 05:14:32
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -104,7 +104,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		
 
 	public override string[] TokenNames { get { return TigerParser.tokenNames; } }
-	public override string GrammarFileName { get { return "C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g"; } }
+	public override string GrammarFileName { get { return "C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g"; } }
 
 
 	private IList<string> _errors = new List<string>();
@@ -125,7 +125,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_prog();
 
 	// $ANTLR start "prog"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:94:8: public prog returns [ExpressionNode node] : e= expr_or EOF ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:94:8: public prog returns [ExpressionNode node] : e= expr_or EOF ;
 	[GrammarRule("prog")]
 	public ExpressionNode prog()
 	{
@@ -140,9 +140,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(94, 86);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:94:43: (e= expr_or EOF )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:94:43: (e= expr_or EOF )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:94:45: e= expr_or EOF
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:94:45: e= expr_or EOF
 			{
 			DebugLocation(94, 47);
 			PushFollow(Follow._expr_or_in_prog577);
@@ -183,7 +183,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_expr_or();
 
 	// $ANTLR start "expr_or"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:95:1: expr_or returns [ExpressionNode node] : left= expr_and ( Or right= expr_or )? ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:95:1: expr_or returns [ExpressionNode node] : left= expr_and ( Or right= expr_or )? ;
 	[GrammarRule("expr_or")]
 	private ExpressionNode expr_or()
 	{
@@ -199,9 +199,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(95, 3);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:95:39: (left= expr_and ( Or right= expr_or )? )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:95:39: (left= expr_and ( Or right= expr_or )? )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:95:41: left= expr_and ( Or right= expr_or )?
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:95:41: left= expr_and ( Or right= expr_or )?
 			{
 			DebugLocation(95, 46);
 			PushFollow(Follow._expr_and_in_expr_or596);
@@ -217,7 +217,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 
 			}
 			DebugLocation(100, 1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:100:1: ( Or right= expr_or )?
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:100:1: ( Or right= expr_or )?
 			int alt1=2;
 			try { DebugEnterSubRule(1);
 			try { DebugEnterDecision(1, decisionCanBacktrack[1]);
@@ -232,7 +232,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:100:2: Or right= expr_or
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:100:2: Or right= expr_or
 				{
 				DebugLocation(100, 2);
 				Match(input,Or,Follow._Or_in_expr_or602); if (state.failed) return node;
@@ -283,7 +283,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_expr_and();
 
 	// $ANTLR start "expr_and"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:105:1: expr_and returns [ExpressionNode node] : left= expr_logical ( And right= expr_and )? ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:105:1: expr_and returns [ExpressionNode node] : left= expr_logical ( And right= expr_and )? ;
 	[GrammarRule("expr_and")]
 	private ExpressionNode expr_and()
 	{
@@ -299,9 +299,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(105, 2);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:105:39: (left= expr_logical ( And right= expr_and )? )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:105:39: (left= expr_logical ( And right= expr_and )? )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:105:41: left= expr_logical ( And right= expr_and )?
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:105:41: left= expr_logical ( And right= expr_and )?
 			{
 			DebugLocation(105, 46);
 			PushFollow(Follow._expr_logical_in_expr_and627);
@@ -316,7 +316,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 
 			}
 			DebugLocation(109, 1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:109:1: ( And right= expr_and )?
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:109:1: ( And right= expr_and )?
 			int alt2=2;
 			try { DebugEnterSubRule(2);
 			try { DebugEnterDecision(2, decisionCanBacktrack[2]);
@@ -331,7 +331,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:109:2: And right= expr_and
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:109:2: And right= expr_and
 				{
 				DebugLocation(109, 2);
 				Match(input,And,Follow._And_in_expr_and634); if (state.failed) return node;
@@ -382,7 +382,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_expr_logical();
 
 	// $ANTLR start "expr_logical"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:115:1: expr_logical returns [ExpressionNode node] : left= expr_arithm ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical )? ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:115:1: expr_logical returns [ExpressionNode node] : left= expr_arithm ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical )? ;
 	[GrammarRule("expr_logical")]
 	private ExpressionNode expr_logical()
 	{
@@ -399,9 +399,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(115, 3);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:117:2: (left= expr_arithm ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical )? )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:117:2: (left= expr_arithm ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical )? )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:117:4: left= expr_arithm ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical )?
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:117:4: left= expr_arithm ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical )?
 			{
 			DebugLocation(117, 9);
 			PushFollow(Follow._expr_arithm_in_expr_logical668);
@@ -416,7 +416,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 
 			}
 			DebugLocation(121, 2);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:121:2: ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical )?
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:121:2: ( ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical )?
 			int alt4=2;
 			try { DebugEnterSubRule(4);
 			try { DebugEnterDecision(4, decisionCanBacktrack[4]);
@@ -459,10 +459,10 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:123:2: ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:123:2: ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan ) right= expr_logical
 				{
 				DebugLocation(123, 2);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:123:2: ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan )
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:123:2: ( ( Equals ) | NotEquals | GThan | LThan | GEThan | LEThan )
 				int alt3=6;
 				try { DebugEnterSubRule(3);
 				try { DebugEnterDecision(3, decisionCanBacktrack[3]);
@@ -513,12 +513,12 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:123:3: ( Equals )
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:123:3: ( Equals )
 					{
 					DebugLocation(123, 3);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:123:3: ( Equals )
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:123:3: ( Equals )
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:123:4: Equals
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:123:4: Equals
 					{
 					DebugLocation(123, 4);
 					Match(input,Equals,Follow._Equals_in_expr_logical681); if (state.failed) return node;
@@ -537,7 +537,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:127:2: NotEquals
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:127:2: NotEquals
 					{
 					DebugLocation(127, 2);
 					Match(input,NotEquals,Follow._NotEquals_in_expr_logical692); if (state.failed) return node;
@@ -553,7 +553,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					break;
 				case 3:
 					DebugEnterAlt(3);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:131:2: GThan
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:131:2: GThan
 					{
 					DebugLocation(131, 2);
 					Match(input,GThan,Follow._GThan_in_expr_logical701); if (state.failed) return node;
@@ -569,7 +569,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					break;
 				case 4:
 					DebugEnterAlt(4);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:134:2: LThan
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:134:2: LThan
 					{
 					DebugLocation(134, 2);
 					Match(input,LThan,Follow._LThan_in_expr_logical708); if (state.failed) return node;
@@ -585,7 +585,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					break;
 				case 5:
 					DebugEnterAlt(5);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:138:2: GEThan
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:138:2: GEThan
 					{
 					DebugLocation(138, 2);
 					Match(input,GEThan,Follow._GEThan_in_expr_logical717); if (state.failed) return node;
@@ -601,7 +601,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					break;
 				case 6:
 					DebugEnterAlt(6);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:142:2: LEThan
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:142:2: LEThan
 					{
 					DebugLocation(142, 2);
 					Match(input,LEThan,Follow._LEThan_in_expr_logical726); if (state.failed) return node;
@@ -666,7 +666,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_expr_arithm();
 
 	// $ANTLR start "expr_arithm"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:153:1: expr_arithm returns [ExpressionNode node] : left= expr_factor ( ( ( Plus ) | Minus ) right= expr_arithm )? ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:153:1: expr_arithm returns [ExpressionNode node] : left= expr_factor ( ( ( Plus ) | Minus ) right= expr_arithm )? ;
 	[GrammarRule("expr_arithm")]
 	private ExpressionNode expr_arithm()
 	{
@@ -683,9 +683,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(153, 3);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:155:2: (left= expr_factor ( ( ( Plus ) | Minus ) right= expr_arithm )? )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:155:2: (left= expr_factor ( ( ( Plus ) | Minus ) right= expr_arithm )? )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:155:4: left= expr_factor ( ( ( Plus ) | Minus ) right= expr_arithm )?
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:155:4: left= expr_factor ( ( ( Plus ) | Minus ) right= expr_arithm )?
 			{
 			DebugLocation(155, 9);
 			PushFollow(Follow._expr_factor_in_expr_arithm770);
@@ -698,7 +698,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				node = left;
 			}
 			DebugLocation(156, 2);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:156:2: ( ( ( Plus ) | Minus ) right= expr_arithm )?
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:156:2: ( ( ( Plus ) | Minus ) right= expr_arithm )?
 			int alt6=2;
 			try { DebugEnterSubRule(6);
 			try { DebugEnterDecision(6, decisionCanBacktrack[6]);
@@ -717,10 +717,10 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:157:2: ( ( Plus ) | Minus ) right= expr_arithm
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:157:2: ( ( Plus ) | Minus ) right= expr_arithm
 				{
 				DebugLocation(157, 2);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:157:2: ( ( Plus ) | Minus )
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:157:2: ( ( Plus ) | Minus )
 				int alt5=2;
 				try { DebugEnterSubRule(5);
 				try { DebugEnterDecision(5, decisionCanBacktrack[5]);
@@ -747,12 +747,12 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:158:2: ( Plus )
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:158:2: ( Plus )
 					{
 					DebugLocation(158, 2);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:158:2: ( Plus )
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:158:2: ( Plus )
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:158:3: Plus
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:158:3: Plus
 					{
 					DebugLocation(158, 3);
 					Match(input,Plus,Follow._Plus_in_expr_arithm783); if (state.failed) return node;
@@ -771,7 +771,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:162:2: Minus
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:162:2: Minus
 					{
 					DebugLocation(162, 2);
 					Match(input,Minus,Follow._Minus_in_expr_arithm794); if (state.failed) return node;
@@ -833,7 +833,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_expr_factor();
 
 	// $ANTLR start "expr_factor"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:168:1: expr_factor returns [ExpressionNode node] : left= expr ( ( ( Mult ) | Div ) right= expr_factor )? ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:168:1: expr_factor returns [ExpressionNode node] : left= expr ( ( ( Mult ) | Div ) right= expr_factor )? ;
 	[GrammarRule("expr_factor")]
 	private ExpressionNode expr_factor()
 	{
@@ -850,9 +850,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(168, 3);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:170:2: (left= expr ( ( ( Mult ) | Div ) right= expr_factor )? )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:170:2: (left= expr ( ( ( Mult ) | Div ) right= expr_factor )? )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:170:4: left= expr ( ( ( Mult ) | Div ) right= expr_factor )?
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:170:4: left= expr ( ( ( Mult ) | Div ) right= expr_factor )?
 			{
 			DebugLocation(170, 9);
 			PushFollow(Follow._expr_in_expr_factor833);
@@ -865,7 +865,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				node = left; 
 			}
 			DebugLocation(171, 2);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:171:2: ( ( ( Mult ) | Div ) right= expr_factor )?
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:171:2: ( ( ( Mult ) | Div ) right= expr_factor )?
 			int alt8=2;
 			try { DebugEnterSubRule(8);
 			try { DebugEnterDecision(8, decisionCanBacktrack[8]);
@@ -884,10 +884,10 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:172:2: ( ( Mult ) | Div ) right= expr_factor
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:172:2: ( ( Mult ) | Div ) right= expr_factor
 				{
 				DebugLocation(172, 2);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:172:2: ( ( Mult ) | Div )
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:172:2: ( ( Mult ) | Div )
 				int alt7=2;
 				try { DebugEnterSubRule(7);
 				try { DebugEnterDecision(7, decisionCanBacktrack[7]);
@@ -914,12 +914,12 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:173:2: ( Mult )
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:173:2: ( Mult )
 					{
 					DebugLocation(173, 2);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:173:2: ( Mult )
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:173:2: ( Mult )
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:173:3: Mult
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:173:3: Mult
 					{
 					DebugLocation(173, 3);
 					Match(input,Mult,Follow._Mult_in_expr_factor845); if (state.failed) return node;
@@ -938,7 +938,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:177:2: Div
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:177:2: Div
 					{
 					DebugLocation(177, 2);
 					Match(input,Div,Follow._Div_in_expr_factor855); if (state.failed) return node;
@@ -1000,7 +1000,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_expr();
 
 	// $ANTLR start "expr"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:183:1: expr returns [ExpressionNode node] : ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End ) lv= lvalue[$node] ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:183:1: expr returns [ExpressionNode node] : ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End ) lv= lvalue[$node] ;
 	[GrammarRule("expr")]
 	private ExpressionNode expr()
 	{
@@ -1030,12 +1030,12 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(183, 42);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:183:35: ( ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End ) lv= lvalue[$node] )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:183:35: ( ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End ) lv= lvalue[$node] )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:184:2: ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End ) lv= lvalue[$node]
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:184:2: ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End ) lv= lvalue[$node]
 			{
 			DebugLocation(184, 2);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:184:2: ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:184:2: ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End )
 			int alt12=11;
 			try { DebugEnterSubRule(12);
 			try { DebugEnterDecision(12, decisionCanBacktrack[12]);
@@ -1111,7 +1111,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:185:2: STRING_CONST
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:185:2: STRING_CONST
 				{
 				DebugLocation(185, 2);
 				STRING_CONST1=(IToken)Match(input,STRING_CONST,Follow._STRING_CONST_in_expr889); if (state.failed) return node;
@@ -1125,7 +1125,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:186:2: INT_CONST
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:186:2: INT_CONST
 				{
 				DebugLocation(186, 2);
 				INT_CONST2=(IToken)Match(input,INT_CONST,Follow._INT_CONST_in_expr897); if (state.failed) return node;
@@ -1139,7 +1139,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:187:2: NIL
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:187:2: NIL
 				{
 				DebugLocation(187, 2);
 				Match(input,NIL,Follow._NIL_in_expr905); if (state.failed) return node;
@@ -1153,7 +1153,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:188:2: Minus e= expr_or
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:188:2: Minus e= expr_or
 				{
 				DebugLocation(188, 2);
 				Match(input,Minus,Follow._Minus_in_expr913); if (state.failed) return node;
@@ -1172,7 +1172,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:192:2: id= ID aux= idAux[$id.Text]
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:192:2: id= ID aux= idAux[$id.Text]
 				{
 				DebugLocation(192, 5);
 				id=(IToken)Match(input,ID,Follow._ID_in_expr944); if (state.failed) return node;
@@ -1191,7 +1191,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 6:
 				DebugEnterAlt(6);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:193:2: LParent (seq= exprSeq )? RParent
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:193:2: LParent (seq= exprSeq )? RParent
 				{
 				DebugLocation(193, 2);
 				Match(input,LParent,Follow._LParent_in_expr959); if (state.failed) return node;
@@ -1201,7 +1201,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					node = new ExpressionSequenceNode();
 				}
 				DebugLocation(193, 50);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:193:50: (seq= exprSeq )?
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:193:50: (seq= exprSeq )?
 				int alt9=2;
 				try { DebugEnterSubRule(9);
 				try { DebugEnterDecision(9, decisionCanBacktrack[9]);
@@ -1216,7 +1216,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:193:51: seq= exprSeq
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:193:51: seq= exprSeq
 					{
 					DebugLocation(193, 55);
 					PushFollow(Follow._exprSeq_in_expr968);
@@ -1242,7 +1242,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 7:
 				DebugEnterAlt(7);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:194:2: If cond= expr_or Then then= expr_or ( Else els= expr_or )?
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:194:2: If cond= expr_or Then then= expr_or ( Else els= expr_or )?
 				{
 				DebugLocation(194, 2);
 				Match(input,If,Follow._If_in_expr982); if (state.failed) return node;
@@ -1259,7 +1259,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				PopFollow();
 				if (state.failed) return node;
 				DebugLocation(194, 40);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:194:40: ( Else els= expr_or )?
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:194:40: ( Else els= expr_or )?
 				int alt10=2;
 				try { DebugEnterSubRule(10);
 				try { DebugEnterDecision(10, decisionCanBacktrack[10]);
@@ -1274,7 +1274,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:194:41: Else els= expr_or
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:194:41: Else els= expr_or
 					{
 					DebugLocation(194, 41);
 					Match(input,Else,Follow._Else_in_expr999); if (state.failed) return node;
@@ -1302,7 +1302,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 8:
 				DebugEnterAlt(8);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:198:2: While cond= expr_or Do body= expr_or
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:198:2: While cond= expr_or Do body= expr_or
 				{
 				DebugLocation(198, 2);
 				Match(input,While,Follow._While_in_expr1020); if (state.failed) return node;
@@ -1330,7 +1330,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 9:
 				DebugEnterAlt(9);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:202:2: For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:202:2: For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or
 				{
 				DebugLocation(202, 2);
 				Match(input,For,Follow._For_in_expr1044); if (state.failed) return node;
@@ -1369,7 +1369,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 10:
 				DebugEnterAlt(10);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:206:2: Break
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:206:2: Break
 				{
 				DebugLocation(206, 2);
 				Match(input,Break,Follow._Break_in_expr1084); if (state.failed) return node;
@@ -1383,7 +1383,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 11:
 				DebugEnterAlt(11);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:207:2: Let declarations= declarationList In (seq= exprSeq )? End
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:207:2: Let declarations= declarationList In (seq= exprSeq )? End
 				{
 				DebugLocation(207, 2);
 				Match(input,Let,Follow._Let_in_expr1093); if (state.failed) return node;
@@ -1400,7 +1400,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				DebugLocation(207, 87);
 				Match(input,In,Follow._In_in_expr1103); if (state.failed) return node;
 				DebugLocation(207, 90);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:207:90: (seq= exprSeq )?
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:207:90: (seq= exprSeq )?
 				int alt11=2;
 				try { DebugEnterSubRule(11);
 				try { DebugEnterDecision(11, decisionCanBacktrack[11]);
@@ -1415,7 +1415,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:207:91: seq= exprSeq
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:207:91: seq= exprSeq
 					{
 					DebugLocation(207, 95);
 					PushFollow(Follow._exprSeq_in_expr1110);
@@ -1480,7 +1480,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_idAux();
 
 	// $ANTLR start "idAux"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:210:1: idAux[string id] returns [ExpressionNode node] : ( LParent (list= exprList )? RParent | ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey ) | ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? ) );
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:210:1: idAux[string id] returns [ExpressionNode node] : ( LParent (list= exprList )? RParent | ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey ) | ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? ) );
 	[GrammarRule("idAux")]
 	private ExpressionNode idAux(string id)
 	{
@@ -1501,7 +1501,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(210, 2);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:212:1: ( LParent (list= exprList )? RParent | ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey ) | ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? ) )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:212:1: ( LParent (list= exprList )? RParent | ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey ) | ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? ) )
 			int alt17=3;
 			try { DebugEnterDecision(17, decisionCanBacktrack[17]);
 			switch (input.LA(1))
@@ -1565,7 +1565,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:213:2: LParent (list= exprList )? RParent
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:213:2: LParent (list= exprList )? RParent
 				{
 				DebugLocation(213, 2);
 				Match(input,LParent,Follow._LParent_in_idAux1151); if (state.failed) return node;
@@ -1575,7 +1575,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					node = new CallableNode(id, new List<ExpressionNode>()); 
 				}
 				DebugLocation(213, 70);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:213:70: (list= exprList )?
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:213:70: (list= exprList )?
 				int alt13=2;
 				try { DebugEnterSubRule(13);
 				try { DebugEnterDecision(13, decisionCanBacktrack[13]);
@@ -1590,7 +1590,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:213:71: list= exprList
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:213:71: list= exprList
 					{
 					DebugLocation(213, 76);
 					PushFollow(Follow._exprList_in_idAux1159);
@@ -1616,10 +1616,10 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:214:2: ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey )
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:214:2: ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey )
 				{
 				DebugLocation(214, 2);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:214:2: ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey )
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:214:2: ( ( LKey RKey )=> LKey RKey | LKey fields= fieldList RKey )
 				int alt14=2;
 				try { DebugEnterSubRule(14);
 				try { DebugEnterDecision(14, decisionCanBacktrack[14]);
@@ -1659,7 +1659,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:215:3: ( LKey RKey )=> LKey RKey
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:215:3: ( LKey RKey )=> LKey RKey
 					{
 					DebugLocation(216, 5);
 					Match(input,LKey,Follow._LKey_in_idAux1188); if (state.failed) return node;
@@ -1675,7 +1675,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:217:5: LKey fields= fieldList RKey
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:217:5: LKey fields= fieldList RKey
 					{
 					DebugLocation(217, 5);
 					Match(input,LKey,Follow._LKey_in_idAux1199); if (state.failed) return node;
@@ -1705,10 +1705,10 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:223:2: ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? )
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:223:2: ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? )
 				{
 				DebugLocation(223, 2);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:223:2: ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? )
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:223:2: ( ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or ) | lv= lvalue[$node] ( Assign body= expr_or )? )
 				int alt16=2;
 				try { DebugEnterSubRule(16);
 				try { DebugEnterDecision(16, decisionCanBacktrack[16]);
@@ -1726,12 +1726,12 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:223:3: ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or )
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:223:3: ( LCorch expr_or RCorch Of )=> ( LCorch length= expr_or RCorch Of initialValue= expr_or )
 					{
 					DebugLocation(224, 2);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:224:2: ( LCorch length= expr_or RCorch Of initialValue= expr_or )
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:224:2: ( LCorch length= expr_or RCorch Of initialValue= expr_or )
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:225:2: LCorch length= expr_or RCorch Of initialValue= expr_or
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:225:2: LCorch length= expr_or RCorch Of initialValue= expr_or
 					{
 					DebugLocation(225, 2);
 					Match(input,LCorch,Follow._LCorch_in_idAux1244); if (state.failed) return node;
@@ -1764,7 +1764,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:230:2: lv= lvalue[$node] ( Assign body= expr_or )?
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:230:2: lv= lvalue[$node] ( Assign body= expr_or )?
 					{
 					DebugLocation(230, 5);
 					PushFollow(Follow._lvalue_in_idAux1277);
@@ -1777,7 +1777,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 						node = lv; 
 					}
 					DebugLocation(230, 41);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:230:41: ( Assign body= expr_or )?
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:230:41: ( Assign body= expr_or )?
 					int alt15=2;
 					try { DebugEnterSubRule(15);
 					try { DebugEnterDecision(15, decisionCanBacktrack[15]);
@@ -1792,7 +1792,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:230:42: Assign body= expr_or
+						// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:230:42: Assign body= expr_or
 						{
 						DebugLocation(230, 42);
 						Match(input,Assign,Follow._Assign_in_idAux1282); if (state.failed) return node;
@@ -1849,7 +1849,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_exprSeq();
 
 	// $ANTLR start "exprSeq"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:232:1: exprSeq returns [ExpressionSequenceNode node] : e1= expr_or ( DotComma e2= expr_or )* ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:232:1: exprSeq returns [ExpressionSequenceNode node] : e1= expr_or ( DotComma e2= expr_or )* ;
 	[GrammarRule("exprSeq")]
 	private ExpressionSequenceNode exprSeq()
 	{
@@ -1863,12 +1863,12 @@ public partial class TigerParser : Antlr.Runtime.Parser
 
 		node = new ExpressionSequenceNode();
 		try { DebugEnterRule(GrammarFileName, "exprSeq");
-		DebugLocation(232, 156);
+		DebugLocation(232, 158);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:234:1: (e1= expr_or ( DotComma e2= expr_or )* )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:234:1: (e1= expr_or ( DotComma e2= expr_or )* )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:234:3: e1= expr_or ( DotComma e2= expr_or )*
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:234:3: e1= expr_or ( DotComma e2= expr_or )*
 			{
 			DebugLocation(234, 6);
 			PushFollow(Follow._expr_or_in_exprSeq1316);
@@ -1878,10 +1878,10 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			DebugLocation(234, 16);
 			if ( state.backtracking == 0 )
 			{
-				((ExpressionSequenceNode)node).Sequence.Add(e1); 
+				((ExpressionSequenceNode)node).AddToSequence(e1); 
 			}
-			DebugLocation(234, 74);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:234:74: ( DotComma e2= expr_or )*
+			DebugLocation(234, 75);
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:234:75: ( DotComma e2= expr_or )*
 			try { DebugEnterSubRule(18);
 			while (true)
 			{
@@ -1900,19 +1900,19 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:234:75: DotComma e2= expr_or
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:234:76: DotComma e2= expr_or
 					{
-					DebugLocation(234, 75);
+					DebugLocation(234, 76);
 					Match(input,DotComma,Follow._DotComma_in_exprSeq1320); if (state.failed) return node;
-					DebugLocation(234, 87);
+					DebugLocation(234, 88);
 					PushFollow(Follow._expr_or_in_exprSeq1326);
 					e2=expr_or();
 					PopFollow();
 					if (state.failed) return node;
-					DebugLocation(234, 97);
+					DebugLocation(234, 98);
 					if ( state.backtracking == 0 )
 					{
-						((ExpressionSequenceNode)node).Sequence.Add(e2); 
+						((ExpressionSequenceNode)node).AddToSequence(e2); 
 					}
 
 					}
@@ -1943,7 +1943,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			LeaveRule("exprSeq", 9);
 			Leave_exprSeq();
 		}
-		DebugLocation(234, 156);
+		DebugLocation(234, 158);
 		} finally { DebugExitRule(GrammarFileName, "exprSeq"); }
 		return node;
 
@@ -1955,7 +1955,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_exprList();
 
 	// $ANTLR start "exprList"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:236:1: exprList returns [IList<ExpressionNode> items] : e1= expr_or ( Comma e2= expr_or )* ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:236:1: exprList returns [IList<ExpressionNode> items] : e1= expr_or ( Comma e2= expr_or )* ;
 	[GrammarRule("exprList")]
 	private IList<ExpressionNode> exprList()
 	{
@@ -1972,9 +1972,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(236, 82);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:238:1: (e1= expr_or ( Comma e2= expr_or )* )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:238:1: (e1= expr_or ( Comma e2= expr_or )* )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:238:3: e1= expr_or ( Comma e2= expr_or )*
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:238:3: e1= expr_or ( Comma e2= expr_or )*
 			{
 			DebugLocation(238, 6);
 			PushFollow(Follow._expr_or_in_exprList1354);
@@ -1987,7 +1987,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				items.Add(e1);
 			}
 			DebugLocation(238, 39);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:238:39: ( Comma e2= expr_or )*
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:238:39: ( Comma e2= expr_or )*
 			try { DebugEnterSubRule(19);
 			while (true)
 			{
@@ -2006,7 +2006,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:238:40: Comma e2= expr_or
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:238:40: Comma e2= expr_or
 					{
 					DebugLocation(238, 40);
 					Match(input,Comma,Follow._Comma_in_exprList1359); if (state.failed) return items;
@@ -2061,7 +2061,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_fieldList();
 
 	// $ANTLR start "fieldList"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:240:1: fieldList returns [IList<FieldAssignmentNode> items] : id= idAssign ( Comma id= idAssign )* ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:240:1: fieldList returns [IList<FieldAssignmentNode> items] : id= idAssign ( Comma id= idAssign )* ;
 	[GrammarRule("fieldList")]
 	private IList<FieldAssignmentNode> fieldList()
 	{
@@ -2077,9 +2077,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(240, 85);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:241:51: (id= idAssign ( Comma id= idAssign )* )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:241:51: (id= idAssign ( Comma id= idAssign )* )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:242:2: id= idAssign ( Comma id= idAssign )*
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:242:2: id= idAssign ( Comma id= idAssign )*
 			{
 			DebugLocation(242, 5);
 			PushFollow(Follow._idAssign_in_fieldList1392);
@@ -2092,7 +2092,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				items.Add(id);
 			}
 			DebugLocation(242, 40);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:242:40: ( Comma id= idAssign )*
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:242:40: ( Comma id= idAssign )*
 			try { DebugEnterSubRule(20);
 			while (true)
 			{
@@ -2111,7 +2111,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:242:41: Comma id= idAssign
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:242:41: Comma id= idAssign
 					{
 					DebugLocation(242, 41);
 					Match(input,Comma,Follow._Comma_in_fieldList1397); if (state.failed) return items;
@@ -2166,7 +2166,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_idAssign();
 
 	// $ANTLR start "idAssign"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:244:1: idAssign returns [FieldAssignmentNode node] : fieldName= ID Equals body= expr_or ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:244:1: idAssign returns [FieldAssignmentNode node] : fieldName= ID Equals body= expr_or ;
 	[GrammarRule("idAssign")]
 	private FieldAssignmentNode idAssign()
 	{
@@ -2182,9 +2182,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(244, 100);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:244:44: (fieldName= ID Equals body= expr_or )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:244:44: (fieldName= ID Equals body= expr_or )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:245:1: fieldName= ID Equals body= expr_or
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:245:1: fieldName= ID Equals body= expr_or
 			{
 			DebugLocation(245, 11);
 			fieldName=(IToken)Match(input,ID,Follow._ID_in_idAssign1425); if (state.failed) return node;
@@ -2227,7 +2227,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_lvalue();
 
 	// $ANTLR start "lvalue"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:247:1: lvalue[ExpressionNode accessNode] returns [ExpressionNode node] : ( Dot fieldName= ID | LCorch index= expr_or RCorch )* ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:247:1: lvalue[ExpressionNode accessNode] returns [ExpressionNode node] : ( Dot fieldName= ID | LCorch index= expr_or RCorch )* ;
 	[GrammarRule("lvalue")]
 	private ExpressionNode lvalue(ExpressionNode accessNode)
 	{
@@ -2243,9 +2243,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(247, 2);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:247:65: ( ( Dot fieldName= ID | LCorch index= expr_or RCorch )* )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:247:65: ( ( Dot fieldName= ID | LCorch index= expr_or RCorch )* )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:248:1: ( Dot fieldName= ID | LCorch index= expr_or RCorch )*
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:248:1: ( Dot fieldName= ID | LCorch index= expr_or RCorch )*
 			{
 			DebugLocation(248, 1);
 			if ( state.backtracking == 0 )
@@ -2253,7 +2253,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				node = accessNode;
 			}
 			DebugLocation(249, 1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:249:1: ( Dot fieldName= ID | LCorch index= expr_or RCorch )*
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:249:1: ( Dot fieldName= ID | LCorch index= expr_or RCorch )*
 			try { DebugEnterSubRule(21);
 			while (true)
 			{
@@ -2276,7 +2276,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:250:1: Dot fieldName= ID
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:250:1: Dot fieldName= ID
 					{
 					DebugLocation(250, 1);
 					Match(input,Dot,Follow._Dot_in_lvalue1455); if (state.failed) return node;
@@ -2292,7 +2292,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:251:1: LCorch index= expr_or RCorch
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:251:1: LCorch index= expr_or RCorch
 					{
 					DebugLocation(251, 1);
 					Match(input,LCorch,Follow._LCorch_in_lvalue1467); if (state.failed) return node;
@@ -2349,7 +2349,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_declarationList();
 
 	// $ANTLR start "declarationList"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:254:1: declarationList returns [IList<DeclarationNode> items] : (dec= declaration )+ ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:254:1: declarationList returns [IList<DeclarationNode> items] : (dec= declaration )+ ;
 	[GrammarRule("declarationList")]
 	private IList<DeclarationNode> declarationList()
 	{
@@ -2365,12 +2365,12 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(254, 48);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:255:45: ( (dec= declaration )+ )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:255:45: ( (dec= declaration )+ )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:256:2: (dec= declaration )+
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:256:2: (dec= declaration )+
 			{
 			DebugLocation(256, 2);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:256:2: (dec= declaration )+
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:256:2: (dec= declaration )+
 			int cnt22=0;
 			try { DebugEnterSubRule(22);
 			while (true)
@@ -2390,7 +2390,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:256:3: dec= declaration
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:256:3: dec= declaration
 					{
 					DebugLocation(256, 7);
 					PushFollow(Follow._declaration_in_declarationList1507);
@@ -2449,7 +2449,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_declaration();
 
 	// $ANTLR start "declaration"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:257:1: declaration returns [DeclarationNode node] : (t= typeDeclaration | v= variableDeclaration | f= functionDeclaration );
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:257:1: declaration returns [DeclarationNode node] : (t= typeDeclaration | v= variableDeclaration | f= functionDeclaration );
 	[GrammarRule("declaration")]
 	private DeclarationNode declaration()
 	{
@@ -2466,7 +2466,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(257, 43);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:257:44: (t= typeDeclaration | v= variableDeclaration | f= functionDeclaration )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:257:44: (t= typeDeclaration | v= variableDeclaration | f= functionDeclaration )
 			int alt23=3;
 			try { DebugEnterDecision(23, decisionCanBacktrack[23]);
 			switch (input.LA(1))
@@ -2501,7 +2501,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:259:1: t= typeDeclaration
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:259:1: t= typeDeclaration
 				{
 				DebugLocation(259, 3);
 				PushFollow(Follow._typeDeclaration_in_declaration1533);
@@ -2518,7 +2518,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:260:1: v= variableDeclaration
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:260:1: v= variableDeclaration
 				{
 				DebugLocation(260, 3);
 				PushFollow(Follow._variableDeclaration_in_declaration1543);
@@ -2535,7 +2535,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:261:1: f= functionDeclaration
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:261:1: f= functionDeclaration
 				{
 				DebugLocation(261, 3);
 				PushFollow(Follow._functionDeclaration_in_declaration1553);
@@ -2576,7 +2576,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_typeDeclaration();
 
 	// $ANTLR start "typeDeclaration"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:263:1: typeDeclaration returns [TypeDeclarationNode node] : Type name= ID Equals t= type[$name.Text] ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:263:1: typeDeclaration returns [TypeDeclarationNode node] : Type name= ID Equals t= type[$name.Text] ;
 	[GrammarRule("typeDeclaration")]
 	private TypeDeclarationNode typeDeclaration()
 	{
@@ -2592,9 +2592,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(263, 62);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:263:52: ( Type name= ID Equals t= type[$name.Text] )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:263:52: ( Type name= ID Equals t= type[$name.Text] )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:264:1: Type name= ID Equals t= type[$name.Text]
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:264:1: Type name= ID Equals t= type[$name.Text]
 			{
 			DebugLocation(264, 1);
 			Match(input,Type,Follow._Type_in_typeDeclaration1568); if (state.failed) return node;
@@ -2639,7 +2639,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_type();
 
 	// $ANTLR start "type"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:266:1: type[string name] returns [TypeDeclarationNode node] : (id= ID | LKey (fields= typeFields )? RKey | ArrayOf typeName= ID );
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:266:1: type[string name] returns [TypeDeclarationNode node] : (id= ID | LKey (fields= typeFields )? RKey | ArrayOf typeName= ID );
 	[GrammarRule("type")]
 	private TypeDeclarationNode type(string name)
 	{
@@ -2656,7 +2656,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(266, 80);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:266:54: (id= ID | LKey (fields= typeFields )? RKey | ArrayOf typeName= ID )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:266:54: (id= ID | LKey (fields= typeFields )? RKey | ArrayOf typeName= ID )
 			int alt25=3;
 			try { DebugEnterDecision(25, decisionCanBacktrack[25]);
 			switch (input.LA(1))
@@ -2691,7 +2691,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:267:2: id= ID
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:267:2: id= ID
 				{
 				DebugLocation(267, 5);
 				id=(IToken)Match(input,ID,Follow._ID_in_type1607); if (state.failed) return node;
@@ -2705,7 +2705,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:268:2: LKey (fields= typeFields )? RKey
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:268:2: LKey (fields= typeFields )? RKey
 				{
 				DebugLocation(268, 2);
 				Match(input,LKey,Follow._LKey_in_type1615); if (state.failed) return node;
@@ -2715,7 +2715,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 					node = new RecordDeclarationNode(name); 
 				}
 				DebugLocation(268, 50);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:268:50: (fields= typeFields )?
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:268:50: (fields= typeFields )?
 				int alt24=2;
 				try { DebugEnterSubRule(24);
 				try { DebugEnterDecision(24, decisionCanBacktrack[24]);
@@ -2730,7 +2730,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:268:51: fields= typeFields
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:268:51: fields= typeFields
 					{
 					DebugLocation(268, 58);
 					PushFollow(Follow._typeFields_in_type1623);
@@ -2756,7 +2756,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:269:2: ArrayOf typeName= ID
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:269:2: ArrayOf typeName= ID
 				{
 				DebugLocation(269, 2);
 				Match(input,ArrayOf,Follow._ArrayOf_in_type1636); if (state.failed) return node;
@@ -2796,7 +2796,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_typeFields();
 
 	// $ANTLR start "typeFields"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:271:1: typeFields returns [IList<TypeField> items] : t= typeField ( Comma t= typeField )* ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:271:1: typeFields returns [IList<TypeField> items] : t= typeField ( Comma t= typeField )* ;
 	[GrammarRule("typeFields")]
 	private IList<TypeField> typeFields()
 	{
@@ -2812,9 +2812,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(271, 85);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:272:40: (t= typeField ( Comma t= typeField )* )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:272:40: (t= typeField ( Comma t= typeField )* )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:273:1: t= typeField ( Comma t= typeField )*
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:273:1: t= typeField ( Comma t= typeField )*
 			{
 			DebugLocation(273, 3);
 			PushFollow(Follow._typeField_in_typeFields1668);
@@ -2827,7 +2827,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				items.Add(t); 
 			}
 			DebugLocation(273, 40);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:273:40: ( Comma t= typeField )*
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:273:40: ( Comma t= typeField )*
 			try { DebugEnterSubRule(26);
 			while (true)
 			{
@@ -2846,7 +2846,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:273:41: Comma t= typeField
+					// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:273:41: Comma t= typeField
 					{
 					DebugLocation(273, 41);
 					Match(input,Comma,Follow._Comma_in_typeFields1673); if (state.failed) return items;
@@ -2901,7 +2901,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_typeField();
 
 	// $ANTLR start "typeField"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:275:1: typeField returns [TypeField value] : id= ID ':' typeId= ID ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:275:1: typeField returns [TypeField value] : id= ID ':' typeId= ID ;
 	[GrammarRule("typeField")]
 	private TypeField typeField()
 	{
@@ -2917,9 +2917,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(275, 111);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:275:37: (id= ID ':' typeId= ID )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:275:37: (id= ID ':' typeId= ID )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:275:39: id= ID ':' typeId= ID
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:275:39: id= ID ':' typeId= ID
 			{
 			DebugLocation(275, 42);
 			id=(IToken)Match(input,ID,Follow._ID_in_typeField1701); if (state.failed) return value;
@@ -2959,7 +2959,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_variableDeclaration();
 
 	// $ANTLR start "variableDeclaration"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:277:1: variableDeclaration returns [VariableDeclarationNode node] : Var name= ID ( ':' tName= ID )? Assign body= expr_or ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:277:1: variableDeclaration returns [VariableDeclarationNode node] : Var name= ID ( ':' tName= ID )? Assign body= expr_or ;
 	[GrammarRule("variableDeclaration")]
 	private VariableDeclarationNode variableDeclaration()
 	{
@@ -2977,16 +2977,16 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(277, 72);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:278:32: ( Var name= ID ( ':' tName= ID )? Assign body= expr_or )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:278:32: ( Var name= ID ( ':' tName= ID )? Assign body= expr_or )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:279:1: Var name= ID ( ':' tName= ID )? Assign body= expr_or
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:279:1: Var name= ID ( ':' tName= ID )? Assign body= expr_or
 			{
 			DebugLocation(279, 1);
 			Match(input,Var,Follow._Var_in_variableDeclaration1728); if (state.failed) return node;
 			DebugLocation(279, 10);
 			name=(IToken)Match(input,ID,Follow._ID_in_variableDeclaration1734); if (state.failed) return node;
 			DebugLocation(279, 15);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:279:15: ( ':' tName= ID )?
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:279:15: ( ':' tName= ID )?
 			int alt27=2;
 			try { DebugEnterSubRule(27);
 			try { DebugEnterDecision(27, decisionCanBacktrack[27]);
@@ -3001,7 +3001,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:279:16: ':' tName= ID
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:279:16: ':' tName= ID
 				{
 				DebugLocation(279, 16);
 				Match(input,54,Follow._54_in_variableDeclaration1737); if (state.failed) return node;
@@ -3058,7 +3058,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_functionDeclaration();
 
 	// $ANTLR start "functionDeclaration"
-	// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:284:1: functionDeclaration returns [CallableDeclarationNode node] : Function name= ID LParent (f= typeFields )? RParent ( ':' tName= ID )? Equals body= expr_or ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:284:1: functionDeclaration returns [CallableDeclarationNode node] : Function name= ID LParent (f= typeFields )? RParent ( ':' tName= ID )? Equals body= expr_or ;
 	[GrammarRule("functionDeclaration")]
 	private CallableDeclarationNode functionDeclaration()
 	{
@@ -3080,9 +3080,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(284, 0);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:289:1: ( Function name= ID LParent (f= typeFields )? RParent ( ':' tName= ID )? Equals body= expr_or )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:289:1: ( Function name= ID LParent (f= typeFields )? RParent ( ':' tName= ID )? Equals body= expr_or )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:290:1: Function name= ID LParent (f= typeFields )? RParent ( ':' tName= ID )? Equals body= expr_or
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:290:1: Function name= ID LParent (f= typeFields )? RParent ( ':' tName= ID )? Equals body= expr_or
 			{
 			DebugLocation(290, 1);
 			Match(input,Function,Follow._Function_in_functionDeclaration1793); if (state.failed) return node;
@@ -3091,7 +3091,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			DebugLocation(290, 20);
 			Match(input,LParent,Follow._LParent_in_functionDeclaration1801); if (state.failed) return node;
 			DebugLocation(290, 28);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:290:28: (f= typeFields )?
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:290:28: (f= typeFields )?
 			int alt28=2;
 			try { DebugEnterSubRule(28);
 			try { DebugEnterDecision(28, decisionCanBacktrack[28]);
@@ -3106,7 +3106,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:290:29: f= typeFields
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:290:29: f= typeFields
 				{
 				DebugLocation(290, 31);
 				PushFollow(Follow._typeFields_in_functionDeclaration1808);
@@ -3128,7 +3128,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			DebugLocation(290, 67);
 			Match(input,RParent,Follow._RParent_in_functionDeclaration1814); if (state.failed) return node;
 			DebugLocation(290, 75);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:290:75: ( ':' tName= ID )?
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:290:75: ( ':' tName= ID )?
 			int alt29=2;
 			try { DebugEnterSubRule(29);
 			try { DebugEnterDecision(29, decisionCanBacktrack[29]);
@@ -3143,7 +3143,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:290:76: ':' tName= ID
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:290:76: ':' tName= ID
 				{
 				DebugLocation(290, 76);
 				Match(input,54,Follow._54_in_functionDeclaration1817); if (state.failed) return node;
@@ -3206,9 +3206,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		TraceIn("synpred1_Tiger_fragment", 22);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:215:3: ( LKey RKey )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:215:3: ( LKey RKey )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:215:4: LKey RKey
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:215:4: LKey RKey
 			{
 			DebugLocation(215, 4);
 			Match(input,LKey,Follow._LKey_in_synpred1_Tiger1176); if (state.failed) return;
@@ -3238,9 +3238,9 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		TraceIn("synpred2_Tiger_fragment", 23);
 		try
 		{
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:223:3: ( LCorch expr_or RCorch Of )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:223:3: ( LCorch expr_or RCorch Of )
 			DebugEnterAlt(1);
-			// C:\\HERE\\School\\!4to\\Complementos de Compilacion\\Compilador\\Grammar\\Tiger.g:223:4: LCorch expr_or RCorch Of
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:223:4: LCorch expr_or RCorch Of
 			{
 			DebugLocation(223, 4);
 			Match(input,LCorch,Follow._LCorch_in_synpred2_Tiger1228); if (state.failed) return;

@@ -4,16 +4,26 @@ using TigerNET.Common;
 using TigerNET.Common.Errors;
 using TigerNET.Common.Types;
 
-namespace TigerNET.AST
-{
-    public abstract class BinaryOperatorNode : OperatorNode
-    {
+namespace TigerNET.AST {
+    public abstract class BinaryOperatorNode : OperatorNode {
         protected string NoValueMessage = "{0} expression does not return any value";
         protected string NoTypeMessage = "{0} expression must return a {1}";
         public ExpressionNode Left { get; set; }
-        public ExpressionNode Right { get; set; }
+        private ExpressionNode _right;
+
+        public ExpressionNode Right {
+            get { return _right; }
+            set {
+                _right = value;
+                if (value != null) {
+                    Left.Parent = this;
+                    _right.Parent = this;
+                }
+            }
+        }
+
         public string OperatorName { get; set; }
-        public IList<Type> AllowedTypes { get; set; } 
+        public IList<Type> AllowedTypes { get; set; }
 
         protected BinaryOperatorNode(ExpressionNode left, ExpressionNode right, string operatorName) {
             Left = left;
@@ -29,16 +39,14 @@ namespace TigerNET.AST
         /// </summary>
         /// <param name="scope"></param>
         /// <param name="errors"></param>
-        public override void CheckSemantic(Scope scope, IList<Error> errors)
-        {
+        public override void CheckSemantic(Scope scope, IList<Error> errors) {
             //Se comprueban ambos nodos (izquierda y derecha)
             int errorsCount = errors.Count;
             Left.CheckSemantic(scope, errors);
             Right.CheckSemantic(scope, errors);
 
             //Si ocurrio algun error
-            if (errorsCount != errors.Count)
-            {
+            if (errorsCount != errors.Count) {
                 return;
             }
 
@@ -51,8 +59,7 @@ namespace TigerNET.AST
             }
 
             //Chequeamos que ambas expresiones retornen el mismo tipo (en Tiger)
-            if (Left.ReturnType != Right.ReturnType)
-            {
+            if (Left.ReturnType != Right.ReturnType) {
                 errors.Add(new OperatorError(Line, Column, OperatorName, Left.ReturnType, Right.ReturnType));
                 return;
             }
@@ -88,7 +95,7 @@ namespace TigerNET.AST
         }
 
         protected string GetNoValueMessage(string expressionName) {
-            return string.Format(NoValueMessage, expressionName);   
+            return string.Format(NoValueMessage, expressionName);
         }
     }
 }

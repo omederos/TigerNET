@@ -11,6 +11,7 @@ namespace TigerNET.Tests.Parser {
             string name = Utils.GetName(dec);
             string type = Utils.GetType(dec);
             ExpressionNode body = Utils.GetBody(dec);
+            Assert.That(body.Parent == dec);
             Assert.AreEqual(name, "a");
             Assert.AreEqual(type, "int");
             Assert.IsInstanceOf<PlusOperatorNode>(body);
@@ -24,6 +25,7 @@ namespace TigerNET.Tests.Parser {
             string name = Utils.GetName(dec);
             string type = Utils.GetType(dec);
             ExpressionNode body = Utils.GetBody(dec);
+            Assert.That(body.Parent == dec);
             Assert.AreEqual(name, "a");
             Assert.AreEqual(type, null);
             Assert.IsInstanceOf<PlusOperatorNode>(body);

@@ -21,6 +21,8 @@ namespace TigerNET.Tests.Parser {
             FieldAssignmentNode field1 = fields[0];
             Assert.AreEqual(field1.FieldName, "a");
             Assert.IsInstanceOf<IntegerLiteralNode>(field1.Body);
+            Assert.That(field1.Parent == ast);
+            Assert.That(field1.Body.Parent == field1);
         }
 
         [Test]
@@ -32,9 +34,13 @@ namespace TigerNET.Tests.Parser {
             FieldAssignmentNode field1 = fields[0];
             Assert.AreEqual(field1.FieldName, "a");
             Assert.IsInstanceOf<IntegerLiteralNode>(field1.Body);
+            Assert.That(field1.Parent == ast);
+            Assert.That(field1.Body.Parent == field1);
             FieldAssignmentNode field2 = fields[1];
             Assert.AreEqual(field2.FieldName, "b");
             Assert.IsInstanceOf<StringLiteralNode>(field2.Body);
+            Assert.That(field2.Parent == ast);
+            Assert.That(field2.Body.Parent == field2);
         }
     }
 }

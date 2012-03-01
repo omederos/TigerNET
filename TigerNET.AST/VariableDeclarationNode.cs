@@ -14,6 +14,7 @@ namespace TigerNET.AST {
         public VariableDeclarationNode(string name, ExpressionNode body, string type = null) : base(name) {
             Body = body;
             Type = type;
+            Body.Parent = this;
         }
 
         public override void GenerateCode() {

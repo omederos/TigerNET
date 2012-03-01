@@ -11,6 +11,9 @@ namespace TigerNET.Tests.Parser {
             Assert.IsInstanceOf<IntegerLiteralNode>(cond);
             ExpressionNode body = Utils.GetBody(ast);
             Assert.IsInstanceOf<IntegerLiteralNode>(body);
+            Assert.That(cond.Parent == ast);
+            Assert.That(body.Parent == ast);
+
         }
 
         [Test]
@@ -21,6 +24,8 @@ namespace TigerNET.Tests.Parser {
             Assert.IsInstanceOf<WhileNode>(cond);
             ExpressionNode body = Utils.GetBody(ast);
             Assert.IsInstanceOf<IntegerLiteralNode>(body);
+            Assert.That(cond.Parent == ast);
+            Assert.That(body.Parent == ast);
         }
     }
 }

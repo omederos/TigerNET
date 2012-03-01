@@ -24,6 +24,7 @@ namespace TigerNET.AST
         public RecordAccessNode(ExpressionNode left, string fieldName) {
             Left = left;
             FieldName = fieldName;
+            Left.Parent = this;
         }
 
         public override void GenerateCode() {

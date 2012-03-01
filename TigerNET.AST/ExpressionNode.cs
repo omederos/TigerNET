@@ -22,6 +22,8 @@ namespace TigerNET.AST {
         /// </summary>
         public TigerType ReturnType { get; set; }
 
+        public ExpressionNode Parent { get; set; }
+
         /// <summary>
         /// Comprueba si el nodo actual retorna algun tipo
         /// </summary>

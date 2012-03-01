@@ -12,11 +12,15 @@ namespace TigerNET.AST {
         public ExpressionNode ExpressionFinal { get; set; }
         public ExpressionNode Body { get; set; }
 
-        public ForToDoNode(string variableName, ExpressionNode expressionInitial, ExpressionNode expressionFinal, ExpressionNode Body) {
+        public ForToDoNode(string variableName, ExpressionNode expressionInitial, ExpressionNode expressionFinal, ExpressionNode body) {
             VariableName = variableName;
             ExpressionInitial = expressionInitial;
             ExpressionFinal = expressionFinal;
-            this.Body = Body;
+            Body = body;
+            ExpressionInitial.Parent = this;
+            ExpressionFinal.Parent = this;
+            Body.Parent = this;
+
         }
 
         public override void GenerateCode()

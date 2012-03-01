@@ -14,6 +14,10 @@ namespace TigerNET.Tests.Parser {
             Assert.IsInstanceOf<IntegerLiteralNode>(cond);
             Assert.IsInstanceOf<IntegerLiteralNode>(then);
             Assert.IsInstanceOf<IntegerLiteralNode>(els);
+            Assert.That(cond.Parent == ast);
+            Assert.That(then.Parent == ast);
+            Assert.That(els.Parent == ast);
+
         }
 
         [Test]
@@ -26,6 +30,8 @@ namespace TigerNET.Tests.Parser {
             Assert.IsInstanceOf<IntegerLiteralNode>(cond);
             Assert.IsInstanceOf<IntegerLiteralNode>(then);
             Assert.AreEqual(els, null);
+            Assert.That(cond.Parent == ast);
+            Assert.That(then.Parent == ast);
         }
     }
 }

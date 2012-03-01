@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using TigerNET.AST;
 
@@ -12,6 +13,11 @@ namespace TigerNET.Tests.Parser {
             Assert.AreEqual(name, "f");
             IList<ExpressionNode> parameters = Utils.GetParameters(ast);
             Assert.AreEqual(parameters.Count, 0);
+            Assert.That(ParentIs(parameters, ast));
+        }
+
+        private bool ParentIs(IList<ExpressionNode> parameters, ExpressionNode parent ) {
+            return parameters.All(p => p.Parent == parent);
         }
 
         [Test]
@@ -23,6 +29,7 @@ namespace TigerNET.Tests.Parser {
             IList<ExpressionNode> parameters = Utils.GetParameters(ast);
             Assert.AreEqual(parameters.Count, 1);
             Assert.IsInstanceOf<IntegerLiteralNode>(parameters[0]);
+            Assert.That(ParentIs(parameters, ast));
         }
 
         [Test]
@@ -34,6 +41,7 @@ namespace TigerNET.Tests.Parser {
             IList<ExpressionNode> parameters = Utils.GetParameters(ast);
             Assert.AreEqual(parameters.Count, 1);
             Assert.IsInstanceOf<CallableNode>(parameters[0]);
+            Assert.That(ParentIs(parameters, ast));
         }
 
         [Test]
@@ -47,6 +55,7 @@ namespace TigerNET.Tests.Parser {
             Assert.IsInstanceOf<CallableNode>(parameters[0]);
             IList<ExpressionNode> parameters2 = Utils.GetParameters(parameters[0]);
             Assert.AreEqual(parameters2.Count, 2);
+            Assert.That(ParentIs(parameters, ast));
         }
     }
 }

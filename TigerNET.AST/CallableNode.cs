@@ -15,6 +15,9 @@ namespace TigerNET.AST
         public CallableNode(string name, IList<ExpressionNode> parameters) {
             Name = name;
             Parameters = parameters;
+            foreach (var p in parameters) {
+                p.Parent = this;
+            }
         }
 
         public override void GenerateCode() {

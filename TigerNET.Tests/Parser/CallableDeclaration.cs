@@ -12,6 +12,7 @@ namespace TigerNET.Tests.Parser {
             string name = Utils.GetName(dec);
             string type = Utils.GetType(dec);
             ExpressionNode body = Utils.GetBody(dec);
+            Assert.That(body.Parent == dec);
             IList<TypeField> fields = Utils.GetFields(dec);
             Assert.AreEqual(name, "f");
             Assert.AreEqual(type, null);
@@ -27,6 +28,7 @@ namespace TigerNET.Tests.Parser {
             string name = Utils.GetName(dec);
             string type = Utils.GetType(dec);
             ExpressionNode body = Utils.GetBody(dec);
+            Assert.That(body.Parent == dec);
             IList<TypeField> fields = Utils.GetFields(dec);
             Assert.AreEqual(name, "f");
             Assert.AreEqual(type, "int");
@@ -42,6 +44,7 @@ namespace TigerNET.Tests.Parser {
             string name = Utils.GetName(dec);
             string type = Utils.GetType(dec);
             ExpressionNode body = Utils.GetBody(dec);
+            Assert.That(body.Parent == dec);
             IList<TypeField> fields = Utils.GetFields(dec);
             Assert.AreEqual(name, "f");
             Assert.AreEqual(type, null);
@@ -61,6 +64,7 @@ namespace TigerNET.Tests.Parser {
             string name = Utils.GetName(dec);
             string type = Utils.GetType(dec);
             ExpressionNode body = Utils.GetBody(dec);
+            Assert.That(body.Parent == dec);
             IList<TypeField> fields = Utils.GetFields(dec);
             Assert.AreEqual(name, "f");
             Assert.AreEqual(type, "int");

@@ -9,7 +9,7 @@ namespace TigerNET.Tests.Parser {
         public void VariableAccessNode_X() {
             ExpressionNode ast = Utils.BuildAST("x");
             Assert.IsInstanceOf<VariableAccessNode>(ast);
-
+            Assert.That(ast.Parent == null);
             string name = Utils.GetName(ast);
             Assert.AreEqual(name, "x");
         }
@@ -24,7 +24,7 @@ namespace TigerNET.Tests.Parser {
             Assert.IsInstanceOf<RecordAccessNode>(ast);
             string fieldName = Utils.GetFieldName(ast);
             ExpressionNode left = Utils.GetLeft(ast);
-
+            Assert.That(left.Parent == ast);
             Assert.AreEqual(fieldName, "y");
             Assert.IsInstanceOf<VariableAccessNode>(left);
         }
@@ -61,6 +61,8 @@ namespace TigerNET.Tests.Parser {
             Assert.IsInstanceOf<ArrayAccessNode>(ast);
             ExpressionNode index = Utils.GetIndex(ast);
             ExpressionNode left = Utils.GetLeft(ast);
+            Assert.That(index.Parent == ast);
+            Assert.That(left.Parent == ast);
 
             Assert.IsInstanceOf<VariableAccessNode>(left);
             Assert.IsInstanceOf<IntegerLiteralNode>(index);

@@ -12,6 +12,8 @@ namespace TigerNET.Tests.Parser {
             Assert.AreEqual(declarations.Count, 2);
             Assert.IsInstanceOf<VariableDeclarationNode>(declarations[0]);
             Assert.IsInstanceOf<VariableDeclarationNode>(declarations[1]);
+            Assert.That(declarations[0].Parent == ast);
+            Assert.That(declarations[1].Parent == ast);
         }
 
         [Test]
@@ -21,6 +23,7 @@ namespace TigerNET.Tests.Parser {
             IList<DeclarationNode> declarations = Utils.GetDeclarations(ast);
             Assert.AreEqual(declarations.Count, 1);
             Assert.IsInstanceOf<VariableDeclarationNode>(declarations[0]);
+            Assert.That(declarations[0].Parent == ast);
         }
 
         [Test]
@@ -33,6 +36,10 @@ namespace TigerNET.Tests.Parser {
             ExpressionSequenceNode expressions = Utils.GetExpressions(ast);
             Assert.AreEqual(expressions.Sequence.Count, 1);
             Assert.IsInstanceOf<CallableNode>(expressions.Sequence[0]);
+
+            Assert.That(declarations[0].Parent == ast);
+            Assert.That(expressions.Parent == ast);
+            Assert.That(expressions.Sequence[0].Parent == expressions);
         }
 
         [Test]
@@ -46,6 +53,11 @@ namespace TigerNET.Tests.Parser {
             Assert.AreEqual(expressions.Sequence.Count, 2);
             Assert.IsInstanceOf<CallableNode>(expressions.Sequence[0]);
             Assert.IsInstanceOf<CallableNode>(expressions.Sequence[1]);
+
+            Assert.That(declarations[0].Parent == ast);
+            Assert.That(expressions.Parent == ast);
+            Assert.That(expressions.Sequence[0].Parent == expressions);
+            Assert.That(expressions.Sequence[1].Parent == expressions);
         }
     }
 }

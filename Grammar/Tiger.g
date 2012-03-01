@@ -231,7 +231,7 @@ idAux [string id] returns [ExpressionNode node]
 	);
 exprSeq	returns [ExpressionSequenceNode node] 
 @init {$node = new ExpressionSequenceNode();}
-:	e1 = expr_or {((ExpressionSequenceNode)$node).Sequence.Add($e1.node); }(DotComma e2 = expr_or {((ExpressionSequenceNode)$node).Sequence.Add($e2.node); })*; /* una o mas expresiones separadas por punto y coma (;) */
+:	e1 = expr_or {((ExpressionSequenceNode)$node).AddToSequence($e1.node); }(DotComma e2 = expr_or {((ExpressionSequenceNode)$node).AddToSequence($e2.node); })*; /* una o mas expresiones separadas por punto y coma (;) */
 
 exprList returns [IList<ExpressionNode> items]	
 @init {items = new List<ExpressionNode>();}

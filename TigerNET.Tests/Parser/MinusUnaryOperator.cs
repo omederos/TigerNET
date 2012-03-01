@@ -8,6 +8,7 @@ namespace TigerNET.Tests.Parser {
             ExpressionNode ast = Utils.BuildAST("-0");
             Assert.IsInstanceOf<MinusUnaryOperatorNode>(ast);
             ExpressionNode body = Utils.GetBody(ast);
+            Assert.That(body.Parent == ast);
             Assert.IsInstanceOf<IntegerLiteralNode>(body);
         }
     }

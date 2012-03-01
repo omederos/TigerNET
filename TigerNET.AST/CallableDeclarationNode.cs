@@ -26,6 +26,7 @@ namespace TigerNET.AST
             Fields = fields;
             Type = type;
             Body = body;
+            Body.Parent = this;
         }
 
         public override void GenerateCode() {

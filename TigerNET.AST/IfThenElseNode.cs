@@ -13,6 +13,11 @@ namespace TigerNET.AST {
             Condition = condition;
             ThenBody = thenBody;
             ElseBody = elseBody;
+            Condition.Parent = this;
+            ThenBody.Parent = this;
+            if (ElseBody != null) {
+                ElseBody.Parent = this;
+            }
         }
 
         public override void GenerateCode() {

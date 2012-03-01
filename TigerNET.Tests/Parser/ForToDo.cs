@@ -15,6 +15,9 @@ namespace TigerNET.Tests.Parser {
             Assert.IsInstanceOf<PlusOperatorNode>(initial);
             Assert.IsInstanceOf<ExpressionSequenceNode>(final);
             Assert.IsInstanceOf<ExpressionSequenceNode>(body);
+            Assert.That(initial.Parent == ast);
+            Assert.That(final.Parent == ast);
+            Assert.That(body.Parent == ast);
         }
     }
 }

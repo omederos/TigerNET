@@ -22,6 +22,8 @@ namespace TigerNET.AST
         public ArrayAccessNode(ExpressionNode left, ExpressionNode index) {
             Left = left;
             Index = index;
+            Left.Parent = this;
+            Index.Parent = this;
         }
 
         public override void GenerateCode() {

@@ -6,6 +6,7 @@
 
         protected UnaryOperatorNode(ExpressionNode body) {
             Body = body;
+            Body.Parent = this;
         }
     }
 }

@@ -11,11 +11,13 @@ namespace TigerNET.AST
     {
         public IList<ExpressionNode> Sequence { get; set; }
 
-        public ExpressionSequenceNode(IList<ExpressionNode> sequence) {
-            Sequence = sequence;
+        public ExpressionSequenceNode() {
+            Sequence = new List<ExpressionNode>();
         }
-        public ExpressionSequenceNode() : this(new List<ExpressionNode>())
-        {
+
+        public void AddToSequence(ExpressionNode expr) {
+            expr.Parent = this;
+            Sequence.Add(expr);
         }
 
         public override void GenerateCode() {

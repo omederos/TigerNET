@@ -14,6 +14,7 @@ namespace TigerNET.AST
 
         protected AssignmentBaseNode(ExpressionNode body ) {
             Body = body;
+            Body.Parent = this;
         }
     }
 }

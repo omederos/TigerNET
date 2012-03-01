@@ -17,6 +17,9 @@ namespace TigerNET.AST
 
         public RecordLiteralNode(string name, IList<FieldAssignmentNode> fields) : base(name) {
             Fields = fields;
+            foreach (var f in Fields) {
+                f.Parent = this;
+            }
         }
 
         public override void GenerateCode() {

@@ -12,6 +12,8 @@ namespace TigerNET.AST {
         public WhileNode(ExpressionNode condition, ExpressionNode body) {
             Condition = condition;
             Body = body;
+            Condition.Parent = this;
+            Body.Parent = this;
         }
 
         public override void GenerateCode()

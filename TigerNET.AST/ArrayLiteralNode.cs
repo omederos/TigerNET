@@ -22,6 +22,8 @@ namespace TigerNET.AST
         public ArrayLiteralNode(string name,  ExpressionNode count, ExpressionNode initialValue) : base(name) {
             Count = count;
             InitialValue = initialValue;
+            Count.Parent = this;
+            InitialValue.Parent = this;
         }
 
         public override void GenerateCode() {

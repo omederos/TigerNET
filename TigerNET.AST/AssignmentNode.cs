@@ -20,6 +20,7 @@ namespace TigerNET.AST
 
         public AssignmentNode(AccessNode left, ExpressionNode body) : base(body) {
             Left = left;
+            Left.Parent = this;
         }
 
         public override void GenerateCode() {

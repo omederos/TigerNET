@@ -19,6 +19,7 @@ namespace TigerNET.Tests.Parser {
             IList<ExpressionNode> seq = Utils.GetSequence(ast);
             Assert.AreEqual(seq.Count, 1);
             Assert.IsInstanceOf<IntegerLiteralNode>(seq[0]);
+            Assert.That(seq[0].Parent == ast);
         }
 
         [Test]
@@ -28,6 +29,7 @@ namespace TigerNET.Tests.Parser {
             IList<ExpressionNode> seq = Utils.GetSequence(ast);
             Assert.AreEqual(seq.Count, 1);
             Assert.IsInstanceOf<CallableNode>(seq[0]);
+            Assert.That(seq[0].Parent == ast);
         }
 
         [Test]
@@ -38,6 +40,8 @@ namespace TigerNET.Tests.Parser {
             Assert.AreEqual(seq.Count, 2);
             Assert.IsInstanceOf<IntegerLiteralNode>(seq[0]);
             Assert.IsInstanceOf<IntegerLiteralNode>(seq[1]);
+            Assert.That(seq[0].Parent == ast);
+            Assert.That(seq[1].Parent == ast);
         }
 
         [Test]
@@ -48,6 +52,8 @@ namespace TigerNET.Tests.Parser {
             Assert.AreEqual(seq.Count, 2);
             Assert.IsInstanceOf<ExpressionSequenceNode>(seq[0]);
             Assert.IsInstanceOf<ExpressionSequenceNode>(seq[1]);
+            Assert.That(seq[0].Parent == ast);
+            Assert.That(seq[1].Parent == ast);
         }
     }
 }
