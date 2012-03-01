@@ -46,6 +46,16 @@ namespace TigerNET.AST
             if (errorsCount != errors.Count) {
                 return;
             }
+
+            //Si 'Left' es una variable, y es de solo lectura => Error!
+            if (Left is VariableAccessNode) {
+                var varAccessNode = (VariableAccessNode) Left;
+                //Buscamos la variable a la que estamos accediendo en el scope
+                var variable = scope.GetVariable(varAccessNode.Name);
+                if (variable.ReadOnly) {
+                    errors.Add(new MessageError(Line, Column, string.Format("Cannot assign value to read-only variable '{0}'", variable.Name)));
+                }
+            }
             
             //Si el tipo de retorno es diferente
             //TODO: Aceptar nil si es array, record o string!

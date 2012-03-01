@@ -41,8 +41,6 @@ end");
             Assert.That(Errors.Count == 1);
             Assert.That(ast.ReturnType == null);
         }
-
-
         [Test]
         public void Assign_Nil_To_Record()
         {
@@ -162,6 +160,14 @@ end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 1);
             Assert.That(Errors[0] is UnexpectedTypeError);
+        }
+        [Test]
+        public void Assign_To_ReadOnly_Variable()
+        {
+            Scope.Add("readonly", IntegerType.Create(), true);
+            var ast = Utils.BuildAST(@"readonly := 10");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 1);
         }
     }
 }
