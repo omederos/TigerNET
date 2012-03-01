@@ -31,7 +31,7 @@ namespace TigerNET.AST
             else {
                 var variable = scope.GetVariable(Name);
                 //Asignamos el tipo de retorno
-                ReturnType = variable;
+                ReturnType = variable.Type;
             }
         }
     }

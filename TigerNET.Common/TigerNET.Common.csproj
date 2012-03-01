@@ -65,6 +65,7 @@
     <Compile Include="Types\RecordType.cs" />
     <Compile Include="Types\StringType.cs" />
     <Compile Include="Types\TigerType.cs" />
+    <Compile Include="Types\Variable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

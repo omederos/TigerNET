@@ -9,7 +9,7 @@ namespace TigerNET.Common
     public class Scope {
         public Scope(Scope parent) {
             DefinedTypes = new Dictionary<string, TigerType>();
-            DefinedVariables = new Dictionary<string, TigerType>();
+            DefinedVariables = new Dictionary<string, Variable>();
             DefinedCallables = new Dictionary<string, Callable>();
             Parent = parent;
         }
@@ -22,7 +22,7 @@ namespace TigerNET.Common
         public Scope Parent { get; set; }
 
         public IDictionary<string, TigerType> DefinedTypes { get; set; }
-        public IDictionary<string, TigerType> DefinedVariables { get; set; }
+        public IDictionary<string, Variable> DefinedVariables { get; set; }
         public IDictionary<string, Callable> DefinedCallables { get; set; }
 
         /// <summary>
@@ -114,11 +114,12 @@ namespace TigerNET.Common
         /// </summary>
         /// <param name="variable">Variable a anadir</param>
         /// <param name="type">Tipo que almacenara esa variable</param>
-        public void Add(string variable, TigerType type) {
+        /// <param name="readOnly">Especifica si la variable sera de solo lectura o no (eg. la del 'for')</param>
+        public void Add(string variable, TigerType type, bool readOnly = false) {
             if (DefinedVariables.ContainsKey(variable)) {
                 throw new Exception("La variable ya existe");
             }
-            DefinedVariables.Add(variable, type);
+            DefinedVariables.Add(variable, new Variable(variable, type, readOnly));
         }
 
         /// <summary>
@@ -180,7 +181,7 @@ namespace TigerNET.Common
             return Exists(variableName, (x, scope) => scope.DefinedVariables.ContainsKey(x), lookInAncestors);
         }
 
-        public TigerType GetVariable(string name, bool lookInAncestors = true) {
+        public Variable GetVariable(string name, bool lookInAncestors = true) {
             if (!ExistsVariable(name, lookInAncestors))
             {
                 throw new Exception(string.Format("La variable {0} no existe", name));

@@ -85,7 +85,7 @@ namespace TigerNET.Tests.Semantic
             Assert.That(ast.CurrentScope.DefinedTypes["a"] is RecordType);
             Assert.That(ast.CurrentScope.DefinedTypes["b"] is RecordType);
             Assert.That(ast.CurrentScope.DefinedTypes["c"] is RecordType);
-            Assert.That(ast.CurrentScope.DefinedVariables["x"] is IntegerType);
+            Assert.That(ast.CurrentScope.DefinedVariables["x"].Type is IntegerType);
             Assert.That(ast.CurrentScope.DefinedTypes["h"] is IntegerType);
             Assert.That(ast.CurrentScope.DefinedTypes["i"] is IntegerType);
             Assert.That(ast.CurrentScope.DefinedTypes["j"] is IntegerType);
