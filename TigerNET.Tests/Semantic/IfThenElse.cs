@@ -51,6 +51,19 @@ namespace TigerNET.Tests.Semantic
             Assert.That(Errors.Count == 0);
             Assert.That(!ast.ReturnsValue());
         }
+        
+        [Test]
+        public void Then_Returns_Record_Else_Returns_Nil()
+        {
+            var ast = Utils.BuildAST(@"
+let 
+    type x = {x : int}
+in 
+    if 1 < 2 then x{x = 0} else nil
+end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 0);
+        }
 
     }
 }
