@@ -85,7 +85,7 @@ namespace TigerNET.Tests.Semantic
             ast.CheckSemantic(Scope, Errors);
 
             Assert.That(Errors.Count == 1);
-            Assert.That(Errors[0] is NotMatchingTypesError);
+            Assert.That(Errors[0] is UnexpectedTypeError);
         }
 
         [Test]

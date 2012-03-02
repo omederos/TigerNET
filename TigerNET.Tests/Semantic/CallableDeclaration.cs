@@ -74,7 +74,7 @@ namespace TigerNET.Tests.Semantic
             var ast = (LetInEndNode)Utils.BuildAST("let function f() : string = 1 in end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 1);
-            Assert.That(Errors[0] is NotMatchingTypesError);
+            Assert.That(Errors[0] is UnexpectedTypeError);
             Assert.That(!ast.CurrentScope.ExistsVariableOrCallable("f"));
         }
 
@@ -86,6 +86,22 @@ namespace TigerNET.Tests.Semantic
             Assert.That(Errors.Count == 1);
             Assert.That(Errors[0] is UndefinedTypeError);
             Assert.That(!ast.CurrentScope.ExistsVariableOrCallable("f"));
+        }
+
+        [Test]
+        public void Function_Return_Nil_OK()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST("let type record = {x : int} function f() : record = nil in end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 0);
+        }
+        [Test]
+        public void Function_Return_Nil_NotAccepted()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST("let function f() : int = nil in end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 1);
+            Assert.That(Errors[0] is UnexpectedTypeError);
         }
 
         [Test]

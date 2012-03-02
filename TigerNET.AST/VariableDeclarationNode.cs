@@ -56,7 +56,7 @@ namespace TigerNET.AST {
                 if (Body.ReturnType != resultType) {
                     //Debemos chequear el caso se este asignando Nil a un tipo que lo permita
                     if (!(Body.ReturnType is NilType) || !NilType.CanBeAssignedTo(resultType)) {
-                        errors.Add(new NotMatchingTypesError(Line, Column, resultType, Body.ReturnType));
+                        errors.Add(new UnexpectedTypeError(Line, Column, resultType, Body.ReturnType));
                     }
                     
                 }

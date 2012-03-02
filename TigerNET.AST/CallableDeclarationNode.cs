@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TigerNET.Common;
 using TigerNET.Common.Errors;
+using TigerNET.Common.Types;
 
 namespace TigerNET.AST
 {
@@ -122,7 +123,10 @@ namespace TigerNET.AST
                 //Comprobamos que el tipo del cuerpo de la funcion sea igual al especificado
                 else if (type != Body.ReturnType)
                 {
-                    errors.Add(new NotMatchingTypesError(Line, Column, type, Body.ReturnType));
+                    //Si no pasa que el tipo es 'nil' y puede ser asignado (es decir, si el tipo no es 'nil', o si el tipo es 'nil' y no puede ser asignado
+                    if (!(Body.ReturnType is NilType && NilType.CanBeAssignedTo(type))) {
+                        errors.Add(new UnexpectedTypeError(Line, Column, type, Body.ReturnType));
+                    }
                 }
                 //TODO: Es posible retornar Nil aqui?
             }
