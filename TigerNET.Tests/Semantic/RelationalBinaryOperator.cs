@@ -12,9 +12,9 @@ namespace TigerNET.Tests.Semantic
     public class RelationalBinaryOperator : SemanticTest
     {
         private string[] _compOperators = {  ">", ">=", "<", "<="};
-        IEnumerable<ExpressionNode> GetASTs(string expression)
+        IEnumerable<ExpressionNode> GetASTs(string expression, string[] operators = null)
         {
-            foreach (var op in _compOperators)
+            foreach (var op in operators ?? _compOperators)
             {
                 yield return Utils.BuildAST(string.Format(expression, op));
             }
@@ -66,6 +66,94 @@ namespace TigerNET.Tests.Semantic
             {
                 ast.CheckSemantic(Scope, Errors);
                 Assert.That(Errors.Count == 0);
+                Assert.That(ast.ReturnType is IntegerType);
+                Errors.Clear();
+            }
+        }
+
+        [Test]
+        public void Comp_Nil_Record()
+        {
+            var asts = GetASTs("let type x = {{x : int}} var i := x{{ x = 0 }} in nil{0}i", new[] {"=", "<>"});
+            foreach (var ast in asts)
+            {
+                ast.CheckSemantic(Scope, Errors);
+                Assert.That(Errors.Count == 0);
+                Assert.That(ast.ReturnType is IntegerType);
+                Errors.Clear();
+            }
+        }
+
+        [Test]
+        public void Comp_Record_Nil()
+        {
+            var asts = GetASTs("let type x = {{x : int}} var i := x{{ x = 0 }} in i{0}nil", new[] {"=", "<>"});
+            foreach (var ast in asts)
+            {
+                ast.CheckSemantic(Scope, Errors);
+                Assert.That(Errors.Count == 0);
+                Assert.That(ast.ReturnType is IntegerType);
+                Errors.Clear();
+            }
+        }
+        [Test]
+        public void Comp_Nil_Array()
+        {
+            var asts = GetASTs("let type x = array of int var i := x[10] of 0 in i{0}nil", new[] {"=", "<>"});
+            foreach (var ast in asts)
+            {
+                ast.CheckSemantic(Scope, Errors);
+                Assert.That(Errors.Count == 0);
+                Assert.That(ast.ReturnType is IntegerType);
+                Errors.Clear();
+            }
+        }
+
+        [Test]
+        public void Comp_Array_Nil()
+        {
+            var asts = GetASTs("let type x = array of int var i := x[10] of 0 in i{0}nil", new[] {"=", "<>"});
+            foreach (var ast in asts)
+            {
+                ast.CheckSemantic(Scope, Errors);
+                Assert.That(Errors.Count == 0);
+                Assert.That(ast.ReturnType is IntegerType);
+                Errors.Clear();
+            }
+        }
+        [Test]
+        public void Comp_String_Nil()
+        {
+            var asts = GetASTs(@"""hello""{0}nil");
+            foreach (var ast in asts)
+            {
+                ast.CheckSemantic(Scope, Errors);
+                Assert.That(Errors.Count == 0);
+                Assert.That(ast.ReturnType is IntegerType);
+                Errors.Clear();
+            }
+        }
+        [Test]
+        public void Comp_Nil_String()
+        {
+            var asts = GetASTs(@"nil{0}""hello""");
+            foreach (var ast in asts)
+            {
+                ast.CheckSemantic(Scope, Errors);
+                Assert.That(Errors.Count == 0);
+                Assert.That(ast.ReturnType is IntegerType);
+                Errors.Clear();
+            }
+        }
+
+        [Test]
+        public void Comp_Nil_Int()
+        {
+            var asts = GetASTs(@"nil{0}0");
+            foreach (var ast in asts)
+            {
+                ast.CheckSemantic(Scope, Errors);
+                Assert.That(Errors.Count == 1);
                 Assert.That(ast.ReturnType is IntegerType);
                 Errors.Clear();
             }

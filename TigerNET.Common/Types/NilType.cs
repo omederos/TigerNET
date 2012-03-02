@@ -12,6 +12,9 @@ namespace TigerNET.Common.Types {
         public static bool CanBeAssignedTo(TigerType type) {
             return type is RecordType || type is ArrayType || type is StringType;
         }
+        public static bool CanBeAssignedTo(Type type) {
+            return type == typeof(RecordType) || type == typeof(ArrayType) || type == typeof(StringType);
+        }
 
         public override string ToString() {
             return "nil";

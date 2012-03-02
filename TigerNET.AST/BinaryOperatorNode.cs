@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TigerNET.Common;
 using TigerNET.Common.Errors;
 using TigerNET.Common.Types;
@@ -58,15 +59,31 @@ namespace TigerNET.AST {
                 return;
             }
 
-            //Chequeamos que ambas expresiones retornen el mismo tipo (en Tiger)
-            if (Left.ReturnType != Right.ReturnType) {
-                errors.Add(new OperatorError(Line, Column, OperatorName, Left.ReturnType, Right.ReturnType));
-                return;
-            }
-
             //Comprobamos que ambas expresiones sean del tipo permitido por este nodo
             CheckIfAreTypesAllowed(errors);
 
+            if (errorsCount != errors.Count) {
+                return;
+            }
+
+            //Chequeamos que ambas expresiones retornen el mismo tipo (en Tiger)
+            if (Left.ReturnType != Right.ReturnType) {
+                //Si no retornan el mismo tipo, pero si un tipo es nil
+                if (Left.ReturnType is NilType || Right.ReturnType is NilType) {
+                    //Comprobamos que el otro tipo sea 'compatible' con nil
+                    var nonNilType = Left.ReturnType is NilType ? Right.ReturnType : Left.ReturnType;
+                    if (!NilType.CanBeAssignedTo(nonNilType)) {
+                        errors.Add(new OperatorError(Line, Column, OperatorName, Left.ReturnType, Right.ReturnType));
+                    }
+                }
+                else {
+                    errors.Add(new OperatorError(Line, Column, OperatorName, Left.ReturnType, Right.ReturnType));
+                }
+            }
+            //Si ambos tipos son nil
+            else if (Left.ReturnType is NilType && Right.ReturnType is NilType) {
+                errors.Add(new MessageError(Line, Column, "The type of the two expressions cannot be inferred because 'nil' was used"));
+            }
             //El tipo de retorno de esta expresion sera entero
             ReturnType = IntegerType.Create();
         }
@@ -77,17 +94,31 @@ namespace TigerNET.AST {
 
             foreach (var allowedType in AllowedTypes) {
                 //Comparamos si son del mismo tipo (TigerType)
-                if (Left.ReturnType.GetType() == allowedType) {
+                if (Left.ReturnType.GetType() == allowedType)
+                {
+                    foundLeft = true;
+                }
+                //Sino, comprobamos que sea 'nil', y en caso de serlo, vemos si alguno de los tipos que acepta este nodo como operandos permite 'nil'
+                else if (Left.ReturnType is NilType && IsNilAccepted()) {
                     foundLeft = true;
                 }
                 if (Right.ReturnType.GetType() == allowedType) {
                     foundRight = true;
                 }
+                else if (Right.ReturnType is NilType && IsNilAccepted())
+                {
+                    foundRight = true;
+                }
             }
 
+            //Si alguno de los dos tipos no esta permitido...
             if (!foundLeft || !foundRight) {
                 errors.Add(new OperatorError(Line, Column, OperatorName, Left.ReturnType, Right.ReturnType));
             }
+        }
+
+        private bool IsNilAccepted() {
+            return AllowedTypes.Any(allowedType => NilType.CanBeAssignedTo(allowedType));
         }
 
         protected string GetNoTypeMessage(string expressionName, string typeName) {

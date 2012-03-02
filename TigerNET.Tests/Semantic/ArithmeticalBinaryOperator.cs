@@ -63,5 +63,17 @@ namespace TigerNET.Tests.Semantic
                 Errors.Clear();
             }
         }
+        [Test]
+        public void Nil_String()
+        {
+            var asts = GetASTs(@"nil{0}""Oscar""");
+            foreach (var ast in asts)
+            {
+                ast.CheckSemantic(Scope, Errors);
+                Assert.That(Errors.Count == 1);
+                Assert.That(Errors[0] is OperatorError);
+                Errors.Clear();
+            }
+        }
     }
 }
