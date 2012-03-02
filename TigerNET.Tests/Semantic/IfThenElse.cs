@@ -49,7 +49,7 @@ namespace TigerNET.Tests.Semantic
             var ast = Utils.BuildAST("if 1 < 2 then () else (2;())");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.ReturnType == null);
+            Assert.That(!ast.ReturnsValue());
         }
 
     }

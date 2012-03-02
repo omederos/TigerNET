@@ -4,7 +4,7 @@ using TigerNET.Common;
 using TigerNET.Common.Errors;
 
 namespace TigerNET.AST {
-    public class WhileNode : ControlNode
+    public class WhileNode : LoopNode
     {
         public ExpressionNode Condition { get; set; }
         public ExpressionNode Body { get; set; }

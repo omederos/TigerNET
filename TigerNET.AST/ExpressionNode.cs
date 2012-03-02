@@ -9,6 +9,11 @@ using TigerNET.Common.Types;
 namespace TigerNET.AST {
     public abstract class ExpressionNode {
         /// <summary>
+        /// Indica si este nodo tiene como ancestro a un 'while/for' y como descendiente a un 'break'
+        /// </summary>
+        public bool IsBreakable { get; set; }
+
+        /// <summary>
         /// Linea del fichero donde aparece este nodo
         /// </summary>
         public int Line { get; set; }
@@ -29,7 +34,7 @@ namespace TigerNET.AST {
         /// </summary>
         /// <returns>True si retorna algun tipo. False en otro caso</returns>
         public bool ReturnsValue() {
-            return ReturnType != null;
+            return ReturnType != null && !IsBreakable;
         }
 
         /// <summary>

@@ -231,7 +231,6 @@ namespace TigerNET.Tests.Semantic
             Assert.That(Errors[0] is UndefinedFunctionError);
         }
 
-        //TODO: Anadir pruebas para el Expression Sequence
         #region Expresion Sequence Tests
         [Test]
         public void No_Expressions()
@@ -243,7 +242,7 @@ namespace TigerNET.Tests.Semantic
                                                     end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.ReturnType == null);
+            Assert.That(!ast.ReturnsValue());
         }
 
         [Test]

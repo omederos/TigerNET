@@ -88,6 +88,12 @@ namespace TigerNET.Tests.Semantic
             Assert.That(!ast.CurrentScope.ExistsVariableOrCallable("f"));
         }
 
-        //TODO: Cuando implemente VariableAccessNode, comprobar que se acceden a los parametros de la funcion sin problema
+        [Test]
+        public void Access_Function_Parameters_In_Definition()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST("let function f(x : int ) = x := 1 in end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 0);
+        }
     }
 }

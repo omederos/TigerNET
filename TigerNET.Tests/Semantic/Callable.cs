@@ -62,7 +62,7 @@ namespace TigerNET.Tests.Semantic
                                                     end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.ReturnType == null);
+            Assert.That(!ast.ReturnsValue());
         }
     
     }

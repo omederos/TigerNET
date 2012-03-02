@@ -69,7 +69,10 @@ namespace TigerNET.AST
 
             //Que el tipo de InitialValue sea igual al tipo definido en el array
             if (array.ElementsType != InitialValue.ReturnType) {
-                errors.Add(new UnexpectedTypeError(Line, Column, InitialValue.ReturnType, array.ElementsType));
+                //Si no pasa que el tipo es 'nil' y puede ser asignado (es decir, si el tipo no es 'nil', o si el tipo es 'nil' y no puede ser asignado
+                if (!(InitialValue.ReturnType is NilType && NilType.CanBeAssignedTo(array.ElementsType))) {
+                    errors.Add(new UnexpectedTypeError(Line, Column, InitialValue.ReturnType, array.ElementsType));
+                }
             }
         }
     }

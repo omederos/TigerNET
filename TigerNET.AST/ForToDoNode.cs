@@ -5,7 +5,7 @@ using TigerNET.Common.Errors;
 using TigerNET.Common.Types;
 
 namespace TigerNET.AST {
-    public class ForToDoNode : ControlNode
+    public class ForToDoNode : LoopNode
     {
         public string VariableName { get; set; }
         public ExpressionNode ExpressionInitial { get; set; }

@@ -23,7 +23,7 @@ in
 end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.ReturnType == null);
+            Assert.That(!ast.ReturnsValue());
         }
 
         [Test]
@@ -39,7 +39,7 @@ in
 end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 1);
-            Assert.That(ast.ReturnType == null);
+            Assert.That(!ast.ReturnsValue());
         }
         [Test]
         public void Assign_Nil_To_Record()
@@ -53,7 +53,7 @@ in
 end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.ReturnType == null);
+            Assert.That(!ast.ReturnsValue());
         }
         [Test]
         public void Assign_Nil_To_String()
@@ -66,7 +66,7 @@ in
 end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.ReturnType == null);
+            Assert.That(!ast.ReturnsValue());
         }
         [Test]
         public void Assign_Nil_To_Array()
@@ -80,7 +80,7 @@ in
 end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.ReturnType == null);
+            Assert.That(!ast.ReturnsValue());
         }
         [Test]
         public void Assign_To_Array_Position()
@@ -94,7 +94,7 @@ in
 end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.ReturnType == null);
+            Assert.That(!ast.ReturnsValue());
         }
         [Test]
         public void Assign_To_Array_Position_Nil()
@@ -108,7 +108,7 @@ in
 end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.ReturnType == null);
+            Assert.That(!ast.ReturnsValue());
         }
         [Test]
         public void Assign_To_Record_Field()
@@ -123,7 +123,7 @@ in
 end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.ReturnType == null);
+            Assert.That(!ast.ReturnsValue());
         }
         [Test]
         public void Assign_Procedure_NoValue()
@@ -137,7 +137,7 @@ in
 end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 1);
-            Assert.That(ast.ReturnType == null);
+            Assert.That(!ast.ReturnsValue());
         }
         [Test]
         public void Redefine_Type_Nested_LetIn_IncorrectAssignment()

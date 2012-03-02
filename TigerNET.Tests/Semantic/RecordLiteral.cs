@@ -62,5 +62,20 @@ namespace TigerNET.Tests.Semantic
             Assert.That(Errors.Count == 1);
             Assert.That(Errors[0] is UndefinedTypeError);
         }
+
+        [Test]
+        public void Assign_Nil_To_Some_Fields()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"let
+                                                        type integers = array of int
+                                                        type school = { name : string, address : string }
+                                                        type p = { name : string, score : integers,  school : school, age : int }
+                                                    in
+                                                        p{name = nil, score = nil, school = nil, age = nil}
+                                                    end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 1);
+            Assert.That(Errors[0] is UnexpectedTypeError);
+        }
     }
 }

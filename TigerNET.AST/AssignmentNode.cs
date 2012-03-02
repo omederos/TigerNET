@@ -59,7 +59,6 @@ namespace TigerNET.AST
             }
             
             //Si el tipo de retorno es diferente
-            //TODO: Aceptar nil si es array, record o string!
             if (Body.ReturnType != Left.ReturnType) {
                 //Si se esta asignando nil, comprobar que el tipo lo permita
                 if (!(Body.ReturnType is NilType) || !NilType.CanBeAssignedTo(Left.ReturnType))

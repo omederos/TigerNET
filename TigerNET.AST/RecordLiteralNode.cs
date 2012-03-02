@@ -75,9 +75,17 @@ namespace TigerNET.AST
                 
                 //Comprobamos: 
                 // - Que la expresion retorne algun valor
-                // - Que el tipo que estamos asignando al campo coincida...
-                if (declarationField.ReturnsValue() && declarationField.ReturnType != definitionField.Value) {
-                    errors.Add(new UnexpectedTypeError(Line, Column, declarationField.ReturnType, definitionField.Value));
+                ErrorsHelper.CheckIfReturnsValue(declarationField, errors,
+                                                 string.Format(
+                                                     "The expression to be assigned to field '{0}' must return a value",
+                                                     declarationField.FieldName));
+                
+                // - Que el tipo que estamos asignando al campo coincida, o que si el tipo es 'nil', el tipo del campo lo acepte
+                if (declarationField.ReturnType != definitionField.Value) {
+                    //Si no pasa que el tipo es 'nil' y puede ser asignado (es decir, si el tipo no es 'nil', o si el tipo es 'nil' y no puede ser asignado
+                    if (!(declarationField.ReturnType is NilType && NilType.CanBeAssignedTo(definitionField.Value))) {
+                        errors.Add(new UnexpectedTypeError(Line, Column, declarationField.ReturnType, definitionField.Value));
+                    }
                 }
             }
 

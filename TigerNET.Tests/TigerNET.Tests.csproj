@@ -74,6 +74,7 @@
     <Compile Include="Semantic\Assignment.cs" />
     <Compile Include="Semantic\Callable.cs" />
     <Compile Include="Semantic\CallableDeclaration.cs" />
+    <Compile Include="Semantic\Break.cs" />
     <Compile Include="Semantic\ForToDo.cs" />
     <Compile Include="Semantic\GroupDeclarations.cs" />
     <Compile Include="Semantic\IfThenElse.cs" />

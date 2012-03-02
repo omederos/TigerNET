@@ -61,5 +61,34 @@ namespace TigerNET.Tests.Semantic
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
         }
+        
+        [Test]
+        public void Array_Of_Int_Assign_Nil()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"let
+                                                        type p = array of int
+                                                    in
+                                                        p[10] of nil
+                                                    end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 1);
+        }
+
+        [Test]
+        public void Array_Of_SomethingThatAcceptsNil_Assign_Nil()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST(@"let
+                                                        type r = { x : int }
+                                                        type p0 = array of r
+                                                        type p1 = array of string
+                                                        type p2 = array of p2
+                                                    in
+                                                        p0[10] of nil
+                                                        p1[10] of nil
+                                                        p2[10] of nil
+                                                    end");
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 0);
+        }
     }
 }
