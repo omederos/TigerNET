@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using TigerNET.Common;
 using TigerNET.Common.Errors;
@@ -16,8 +17,8 @@ namespace TigerNET.AST
             Value = value;
         }
 
-        public override void GenerateCode() {
-            throw new NotImplementedException();
+        public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
+            generator.Emit(OpCodes.Ldc_I4, Value);
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {

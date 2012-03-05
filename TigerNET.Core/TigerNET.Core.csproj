@@ -40,8 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Compiler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TigerNET.AST\TigerNET.AST.csproj">
+      <Project>{AA13FB85-8458-4F50-B26D-99F11233EADD}</Project>
+      <Name>TigerNET.AST</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TigerNET.Common\TigerNET.Common.csproj">
+      <Project>{B783BABF-1096-42D3-9E26-05486E27EAF9}</Project>
+      <Name>TigerNET.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

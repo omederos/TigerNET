@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using TigerNET.Common;
 using TigerNET.Common.Errors;
 using TigerNET.Common.Types;
@@ -13,7 +14,7 @@ namespace TigerNET.AST {
 
         public NotEqualOperatorNode() : this(null, null) {}
 
-        public override void GenerateCode() {
+        public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
             throw new NotImplementedException();
         }
     }

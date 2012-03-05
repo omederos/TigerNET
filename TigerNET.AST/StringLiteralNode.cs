@@ -17,7 +17,7 @@ namespace TigerNET.AST
             Value = value;
         }
 
-        public override void GenerateCode() {
+        public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
             throw new NotImplementedException();
         }
 

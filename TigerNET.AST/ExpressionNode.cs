@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using TigerNET.Common;
 using TigerNET.Common.Errors;
@@ -40,7 +41,9 @@ namespace TigerNET.AST {
         /// <summary>
         /// Genera el codigo asociado a este nodo
         /// </summary>
-        public abstract void GenerateCode();
+        /// <param name="generator">El ILGenerator del metodo donde se debe generar el codigo del nodo actual</param>
+        /// <param name="typeBuilder">El tipo (clase) al que pertenece el codigo que se estara generando</param>
+        public abstract void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder);
 
         /// <summary>
         /// Chequea la semantica de este nodo
