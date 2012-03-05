@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="CodeGeneration\ArithmeticalBinaryOperator.cs" />
     <Compile Include="CodeGeneration\CodeGenTest.cs" />
+    <Compile Include="CodeGeneration\LogicalOperatorNode.cs" />
     <Compile Include="CodeGeneration\MinusUnary.cs" />
     <Compile Include="Parser\Access.cs" />
     <Compile Include="Parser\ArithmeticalBinaryOperators.cs" />
