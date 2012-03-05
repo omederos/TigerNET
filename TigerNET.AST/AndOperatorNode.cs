@@ -42,33 +42,5 @@ namespace TigerNET.AST
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// Comprueba si el elemento que esta en el tope de la pila es igual a cero
-        /// Deja en la pila 0 si es igual a 0, y un numero mayor que cero si es diferente
-        /// </summary>
-        /// <param name="generator"></param>
-        private void CheckIfEqualToZero(ILGenerator generator) {
-            //Metemos el '0' para la pila
-            generator.Emit(OpCodes.Ldc_I4_0);
-            //Comparamos, y guardamos el resultado en la pila. Si el valor inicial era igual a cero, entonces habra un 1 ahora, sino un 0
-            generator.Emit(OpCodes.Ceq);
-            //Negamos el valor que esta en la pila, para que si era igual a cero el valor inicial, quede un cero...
-            Negate(generator);
-        }
-
-        private LocalBuilder GetValueFromStack(ILGenerator generator, Type type, bool peek = true) {
-            var result = generator.DeclareLocal(type);
-            generator.Emit(OpCodes.Stloc, result);
-            if (peek) {
-                generator.Emit(OpCodes.Ldloc, result);
-            }
-            return result;
-        }
-
-        private void Negate(ILGenerator generator) {
-            generator.Emit(OpCodes.Ldc_I4_0);
-            generator.Emit(OpCodes.Ceq);
-        }
     }
 }

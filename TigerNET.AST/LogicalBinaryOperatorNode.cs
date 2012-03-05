@@ -1,4 +1,7 @@
-﻿namespace TigerNET.AST
+﻿using System;
+using System.Reflection.Emit;
+
+namespace TigerNET.AST
 {
     public abstract class LogicalBinaryOperatorNode : BinaryOperatorNode
     {
