@@ -63,14 +63,21 @@ namespace TigerNET.AST {
                 if (ThenBody.ReturnType != ElseBody.ReturnType)
                 {
                     //Si alguno de los dos es nil...
-                    if (ThenBody.ReturnType is NilType || ElseBody.ReturnType is NilType) {
+                    if (ThenBody.ReturnType is NilType || ElseBody.ReturnType is NilType)
+                    {
                         var nonNilType = ThenBody.ReturnType is NilType ? ElseBody.ReturnType : ThenBody.ReturnType;
                         //Si no pasa que el tipo es 'nil' y puede ser asignado (es decir, si el tipo no es 'nil', o si el tipo es 'nil' y no puede ser asignado)
-                        if (!(NilType.CanBeAssignedTo(nonNilType))) {
+                        if (!(NilType.CanBeAssignedTo(nonNilType)))
+                        {
                             errors.Add(new MessageError(Line, Column,
                                                         "In if-then-else expressions, both 'then' and 'else' expressions must either return no value or be of the same type"));
                         }
                     }
+                    else {
+                        errors.Add(new MessageError(Line, Column,
+                                                    "In if-then-else expressions, both 'then' and 'else' expressions must either return no value or be of the same type"));
+                    }
+
                 }
                 //Si retornan el mismo tipo
                 else {
