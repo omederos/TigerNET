@@ -71,21 +71,19 @@ namespace TigerNET.AST {
         }
 
         /// <summary>
-        /// Guarda el valor en el tope de la pila en una variable y devuelve esa variable. Si se especifica, lo vuelve a meter en la pila (hace un 'peek')
+        /// Guarda el valor en el tope de la pila en la variable especificada. Si se especifica, lo vuelve a meter en la pila (hace un 'peek')
         /// </summary>
         /// <param name="generator"></param>
         /// <param name="type"></param>
         /// <param name="peek"></param>
         /// <returns></returns>
-        protected LocalBuilder GetValueFromStack(ILGenerator generator, Type type, bool peek = true)
+        protected void GetValueFromStack(ILGenerator generator, LocalBuilder variable, bool peek = true)
         {
-            var result = generator.DeclareLocal(type);
-            generator.Emit(OpCodes.Stloc, result);
+            generator.Emit(OpCodes.Stloc, variable);
             if (peek)
             {
-                generator.Emit(OpCodes.Ldloc, result);
+                generator.Emit(OpCodes.Ldloc, variable);
             }
-            return result;
         }
 
         /// <summary>

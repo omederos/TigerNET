@@ -19,7 +19,8 @@ namespace TigerNET.AST
             //Devuelve '0' en la pila si el valor de Left es igual a cero.
             CheckIfEqualToZero(generator); 
             //Guardamos el resultado en una variable, por si se salta no perderlo
-            var result = GetValueFromStack(generator, typeof (int));
+            var result = generator.DeclareLocal(typeof (int));
+            GetValueFromStack(generator, result);
             
             //Si fue igual a cero (falso), saltamos hacia el final
             generator.Emit(OpCodes.Brfalse, end);
@@ -27,7 +28,7 @@ namespace TigerNET.AST
             //Sino, Generamos el codigo de la derecha
             Right.GenerateCode(generator, typeBuilder);
             //Guardamos el resultado en la variable
-            result = GetValueFromStack(generator, typeof (int));
+            GetValueFromStack(generator, result);
 
             //Si llegamos aqui, entonces el resultado sera el del operador derecho (si es 0 => 0)
             CheckIfEqualToZero(generator);

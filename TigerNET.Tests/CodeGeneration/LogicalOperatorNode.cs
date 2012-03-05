@@ -29,5 +29,26 @@ namespace TigerNET.Tests.CodeGeneration
             var result = GenerateCode("1 & 2");
             Assert.That(int.Parse(result) > 0);
         }
+        [Test]
+        public void Or_False_False() {
+            var result = GenerateCode("0 | 0");
+            Assert.That(result == "0");
+        }
+
+        [Test]
+        public void Or_True_False() {
+            var result = GenerateCode("1 | 0");
+            Assert.That(int.Parse(result) > 0);
+        }
+        [Test]
+        public void Or_False_True() {
+            var result = GenerateCode("0 | 1");
+            Assert.That(int.Parse(result) > 0);
+        }
+        [Test]
+        public void Or_True_True() {
+            var result = GenerateCode("1 | 2");
+            Assert.That(int.Parse(result) > 0);
+        }
     }
 }
