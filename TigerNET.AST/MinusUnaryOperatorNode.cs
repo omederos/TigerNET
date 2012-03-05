@@ -12,7 +12,9 @@ namespace TigerNET.AST
         public MinusUnaryOperatorNode(ExpressionNode body) : base(body) {}
 
         public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
-            throw new NotImplementedException();
+            Body.GenerateCode(generator, typeBuilder);
+            generator.Emit(OpCodes.Ldc_I4, -1);
+            generator.Emit(OpCodes.Mul);
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
