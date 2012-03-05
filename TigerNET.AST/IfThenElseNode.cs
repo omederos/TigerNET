@@ -23,8 +23,50 @@ namespace TigerNET.AST {
         }
 
         public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
+            var lblElse = generator.DefineLabel();
+            var lblEnd = generator.DefineLabel();
 
+            bool returnsValue = false;
+
+            //Generamos la condicion
+            Condition.GenerateCode(generator, typeBuilder);
+            //Comprueba si el resultado es igual a cero (0 => 0)
+            CheckIfEqualToZero(generator);
+            //Si la condicion no se cumple, saltamos para el 'else'
+            generator.Emit(OpCodes.Brfalse, lblElse);
             
+            //Si la condicion es verdadera, estamos en el 'then'
+            ThenBody.GenerateCode(generator, typeBuilder);
+
+            //TODO: Cambiar por cualquier tipo. Hacer un mapeo de tipos de tiger a tipos de IL
+            var result = generator.DeclareLocal(typeof (int));
+
+            //Comprobamos que la expresion retorne algun valor (si tiene tanto 'then' como 'else' y retornan valor)
+            if (ElseBody != null && ThenBody.ReturnsValue()) {
+                returnsValue = true;
+                //Guardamos el valor de retorno en la variable
+                GetValueFromStack(generator, result, false);
+            }
+
+            //Saltamos al final
+            generator.Emit(OpCodes.Br, lblEnd);
+
+            //Empezamos el 'else'
+            generator.MarkLabel(lblElse);
+
+            //Si hay un 'else' para generar
+            if (ElseBody != null) {
+                ElseBody.GenerateCode(generator, typeBuilder);
+                if (returnsValue) {
+                    GetValueFromStack(generator, result, false);
+                }
+            }
+
+            generator.MarkLabel(lblEnd);
+            //Si debe retornar algun valor
+            if (returnsValue) {
+                generator.Emit(OpCodes.Ldloc, result);
+            }
             ReturnType = null;
         }
 
