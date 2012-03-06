@@ -21,6 +21,13 @@ namespace TigerNET.Tests.CodeGeneration
             var result = GenerateCode("if 0 then 10 else 2");
             Assert.That(result == "2");
         }
+        
+        [Test]
+        public void Strings() {
+            var result = GenerateCode(@"if 2 = 2 then ""Hello"" else ""World""");
+            Assert.That(result == "Hello");
+        }
+
         //TODO: Para probar mas cosas, terminar el chequeo de mas nodos, y ademas implementar 'print', etc para poder probar bien...
 
 //        [Test]

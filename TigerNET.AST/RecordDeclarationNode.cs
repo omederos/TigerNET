@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using TigerNET.Common;
@@ -16,13 +18,68 @@ namespace TigerNET.AST
         /// </summary>
         public IList<TypeField> Fields { get; set; }
 
+        public RecordType RecordType { get; set; }
+
         public RecordDeclarationNode(string name, IList<TypeField> fields) : base(name) {
             Fields = fields;
         }
         public RecordDeclarationNode(string name) : this(name, new List<TypeField>()) {}
 
         public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
-            throw new NotImplementedException();
+            //La declaracion de un record no es mas que declarar una clase, y los parametros/argumentos del record son campos de la clase
+            //El problema que puede ocurrir aqui es que el record tenga un parametro de tipo otro record, y que ese otro record no este definido (porque en la secuencia de declaraciones aparece debajo)
+            //Pero ya garantizamos que estara creado porque antes de llamarse este metodo, se hace un llamado para crearlos
+
+            Dictionary<string, FieldBuilder> fieldsOfClass = new Dictionary<string, FieldBuilder>();
+
+            //Crear los campos de la clase dentro de este record (parametros/argumentos del record)
+            foreach (var field in RecordType.Fields) {
+                var name = NamesGenerator.GenerateNewName();
+                var fieldOfClass = RecordType.ILRecord.DefineField(name, field.Value.GetILType(),
+                                                FieldAttributes.Public);
+                fieldsOfClass.Add(name, fieldOfClass);
+            }
+
+            //Guardamos los campos asignados en la informacion del record
+            RecordType.FieldsInClass = fieldsOfClass;
+
+            //Creamos el constructor de la clase
+            var constructor = RecordType.ILRecord.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard,
+                                                                    RecordType.Fields.Select(x => x.Value.GetILType()).ToArray());
+            RecordType.Constructor = constructor;
+
+            //Cogemos el generador de codigo del constructor 
+            var genConstructor = constructor.GetILGenerator();
+
+            int index = 1;
+            //Le damos valor a todos los campos en el constructor de la clase
+            foreach (var keyPair in RecordType.FieldsInClass) {
+                //Cargamos la referencia a 'this'
+                genConstructor.Emit(OpCodes.Ldarg_0);
+                //Cargamos el campo i-esimo (es a partir de 1 porque el 0 es la referencia a 'this' por no estar en un metodo estatico) y lo ponemos en la pila
+                genConstructor.Emit(OpCodes.Ldarg, index);
+                //Metemos en la pila el valor que le asignaremos y se lo asignamos al campo que habiamos metido en la pila
+                genConstructor.Emit(OpCodes.Stfld, keyPair.Value);
+                //Aumentamos el indice
+                index += 1;
+            }
+
+            //Retornamos en el constructor
+            genConstructor.Emit(OpCodes.Ret);
+
+            //Finalmente 'cerramos' el tipo para que pueda ser usado
+            RecordType.ILRecord.CreateType();
+        }
+
+        /// <summary>
+        /// Crea una clase (sin campos) que representara a este record
+        /// Este metodo debe ser llamado antes de llamar al GenerateCode
+        /// </summary>
+        /// <param name="typeBuilder"></param>
+        public void CreateRecordClass(TypeBuilder typeBuilder)
+        {
+            //Guardamos el TypeBuilder de este record en su informacion, para poder usarlo en RecordLiteralNode
+            RecordType.ILRecord = Builders.Module.DefineType(RecordType.Id, TypeAttributes.Public | TypeAttributes.Class);
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
@@ -62,7 +119,9 @@ namespace TigerNET.AST
             }
 
             //Si no ocurrio ningun error, actualizamos la definicion de este tipo
-            scope.Add(new RecordType(Name, new Fields(fields)), updateIfExists: true);
+            //Guardamos el record en este nodo para usarlo en la generacion de codigo
+            RecordType = new RecordType(Name, new Fields(fields));
+            scope.Add(RecordType, updateIfExists: true);
         }
 
         /// <summary>

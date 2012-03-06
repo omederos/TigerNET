@@ -9,7 +9,7 @@ using TigerNET.Common.Types;
 
 namespace TigerNET.AST
 {
-    public class CallableDeclarationNode : DeclarationNode {
+    public class CallableDeclarationNode : DeclarationNode, IScopeDefiner {
         /// <summary>
         /// Campos de la funcion/procedimiento
         /// </summary>
@@ -45,7 +45,7 @@ namespace TigerNET.AST
             int errorsCount = errors.Count;
             IList<string> parameters = new List<string>();
             //Creamos el scope de la nueva funcion
-            _scopeFunction = new Scope(scope);
+            Scope = new Scope(scope);
 
             //Chequeamos los parametros...
             foreach (var field in Fields) {
@@ -67,7 +67,7 @@ namespace TigerNET.AST
 
                 //Anadimos este parametro al scope de la funcion
                 if (!errorInField) {
-                    _scopeFunction.Add(field.Id, scope.GetType(field.TypeId));
+                    Scope.Add(field.Id, scope.GetType(field.TypeId));
                 }
             }
 
@@ -92,11 +92,6 @@ namespace TigerNET.AST
         }
 
         /// <summary>
-        /// Scope que se creara de la funcion/procedimiento
-        /// </summary>
-        private Scope _scopeFunction;
-
-        /// <summary>
         /// Chequea semanticamente el cuerpo de la funcion
         /// Ademas, comprueba que el tipo de retorno especificado coincide con el del cuerpo de la funcion
         /// </summary>
@@ -104,7 +99,7 @@ namespace TigerNET.AST
         /// <param name="errors"></param>
         public void CheckBodySemantic(Scope scope, IList<Error> errors) {
             int errorsCount = errors.Count;
-            Body.CheckSemantic(_scopeFunction, errors);
+            Body.CheckSemantic(Scope, errors);
 
             //Si ocurrio algun error...
             if (errorsCount != errors.Count) {
@@ -131,6 +126,13 @@ namespace TigerNET.AST
                 }
                 //TODO: Es posible retornar Nil aqui?
             }
+        }
+
+        public Scope Scope { get; set; }
+
+        public FieldBuilder ParentInstance {
+            get;
+            set;
         }
     }
 }

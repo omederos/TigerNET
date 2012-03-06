@@ -2,10 +2,10 @@
 
 namespace TigerNET.Common.Types
 {
-    public abstract class TigerType {
+    public abstract class TigerType : IUniqueNamed {
         protected TigerType(string name, Guid guid) {
             Name = name;
-            Id = guid;
+            Id = guid.ToCleanString();
         }
 
         public string Name { get; set; }
@@ -13,7 +13,7 @@ namespace TigerNET.Common.Types
         /// <summary>
         /// Hash que identifica al tipo (para ser usado en Arrays/Records principalmente)
         /// </summary>
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public static bool operator ==(TigerType type, object x) {
             //Si ambos son null, entonces son iguales
@@ -36,5 +36,9 @@ namespace TigerNET.Common.Types
         }
 
         public abstract Type GetILType();
+        
+        public string GetName() {
+            return Id;
+        }
     }
 }

@@ -38,11 +38,11 @@ namespace TigerNET.AST {
             //Si la condicion es verdadera, estamos en el 'then'
             ThenBody.GenerateCode(generator, typeBuilder);
 
-            //TODO: Cambiar por cualquier tipo. Hacer un mapeo de tipos de tiger a tipos de IL
-            var result = generator.DeclareLocal(typeof (int));
+            LocalBuilder result = null;
 
             //Comprobamos que la expresion retorne algun valor (si tiene tanto 'then' como 'else' y retornan valor)
             if (ElseBody != null && ThenBody.ReturnsValue()) {
+                result = generator.DeclareLocal(ThenBody.ReturnType.GetILType());
                 returnsValue = true;
                 //Guardamos el valor de retorno en la variable
                 GetValueFromStack(generator, result, false);

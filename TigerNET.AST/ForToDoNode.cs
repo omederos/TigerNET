@@ -6,7 +6,7 @@ using TigerNET.Common.Errors;
 using TigerNET.Common.Types;
 
 namespace TigerNET.AST {
-    public class ForToDoNode : LoopNode
+    public class ForToDoNode : LoopNode, IScopeDefiner
     {
         public string VariableName { get; set; }
         public ExpressionNode ExpressionInitial { get; set; }
@@ -31,9 +31,9 @@ namespace TigerNET.AST {
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
             //El 'for' define un nuevo scope
-            var scopeFor = new Scope(scope);
+            Scope = new Scope(scope);
             //Anadimos una variable de tipo entero de solo lectura al scope del 'for'
-            scopeFor.Add(VariableName, IntegerType.Create(), true);
+            Scope.Add(VariableName, IntegerType.Create(), true);
 
             //Evaluamos la expresion de inicio y la de fin.
             //OJO: Con el Scope que veniamos usando hasta ahora, pues la variable del 'for' no es visible para estas expresiones
@@ -50,12 +50,16 @@ namespace TigerNET.AST {
             ErrorsHelper.CheckIfReturnTypeIsInt(ExpressionFinal, errors, "The expression that defines the last value in the 'for' must return a value", "The expression that defines the last value in the 'for' must return an integer");
 
             //Comprobamos el cuerpo
-            Body.CheckSemantic(scopeFor, errors);
+            Body.CheckSemantic(Scope, errors);
             
             //Comprobamos que retorne algun valor
             if (Body.ReturnsValue()) {
                 errors.Add(new MessageError(Line, Column, "Expression body of 'for' must not return a value"));
             }
         }
+
+        public Scope Scope { get; set; }
+
+        public FieldBuilder ParentInstance { get; set; }
     }
 }

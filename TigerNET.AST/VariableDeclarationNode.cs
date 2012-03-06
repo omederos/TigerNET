@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using TigerNET.Common;
@@ -9,8 +10,10 @@ using TigerNET.Common.Types;
 
 namespace TigerNET.AST {
     public class VariableDeclarationNode : DeclarationNode {
+
         public ExpressionNode Body { get; set; }
         public string Type { get; set; }
+        public Variable Variable { get; set; }
 
         public VariableDeclarationNode(string name, ExpressionNode body, string type = null) : base(name) {
             Body = body;
@@ -19,7 +22,19 @@ namespace TigerNET.AST {
         }
 
         public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
-            throw new NotImplementedException();
+            //Como nuestros scopes son representados por clases, las variables son declaradas como variables de instancia en la clase (campos)
+
+            //Guardamos la variable que definimos en IL (para poder mapearla luego sin problemas)
+            Variable.ILVariable = typeBuilder.DefineField(Variable.GetName(), Variable.Type.GetILType(), FieldAttributes.Public);
+
+            //Generamos el codigo del cuerpo de la asignacion
+            Body.GenerateCode(generator, typeBuilder);
+
+            //Le asignamos ese valor que se quedo en la pila a la variable
+            generator.Emit(OpCodes.Ldarg_0); //Cargamos el parametro 0 (la instancia de la clase)
+            generator.Emit(OpCodes.Stfld, Variable.ILVariable); //Asignamos el valor que esta en la pila a la variable
+
+            //TODO: Si es un record, dejar guardados los valores de los parametros/argumentos del record en el RecordLiteralNode!
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
@@ -78,9 +93,9 @@ namespace TigerNET.AST {
             if (errorsCount == errors.Count) {
                 //Finalmente anadimos la variable declarada al scope
                 scope.Add(Name, Body.ReturnType is NilType ? resultType : Body.ReturnType);
+                //Guardamos la variable en el nodo para poder usarla en la generacion de codigo
+                Variable = scope.GetVariable(Name, false);
             }
-
-            
         }
     }
 }
