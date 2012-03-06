@@ -67,7 +67,6 @@ namespace TigerNET.AST {
             if (returnsValue) {
                 generator.Emit(OpCodes.Ldloc, result);
             }
-            ReturnType = null;
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {

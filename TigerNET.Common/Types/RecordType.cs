@@ -63,6 +63,9 @@ namespace TigerNET.Common.Types {
         public override string ToString() {
             return string.Format("[Record] ({0}) ({1})", Name, Id);
         }
-        
+
+        public override Type GetILType() {
+            throw new NotImplementedException();
+        }
     }
 }

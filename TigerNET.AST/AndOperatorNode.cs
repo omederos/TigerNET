@@ -39,9 +39,5 @@ namespace TigerNET.AST
             //Guardamos el resultado en la pila
             generator.Emit(OpCodes.Ldloc, result);
         }
-
-        public override void CheckSemantic(Scope scope, IList<Error> errors) {
-            throw new NotImplementedException();
-        }
     }
 }

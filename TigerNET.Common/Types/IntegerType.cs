@@ -22,5 +22,9 @@ namespace TigerNET.Common.Types {
         public override string ToString() {
             return "int";
         }
+
+        public override Type GetILType() {
+            return typeof (int);
+        }
     }
 }

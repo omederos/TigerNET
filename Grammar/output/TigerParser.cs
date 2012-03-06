@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:45:30 C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g 2012-03-01 05:14:32
+// $ANTLR 3.3 Nov 30, 2010 12:45:30 C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g 2012-03-06 04:48:08
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -1000,7 +1000,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 	partial void Leave_expr();
 
 	// $ANTLR start "expr"
-	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:183:1: expr returns [ExpressionNode node] : ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End ) lv= lvalue[$node] ;
+	// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:183:1: expr returns [ExpressionNode node] : ( STRING_CONST | INT_CONST | NIL | Minus e= expr | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End ) lv= lvalue[$node] ;
 	[GrammarRule("expr")]
 	private ExpressionNode expr()
 	{
@@ -1030,12 +1030,12 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		DebugLocation(183, 42);
 		try
 		{
-			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:183:35: ( ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End ) lv= lvalue[$node] )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:183:35: ( ( STRING_CONST | INT_CONST | NIL | Minus e= expr | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End ) lv= lvalue[$node] )
 			DebugEnterAlt(1);
-			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:184:2: ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End ) lv= lvalue[$node]
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:184:2: ( STRING_CONST | INT_CONST | NIL | Minus e= expr | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End ) lv= lvalue[$node]
 			{
 			DebugLocation(184, 2);
-			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:184:2: ( STRING_CONST | INT_CONST | NIL | Minus e= expr_or | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End )
+			// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:184:2: ( STRING_CONST | INT_CONST | NIL | Minus e= expr | id= ID aux= idAux[$id.Text] | LParent (seq= exprSeq )? RParent | If cond= expr_or Then then= expr_or ( Else els= expr_or )? | While cond= expr_or Do body= expr_or | For varName= ID Assign start= expr_or To end= expr_or Do bodyFor= expr_or | Break | Let declarations= declarationList In (seq= exprSeq )? End )
 			int alt12=11;
 			try { DebugEnterSubRule(12);
 			try { DebugEnterDecision(12, decisionCanBacktrack[12]);
@@ -1153,16 +1153,16 @@ public partial class TigerParser : Antlr.Runtime.Parser
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:188:2: Minus e= expr_or
+				// C:\\Users\\Oscar\\Documents\\Visual Studio 2010\\Projects\\TigerNET\\Grammar\\Tiger.g:188:2: Minus e= expr
 				{
 				DebugLocation(188, 2);
 				Match(input,Minus,Follow._Minus_in_expr913); if (state.failed) return node;
 				DebugLocation(188, 10);
-				PushFollow(Follow._expr_or_in_expr919);
-				e=expr_or();
+				PushFollow(Follow._expr_in_expr919);
+				e=expr();
 				PopFollow();
 				if (state.failed) return node;
-				DebugLocation(188, 20);
+				DebugLocation(188, 17);
 				if ( state.backtracking == 0 )
 				{
 					node = new MinusUnaryOperatorNode(e); 
@@ -3453,7 +3453,7 @@ public partial class TigerParser : Antlr.Runtime.Parser
 		public static readonly BitSet _INT_CONST_in_expr897 = new BitSet(new ulong[]{0x4000200UL});
 		public static readonly BitSet _NIL_in_expr905 = new BitSet(new ulong[]{0x4000200UL});
 		public static readonly BitSet _Minus_in_expr913 = new BitSet(new ulong[]{0x144000008B20B0UL});
-		public static readonly BitSet _expr_or_in_expr919 = new BitSet(new ulong[]{0x4000200UL});
+		public static readonly BitSet _expr_in_expr919 = new BitSet(new ulong[]{0x4000200UL});
 		public static readonly BitSet _ID_in_expr944 = new BitSet(new ulong[]{0x4000AC0UL});
 		public static readonly BitSet _idAux_in_expr950 = new BitSet(new ulong[]{0x4000200UL});
 		public static readonly BitSet _LParent_in_expr959 = new BitSet(new ulong[]{0x144000008B21B0UL});

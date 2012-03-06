@@ -18,6 +18,8 @@ namespace TigerNET.AST
         }
 
         public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
+            //Metemos el valor del string a la pila
+            generator.Emit(OpCodes.Ldstr, Value);
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {

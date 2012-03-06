@@ -54,6 +54,8 @@
     <Compile Include="CodeGeneration\IfThenElse.cs" />
     <Compile Include="CodeGeneration\LogicalOperatorNode.cs" />
     <Compile Include="CodeGeneration\MinusUnary.cs" />
+    <Compile Include="CodeGeneration\RelationalBinaryOperator.cs" />
+    <Compile Include="CodeGeneration\StringLiteral.cs" />
     <Compile Include="Parser\Access.cs" />
     <Compile Include="Parser\ArithmeticalBinaryOperators.cs" />
     <Compile Include="Parser\ArrayLiteral.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Semantic\GroupDeclarations.cs" />
     <Compile Include="Semantic\IfThenElse.cs" />
     <Compile Include="Semantic\LetInEnd.cs" />
+    <Compile Include="Semantic\LogicalBinaryOperator.cs" />
     <Compile Include="Semantic\MinusUnary.cs" />
     <Compile Include="Semantic\RecordAccess.cs" />
     <Compile Include="Semantic\RecordDeclaration.cs" />

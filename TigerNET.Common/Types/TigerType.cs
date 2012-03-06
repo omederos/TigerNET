@@ -35,5 +35,6 @@ namespace TigerNET.Common.Types
             return !(type == x);
         }
 
+        public abstract Type GetILType();
     }
 }

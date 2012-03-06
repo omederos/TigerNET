@@ -19,5 +19,9 @@ namespace TigerNET.Common.Types {
         public override string ToString() {
             return "nil";
         }
+
+        public override Type GetILType() {
+            return null;
+        }
     }
 }

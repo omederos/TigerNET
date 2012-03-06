@@ -18,7 +18,19 @@ namespace TigerNET.AST
         }
         public EqualOperatorNode() : this(null, null) {}
         public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
-            throw new NotImplementedException();
+            Left.GenerateCode(generator, typeBuilder);
+            Right.GenerateCode(generator, typeBuilder);
+
+            //Si estamos comparando enteros, comparamos por valor
+            if (Left.ReturnType is IntegerType)
+            {
+                generator.Emit(OpCodes.Ceq);
+            }
+            //Sino, comparamos por referencia
+            else {
+                //Llamamos a 'ReferenceEquals'
+                generator.Emit(OpCodes.Call, typeof(Object).GetMethod("ReferenceEquals", new Type[] {typeof(object), typeof(object)}));
+            }
         }
     }
 }

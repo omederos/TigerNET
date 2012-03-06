@@ -185,7 +185,7 @@ expr	returns [ExpressionNode node]:
 	STRING_CONST {$node = new StringLiteralNode($STRING_CONST.Text); }| /* string-constant */
 	INT_CONST {$node = new IntegerLiteralNode(int.Parse($INT_CONST.Text)); }| /* integer-constant */
 	NIL {$node = new NilLiteralNode(); }| /* nil */
-	Minus e = expr_or {$node = new MinusUnaryOperatorNode($e.node); }| /* -expr */
+	Minus e = expr {$node = new MinusUnaryOperatorNode($e.node); }| /* -expr */
 	/* id(expr-list) */ /* type-id{field-list} */
 	/* type-id[expr] of expr*/
 	/* lvalue */ /* lvalue := expr */

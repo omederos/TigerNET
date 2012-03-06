@@ -11,5 +11,16 @@ namespace TigerNET.Tests.Parser {
             Assert.That(body.Parent == ast);
             Assert.IsInstanceOf<IntegerLiteralNode>(body);
         }
+
+        [Test]
+        public void MinusAndEquals_Preference() {
+            ExpressionNode ast = Utils.BuildAST("-3 = 3");
+            Assert.IsInstanceOf<EqualOperatorNode>(ast);
+            var left = Utils.GetLeft(ast);
+            Assert.IsInstanceOf<MinusUnaryOperatorNode>(left);
+            var right = Utils.GetRight(ast);
+            Assert.IsInstanceOf<IntegerLiteralNode>(right);
+            
+        }
     }
 }

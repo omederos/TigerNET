@@ -6,11 +6,15 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using TigerNET.AST;
+using TigerNET.Common;
+using TigerNET.Common.Errors;
 
 namespace TigerNET.Core
 {
     public class Compiler {
         public void GenerateCode(ExpressionNode expressionNode, string outputFile) {
+            //TODO: Eliminar este codigo
+            expressionNode.CheckSemantic(new Scope(), new List<Error>());
             //Nombre del fichero (includa extension)
             string filename = Path.GetFileName(outputFile);
             //Nombre del directorio donde se encuentra el fichero
@@ -50,7 +54,10 @@ namespace TigerNET.Core
             expressionNode.GenerateCode(runGen, programClassBuilder);
 
 #if DEBUG
-            MethodInfo writeLine = typeof(Console).GetMethod("WriteLine", new[] { typeof(int) });
+            Type[] types = expressionNode.ReturnType == null
+                               ? new Type[0]
+                               : new Type[] {expressionNode.ReturnType.GetILType()};
+            MethodInfo writeLine = typeof(Console).GetMethod("WriteLine", types);
             runGen.EmitCall(OpCodes.Call, writeLine, null);
 #endif
 
