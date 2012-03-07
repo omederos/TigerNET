@@ -34,7 +34,7 @@ namespace TigerNET.AST {
             generator.Emit(OpCodes.Ldarg_0); //Cargamos el parametro 0 (la instancia de la clase)
             generator.Emit(OpCodes.Stfld, Variable.ILVariable); //Asignamos el valor que esta en la pila a la variable
 
-            //TODO: Si es un record, dejar guardados los valores de los parametros/argumentos del record en el RecordLiteralNode!
+            //TODO: Si es un record, dejar guardados los valores de los parametros/argumentos del record en el RecordLiteralNode!?
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {

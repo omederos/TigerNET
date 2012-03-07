@@ -79,7 +79,7 @@ namespace TigerNET.AST
         public void CreateRecordClass(TypeBuilder typeBuilder)
         {
             //Guardamos el TypeBuilder de este record en su informacion, para poder usarlo en RecordLiteralNode
-            RecordType.ILRecord = Builders.Module.DefineType(RecordType.Id, TypeAttributes.Public | TypeAttributes.Class);
+            RecordType.ILRecord = Builders.Module.DefineType(RecordType.GetName(), TypeAttributes.Public | TypeAttributes.Class);
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {

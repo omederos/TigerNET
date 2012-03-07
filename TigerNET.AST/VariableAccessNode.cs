@@ -52,7 +52,9 @@ namespace TigerNET.AST
             //Buscamos el nombre de la variable
             var variable = ((IScopeDefiner)parent).Scope.GetVariable(Name, false);
             //Ponemos su valor en la pila
-            generator.Emit(OpCodes.Ldloc, variable.ILVariable);
+            generator.Emit(OpCodes.Ldfld, variable.ILVariable);
+
+            //TODO: Ver bien el GetGenerateCodeWhenLeftValue
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
