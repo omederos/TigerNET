@@ -16,10 +16,10 @@ namespace TigerNET.Tests.Semantic
             var ast = (LetInEndNode)Utils.BuildAST("let function f() = 1 in end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.CurrentScope.ExistsVariableOrCallable("f"));
-            Assert.That(ast.CurrentScope.DefinedCallables["f"].Fields.Count == 0);
-            Assert.That(ast.CurrentScope.DefinedCallables["f"].Name == "f");
-            Assert.That(ast.CurrentScope.DefinedCallables["f"].Type == null);
+            Assert.That(ast.Scope.ExistsVariableOrCallable("f"));
+            Assert.That(ast.Scope.DefinedCallables["f"].Fields.Count == 0);
+            Assert.That(ast.Scope.DefinedCallables["f"].Name == "f");
+            Assert.That(ast.Scope.DefinedCallables["f"].Type == null);
         }
         
         [Test]
@@ -28,12 +28,12 @@ namespace TigerNET.Tests.Semantic
             var ast = (LetInEndNode)Utils.BuildAST("let function f(a:string) = 1 in end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.CurrentScope.ExistsVariableOrCallable("f"));
-            Assert.That(ast.CurrentScope.DefinedCallables["f"].Fields.Count == 1);
-            Assert.That(ast.CurrentScope.DefinedCallables["f"].Fields[0].Id == "a");
-            Assert.That(ast.CurrentScope.DefinedCallables["f"].Fields[0].TypeId == "string");
-            Assert.That(ast.CurrentScope.DefinedCallables["f"].Name == "f");
-            Assert.That(ast.CurrentScope.DefinedCallables["f"].Type == null);
+            Assert.That(ast.Scope.ExistsVariableOrCallable("f"));
+            Assert.That(ast.Scope.DefinedCallables["f"].Fields.Count == 1);
+            Assert.That(ast.Scope.DefinedCallables["f"].Fields[0].Id == "a");
+            Assert.That(ast.Scope.DefinedCallables["f"].Fields[0].TypeId == "string");
+            Assert.That(ast.Scope.DefinedCallables["f"].Name == "f");
+            Assert.That(ast.Scope.DefinedCallables["f"].Type == null);
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace TigerNET.Tests.Semantic
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 1);
             Assert.That(Errors[0] is DuplicateParameterError);
-            Assert.That(!ast.CurrentScope.ExistsVariableOrCallable("f"));
+            Assert.That(!ast.Scope.ExistsVariableOrCallable("f"));
         }
 
         [Test]
@@ -53,7 +53,7 @@ namespace TigerNET.Tests.Semantic
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 1);
             Assert.That(Errors[0] is UndefinedTypeError);
-            Assert.That(!ast.CurrentScope.ExistsVariableOrCallable("f"));
+            Assert.That(!ast.Scope.ExistsVariableOrCallable("f"));
         }
 
         [Test]
@@ -62,10 +62,10 @@ namespace TigerNET.Tests.Semantic
             var ast = (LetInEndNode)Utils.BuildAST("let function f() : int = 1 in end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.CurrentScope.ExistsVariableOrCallable("f"));
-            Assert.That(ast.CurrentScope.DefinedCallables["f"].Fields.Count == 0);
-            Assert.That(ast.CurrentScope.DefinedCallables["f"].Name == "f");
-            Assert.That(ast.CurrentScope.DefinedCallables["f"].Type == "int");
+            Assert.That(ast.Scope.ExistsVariableOrCallable("f"));
+            Assert.That(ast.Scope.DefinedCallables["f"].Fields.Count == 0);
+            Assert.That(ast.Scope.DefinedCallables["f"].Name == "f");
+            Assert.That(ast.Scope.DefinedCallables["f"].Type == "int");
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace TigerNET.Tests.Semantic
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 1);
             Assert.That(Errors[0] is UnexpectedTypeError);
-            Assert.That(!ast.CurrentScope.ExistsVariableOrCallable("f"));
+            Assert.That(!ast.Scope.ExistsVariableOrCallable("f"));
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace TigerNET.Tests.Semantic
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 1);
             Assert.That(Errors[0] is UndefinedTypeError);
-            Assert.That(!ast.CurrentScope.ExistsVariableOrCallable("f"));
+            Assert.That(!ast.Scope.ExistsVariableOrCallable("f"));
         }
 
         [Test]

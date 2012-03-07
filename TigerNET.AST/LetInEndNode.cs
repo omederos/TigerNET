@@ -7,13 +7,6 @@ using TigerNET.Common;
 using TigerNET.Common.Errors;
 
 namespace TigerNET.AST {
-    public interface IScopeDefiner {
-        //Scope asociado al nodo actual
-        Scope Scope { get; set; }
-        //Instancia del padre del nodo actual (en IL)
-        FieldBuilder ParentInstance { get; set; }
-    }
-
     public class LetInEndNode : InstructionNode, IScopeDefiner {
         /// <summary>
         /// Declaraciones dentro del LET - IN
@@ -36,10 +29,9 @@ namespace TigerNET.AST {
         }
 
         /// <summary>
-        /// Util en las pruebas unitarias solamente!
+        /// Scope que define este nodo por ser IScopeDefiner
         /// </summary>
-        public Scope CurrentScope { get; set; }
-
+        public Scope Scope { get; set; }
 
         public LetInEndNode(IList<DeclarationNode> declarations, ExpressionSequenceNode expressions) {
             Declarations = declarations;
@@ -64,8 +56,6 @@ namespace TigerNET.AST {
 
             //Creamos un nuevo scope
             var scopeLetIn = new Scope(scope);
-            CurrentScope = scopeLetIn;
-            
             //Guardamos el scope en el nodo para usarlo en la generacion de codigo
             Scope = scopeLetIn;
 
@@ -312,8 +302,6 @@ namespace TigerNET.AST {
         private bool IsFullyDefined(string type, Scope scope) {
             return scope.ExistsType(type) && scope.GetType(type) != null;
         }
-
-        public Scope Scope { get; set; }
 
         //TODO: Asignarle valor en la generacion de codigo!
         public FieldBuilder ParentInstance { get; set; }

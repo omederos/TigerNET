@@ -16,8 +16,8 @@ namespace TigerNET.Tests.Semantic
             var ast = (LetInEndNode)Utils.BuildAST("let type a = string in end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.CurrentScope.ExistsType("a"));
-            Assert.That(ast.CurrentScope.GetType("a") is StringType);
+            Assert.That(ast.Scope.ExistsType("a"));
+            Assert.That(ast.Scope.GetType("a") is StringType);
         }
 
         [Test]

@@ -120,8 +120,8 @@ namespace TigerNET.Tests.Semantic
         public void Array_Alias_Equals() {
             var ast = (LetInEndNode) Utils.BuildAST("let type a = array of int type b = a in end");
             ast.CheckSemantic(Scope, Errors);
-            var typeA = ast.CurrentScope.GetType("a");
-            var typeB = ast.CurrentScope.GetType("b");
+            var typeA = ast.Scope.GetType("a");
+            var typeB = ast.Scope.GetType("b");
 
             Assert.That(typeA == typeB);
         }

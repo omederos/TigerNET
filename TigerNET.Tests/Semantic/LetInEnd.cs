@@ -67,11 +67,11 @@ namespace TigerNET.Tests.Semantic
             var ast = (LetInEndNode)Utils.BuildAST("let type r = { x : a } type a = b type c = r type b = c in end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.CurrentScope.DefinedTypes["r"] is RecordType);
-            Assert.That(((RecordType)ast.CurrentScope.DefinedTypes["r"]).Fields["x"] is RecordType);
-            Assert.That(ast.CurrentScope.DefinedTypes["a"] is RecordType);
-            Assert.That(ast.CurrentScope.DefinedTypes["b"] is RecordType);
-            Assert.That(ast.CurrentScope.DefinedTypes["c"] is RecordType);
+            Assert.That(ast.Scope.DefinedTypes["r"] is RecordType);
+            Assert.That(((RecordType)ast.Scope.DefinedTypes["r"]).Fields["x"] is RecordType);
+            Assert.That(ast.Scope.DefinedTypes["a"] is RecordType);
+            Assert.That(ast.Scope.DefinedTypes["b"] is RecordType);
+            Assert.That(ast.Scope.DefinedTypes["c"] is RecordType);
         }
 
         [Test]
@@ -80,15 +80,15 @@ namespace TigerNET.Tests.Semantic
             var ast = (LetInEndNode)Utils.BuildAST("let type r = { x : a } type a = b type c = r type b = c var x := 1 type h = i type i = j type j = int in end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.CurrentScope.DefinedTypes["r"] is RecordType);
-            Assert.That(((RecordType)ast.CurrentScope.DefinedTypes["r"]).Fields["x"] is RecordType);
-            Assert.That(ast.CurrentScope.DefinedTypes["a"] is RecordType);
-            Assert.That(ast.CurrentScope.DefinedTypes["b"] is RecordType);
-            Assert.That(ast.CurrentScope.DefinedTypes["c"] is RecordType);
-            Assert.That(ast.CurrentScope.DefinedVariables["x"].Type is IntegerType);
-            Assert.That(ast.CurrentScope.DefinedTypes["h"] is IntegerType);
-            Assert.That(ast.CurrentScope.DefinedTypes["i"] is IntegerType);
-            Assert.That(ast.CurrentScope.DefinedTypes["j"] is IntegerType);
+            Assert.That(ast.Scope.DefinedTypes["r"] is RecordType);
+            Assert.That(((RecordType)ast.Scope.DefinedTypes["r"]).Fields["x"] is RecordType);
+            Assert.That(ast.Scope.DefinedTypes["a"] is RecordType);
+            Assert.That(ast.Scope.DefinedTypes["b"] is RecordType);
+            Assert.That(ast.Scope.DefinedTypes["c"] is RecordType);
+            Assert.That(ast.Scope.DefinedVariables["x"].Type is IntegerType);
+            Assert.That(ast.Scope.DefinedTypes["h"] is IntegerType);
+            Assert.That(ast.Scope.DefinedTypes["i"] is IntegerType);
+            Assert.That(ast.Scope.DefinedTypes["j"] is IntegerType);
         }
 
         [Test]
@@ -99,18 +99,18 @@ namespace TigerNET.Tests.Semantic
             Assert.That(Errors.Count == 0);
             
             //Que los 3 sean RecordType
-            Assert.That(ast.CurrentScope.DefinedTypes["r"] is RecordType);
-            Assert.That(ast.CurrentScope.DefinedTypes["a"] is RecordType);
-            Assert.That(ast.CurrentScope.DefinedTypes["b"] is RecordType);
+            Assert.That(ast.Scope.DefinedTypes["r"] is RecordType);
+            Assert.That(ast.Scope.DefinedTypes["a"] is RecordType);
+            Assert.That(ast.Scope.DefinedTypes["b"] is RecordType);
 
             //B y R son exactamente los mismos
-            Assert.That(ast.CurrentScope.DefinedTypes["r"] == ast.CurrentScope.DefinedTypes["b"]);
+            Assert.That(ast.Scope.DefinedTypes["r"] == ast.Scope.DefinedTypes["b"]);
             
             //El tipo del campo 'x' de 'r' es igual a 'a'
-            Assert.That(((RecordType)ast.CurrentScope.DefinedTypes["r"]).Fields["x"] == ast.CurrentScope.DefinedTypes["a"]);
+            Assert.That(((RecordType)ast.Scope.DefinedTypes["r"]).Fields["x"] == ast.Scope.DefinedTypes["a"]);
 
             //El tipo del campo 'y' de 'a' es igual a 'b'
-            Assert.That(((RecordType)ast.CurrentScope.DefinedTypes["a"]).Fields["y"] == ast.CurrentScope.DefinedTypes["b"]);
+            Assert.That(((RecordType)ast.Scope.DefinedTypes["a"]).Fields["y"] == ast.Scope.DefinedTypes["b"]);
         }
 
         [Test]
@@ -126,15 +126,15 @@ namespace TigerNET.Tests.Semantic
             Assert.That(Errors.Count == 0);
 
             //Que los 3 sean RecordType
-            Assert.That(ast.CurrentScope.DefinedTypes["a"] is ArrayType);
-            Assert.That(ast.CurrentScope.DefinedTypes["b"] is ArrayType);
-            Assert.That(ast.CurrentScope.DefinedTypes["c"] is ArrayType);
+            Assert.That(ast.Scope.DefinedTypes["a"] is ArrayType);
+            Assert.That(ast.Scope.DefinedTypes["b"] is ArrayType);
+            Assert.That(ast.Scope.DefinedTypes["c"] is ArrayType);
 
-            Assert.That(ast.CurrentScope.DefinedTypes["a"] == ast.CurrentScope.DefinedTypes["b"]);
-            Assert.That(ast.CurrentScope.DefinedTypes["b"] == ast.CurrentScope.DefinedTypes["c"]);
-            var arr = (ArrayType) ast.CurrentScope.DefinedTypes["c"];
+            Assert.That(ast.Scope.DefinedTypes["a"] == ast.Scope.DefinedTypes["b"]);
+            Assert.That(ast.Scope.DefinedTypes["b"] == ast.Scope.DefinedTypes["c"]);
+            var arr = (ArrayType) ast.Scope.DefinedTypes["c"];
             Assert.That(arr.ElementsType is ArrayType);
-            Assert.That(arr.ElementsType == ast.CurrentScope.DefinedTypes["a"]);
+            Assert.That(arr.ElementsType == ast.Scope.DefinedTypes["a"]);
         }
         
         [Test]

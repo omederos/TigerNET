@@ -17,9 +17,9 @@ namespace TigerNET.Tests.Semantic
             var ast = (LetInEndNode)Utils.BuildAST("let type person = {} in end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.CurrentScope.ExistsType("person"));
-            Assert.That(ast.CurrentScope.DefinedTypes.ContainsKey("person"));
-            Assert.That(ast.CurrentScope.DefinedTypes["person"] is RecordType);
+            Assert.That(ast.Scope.ExistsType("person"));
+            Assert.That(ast.Scope.DefinedTypes.ContainsKey("person"));
+            Assert.That(ast.Scope.DefinedTypes["person"] is RecordType);
         }
 
         [Test]
@@ -30,11 +30,11 @@ namespace TigerNET.Tests.Semantic
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
             
-            Assert.That(ast.CurrentScope.ExistsType("person"));
-            Assert.That(ast.CurrentScope.DefinedTypes.ContainsKey("person"));
-            Assert.That(ast.CurrentScope.DefinedTypes["person"] is RecordType);
+            Assert.That(ast.Scope.ExistsType("person"));
+            Assert.That(ast.Scope.DefinedTypes.ContainsKey("person"));
+            Assert.That(ast.Scope.DefinedTypes["person"] is RecordType);
 
-            var type = (RecordType)ast.CurrentScope.DefinedTypes["person"];
+            var type = (RecordType)ast.Scope.DefinedTypes["person"];
             Assert.That(type.Fields.Count == 1);
             Assert.That(type.Fields["Name"] is StringType);
         }
@@ -47,11 +47,11 @@ namespace TigerNET.Tests.Semantic
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
             
-            Assert.That(ast.CurrentScope.ExistsType("person"));
-            Assert.That(ast.CurrentScope.DefinedTypes.ContainsKey("person"));
-            Assert.That(ast.CurrentScope.DefinedTypes["person"] is RecordType);
+            Assert.That(ast.Scope.ExistsType("person"));
+            Assert.That(ast.Scope.DefinedTypes.ContainsKey("person"));
+            Assert.That(ast.Scope.DefinedTypes["person"] is RecordType);
 
-            var type = (RecordType)ast.CurrentScope.DefinedTypes["person"];
+            var type = (RecordType)ast.Scope.DefinedTypes["person"];
             Assert.That(type.Fields.Count == 2);
             Assert.That(type.Fields["Name"] is StringType);
             Assert.That(type.Fields["Age"] is IntegerType);

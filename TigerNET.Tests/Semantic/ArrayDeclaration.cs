@@ -18,9 +18,9 @@ namespace TigerNET.Tests.Semantic
             var ast = (LetInEndNode)Utils.BuildAST("let type list = array of string in end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.CurrentScope.ExistsType("list"));
-            Assert.That(ast.CurrentScope.GetType("list") is ArrayType);
-            var type = (ArrayType)ast.CurrentScope.GetType("list");
+            Assert.That(ast.Scope.ExistsType("list"));
+            Assert.That(ast.Scope.GetType("list") is ArrayType);
+            var type = (ArrayType)ast.Scope.GetType("list");
             Assert.That(type.ElementsType is StringType);
         }
 
@@ -45,9 +45,9 @@ namespace TigerNET.Tests.Semantic
             var ast = (LetInEndNode)Utils.BuildAST("let type someRecord = array of string in end");
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 0);
-            Assert.That(ast.CurrentScope.ExistsType("someRecord"));
-            Assert.That(ast.CurrentScope.GetType("someRecord") is ArrayType);
-            var type = (ArrayType)ast.CurrentScope.GetType("someRecord");
+            Assert.That(ast.Scope.ExistsType("someRecord"));
+            Assert.That(ast.Scope.GetType("someRecord") is ArrayType);
+            var type = (ArrayType)ast.Scope.GetType("someRecord");
             Assert.That(type.ElementsType is StringType);
         }
 

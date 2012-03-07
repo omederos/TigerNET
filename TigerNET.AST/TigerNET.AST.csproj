@@ -68,6 +68,7 @@
     <Compile Include="InstructionNode.cs" />
     <Compile Include="AliasDeclarationNode.cs" />
     <Compile Include="IntegerLiteralNode.cs" />
+    <Compile Include="IScopeDefiner.cs" />
     <Compile Include="LetInEndNode.cs" />
     <Compile Include="LoopNode.cs" />
     <Compile Include="LowerEqualOperatorNode.cs" />
