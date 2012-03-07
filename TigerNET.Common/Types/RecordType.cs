@@ -35,7 +35,8 @@ namespace TigerNET.Common.Types {
         }
 
         public override Type GetILType() {
-            throw new NotImplementedException();
+            //El tipo de este record es el TypeBuilder que crea la clase (en IL) que representa este record
+            return ILRecord;
         }
     }
 }

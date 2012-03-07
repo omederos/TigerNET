@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using TigerNET.Common;
 using TigerNET.Common.Errors;
 
 namespace TigerNET.AST {
-    public class LetInEndNode : InstructionNode, IScopeDefiner {
+    public class LetInEndNode : InstructionNode, IScopeDefiner, IBreakable {
         /// <summary>
         /// Declaraciones dentro del LET - IN
         /// </summary>
@@ -29,9 +30,20 @@ namespace TigerNET.AST {
         }
 
         /// <summary>
+        /// Listado de 'grupos' de declaraciones
+        /// </summary>
+        protected IList<IList<DeclarationNode>> GroupedDeclarations { get; set; }
+        /// <summary>
         /// Scope que define este nodo por ser IScopeDefiner
         /// </summary>
         public Scope Scope { get; set; }
+
+        /// <summary>
+        /// Campo (Int32) que tendra la clase que representa a este Let-In-End
+        /// </summary>
+        public FieldBuilder BreakField { get; set; }
+
+        public Label LabelEnd { get; set; }
 
         public LetInEndNode(IList<DeclarationNode> declarations, ExpressionSequenceNode expressions) {
             Declarations = declarations;
@@ -47,12 +59,131 @@ namespace TigerNET.AST {
         public LetInEndNode(IList<DeclarationNode> declarations) : this(declarations, new ExpressionSequenceNode()) {}
 
         public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
+            //Creamos la clase correspondiente a este Let, pues la expresion Let-In-End define un nuevo scope
+            var letTypeBuilder = typeBuilder.DefineNestedType(NamesGenerator.GenerateNewName(), TypeAttributes.Public | TypeAttributes.Class);
+
+            #region Constructor
+
+            //Creamos el constructor de la clase, que recibe un parametro del padre
+            var constructor = letTypeBuilder.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard,
+                                             new Type[] {typeBuilder});
+
+            //Definimos los dos campos iniciales que tendra la clase
+            //Break (Int32) -> Flag que indica si se tiene que romper romper el flujo de la ejecucion o no. Se le da valor desde un hijo (Break u otro Let-In-End)
+            BreakField = typeBuilder.DefineField("Break", typeof (int), FieldAttributes.Public);
+            //ParentInstance (Tipo del padre) -> Referencia a la clase padre
+            ParentInstance = typeBuilder.DefineField("Parent", typeBuilder, FieldAttributes.Public);
+
+            //Anadimos el codigo necesario en el constructor
+            var genConstructor = constructor.GetILGenerator();
+
+            //Le asignamos a ParentInstance la instancia de mi padre que me pasaron en el constructor
+            genConstructor.Emit(OpCodes.Ldarg_0); //Cargamos 'this'
+            genConstructor.Emit(OpCodes.Ldarg_1); //Cargamos el parametro del constructor (mi padre)
+            genConstructor.Emit(OpCodes.Stfld, ParentInstance); //Cargamos el parametro del constructor (mi padre)
+            
+            //Le asignamos el valor '0' al campo 'Break'
+            genConstructor.Emit(OpCodes.Ldarg_0); //Cargamos 'this'
+            genConstructor.Emit(OpCodes.Ldc_I4, 0); //Metemos en la pila un '0'
+            genConstructor.Emit(OpCodes.Stfld, BreakField); //Le asignamos el '0' al campo 'Break' de esta clase
+
+            //Generamos todas las declaraciones ya aqui en el constructor (para que los campos sean asignados a la clase antes de ejecutar el cuerpo del Let)
+            foreach (var group in GroupedDeclarations) {
+                //Generamos las declaraciones usando el generador del constructor, y se guardaran en la clase ya creada para este Let
+                GenerateCodeOfDeclarations(group, genConstructor, letTypeBuilder);
+            }
+
+            //Terminamos el constructor
+            genConstructor.Emit(OpCodes.Ret);
+
+            #endregion
+
+            //El tipo de retorno del metodo que crearemos depende del tipo de retorno de esta expresion Let-In-End
+            //Si no retorna nada, el metodo es Void. Sino, el metodo retorna el tipo de retorno de la expresion
+            var methodReturnType = ReturnType == null ? typeof(void) : ReturnType.GetILType();
+            //Creamos el metodo principal donde se ejecutara el cuerpo de este Let. No recibe parametros
+            var runMethodBuilder = letTypeBuilder.DefineMethod("Run", MethodAttributes.Public, CallingConventions.HasThis,
+                                                            methodReturnType, new Type[0]);
+
+            var runGenerator = runMethodBuilder.GetILGenerator();
+
+            //Etiqueta para donde se saltara en caso de que se interrumpa el flujo de ejecucion
+            LabelEnd = runGenerator.DefineLabel();
+
+            //Generamos el codigo de la secuencia de expresiones dentro del metodo, y dentro de la clase que creamos para el Let (logico)
+            Expressions.GenerateCode(runGenerator, letTypeBuilder);
+
+            //Aqui almacenaremos el valor de retorno del Let (si retorna)
+            LocalBuilder resultLocal = null;
+            //Si la secuencia de expresiones retorna algun valor
+//            if (ReturnType != null) {
+                //Creamos la variable donde guardaremos el valor
+//                resultLocal = runGenerator.DeclareLocal(ReturnType.GetILType());
+                //Asignamos el valor
+//                runGenerator.Emit(OpCodes.Stloc, resultLocal);
+//            }
+
+            //Ponemos aqui la etiqueta 'END'
+            runGenerator.MarkLabel(LabelEnd);
+
+            //Aqui comprobamos si me mandaron a interrumpir el flujo de ejecucion o no...
+            
+            //Etiqueta a donde se saltara en caso de que no haga falta interrumpir la ejecucion
+            Label lblNoBreak = runGenerator.DefineLabel();
+
+            //Comprobamos si 'Break == 0'
+            // Ver si hace falta terminar la ejecucion del padre.
+            runGenerator.Emit(OpCodes.Ldarg_0); //Cargamos 'this'
+            runGenerator.Emit(OpCodes.Ldfld, BreakField); //Cargamos el campo 'Break' de la clase del Let
+            runGenerator.Emit(OpCodes.Ldc_I4_0); //Anadimos el 0
+            runGenerator.Emit(OpCodes.Beq, lblNoBreak); //Si Break == 0, entonces no hace falta terminar. Saltar para NO_BREAK
+
+            //Si hace falta terminar la ejecicion
+            //Le asignamos el valor '0' al campo Break de esta clase
+            runGenerator.Emit(OpCodes.Ldarg_0);
+            runGenerator.Emit(OpCodes.Ldc_I4_0);
+            runGenerator.Emit(OpCodes.Stfld, BreakField);
+
+            //Ahora, vamos subiendo por los ParentInstance hasta llegar a uno que sea IBreakable (For, While o Let)
+            //Garantizamos que siempre lleguemos, pues tambien lo chequeamos en la semantica del nodo Break.
+            var expression = Parent;
+            //Mientras no lleguemos a un nodo IBreakable
+            while (!(expression is IBreakable)) {
+                expression = expression.Parent;
+            }
+
+            //Ya tenemos en 'expression' al IScopeDefiner padre. Lo que tenemos que hacer es poner su campo 'Break' en 1
+            runGenerator.Emit(OpCodes.Ldarg_0); //Cargamos 'this'
+            runGenerator.Emit(OpCodes.Ldfld, ParentInstance); //Metemos en la pila la referencia a ParentInstance
+            runGenerator.Emit(OpCodes.Ldc_I4, 0); //Metemos en la pila el valor '1' que le asignaremos
+            runGenerator.Emit(OpCodes.Stfld, ((IBreakable) expression).BreakField); //Hacemos la asignacion
+
+            //Terminamos el metodo principal
+            runGenerator.Emit(OpCodes.Ret);
+            //Creamos la clase que definimos para que pueda ser usada
+            letTypeBuilder.CreateType();
+
+            //Ahora, FUERA DE LA CLASE 'LET', instanciamos la clase Let que creamos, y llamamos al metodo principal!
+            generator.Emit(OpCodes.Ldarg_0); //El constructor recibe como 1er argumento la instancia 'this'
+            generator.Emit(OpCodes.Newobj, constructor); //Llamamos al constructor (y pone la referencia al nuevo tipo creado en la pila)
+            generator.Emit(OpCodes.Callvirt, runMethodBuilder); //Llamamos al metodo principal
+
+            //De la forma que lo diseñe, el valor de retorno (si hay) quedara en el tope de la pila
+        }
+
+        /// <summary>
+        /// Recibe una secuencia/bloque de declaraciones y genera el codigo de estas como campos de esta clase
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="generator">Generador que se usara para generar el codigo</param>
+        /// <param name="typeBuilder">Clase donde se guardaran las variables/funciones/tipos</param>
+        private void GenerateCodeOfDeclarations(IList<DeclarationNode> group, ILGenerator generator, TypeBuilder typeBuilder) {
             throw new NotImplementedException();
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
             //Agrupar los bloques de declaraciones de funciones y de tipos por separado
-            var groups = Declarations.GroupDeclarations();
+            GroupedDeclarations = Declarations.GroupDeclarations();
 
             //Creamos un nuevo scope
             var scopeLetIn = new Scope(scope);
@@ -61,7 +192,7 @@ namespace TigerNET.AST {
 
             int errorsCount = errors.Count;
             //Procesamos cada grupo de declaraciones
-            foreach (var group in groups) {
+            foreach (var group in GroupedDeclarations) {
                 Process(group, scopeLetIn, errors);
             }
 
@@ -75,6 +206,7 @@ namespace TigerNET.AST {
 
             ReturnType = Expressions.ReturnType;
         }
+
 
         /// <summary>
         /// Procesa un conjunto de declaraciones de un mismo tipo
@@ -305,5 +437,19 @@ namespace TigerNET.AST {
 
         //TODO: Asignarle valor en la generacion de codigo!
         public FieldBuilder ParentInstance { get; set; }
+    }
+
+    /// <summary>
+    /// Representa a un nodo al cual se le puede hacer 'Break'
+    /// </summary>
+    public interface IBreakable {
+        /// <summary>
+        /// Etiqueta que indica a donde se debe saltar en caso de que se interrumpa el flujo de ejecucion
+        /// </summary>
+        Label LabelEnd { get; set; }
+        /// <summary>
+        /// Campo de la clase del nodo (Int32) que indica si es necesario interrumpir el flujo de ejecucion o no
+        /// </summary>
+        FieldBuilder BreakField { get; set; }
     }
 }
