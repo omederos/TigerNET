@@ -34,7 +34,7 @@ namespace TigerNET.AST
 
             //Crear los campos de la clase dentro de este record (parametros/argumentos del record)
             foreach (var field in RecordType.Fields) {
-                var name = NamesGenerator.GenerateNewName();
+                var name = field.Key; //El nombre aqui no tiene problema, pues es una clase para cada record, y no hay 2 nombres repetidos
                 var fieldOfClass = RecordType.ILRecord.DefineField(name, field.Value.GetILType(),
                                                 FieldAttributes.Public);
                 fieldsOfClass.Add(name, fieldOfClass);

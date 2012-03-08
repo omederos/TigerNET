@@ -36,7 +36,7 @@ namespace TigerNET.AST
             var fieldToAccessBuilder = ((RecordType) (Left.ReturnType)).FieldsInClass[FieldName];
             generator.Emit(OpCodes.Ldfld, fieldToAccessBuilder); //Dejamos en el tope de la pila el valor resultante de acceder al record
 
-            throw new NotImplementedException();
+//            throw new NotImplementedException();
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {

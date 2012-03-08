@@ -31,7 +31,7 @@ in
     x.y
 ");
             //TODO: Cambiar si le asigno nombres a los records (r1, r2, etc)
-            Assert.That(result == @"""hello""");
+            Assert.That(result == "hello");
         }
         [Test]
         public void Declare_One_Array() {
