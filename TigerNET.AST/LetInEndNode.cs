@@ -178,7 +178,49 @@ namespace TigerNET.AST {
         /// <param name="generator">Generador que se usara para generar el codigo</param>
         /// <param name="typeBuilder">Clase donde se guardaran las variables/funciones/tipos</param>
         private void GenerateCodeOfDeclarations(IList<DeclarationNode> group, ILGenerator generator, TypeBuilder typeBuilder) {
-            throw new NotImplementedException();
+            var first = group[0];
+            //Si es un grupo de declaraciones de variables
+            if (first is VariableDeclarationNode) {
+                GenerateCodeOfVariableDeclarations(group, generator, typeBuilder);
+            }
+            //Si es un grupo de declaraciones de functiones/procedimientos
+            else if (first is CallableDeclarationNode)
+            {
+                GenerateCodeOfCallableDeclarations(group, generator, typeBuilder);
+            }
+            //Si es un grupo de declaraciones de tipos
+            else {
+                GenerateCodeOfTypeDeclarations(group, generator, typeBuilder);
+            }
+        }
+
+        private void GenerateCodeOfCallableDeclarations(IList<DeclarationNode> @group, ILGenerator generator, TypeBuilder typeBuilder) {
+            //Hacemos una primera pasada para crear las clases de las funciones
+            foreach (CallableDeclarationNode funcDeclaration in group) {
+                funcDeclaration.CreateCallableClass(typeBuilder);
+            }
+            //Ahora generamos lo demas (crear cuerpo, etc)
+            foreach (CallableDeclarationNode funcDeclaration in group) {
+                funcDeclaration.GenerateCode(generator, typeBuilder);
+            }
+        }
+
+        private void GenerateCodeOfTypeDeclarations(IList<DeclarationNode> @group, ILGenerator generator, TypeBuilder typeBuilder) {
+            //Hacemos una primera pasada por las declaraciones de Records para crear sus clases correspondientes
+            foreach (RecordDeclarationNode recordDeclaration in group.Where(x => x is RecordDeclarationNode)) {
+                recordDeclaration.CreateRecordClass();
+            }
+            //Ahora generamos el codigo de todas las declaraciones de tipos
+            foreach (var typeDeclaration in group) {
+                typeDeclaration.GenerateCode(generator, typeBuilder);
+            }
+        }
+
+        private void GenerateCodeOfVariableDeclarations(IList<DeclarationNode> @group, ILGenerator generator, TypeBuilder typeBuilder) {
+            //Las variables se declaran sin problema
+            foreach (var varDeclaration in group) {
+                varDeclaration.GenerateCode(generator, typeBuilder);
+            }
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {

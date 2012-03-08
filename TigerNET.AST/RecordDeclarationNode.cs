@@ -74,9 +74,9 @@ namespace TigerNET.AST
         /// <summary>
         /// Crea una clase (sin campos) que representara a este record
         /// Este metodo debe ser llamado antes de llamar al GenerateCode
+        /// Las clases se crearan en el Scope inicial, al mismo nivel que la clase 'Program'
         /// </summary>
-        /// <param name="typeBuilder"></param>
-        public void CreateRecordClass(TypeBuilder typeBuilder)
+        public void CreateRecordClass()
         {
             //Guardamos el TypeBuilder de este record en su informacion, para poder usarlo en RecordLiteralNode
             RecordType.ILRecord = Builders.Module.DefineType(RecordType.GetName(), TypeAttributes.Public | TypeAttributes.Class);
