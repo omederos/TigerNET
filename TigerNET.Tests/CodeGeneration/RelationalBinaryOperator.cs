@@ -15,6 +15,30 @@ namespace TigerNET.Tests.CodeGeneration
         }
 
         [Test]
+        public void Equals_No_Record_Record() {
+            var result = GenerateCode(@"
+let
+    type r = {x : int, y : string}
+    var x := r{x = 10, y = ""hello""}
+    var y := r{x = 10, y = ""hello""}
+in
+    x = y
+");
+            Assert.That(result == "0");
+        }
+        [Test]
+        public void Equals_Yes_Record_Record() {
+            var result = GenerateCode(@"
+let
+    type r = {x : int, y : string}
+    var x := r{x = 10, y = ""hello""}
+in
+    x = x
+");
+            Assert.That(result == "1");
+        }
+
+        [Test]
         public void Equals_NO_Int_Int() {
             var result = GenerateCode("-3 = 3");
             Assert.That(result == "0");

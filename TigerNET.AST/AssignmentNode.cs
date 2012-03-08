@@ -24,7 +24,8 @@ namespace TigerNET.AST
             Left.Parent = this;
         }
 
-        public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
+        public override void GenerateCode(
+            ILGenerator generator, TypeBuilder typeBuilder) {
             throw new NotImplementedException();
         }
 

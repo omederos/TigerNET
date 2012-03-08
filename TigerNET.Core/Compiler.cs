@@ -8,13 +8,18 @@ using System.Text;
 using TigerNET.AST;
 using TigerNET.Common;
 using TigerNET.Common.Errors;
+using TigerNET.Common.Types;
 
 namespace TigerNET.Core
 {
     public class Compiler {
         public void GenerateCode(ExpressionNode expressionNode, string outputFile) {
             //TODO: Eliminar este codigo
-            expressionNode.CheckSemantic(new Scope(), new List<Error>());
+            IList<Error> errors = new List<Error>();
+            expressionNode.CheckSemantic(new MainScope(), errors);
+            if (errors.Count > 0) {
+                throw new Exception("Semantic check error");
+            }
             //Nombre del fichero (includa extension)
             string filename = Path.GetFileName(outputFile);
             //Nombre del directorio donde se encuentra el fichero
@@ -31,6 +36,10 @@ namespace TigerNET.Core
             //Creamos un modulo
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule(filename);
             moduleBuilder.CreateGlobalFunctions();
+
+            //Guardamos el modulo y el assembly para que lo puedan usar directamente los nodos que quieran
+            Builders.Module = moduleBuilder;
+            Builders.Assembly = assemblyBuilder;
             
             //Creamos una clase 'Program'
             TypeBuilder programClassBuilder = moduleBuilder.DefineType("Program", TypeAttributes.Public | TypeAttributes.Class);

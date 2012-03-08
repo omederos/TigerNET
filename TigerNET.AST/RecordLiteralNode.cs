@@ -24,7 +24,12 @@ namespace TigerNET.AST
         }
 
         public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
-            throw new NotImplementedException();
+            //Generamos el codigo de cada uno de los argumentos/parametros del record
+            foreach (var fieldAssignment in Fields) {
+                fieldAssignment.GenerateCode(generator, typeBuilder);
+            }
+            //Llamamos al constructor del record (y dejara la instancia de la clase en la pila)
+            generator.Emit(OpCodes.Newobj, ((RecordType)ReturnType).Constructor); //Conocemos que el tipo de retorno es un Record
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {

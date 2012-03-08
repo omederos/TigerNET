@@ -13,7 +13,7 @@ namespace TigerNET.AST
     /// En
     /// var p := persona {nombre="Oscar", asignatura="Compilacion"}
     /// los FieldAssignmentNodes serian:
-    /// nombre="Oscar (FieldName: nombre) (Body: "Oscar")
+    /// nombre="Oscar" (FieldName: nombre) (Body: "Oscar")
     /// asignatura="Compilacion" (FieldName: asignatura) (Body: "Compilacion")
     /// </summary>
     public class FieldAssignmentNode : AssignmentBaseNode
@@ -22,10 +22,6 @@ namespace TigerNET.AST
 
         public FieldAssignmentNode(string fieldName, ExpressionNode body) : base(body) {
             FieldName = fieldName;
-        }
-
-        public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
-            throw new NotImplementedException();
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
