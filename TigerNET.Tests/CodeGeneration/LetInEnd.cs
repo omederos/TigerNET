@@ -40,9 +40,10 @@ in
 let
     type a = array of int
     var x := a[10] of 20
+    function f() : a = x
     /*var x := 2*/
 in
-    x[9]
+    f()[9]
 end");
             //TODO: Cambiar si le asigno nombres a los records (r1, r2, etc)
             Assert.That(result == "20");

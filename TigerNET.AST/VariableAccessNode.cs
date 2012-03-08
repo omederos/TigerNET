@@ -47,6 +47,8 @@ namespace TigerNET.AST
                 
                 //Sino, Hacemos una asignacion a la instancia de la clase del padre, para poder seguir subiendo
                 generator.Emit(OpCodes.Ldfld, node.ParentInstance);
+
+                parent = parent.Parent;
             }
 
             //Buscamos el nombre de la variable
