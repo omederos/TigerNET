@@ -27,8 +27,9 @@ in
 let
     type r = {x : int, y : string}
     var x := r{x = 10, y = ""hello""}
+    var y := x.y
 in
-    x.y
+    y
 ");
             //TODO: Cambiar si le asigno nombres a los records (r1, r2, etc)
             Assert.That(result == "hello");
@@ -41,10 +42,10 @@ let
     var x := a[10] of 20
     /*var x := 2*/
 in
-    x
+    x[9]
 end");
             //TODO: Cambiar si le asigno nombres a los records (r1, r2, etc)
-            Assert.That(result.Length > 0);
+            Assert.That(result == "20");
         }
     }
 }

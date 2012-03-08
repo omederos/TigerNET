@@ -28,7 +28,14 @@ namespace TigerNET.AST
         }
 
         public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
-            throw new NotImplementedException();
+            //Generamos la expresion izquierda, que debe retornarnos un array en el tope de la pila
+            Left.GenerateCode(generator, typeBuilder);
+
+            //Generamos el codigo del index
+            Index.GenerateCode(generator, typeBuilder);
+
+            //Accedemos al array
+            generator.Emit(OpCodes.Ldelem, ((ArrayType)(Left.ReturnType)).ElementsType.GetILType());
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
