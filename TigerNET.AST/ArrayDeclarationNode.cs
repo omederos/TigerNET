@@ -27,9 +27,6 @@ namespace TigerNET.AST
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
             int errorsCount = errors.Count;
-            
-            //Chequeamos si ya existe un tipo en el scope con el mismo nombre que el que define este tipo
-//            CheckIfTypeAlreadyExists(scope, errors);
 
             //Chequear que el tipo que almacenara el array exista en el scope
             if (!scope.ExistsType(TypeName)) {

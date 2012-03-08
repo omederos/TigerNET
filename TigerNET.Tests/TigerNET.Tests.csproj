@@ -95,6 +95,7 @@
     <Compile Include="Semantic\RecordLiteral.cs" />
     <Compile Include="Semantic\RelationalBinaryOperator.cs" />
     <Compile Include="Semantic\Scope.cs" />
+    <Compile Include="Semantic\SemanticTest.cs" />
     <Compile Include="Semantic\TypesEquality.cs" />
     <Compile Include="Semantic\VariableAccess.cs" />
     <Compile Include="Semantic\VariableDeclaration.cs" />

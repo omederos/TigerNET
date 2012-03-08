@@ -1,29 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using TigerNET.AST;
-using TigerNET.Common;
 using TigerNET.Common.Errors;
 using TigerNET.Common.Types;
 
 namespace TigerNET.Tests.Semantic
 {
-    public class SemanticTest {
-        protected Scope Scope;
-        protected IList<Error> Errors;
-
-        [SetUp]
-        public void Init()
-        {
-            Scope = new Scope();
-            Scope.Add(IntegerType.Create());
-            Scope.Add(StringType.Create());
-            Errors = new List<Error>();
-        }
-    }
-
     public class VariableDeclaration : SemanticTest
     {
         [Test]

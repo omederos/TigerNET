@@ -61,10 +61,24 @@
     <Compile Include="NamesGenerator.cs" />
     <Compile Include="Scope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StdLib\ChrCallable.cs" />
+    <Compile Include="StdLib\ConcatCallable.cs" />
+    <Compile Include="StdLib\ExitCallable.cs" />
+    <Compile Include="StdLib\FlushCallable.cs" />
+    <Compile Include="StdLib\GetCharCallable.cs" />
+    <Compile Include="StdLib\GetLineCallable.cs" />
+    <Compile Include="StdLib\NotCallable.cs" />
+    <Compile Include="StdLib\OrdCallable.cs" />
+    <Compile Include="StdLib\PrintCallable.cs" />
+    <Compile Include="StdLib\PrintIntegerCallable.cs" />
+    <Compile Include="StdLib\PrintLineCallable.cs" />
+    <Compile Include="StdLib\SizeCallable.cs" />
+    <Compile Include="StdLib\SubstringCallable.cs" />
     <Compile Include="TypeField.cs" />
     <Compile Include="Types\ArrayType.cs" />
     <Compile Include="Types\Fields.cs" />
     <Compile Include="Types\IntegerType.cs" />
+    <Compile Include="Types\MainScope.cs" />
     <Compile Include="Types\NilType.cs" />
     <Compile Include="Types\RecordType.cs" />
     <Compile Include="Types\StringType.cs" />
@@ -72,9 +86,7 @@
     <Compile Include="Variable.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="StdLib\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

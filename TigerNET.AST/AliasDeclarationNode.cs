@@ -26,7 +26,7 @@ namespace TigerNET.AST
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
             //Este metodo no hace nada
-            //El chequeo semantico de este nodo se realizara desde fuera)
+            //El chequeo semantico de este nodo se realizara desde fuera
         }
 
         public override void UpdateDefinition(Scope scope) {

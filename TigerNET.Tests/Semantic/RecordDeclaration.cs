@@ -65,7 +65,6 @@ namespace TigerNET.Tests.Semantic
             ast.CheckSemantic(Scope, Errors);
             Assert.That(Errors.Count == 1);
             Assert.That(Errors[0] is DuplicateFieldError);
-            
         }
 
         [Test]
@@ -79,15 +78,26 @@ namespace TigerNET.Tests.Semantic
             
         }
 
-//        [Test]
-//        public void AlreadyExistingType()
-//        {
-//            var ast = (LetInEndNode)Utils.BuildAST("let type string = {Name : string, Age : int} in end");
-//            
-//            ast.CheckSemantic(Scope, Errors);
-//            Assert.That(Errors.Count == 1);
-//            Assert.That(Errors[0] is AlreadyDefinedError);
-//            
-//        }
+        [Test]
+        public void AlreadyExistingType_String()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST("let type string = {Name : string, Age : int} in end");
+            
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 1);
+            Assert.That(Errors[0] is AlreadyDefinedError);
+            
+        }
+
+        [Test]
+        public void AlreadyExistingType_Int()
+        {
+            var ast = (LetInEndNode)Utils.BuildAST("let type int = {Name : string, Age : int} in end");
+            
+            ast.CheckSemantic(Scope, Errors);
+            Assert.That(Errors.Count == 1);
+            Assert.That(Errors[0] is AlreadyDefinedError);
+            
+        }
     }
 }

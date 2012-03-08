@@ -7,11 +7,37 @@ using TigerNET.Common.Types;
 namespace TigerNET.Common
 {
     public class Scope {
+        /// <summary>
+        /// Comprueba si el nombre de la funcion/parametro especificado es invalido o no
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public bool IsCallableNameInvalid(string name) {
+            return Exists(name, (x, scope) => scope.InvalidCallableNames.Contains(x));
+        }/// <summary>
+        
+        /// Comprueba si el nombre del tipo especificado es invalido o no
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public bool IsTypeNameInvalid(string name) {
+            return Exists(name, (x, scope) => scope.InvalidTypeNames.Contains(x));
+        }
+
+        internal IList<string> InvalidCallableNames { get; set; }
+        internal IList<string> InvalidTypeNames { get; set; }
+
         public Scope(Scope parent) {
             DefinedTypes = new Dictionary<string, TigerType>();
             DefinedVariables = new Dictionary<string, Variable>();
             DefinedCallables = new Dictionary<string, Callable>();
             Parent = parent;
+
+            InvalidCallableNames = new List<string>();
+            //TODO: Eliminar, y subirlo para el scope padre
+            InvalidTypeNames = new List<string> {"string", "int"};
+
+            
         }
 
         public Scope() : this(null) {}

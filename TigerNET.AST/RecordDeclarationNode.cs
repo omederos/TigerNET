@@ -83,15 +83,11 @@ namespace TigerNET.AST
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
-            //Comprobar que no haya sido definido este tipo (o variable?) anteriormente
+            //Comprobar que no haya sido definido este tipo en este mismo scope
             //Comprobar que no haya dos campos con un mismo nombre
             //Comprobar que todos los tipos de los campos esten definidos
 
             int errorsCount = errors.Count;
-
-
-            //Chequeamos que un tipo con ese nombre no haya sido definido anteriormente
-//            CheckIfTypeAlreadyExists(scope, errors);
 
             IDictionary<string, TigerType> fields = new Dictionary<string, TigerType>();
             
