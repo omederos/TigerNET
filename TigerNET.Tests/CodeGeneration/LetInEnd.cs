@@ -28,10 +28,10 @@ let
     type r = {x : int, y : string}
     var x := r{x = 10, y = ""hello""}
 in
-    x
+    x.y
 ");
             //TODO: Cambiar si le asigno nombres a los records (r1, r2, etc)
-            Assert.That(result.Length > 0);
+            Assert.That(result == @"""hello""");
         }
         [Test]
         public void Declare_One_Array() {

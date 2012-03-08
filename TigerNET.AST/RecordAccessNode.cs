@@ -29,6 +29,13 @@ namespace TigerNET.AST
         }
 
         public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
+            //Generamos el codigo de la expresion de la izquierda. Me dejara una referencia a un record en la pila
+            Left.GenerateCode(generator, typeBuilder);
+
+            //Cogemos el FieldBuilder al que queremos acceder (buscandolo en el objeto de tipo RecordType que es donde guardamos la info de cada record)
+            var fieldToAccessBuilder = ((RecordType) (Left.ReturnType)).FieldsInClass[FieldName];
+            generator.Emit(OpCodes.Ldfld, fieldToAccessBuilder); //Dejamos en el tope de la pila el valor resultante de acceder al record
+
             throw new NotImplementedException();
         }
 
