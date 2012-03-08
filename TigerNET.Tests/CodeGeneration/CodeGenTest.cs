@@ -11,6 +11,7 @@ namespace TigerNET.Tests.CodeGeneration
 {
     public class CodeGenTest {
         protected Compiler Compiler;
+        private string _peVerifyPath = @"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\PEVerify.exe";
         public CodeGenTest() {
             Compiler = new Compiler();
         }
@@ -31,15 +32,28 @@ namespace TigerNET.Tests.CodeGeneration
 
             Compiler.GenerateCode(ast, outputFile);
 
-            //Iniciando el proceso...
+            //Comprobando que el codigo generado este correcto con PEVerify
             Process p = new Process();
+            p.StartInfo = new ProcessStartInfo(@"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\NETFX 4.0 Tools\x64\PEVerify.exe", string.Format(@"""{0}""", outputFile));
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.UseShellExecute = false;
+            p.Start();
+
+            string result = p.StandardOutput.ReadToEnd();
+
+            p.WaitForExit();
+
+
+            //Iniciando el proceso...
+            p = new Process();
             p.StartInfo = new ProcessStartInfo(outputFile);
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardInput = true;
             p.StartInfo.UseShellExecute = false;
             p.Start();
 
-            string result = p.StandardOutput.ReadToEnd().Replace("\r", "").Replace("\n", "");
+            result = p.StandardOutput.ReadToEnd().Replace("\r", "").Replace("\n", "");
 
             p.WaitForExit();
 

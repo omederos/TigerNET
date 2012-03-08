@@ -24,7 +24,7 @@ namespace TigerNET.Core
             AppDomain domain = System.Threading.Thread.GetDomain();
             AssemblyName assemblyName = new AssemblyName
                                   {
-                                      Name = filename
+                                      Name = Path.GetFileNameWithoutExtension(outputFile)
                                   };
             AssemblyBuilder assemblyBuilder = domain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave, directory);
             
@@ -35,15 +35,16 @@ namespace TigerNET.Core
             //Creamos una clase 'Program'
             TypeBuilder programClassBuilder = moduleBuilder.DefineType("Program", TypeAttributes.Public | TypeAttributes.Class);
             //Creamos su constructor
-            ConstructorBuilder programCtorBuilder = programClassBuilder.DefineConstructor(
-                MethodAttributes.Public,
-                CallingConventions.Standard,
-                new Type[0]
-                );
+            var programCtorBuilder = programClassBuilder.DefineDefaultConstructor(MethodAttributes.Public);
+//            ConstructorBuilder programCtorBuilder = programClassBuilder.DefineConstructor(
+//                MethodAttributes.Public,
+//                CallingConventions.Standard,
+//                new Type[0]
+//                );
             
             //Hacemos que retorne para crearlo satisfactoriamente (sino da un error)
-            var gen = programCtorBuilder.GetILGenerator();
-            gen.Emit(OpCodes.Ret);
+//            var gen = programCtorBuilder.GetILGenerator();
+//            gen.Emit(OpCodes.Ret);
 
             //Creamos un metodo 'Run' (publico y no estatico) que es el que ejecutara el codigo del programa
             MethodBuilder run = programClassBuilder.DefineMethod("Run", MethodAttributes.Public, CallingConventions.HasThis,
