@@ -22,7 +22,7 @@ namespace TigerNET.AST
         }
 
         public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
-            throw new NotImplementedException();
+//            throw new NotImplementedException();
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {

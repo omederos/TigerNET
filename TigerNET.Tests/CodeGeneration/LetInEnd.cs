@@ -33,17 +33,18 @@ in
             //TODO: Cambiar si le asigno nombres a los records (r1, r2, etc)
             Assert.That(result.Length > 0);
         }
-//        [Test]
-//        public void Declare_One_Array() {
-//            var result = GenerateCode(@"
-//let
-//    type a = array of int
-//    var x := a[10] of 0
-//in
-//    x
-//");
-//            //TODO: Cambiar si le asigno nombres a los records (r1, r2, etc)
-//            Assert.That(result.Length > 0);
-//        }
+        [Test]
+        public void Declare_One_Array() {
+            var result = GenerateCode(@"
+let
+    type a = array of int
+    var x := a[10] of 20
+    /*var x := 2*/
+in
+    x
+end");
+            //TODO: Cambiar si le asigno nombres a los records (r1, r2, etc)
+            Assert.That(result.Length > 0);
+        }
     }
 }

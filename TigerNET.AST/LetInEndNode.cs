@@ -81,7 +81,7 @@ namespace TigerNET.AST {
             genConstructor.Emit(OpCodes.Ldarg_0); //Cargamos 'this'
             genConstructor.Emit(OpCodes.Ldarg_1); //Cargamos el parametro del constructor (mi padre)
             genConstructor.Emit(OpCodes.Stfld, ParentInstance); //Cargamos el parametro del constructor (mi padre)
-            
+
             //Le asignamos el valor '0' al campo 'Break'
             genConstructor.Emit(OpCodes.Ldarg_0); //Cargamos 'this'
             genConstructor.Emit(OpCodes.Ldc_I4, 0); //Metemos en la pila un '0'
@@ -111,10 +111,11 @@ namespace TigerNET.AST {
             LabelEnd = runGenerator.DefineLabel();
 
             //Generamos el codigo de la secuencia de expresiones dentro del metodo, y dentro de la clase que creamos para el Let (logico)
+
             Expressions.GenerateCode(runGenerator, letTypeBuilder);
 
             //Aqui almacenaremos el valor de retorno del Let (si retorna)
-            LocalBuilder resultLocal = null;
+//            LocalBuilder resultLocal = null;
             //Si la secuencia de expresiones retorna algun valor
 //            if (ReturnType != null) {
                 //Creamos la variable donde guardaremos el valor

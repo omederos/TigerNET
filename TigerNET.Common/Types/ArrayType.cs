@@ -39,7 +39,7 @@ namespace TigerNET.Common.Types {
 
         public override Type GetILType() {
             //TODO: Ver bien cuando es recursivo de el mismo, que no entre en un ciclo infinito. Creo que es mejor no permitirlo en el semantico!
-            return Array.CreateInstance(ElementsType.GetType(), 0).GetType();
+            return Array.CreateInstance(ElementsType.GetILType(), 0).GetType();
         }
     }
 }
