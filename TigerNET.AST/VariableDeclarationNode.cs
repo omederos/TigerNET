@@ -27,11 +27,12 @@ namespace TigerNET.AST {
             //Guardamos la variable que definimos en IL (para poder mapearla luego sin problemas)
             Variable.ILVariable = typeBuilder.DefineField(Variable.GetName(), Variable.Type.GetILType(), FieldAttributes.Public);
 
+            generator.Emit(OpCodes.Ldarg_0); //Cargamos el parametro 0 (la instancia de la clase)
+
             //Generamos el codigo del cuerpo de la asignacion
             Body.GenerateCode(generator, typeBuilder);
 
             //Le asignamos ese valor que se quedo en la pila a la variable
-            generator.Emit(OpCodes.Ldarg_0); //Cargamos el parametro 0 (la instancia de la clase)
             generator.Emit(OpCodes.Stfld, Variable.ILVariable); //Asignamos el valor que esta en la pila a la variable
 
             //TODO: Si es un record, dejar guardados los valores de los parametros/argumentos del record en el RecordLiteralNode!?

@@ -60,7 +60,7 @@ namespace TigerNET.AST {
 
         public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
             //Creamos la clase correspondiente a este Let, pues la expresion Let-In-End define un nuevo scope
-            var letTypeBuilder = typeBuilder.DefineNestedType(NamesGenerator.GenerateNewName(), TypeAttributes.Public | TypeAttributes.Class);
+            var letTypeBuilder = typeBuilder.DefineNestedType(NamesGenerator.GenerateNewName(), TypeAttributes.NestedPublic | TypeAttributes.Class);
 
             #region Constructor
 
@@ -70,9 +70,9 @@ namespace TigerNET.AST {
 
             //Definimos los dos campos iniciales que tendra la clase
             //Break (Int32) -> Flag que indica si se tiene que romper romper el flujo de la ejecucion o no. Se le da valor desde un hijo (Break u otro Let-In-End)
-            BreakField = typeBuilder.DefineField("Break", typeof (int), FieldAttributes.Public);
+            BreakField = letTypeBuilder.DefineField("Break", typeof (int), FieldAttributes.Public);
             //ParentInstance (Tipo del padre) -> Referencia a la clase padre
-            ParentInstance = typeBuilder.DefineField("Parent", typeBuilder, FieldAttributes.Public);
+            ParentInstance = letTypeBuilder.DefineField("Parent", typeBuilder, FieldAttributes.Public);
 
             //Anadimos el codigo necesario en el constructor
             var genConstructor = constructor.GetILGenerator();
@@ -131,32 +131,36 @@ namespace TigerNET.AST {
             //Etiqueta a donde se saltara en caso de que no haga falta interrumpir la ejecucion
             Label lblNoBreak = runGenerator.DefineLabel();
 
-            //Comprobamos si 'Break == 0'
-            // Ver si hace falta terminar la ejecucion del padre.
-            runGenerator.Emit(OpCodes.Ldarg_0); //Cargamos 'this'
-            runGenerator.Emit(OpCodes.Ldfld, BreakField); //Cargamos el campo 'Break' de la clase del Let
-            runGenerator.Emit(OpCodes.Ldc_I4_0); //Anadimos el 0
-            runGenerator.Emit(OpCodes.Beq, lblNoBreak); //Si Break == 0, entonces no hace falta terminar. Saltar para NO_BREAK
+            //Lo siguiente lo tenemos que hacer si alguna expresion de las que se ejecuto anteriormente tenia un 'Break'
+            if (Common.Common.BreakFound) {
+                //Comprobamos si 'Break == 0'
+                // Ver si hace falta terminar la ejecucion del padre.
+                runGenerator.Emit(OpCodes.Ldarg_0); //Cargamos 'this'
+                runGenerator.Emit(OpCodes.Ldfld, BreakField); //Cargamos el campo 'Break' de la clase del Let
+                runGenerator.Emit(OpCodes.Ldc_I4_0); //Anadimos el 0
+                runGenerator.Emit(OpCodes.Beq, lblNoBreak);
+                    //Si Break == 0, entonces no hace falta terminar. Saltar para NO_BREAK
 
-            //Si hace falta terminar la ejecicion
-            //Le asignamos el valor '0' al campo Break de esta clase
-            runGenerator.Emit(OpCodes.Ldarg_0);
-            runGenerator.Emit(OpCodes.Ldc_I4_0);
-            runGenerator.Emit(OpCodes.Stfld, BreakField);
+                //Si hace falta terminar la ejecicion
+                //Le asignamos el valor '0' al campo Break de esta clase
+                runGenerator.Emit(OpCodes.Ldarg_0);
+                runGenerator.Emit(OpCodes.Ldc_I4_0);
+                runGenerator.Emit(OpCodes.Stfld, BreakField);
 
-            //Ahora, vamos subiendo por los ParentInstance hasta llegar a uno que sea IBreakable (For, While o Let)
-            //Garantizamos que siempre lleguemos, pues tambien lo chequeamos en la semantica del nodo Break.
-            var expression = Parent;
-            //Mientras no lleguemos a un nodo IBreakable
-            while (!(expression is IBreakable)) {
-                expression = expression.Parent;
+                //Ahora, vamos subiendo por los ParentInstance hasta llegar a uno que sea IBreakable (For, While o Let)
+                //Garantizamos que siempre lleguemos, pues tambien lo chequeamos en la semantica del nodo Break.
+                var expression = Parent;
+                //Mientras no lleguemos a un nodo IBreakable
+                while (!(expression is IBreakable)) {
+                    expression = expression.Parent;
+                }
+
+                //Ya tenemos en 'expression' al IScopeDefiner padre. Lo que tenemos que hacer es poner su campo 'Break' en 1
+                runGenerator.Emit(OpCodes.Ldarg_0); //Cargamos 'this'
+                runGenerator.Emit(OpCodes.Ldfld, ParentInstance); //Metemos en la pila la referencia a ParentInstance
+                runGenerator.Emit(OpCodes.Ldc_I4, 0); //Metemos en la pila el valor '1' que le asignaremos
+                runGenerator.Emit(OpCodes.Stfld, ((IBreakable) expression).BreakField); //Hacemos la asignacion
             }
-
-            //Ya tenemos en 'expression' al IScopeDefiner padre. Lo que tenemos que hacer es poner su campo 'Break' en 1
-            runGenerator.Emit(OpCodes.Ldarg_0); //Cargamos 'this'
-            runGenerator.Emit(OpCodes.Ldfld, ParentInstance); //Metemos en la pila la referencia a ParentInstance
-            runGenerator.Emit(OpCodes.Ldc_I4, 0); //Metemos en la pila el valor '1' que le asignaremos
-            runGenerator.Emit(OpCodes.Stfld, ((IBreakable) expression).BreakField); //Hacemos la asignacion
 
             //Terminamos el metodo principal
             runGenerator.Emit(OpCodes.Ret);

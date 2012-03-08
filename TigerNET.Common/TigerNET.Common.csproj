@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Builders.cs" />
     <Compile Include="Callable.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="Errors\AlreadyDefinedError.cs" />
     <Compile Include="Errors\CyclicAliasesError.cs" />
     <Compile Include="Errors\DuplicateFieldError.cs" />

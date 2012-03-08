@@ -91,7 +91,7 @@ namespace TigerNET.AST
         public void CreateCallableClass(TypeBuilder typeBuilder) {
             //Las funciones debemos declararlas en un scope anidado, es decir, que sea una clase anidada
             //Guardamos la funcion que definimos en la informacion de este callable
-            Callable.ILCallable = typeBuilder.DefineNestedType(Callable.GetName(), TypeAttributes.Public | TypeAttributes.Class);
+            Callable.ILCallable = typeBuilder.DefineNestedType(Callable.GetName(), TypeAttributes.NestedPublic | TypeAttributes.Class);
 
             //Como estamos definiendo un nuevo scope, y a veces sera necesario subir hacia los scopes padres, es necesario recibir una instancia del scope anterior
             ParentInstance = Callable.ILCallable.DefineField(NamesGenerator.GenerateNewName(), typeBuilder,

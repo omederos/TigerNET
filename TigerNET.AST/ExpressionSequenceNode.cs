@@ -22,7 +22,16 @@ namespace TigerNET.AST
         }
 
         public override void GenerateCode(ILGenerator generator, TypeBuilder typeBuilder) {
-            throw new NotImplementedException();
+            //Por cada una de las expresiones
+            for (int i = 0; i < Sequence.Count; i++) {
+                var expr = Sequence[i];
+                //Generamos el codigo de la expresion
+                expr.GenerateCode(generator, typeBuilder);
+                //Si retorna valor y no es la ultima expresion, debemos sacar este valor de la pila
+                if (expr.ReturnsValue() && i != Sequence.Count - 1) {
+                    generator.Emit(OpCodes.Pop);
+                }
+            }
         }
 
         public override void CheckSemantic(Scope scope, IList<Error> errors) {
